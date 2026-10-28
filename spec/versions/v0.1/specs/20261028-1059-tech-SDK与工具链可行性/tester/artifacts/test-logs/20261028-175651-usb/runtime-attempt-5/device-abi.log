@@ -1,0 +1,8 @@
+Command: %USERPROFILE%\AppData\Local\Android\Sdk\platform-tools\adb.exe -d shell getprop ro.product.cpu.abi
+Timestamp: 2026-10-28T10:13:32.510767+00:00
+arm64-v8a
+
+--- stderr ---
+
+Exit code: 0
+Finished: 2026-10-28T10:13:32.574363+00:00

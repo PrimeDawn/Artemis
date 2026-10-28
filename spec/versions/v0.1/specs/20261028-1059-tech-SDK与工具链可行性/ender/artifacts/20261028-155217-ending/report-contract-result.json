@@ -1,0 +1,1013 @@
+{
+  "verifiedAt": "2026-10-28T08:00:34.428860+00:00",
+  "passed": true,
+  "scope": "Current Spec report contract, actual raw log metadata, working-tree input preservation and Git boundaries; excludes browser visual rendering and approval of the failing global AWR zero-gap gate.",
+  "htmlReports": 6,
+  "rawLogs": 64,
+  "checks": [
+    {
+      "id": "ender/end-report.html:metadata",
+      "status": "pass",
+      "detail": "Required meta and actual Git workflow metadata"
+    },
+    {
+      "id": "ender/end-report.html:structure",
+      "status": "pass",
+      "detail": "Shared report structure and five-column history"
+    },
+    {
+      "id": "ender/end-report.html:assets",
+      "status": "pass",
+      "detail": "Correct asset depth and manifest before report script"
+    },
+    {
+      "id": "ender/end-report.html:style",
+      "status": "pass",
+      "detail": "No inline styles or fetch probes"
+    },
+    {
+      "id": "ender/end-report.html:annotations",
+      "status": "pass",
+      "detail": "No unregistered user annotations"
+    },
+    {
+      "id": "ender/end-report.html:links",
+      "status": "pass",
+      "detail": []
+    },
+    {
+      "id": "ender/end-report.html:revision",
+      "status": "pass",
+      "detail": "Current history and change markers"
+    },
+    {
+      "id": "executor/summary.html:metadata",
+      "status": "pass",
+      "detail": "Required meta and actual Git workflow metadata"
+    },
+    {
+      "id": "executor/summary.html:structure",
+      "status": "pass",
+      "detail": "Shared report structure and five-column history"
+    },
+    {
+      "id": "executor/summary.html:assets",
+      "status": "pass",
+      "detail": "Correct asset depth and manifest before report script"
+    },
+    {
+      "id": "executor/summary.html:style",
+      "status": "pass",
+      "detail": "No inline styles or fetch probes"
+    },
+    {
+      "id": "executor/summary.html:annotations",
+      "status": "pass",
+      "detail": "No unregistered user annotations"
+    },
+    {
+      "id": "executor/summary.html:links",
+      "status": "pass",
+      "detail": []
+    },
+    {
+      "id": "executor/summary.html:revision",
+      "status": "pass",
+      "detail": "Current history and change markers"
+    },
+    {
+      "id": "explorer/exploration-report.html:metadata",
+      "status": "pass",
+      "detail": "Required meta and actual Git workflow metadata"
+    },
+    {
+      "id": "explorer/exploration-report.html:structure",
+      "status": "pass",
+      "detail": "Shared report structure and five-column history"
+    },
+    {
+      "id": "explorer/exploration-report.html:assets",
+      "status": "pass",
+      "detail": "Correct asset depth and manifest before report script"
+    },
+    {
+      "id": "explorer/exploration-report.html:style",
+      "status": "pass",
+      "detail": "No inline styles or fetch probes"
+    },
+    {
+      "id": "explorer/exploration-report.html:annotations",
+      "status": "pass",
+      "detail": "No unregistered user annotations"
+    },
+    {
+      "id": "explorer/exploration-report.html:links",
+      "status": "pass",
+      "detail": []
+    },
+    {
+      "id": "explorer/exploration-report.html:revision",
+      "status": "pass",
+      "detail": "Current history and change markers"
+    },
+    {
+      "id": "tester/test-plan.html:metadata",
+      "status": "pass",
+      "detail": "Required meta and actual Git workflow metadata"
+    },
+    {
+      "id": "tester/test-plan.html:structure",
+      "status": "pass",
+      "detail": "Shared report structure and five-column history"
+    },
+    {
+      "id": "tester/test-plan.html:assets",
+      "status": "pass",
+      "detail": "Correct asset depth and manifest before report script"
+    },
+    {
+      "id": "tester/test-plan.html:style",
+      "status": "pass",
+      "detail": "No inline styles or fetch probes"
+    },
+    {
+      "id": "tester/test-plan.html:annotations",
+      "status": "pass",
+      "detail": "No unregistered user annotations"
+    },
+    {
+      "id": "tester/test-plan.html:links",
+      "status": "pass",
+      "detail": []
+    },
+    {
+      "id": "tester/test-plan.html:revision",
+      "status": "pass",
+      "detail": "Current history and change markers"
+    },
+    {
+      "id": "tester/test-report.html:metadata",
+      "status": "pass",
+      "detail": "Required meta and actual Git workflow metadata"
+    },
+    {
+      "id": "tester/test-report.html:structure",
+      "status": "pass",
+      "detail": "Shared report structure and five-column history"
+    },
+    {
+      "id": "tester/test-report.html:assets",
+      "status": "pass",
+      "detail": "Correct asset depth and manifest before report script"
+    },
+    {
+      "id": "tester/test-report.html:style",
+      "status": "pass",
+      "detail": "No inline styles or fetch probes"
+    },
+    {
+      "id": "tester/test-report.html:annotations",
+      "status": "pass",
+      "detail": "No unregistered user annotations"
+    },
+    {
+      "id": "tester/test-report.html:links",
+      "status": "pass",
+      "detail": []
+    },
+    {
+      "id": "tester/test-report.html:revision",
+      "status": "pass",
+      "detail": "Current history and change markers"
+    },
+    {
+      "id": "writer/plan.html:metadata",
+      "status": "pass",
+      "detail": "Required meta and actual Git workflow metadata"
+    },
+    {
+      "id": "writer/plan.html:structure",
+      "status": "pass",
+      "detail": "Shared report structure and five-column history"
+    },
+    {
+      "id": "writer/plan.html:assets",
+      "status": "pass",
+      "detail": "Correct asset depth and manifest before report script"
+    },
+    {
+      "id": "writer/plan.html:style",
+      "status": "pass",
+      "detail": "No inline styles or fetch probes"
+    },
+    {
+      "id": "writer/plan.html:annotations",
+      "status": "pass",
+      "detail": "No unregistered user annotations"
+    },
+    {
+      "id": "writer/plan.html:links",
+      "status": "pass",
+      "detail": []
+    },
+    {
+      "id": "writer/plan.html:revision",
+      "status": "pass",
+      "detail": "Current history and change markers"
+    },
+    {
+      "id": "six-html-reports",
+      "status": "pass",
+      "detail": 6
+    },
+    {
+      "id": "ender:backlink:explorer",
+      "status": "pass",
+      "detail": "HTML reference has reverse association"
+    },
+    {
+      "id": "ender:backlink:writer",
+      "status": "pass",
+      "detail": "HTML reference has reverse association"
+    },
+    {
+      "id": "ender:backlink:tester",
+      "status": "pass",
+      "detail": "HTML reference has reverse association"
+    },
+    {
+      "id": "ender:backlink:executor",
+      "status": "pass",
+      "detail": "HTML reference has reverse association"
+    },
+    {
+      "id": "ender:backlink:tester",
+      "status": "pass",
+      "detail": "HTML reference has reverse association"
+    },
+    {
+      "id": "ender:backlink:explorer",
+      "status": "pass",
+      "detail": "HTML reference has reverse association"
+    },
+    {
+      "id": "ender:backlink:writer",
+      "status": "pass",
+      "detail": "HTML reference has reverse association"
+    },
+    {
+      "id": "ender:backlink:tester",
+      "status": "pass",
+      "detail": "HTML reference has reverse association"
+    },
+    {
+      "id": "ender:backlink:executor",
+      "status": "pass",
+      "detail": "HTML reference has reverse association"
+    },
+    {
+      "id": "ender:backlink:tester",
+      "status": "pass",
+      "detail": "HTML reference has reverse association"
+    },
+    {
+      "id": "executor:backlink:writer",
+      "status": "pass",
+      "detail": "HTML reference has reverse association"
+    },
+    {
+      "id": "executor:backlink:tester",
+      "status": "pass",
+      "detail": "HTML reference has reverse association"
+    },
+    {
+      "id": "executor:backlink:explorer",
+      "status": "pass",
+      "detail": "HTML reference has reverse association"
+    },
+    {
+      "id": "executor:backlink:tester",
+      "status": "pass",
+      "detail": "HTML reference has reverse association"
+    },
+    {
+      "id": "explorer:backlink:writer",
+      "status": "pass",
+      "detail": "HTML reference has reverse association"
+    },
+    {
+      "id": "explorer:backlink:tester",
+      "status": "pass",
+      "detail": "HTML reference has reverse association"
+    },
+    {
+      "id": "tester:backlink:writer",
+      "status": "pass",
+      "detail": "HTML reference has reverse association"
+    },
+    {
+      "id": "tester:backlink:explorer",
+      "status": "pass",
+      "detail": "HTML reference has reverse association"
+    },
+    {
+      "id": "tester:backlink:executor",
+      "status": "pass",
+      "detail": "HTML reference has reverse association"
+    },
+    {
+      "id": "tester:backlink:tester",
+      "status": "pass",
+      "detail": "HTML reference has reverse association"
+    },
+    {
+      "id": "tester:backlink:tester",
+      "status": "pass",
+      "detail": "HTML reference has reverse association"
+    },
+    {
+      "id": "tester:backlink:writer",
+      "status": "pass",
+      "detail": "HTML reference has reverse association"
+    },
+    {
+      "id": "tester:backlink:executor",
+      "status": "pass",
+      "detail": "HTML reference has reverse association"
+    },
+    {
+      "id": "tester:backlink:explorer",
+      "status": "pass",
+      "detail": "HTML reference has reverse association"
+    },
+    {
+      "id": "writer:backlink:explorer",
+      "status": "pass",
+      "detail": "HTML reference has reverse association"
+    },
+    {
+      "id": "writer:backlink:tester",
+      "status": "pass",
+      "detail": "HTML reference has reverse association"
+    },
+    {
+      "id": "writer:backlink:executor",
+      "status": "pass",
+      "detail": "HTML reference has reverse association"
+    },
+    {
+      "id": "writer:backlink:tester",
+      "status": "pass",
+      "detail": "HTML reference has reverse association"
+    },
+    {
+      "id": "seven-document-navigation",
+      "status": "pass",
+      "detail": "Ledger and six report entries"
+    },
+    {
+      "id": "raw-log:executor/artifacts/android/android-clean-build-1.log",
+      "status": "pass",
+      "detail": "Actual command, exit code and ISO timestamp"
+    },
+    {
+      "id": "raw-log:executor/artifacts/android/android-clean-build-2.log",
+      "status": "pass",
+      "detail": "Actual command, exit code and ISO timestamp"
+    },
+    {
+      "id": "raw-log:executor/artifacts/android/apk-metadata-build-1.log",
+      "status": "pass",
+      "detail": "Actual command, exit code and ISO timestamp"
+    },
+    {
+      "id": "raw-log:executor/artifacts/android/apk-metadata-build-2.log",
+      "status": "pass",
+      "detail": "Actual command, exit code and ISO timestamp"
+    },
+    {
+      "id": "raw-log:executor/artifacts/android/apk-zipalign-build-1.log",
+      "status": "pass",
+      "detail": "Actual command, exit code and ISO timestamp"
+    },
+    {
+      "id": "raw-log:executor/artifacts/android/apk-zipalign-build-2.log",
+      "status": "pass",
+      "detail": "Actual command, exit code and ISO timestamp"
+    },
+    {
+      "id": "raw-log:executor/artifacts/android/gradle-configuration-official.log",
+      "status": "pass",
+      "detail": "Actual command, exit code and ISO timestamp"
+    },
+    {
+      "id": "raw-log:executor/artifacts/downloads/build-input-downloads.log",
+      "status": "pass",
+      "detail": "Actual command, exit code and ISO timestamp"
+    },
+    {
+      "id": "raw-log:executor/artifacts/environment/environment-preflight-final.log",
+      "status": "pass",
+      "detail": "Actual command, exit code and ISO timestamp"
+    },
+    {
+      "id": "raw-log:executor/artifacts/environment/environment-preflight-local.log",
+      "status": "pass",
+      "detail": "Actual command, exit code and ISO timestamp"
+    },
+    {
+      "id": "raw-log:executor/artifacts/environment/environment-preflight.log",
+      "status": "pass",
+      "detail": "Actual command, exit code and ISO timestamp"
+    },
+    {
+      "id": "raw-log:executor/artifacts/environment/preflight-missing-sdk.log",
+      "status": "pass",
+      "detail": "Actual command, exit code and ISO timestamp"
+    },
+    {
+      "id": "raw-log:executor/artifacts/environment/sdk-cli-download-retry.log",
+      "status": "pass",
+      "detail": "Actual command, exit code and ISO timestamp"
+    },
+    {
+      "id": "raw-log:executor/artifacts/environment/sdk-cli-download.log",
+      "status": "pass",
+      "detail": "Actual command, exit code and ISO timestamp"
+    },
+    {
+      "id": "raw-log:executor/artifacts/environment/sdk-license-guard.log",
+      "status": "pass",
+      "detail": "Actual command, exit code and ISO timestamp"
+    },
+    {
+      "id": "raw-log:executor/artifacts/environment/sdk-packages-install.log",
+      "status": "pass",
+      "detail": "Actual command, exit code and ISO timestamp"
+    },
+    {
+      "id": "raw-log:executor/artifacts/native/aar-native-inspection.log",
+      "status": "pass",
+      "detail": "Actual command, exit code and ISO timestamp"
+    },
+    {
+      "id": "raw-log:executor/artifacts/native/apk-native-check-final.log",
+      "status": "pass",
+      "detail": "Actual command, exit code and ISO timestamp"
+    },
+    {
+      "id": "raw-log:executor/artifacts/native/apk-native-check.log",
+      "status": "pass",
+      "detail": "Actual command, exit code and ISO timestamp"
+    },
+    {
+      "id": "raw-log:executor/artifacts/receiver/cli-invalid-port.log",
+      "status": "pass",
+      "detail": "Actual command, exit code and ISO timestamp"
+    },
+    {
+      "id": "raw-log:executor/artifacts/receiver/cli-start-stop.log",
+      "status": "pass",
+      "detail": "Actual command, exit code and ISO timestamp"
+    },
+    {
+      "id": "raw-log:executor/artifacts/receiver/receiver-clean-install.log",
+      "status": "pass",
+      "detail": "Actual command, exit code and ISO timestamp"
+    },
+    {
+      "id": "raw-log:executor/artifacts/tdd/config-red-verified.log",
+      "status": "pass",
+      "detail": "Actual command, exit code and ISO timestamp"
+    },
+    {
+      "id": "raw-log:executor/artifacts/tdd/config-red.log",
+      "status": "pass",
+      "detail": "Actual command, exit code and ISO timestamp"
+    },
+    {
+      "id": "raw-log:executor/artifacts/tdd/native-checker-green.log",
+      "status": "pass",
+      "detail": "Actual command, exit code and ISO timestamp"
+    },
+    {
+      "id": "raw-log:executor/artifacts/tdd/native-checker-red-assertions.log",
+      "status": "pass",
+      "detail": "Actual command, exit code and ISO timestamp"
+    },
+    {
+      "id": "raw-log:executor/artifacts/tdd/native-checker-red.log",
+      "status": "pass",
+      "detail": "Actual command, exit code and ISO timestamp"
+    },
+    {
+      "id": "raw-log:executor/artifacts/tdd/native-relro-padding-green.log",
+      "status": "pass",
+      "detail": "Actual command, exit code and ISO timestamp"
+    },
+    {
+      "id": "raw-log:executor/artifacts/tdd/native-relro-padding-red.log",
+      "status": "pass",
+      "detail": "Actual command, exit code and ISO timestamp"
+    },
+    {
+      "id": "raw-log:executor/artifacts/tdd/receiver-final-unit.log",
+      "status": "pass",
+      "detail": "Actual command, exit code and ISO timestamp"
+    },
+    {
+      "id": "raw-log:executor/artifacts/tdd/receiver-green-localhost.log",
+      "status": "pass",
+      "detail": "Actual command, exit code and ISO timestamp"
+    },
+    {
+      "id": "raw-log:executor/artifacts/tdd/receiver-green.log",
+      "status": "pass",
+      "detail": "Actual command, exit code and ISO timestamp"
+    },
+    {
+      "id": "raw-log:executor/artifacts/tdd/server-red-assertions.log",
+      "status": "pass",
+      "detail": "Actual command, exit code and ISO timestamp"
+    },
+    {
+      "id": "raw-log:executor/artifacts/tdd/server-red.log",
+      "status": "pass",
+      "detail": "Actual command, exit code and ISO timestamp"
+    },
+    {
+      "id": "raw-log:tester/artifacts/test-logs/20261028-144342/android-independent-build-1.log",
+      "status": "pass",
+      "detail": "Actual command, exit code and ISO timestamp"
+    },
+    {
+      "id": "raw-log:tester/artifacts/test-logs/20261028-144342/android-independent-build-2.log",
+      "status": "pass",
+      "detail": "Actual command, exit code and ISO timestamp"
+    },
+    {
+      "id": "raw-log:tester/artifacts/test-logs/20261028-144342/collect-independent-results-final.log",
+      "status": "pass",
+      "detail": "Actual command, exit code and ISO timestamp"
+    },
+    {
+      "id": "raw-log:tester/artifacts/test-logs/20261028-144342/collect-independent-results-local.log",
+      "status": "pass",
+      "detail": "Actual command, exit code and ISO timestamp"
+    },
+    {
+      "id": "raw-log:tester/artifacts/test-logs/20261028-144342/collect-independent-results.log",
+      "status": "pass",
+      "detail": "Actual command, exit code and ISO timestamp"
+    },
+    {
+      "id": "raw-log:tester/artifacts/test-logs/20261028-144342/device-inventory.log",
+      "status": "pass",
+      "detail": "Actual command, exit code and ISO timestamp"
+    },
+    {
+      "id": "raw-log:tester/artifacts/test-logs/20261028-144342/independent-provenance.log",
+      "status": "pass",
+      "detail": "Actual command, exit code and ISO timestamp"
+    },
+    {
+      "id": "raw-log:tester/artifacts/test-logs/20261028-144342/native-checker-independent-unit.log",
+      "status": "pass",
+      "detail": "Actual command, exit code and ISO timestamp"
+    },
+    {
+      "id": "raw-log:tester/artifacts/test-logs/20261028-144342/node-independent-setup.log",
+      "status": "pass",
+      "detail": "Actual command, exit code and ISO timestamp"
+    },
+    {
+      "id": "raw-log:tester/artifacts/test-logs/20261028-144342/receiver-independent.log",
+      "status": "pass",
+      "detail": "Actual command, exit code and ISO timestamp"
+    },
+    {
+      "id": "raw-log:tester/artifacts/test-logs/20261028-144342/tester-apk-metadata-1.log",
+      "status": "pass",
+      "detail": "Actual command, exit code and ISO timestamp"
+    },
+    {
+      "id": "raw-log:tester/artifacts/test-logs/20261028-144342/tester-apk-metadata-2.log",
+      "status": "pass",
+      "detail": "Actual command, exit code and ISO timestamp"
+    },
+    {
+      "id": "raw-log:tester/artifacts/test-logs/20261028-144342/tester-final-native.log",
+      "status": "pass",
+      "detail": "Actual command, exit code and ISO timestamp"
+    },
+    {
+      "id": "raw-log:tester/artifacts/test-logs/20261028-144342/tester-final-zipalign.log",
+      "status": "pass",
+      "detail": "Actual command, exit code and ISO timestamp"
+    },
+    {
+      "id": "raw-log:tester/artifacts/test-logs/20261028-144342/tester-preflight-negative.log",
+      "status": "pass",
+      "detail": "Actual command, exit code and ISO timestamp"
+    },
+    {
+      "id": "raw-log:tester/artifacts/test-logs/20261028-144342/tester-preflight.log",
+      "status": "pass",
+      "detail": "Actual command, exit code and ISO timestamp"
+    },
+    {
+      "id": "raw-log:tester/artifacts/test-logs/20261028-155217-ending/android-independent-build-1.log",
+      "status": "pass",
+      "detail": "Actual command, exit code and ISO timestamp"
+    },
+    {
+      "id": "raw-log:tester/artifacts/test-logs/20261028-155217-ending/android-independent-build-2.log",
+      "status": "pass",
+      "detail": "Actual command, exit code and ISO timestamp"
+    },
+    {
+      "id": "raw-log:tester/artifacts/test-logs/20261028-155217-ending/collect-independent-results.log",
+      "status": "pass",
+      "detail": "Actual command, exit code and ISO timestamp"
+    },
+    {
+      "id": "raw-log:tester/artifacts/test-logs/20261028-155217-ending/device-inventory.log",
+      "status": "pass",
+      "detail": "Actual command, exit code and ISO timestamp"
+    },
+    {
+      "id": "raw-log:tester/artifacts/test-logs/20261028-155217-ending/independent-provenance.log",
+      "status": "pass",
+      "detail": "Actual command, exit code and ISO timestamp"
+    },
+    {
+      "id": "raw-log:tester/artifacts/test-logs/20261028-155217-ending/native-checker-independent-unit.log",
+      "status": "pass",
+      "detail": "Actual command, exit code and ISO timestamp"
+    },
+    {
+      "id": "raw-log:tester/artifacts/test-logs/20261028-155217-ending/node-independent-setup.log",
+      "status": "pass",
+      "detail": "Actual command, exit code and ISO timestamp"
+    },
+    {
+      "id": "raw-log:tester/artifacts/test-logs/20261028-155217-ending/receiver-independent.log",
+      "status": "pass",
+      "detail": "Actual command, exit code and ISO timestamp"
+    },
+    {
+      "id": "raw-log:tester/artifacts/test-logs/20261028-155217-ending/tester-apk-metadata-1.log",
+      "status": "pass",
+      "detail": "Actual command, exit code and ISO timestamp"
+    },
+    {
+      "id": "raw-log:tester/artifacts/test-logs/20261028-155217-ending/tester-apk-metadata-2.log",
+      "status": "pass",
+      "detail": "Actual command, exit code and ISO timestamp"
+    },
+    {
+      "id": "raw-log:tester/artifacts/test-logs/20261028-155217-ending/tester-final-native.log",
+      "status": "pass",
+      "detail": "Actual command, exit code and ISO timestamp"
+    },
+    {
+      "id": "raw-log:tester/artifacts/test-logs/20261028-155217-ending/tester-final-zipalign.log",
+      "status": "pass",
+      "detail": "Actual command, exit code and ISO timestamp"
+    },
+    {
+      "id": "raw-log:tester/artifacts/test-logs/20261028-155217-ending/tester-preflight-negative.log",
+      "status": "pass",
+      "detail": "Actual command, exit code and ISO timestamp"
+    },
+    {
+      "id": "raw-log:tester/artifacts/test-logs/20261028-155217-ending/tester-preflight.log",
+      "status": "pass",
+      "detail": "Actual command, exit code and ISO timestamp"
+    },
+    {
+      "id": "fresh-full-suite",
+      "status": "pass",
+      "detail": "16 required pass; 3 conditional not-run"
+    },
+    {
+      "id": "fresh-receipt:android-independent-build-1",
+      "status": "pass",
+      "detail": 0
+    },
+    {
+      "id": "fresh-receipt:android-independent-build-2",
+      "status": "pass",
+      "detail": 0
+    },
+    {
+      "id": "fresh-receipt:collect-independent-results",
+      "status": "pass",
+      "detail": 0
+    },
+    {
+      "id": "fresh-receipt:device-inventory",
+      "status": "pass",
+      "detail": 0
+    },
+    {
+      "id": "fresh-receipt:independent-provenance",
+      "status": "pass",
+      "detail": 0
+    },
+    {
+      "id": "fresh-receipt:native-checker-independent-unit",
+      "status": "pass",
+      "detail": 0
+    },
+    {
+      "id": "fresh-receipt:node-independent-setup",
+      "status": "pass",
+      "detail": 0
+    },
+    {
+      "id": "fresh-receipt:receiver-independent",
+      "status": "pass",
+      "detail": 0
+    },
+    {
+      "id": "fresh-receipt:tester-apk-metadata-1",
+      "status": "pass",
+      "detail": 0
+    },
+    {
+      "id": "fresh-receipt:tester-apk-metadata-2",
+      "status": "pass",
+      "detail": 0
+    },
+    {
+      "id": "fresh-receipt:tester-final-native",
+      "status": "pass",
+      "detail": 0
+    },
+    {
+      "id": "fresh-receipt:tester-final-zipalign",
+      "status": "pass",
+      "detail": 0
+    },
+    {
+      "id": "fresh-receipt:tester-preflight-negative",
+      "status": "pass",
+      "detail": 1
+    },
+    {
+      "id": "fresh-receipt:tester-preflight",
+      "status": "pass",
+      "detail": 0
+    },
+    {
+      "id": "tested-source:android/app/build.gradle.kts",
+      "status": "pass",
+      "detail": "Actual input unchanged after suite"
+    },
+    {
+      "id": "tested-source:android/app/proguard-rules.pro",
+      "status": "pass",
+      "detail": "Actual input unchanged after suite"
+    },
+    {
+      "id": "tested-source:android/app/src/androidTest/java/io/github/primedawn/artemis/WebRtcSdkSmokeTest.kt",
+      "status": "pass",
+      "detail": "Actual input unchanged after suite"
+    },
+    {
+      "id": "tested-source:android/app/src/main/AndroidManifest.xml",
+      "status": "pass",
+      "detail": "Actual input unchanged after suite"
+    },
+    {
+      "id": "tested-source:android/app/src/main/java/io/github/primedawn/artemis/MainActivity.kt",
+      "status": "pass",
+      "detail": "Actual input unchanged after suite"
+    },
+    {
+      "id": "tested-source:android/app/src/main/res/values/strings.xml",
+      "status": "pass",
+      "detail": "Actual input unchanged after suite"
+    },
+    {
+      "id": "tested-source:android/app/src/main/res/values/themes.xml",
+      "status": "pass",
+      "detail": "Actual input unchanged after suite"
+    },
+    {
+      "id": "tested-source:android/build.gradle.kts",
+      "status": "pass",
+      "detail": "Actual input unchanged after suite"
+    },
+    {
+      "id": "tested-source:android/gradle.properties",
+      "status": "pass",
+      "detail": "Actual input unchanged after suite"
+    },
+    {
+      "id": "tested-source:android/gradle/libs.versions.toml",
+      "status": "pass",
+      "detail": "Actual input unchanged after suite"
+    },
+    {
+      "id": "tested-source:android/gradle/wrapper/gradle-wrapper.jar",
+      "status": "pass",
+      "detail": "Actual input unchanged after suite"
+    },
+    {
+      "id": "tested-source:android/gradle/wrapper/gradle-wrapper.properties",
+      "status": "pass",
+      "detail": "Actual input unchanged after suite"
+    },
+    {
+      "id": "tested-source:android/gradlew",
+      "status": "pass",
+      "detail": "Actual input unchanged after suite"
+    },
+    {
+      "id": "tested-source:android/gradlew.bat",
+      "status": "pass",
+      "detail": "Actual input unchanged after suite"
+    },
+    {
+      "id": "tested-source:android/settings.gradle.kts",
+      "status": "pass",
+      "detail": "Actual input unchanged after suite"
+    },
+    {
+      "id": "tested-source:docs/dependency-provenance.md",
+      "status": "pass",
+      "detail": "Actual input unchanged after suite"
+    },
+    {
+      "id": "tested-source:docs/third-party/WEBRTC-150.7871.01.md",
+      "status": "pass",
+      "detail": "Actual input unchanged after suite"
+    },
+    {
+      "id": "tested-source:docs/toolchain-lock.json",
+      "status": "pass",
+      "detail": "Actual input unchanged after suite"
+    },
+    {
+      "id": "tested-source:docs/toolchain.md",
+      "status": "pass",
+      "detail": "Actual input unchanged after suite"
+    },
+    {
+      "id": "tested-source:docs/validation-followups.md",
+      "status": "pass",
+      "detail": "Actual input unchanged after suite"
+    },
+    {
+      "id": "tested-source:receiver/.node-version",
+      "status": "pass",
+      "detail": "Actual input unchanged after suite"
+    },
+    {
+      "id": "tested-source:receiver/package-lock.json",
+      "status": "pass",
+      "detail": "Actual input unchanged after suite"
+    },
+    {
+      "id": "tested-source:receiver/package.json",
+      "status": "pass",
+      "detail": "Actual input unchanged after suite"
+    },
+    {
+      "id": "tested-source:receiver/src/cli.ts",
+      "status": "pass",
+      "detail": "Actual input unchanged after suite"
+    },
+    {
+      "id": "tested-source:receiver/src/config.ts",
+      "status": "pass",
+      "detail": "Actual input unchanged after suite"
+    },
+    {
+      "id": "tested-source:receiver/src/server.ts",
+      "status": "pass",
+      "detail": "Actual input unchanged after suite"
+    },
+    {
+      "id": "tested-source:receiver/test/config.test.ts",
+      "status": "pass",
+      "detail": "Actual input unchanged after suite"
+    },
+    {
+      "id": "tested-source:receiver/test/server.test.ts",
+      "status": "pass",
+      "detail": "Actual input unchanged after suite"
+    },
+    {
+      "id": "tested-source:receiver/tsconfig.json",
+      "status": "pass",
+      "detail": "Actual input unchanged after suite"
+    },
+    {
+      "id": "tested-source:scripts/bootstrap-android-sdk.ps1",
+      "status": "pass",
+      "detail": "Actual input unchanged after suite"
+    },
+    {
+      "id": "tested-source:scripts/rk-awr-checkpoint.ps1",
+      "status": "pass",
+      "detail": "Actual input unchanged after suite"
+    },
+    {
+      "id": "tested-source:scripts/rk-awr-checkpoint.sh",
+      "status": "pass",
+      "detail": "Actual input unchanged after suite"
+    },
+    {
+      "id": "tested-source:scripts/tests/test_verify_native_libs.py",
+      "status": "pass",
+      "detail": "Actual input unchanged after suite"
+    },
+    {
+      "id": "tested-source:scripts/verify-native-libs.py",
+      "status": "pass",
+      "detail": "Actual input unchanged after suite"
+    },
+    {
+      "id": "tested-source:scripts/verify-toolchain.ps1",
+      "status": "pass",
+      "detail": "Actual input unchanged after suite"
+    },
+    {
+      "id": "tested-source:tests/android-device-probe.py",
+      "status": "pass",
+      "detail": "Actual input unchanged after suite"
+    },
+    {
+      "id": "tested-source:tests/collect-sdk-results.py",
+      "status": "pass",
+      "detail": "Actual input unchanged after suite"
+    },
+    {
+      "id": "tested-source:tests/receiver-smoke.mjs",
+      "status": "pass",
+      "detail": "Actual input unchanged after suite"
+    },
+    {
+      "id": "tested-source:tests/toolchain-provenance.py",
+      "status": "pass",
+      "detail": "Actual input unchanged after suite"
+    },
+    {
+      "id": "tested-source:tests/windows-cli-signal.py",
+      "status": "pass",
+      "detail": "Actual input unchanged after suite"
+    },
+    {
+      "id": "tested-source:.cache/gradle-testing.ps1",
+      "status": "pass",
+      "detail": "Actual input unchanged after suite"
+    },
+    {
+      "id": "tested-source:.cache/inspect-built-apk.py",
+      "status": "pass",
+      "detail": "Actual input unchanged after suite"
+    },
+    {
+      "id": "tested-source:.cache/run-evidence.py",
+      "status": "pass",
+      "detail": "Actual input unchanged after suite"
+    },
+    {
+      "id": "snapshot",
+      "status": "pass",
+      "detail": "Source snapshot hash"
+    },
+    {
+      "id": "product-plan",
+      "status": "pass",
+      "detail": "Product source unchanged"
+    },
+    {
+      "id": "prior-completion-immutable",
+      "status": "pass",
+      "detail": "Original registered report bytes retained"
+    },
+    {
+      "id": "version-evidence-immutable",
+      "status": "pass",
+      "detail": "Historic planning evidence bytes retained"
+    },
+    {
+      "id": "git-branch",
+      "status": "pass",
+      "detail": {
+        "current": "tech/spec-20261028-1059-sdk-toolchain",
+        "remoteDefault": "main",
+        "prTarget": "dev"
+      }
+    },
+    {
+      "id": "diff-whitespace",
+      "status": "pass",
+      "detail": "warning: in the working copy of '.gitignore', CRLF will be replaced by LF the next time Git touches it\nwarning: in the working copy of 'GOALS.md', CRLF will be replaced by LF the next time Git touches it\nwarning: in the working copy of 'spec/versions/v0.1/plan.html', CRLF will be replaced by LF the next time Git touches it\nwarning: in the working copy of 'spec/versions/v0.1/version-context.md', CRLF will be replaced by LF the next time Git touches it\nwarning: in the working copy of 'work-ledger.yaml', CRLF will be replaced by LF the next time Git touches it\n"
+    }
+  ]
+}

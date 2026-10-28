@@ -1,0 +1,9 @@
+=== usb-delivery-validation-portable Run ===
+Command: python .cache/check-usb-delivery-portable.py
+Timestamp: 2026-10-28T10:33:02.778650+00:00
+{"passed": true, "checks": 352, "htmlReports": 6, "rawLogs": 162, "failures": []}
+
+--- stderr ---
+
+Exit code: 0
+Finished: 2026-10-28T10:33:05.085735+00:00

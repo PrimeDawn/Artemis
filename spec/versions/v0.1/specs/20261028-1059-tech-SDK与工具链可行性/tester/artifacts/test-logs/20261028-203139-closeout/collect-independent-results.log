@@ -1,0 +1,9 @@
+=== collect-independent-results Run ===
+Command: python .cache/collect-closeout-results.py --run-dir spec/versions/v0.1/specs/20261028-1059-tech-SDK与工具链可行性/tester/artifacts/test-logs/20261028-203139-closeout
+Timestamp: 2026-10-28T12:37:35.429288+00:00
+{"requiredPassed": 16, "requiredTotal": 16, "notRun": 3, "passedRequired": true, "snapshotSha256": "757da8a5f54fa46c21a738b774f77a3c4dc6555657ce1f1e47ba59230b23619c", "productionChanges": ["scripts/bootstrap-android-sdk.ps1", "scripts/verify-toolchain.ps1"]}
+
+--- stderr ---
+
+Exit code: 0
+Finished: 2026-10-28T12:37:36.365276+00:00

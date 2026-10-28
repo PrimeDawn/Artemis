@@ -1,0 +1,187 @@
+{
+  "startedAt": "2026-10-28T10:52:38.712886+00:00",
+  "device": {
+    "id": "emulator-device-1",
+    "kind": "emulator",
+    "manufacturer": "Google",
+    "model": "sdk_gphone16k_x86_64",
+    "android": "16",
+    "api": "36",
+    "abi": "x86_64",
+    "pageSize": "16384"
+  },
+  "cases": [
+    {
+      "id": "TC-D1",
+      "status": "pass",
+      "detail": "App and test APK installed; expected Compose UI observed; actual JNI initialization and native factory creation/disposal passed (1 instrumentation test).",
+      "evidence": [
+        "install-app.log",
+        "install-test.log",
+        "launch-activity.log",
+        "artemis-ui.xml",
+        "artemis-validation.png",
+        "jni-instrumentation.log"
+      ]
+    },
+    {
+      "id": "TC-D2",
+      "status": "not-run",
+      "reason": "Connected phone is API36, not Android 10/API29"
+    },
+    {
+      "id": "TC-D3",
+      "status": "pass",
+      "reason": "Actual 16384-byte-page device JNI test passed"
+    }
+  ],
+  "scope": "The current built APK on one authorized device; no other system version is inferred.",
+  "artifacts": [
+    {
+      "path": "android/app/build/outputs/apk/debug/app-debug.apk",
+      "bytes": 74654500,
+      "sha256": "c57bc1be8329a9fc50d1258b43a0cf78d0451be78be37c0388bf684a01f8816a"
+    },
+    {
+      "path": "android/app/build/outputs/apk/androidTest/debug/app-debug-androidTest.apk",
+      "bytes": 813165,
+      "sha256": "0a309ae74a4a68a8c31320e4d63f62164e735083b86c73ec98dd36cc945b5d65"
+    }
+  ],
+  "installation": "Both APKs installed in this run",
+  "jniPassed": true,
+  "status": "pass",
+  "finishedAt": "2026-10-28T10:53:01.524604+00:00",
+  "commands": [
+    {
+      "label": "device-manufacturer",
+      "command": "%USERPROFILE%\\AppData\\Local\\Android\\Sdk\\platform-tools\\adb.exe -e shell getprop ro.product.manufacturer",
+      "startedAt": "2026-10-28T10:52:38.712914+00:00",
+      "finishedAt": "2026-10-28T10:52:38.796853+00:00",
+      "exitCode": 0,
+      "stdoutSha256": "2efc3a9f147a6c7484434df1226b1cc9484fdf48f5ccf2c9b13dc142819ea3bd",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "privacyFilter": null
+    },
+    {
+      "label": "device-model",
+      "command": "%USERPROFILE%\\AppData\\Local\\Android\\Sdk\\platform-tools\\adb.exe -e shell getprop ro.product.model",
+      "startedAt": "2026-10-28T10:52:38.796903+00:00",
+      "finishedAt": "2026-10-28T10:52:38.873107+00:00",
+      "exitCode": 0,
+      "stdoutSha256": "bf00b0f6e3351f4e64aa3373a03e0558242abb43da3438be83d03a1cbc6e2089",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "privacyFilter": null
+    },
+    {
+      "label": "device-android",
+      "command": "%USERPROFILE%\\AppData\\Local\\Android\\Sdk\\platform-tools\\adb.exe -e shell getprop ro.build.version.release",
+      "startedAt": "2026-10-28T10:52:38.873142+00:00",
+      "finishedAt": "2026-10-28T10:52:38.942799+00:00",
+      "exitCode": 0,
+      "stdoutSha256": "b7a33ec2d3fa6748259d5a72ed976b7308fa7355fd99818bc0dc12fece595277",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "privacyFilter": null
+    },
+    {
+      "label": "device-api",
+      "command": "%USERPROFILE%\\AppData\\Local\\Android\\Sdk\\platform-tools\\adb.exe -e shell getprop ro.build.version.sdk",
+      "startedAt": "2026-10-28T10:52:38.942836+00:00",
+      "finishedAt": "2026-10-28T10:52:39.019689+00:00",
+      "exitCode": 0,
+      "stdoutSha256": "0a6b5e02cbe592ef9285db1440db99874166326dff103608c6dfd5068ec714f5",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "privacyFilter": null
+    },
+    {
+      "label": "device-abi",
+      "command": "%USERPROFILE%\\AppData\\Local\\Android\\Sdk\\platform-tools\\adb.exe -e shell getprop ro.product.cpu.abi",
+      "startedAt": "2026-10-28T10:52:39.019727+00:00",
+      "finishedAt": "2026-10-28T10:52:39.084201+00:00",
+      "exitCode": 0,
+      "stdoutSha256": "73639484b8886a56b085ee97e76ead4218da03db9c2e5c88dd656c06bca60243",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "privacyFilter": null
+    },
+    {
+      "label": "device-pageSize",
+      "command": "%USERPROFILE%\\AppData\\Local\\Android\\Sdk\\platform-tools\\adb.exe -e shell getconf PAGE_SIZE",
+      "startedAt": "2026-10-28T10:52:39.084237+00:00",
+      "finishedAt": "2026-10-28T10:52:39.163888+00:00",
+      "exitCode": 0,
+      "stdoutSha256": "0cf3b033a9e93a0bc41f772e408f46e947755926bd81e15a470ae9b14f697653",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "privacyFilter": null
+    },
+    {
+      "label": "install-app",
+      "command": "%USERPROFILE%\\AppData\\Local\\Android\\Sdk\\platform-tools\\adb.exe -e install -r %PROJECT_ROOT%\\android\\app\\build\\outputs\\apk\\debug\\app-debug.apk",
+      "startedAt": "2026-10-28T10:52:39.236857+00:00",
+      "finishedAt": "2026-10-28T10:52:46.330365+00:00",
+      "exitCode": 0,
+      "stdoutSha256": "c4aa470acafcf8576c15b0f0b5ae7e852d1ec5413372d0e6a9272e788e1306d3",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "privacyFilter": null
+    },
+    {
+      "label": "install-test",
+      "command": "%USERPROFILE%\\AppData\\Local\\Android\\Sdk\\platform-tools\\adb.exe -e install -r %PROJECT_ROOT%\\android\\app\\build\\outputs\\apk\\androidTest\\debug\\app-debug-androidTest.apk",
+      "startedAt": "2026-10-28T10:52:46.330399+00:00",
+      "finishedAt": "2026-10-28T10:52:47.702587+00:00",
+      "exitCode": 0,
+      "stdoutSha256": "c4aa470acafcf8576c15b0f0b5ae7e852d1ec5413372d0e6a9272e788e1306d3",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "privacyFilter": null
+    },
+    {
+      "label": "jni-instrumentation",
+      "command": "%USERPROFILE%\\AppData\\Local\\Android\\Sdk\\platform-tools\\adb.exe -e shell am instrument -w -r -e class io.github.primedawn.artemis.WebRtcSdkSmokeTest io.github.primedawn.artemis.test/androidx.test.runner.AndroidJUnitRunner",
+      "startedAt": "2026-10-28T10:52:47.702618+00:00",
+      "finishedAt": "2026-10-28T10:52:54.128994+00:00",
+      "exitCode": 0,
+      "stdoutSha256": "83a8dbc3253b20d35c42e3c528eda2e9b3ac6af9373668dfa2f416b9e5792749",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "privacyFilter": null
+    },
+    {
+      "label": "launch-activity",
+      "command": "%USERPROFILE%\\AppData\\Local\\Android\\Sdk\\platform-tools\\adb.exe -e shell am start -W -n io.github.primedawn.artemis/.MainActivity",
+      "startedAt": "2026-10-28T10:52:54.129271+00:00",
+      "finishedAt": "2026-10-28T10:52:58.503772+00:00",
+      "exitCode": 0,
+      "stdoutSha256": "a1fb0c17cbc3e1344bd03ae8718e1b4a6583845877b38d14bef87700d60c2933",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "privacyFilter": null
+    },
+    {
+      "label": "ui-dump",
+      "command": "%USERPROFILE%\\AppData\\Local\\Android\\Sdk\\platform-tools\\adb.exe -e shell uiautomator dump /data/local/tmp/artemis-sdk-ui.xml",
+      "startedAt": "2026-10-28T10:52:58.503806+00:00",
+      "finishedAt": "2026-10-28T10:53:01.157114+00:00",
+      "exitCode": 0,
+      "stdoutSha256": "207a3bd605b9947714f9235437b92ad070da7a93d2a1fa6c6c43a32c49f54663",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "privacyFilter": null
+    },
+    {
+      "label": "ui-read",
+      "command": "%USERPROFILE%\\AppData\\Local\\Android\\Sdk\\platform-tools\\adb.exe -e exec-out cat /data/local/tmp/artemis-sdk-ui.xml",
+      "startedAt": "2026-10-28T10:53:01.157152+00:00",
+      "finishedAt": "2026-10-28T10:53:01.239152+00:00",
+      "exitCode": 0,
+      "stdoutSha256": "7c85b489dad6777739442f583f2a425e47861547cd15f8c4f778cfc87980f337",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "privacyFilter": "Artemis UI package only"
+    },
+    {
+      "label": "app-screenshot",
+      "command": "%USERPROFILE%\\AppData\\Local\\Android\\Sdk\\platform-tools\\adb.exe -e exec-out screencap -p",
+      "startedAt": "2026-10-28T10:53:01.249005+00:00",
+      "finishedAt": "2026-10-28T10:53:01.524281+00:00",
+      "exitCode": 0,
+      "stdoutSha256": "797430f38ed014968ee4839601c246c5e3220ea61244c821381e39bb0d3dac55",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "privacyFilter": null
+    }
+  ]
+}

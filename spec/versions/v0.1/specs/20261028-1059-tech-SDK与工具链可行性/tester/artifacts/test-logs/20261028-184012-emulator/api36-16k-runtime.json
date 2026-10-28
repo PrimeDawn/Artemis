@@ -1,0 +1,14 @@
+{
+  "command": "python .cache/run-emulator-runtime.py --api 36 --page-size 16384",
+  "startedAt": "2026-10-28T10:50:35.878781+00:00",
+  "finishedAt": "2026-10-28T10:53:03.095978+00:00",
+  "exitCode": 0,
+  "expectedExitCode": 0,
+  "durationSeconds": 147.218,
+  "stdoutSha256": "f81f48740d7d1d94d60024be02e6ae41dd5ab8786e6aafe93b6ba9537e90294d",
+  "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "log": "api36-16k-runtime.log",
+  "redactions": [
+    "personal user-root path"
+  ]
+}

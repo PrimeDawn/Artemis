@@ -1,0 +1,14 @@
+{
+  "command": "E:\\Dev\\Nodejs\\npm.cmd --prefix receiver test",
+  "startedAt": "2026-10-28T12:23:45.250272+00:00",
+  "finishedAt": "2026-10-28T12:23:47.653521+00:00",
+  "exitCode": 0,
+  "expectedExitCode": 0,
+  "durationSeconds": 2.404,
+  "stdoutSha256": "b3ad1293cea25a4b2a6e8fd5d71aa32dd065b20dae424bca4c1d2d5707dac201",
+  "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "log": "receiver-tests.log",
+  "redactions": [
+    "personal user-root path"
+  ]
+}

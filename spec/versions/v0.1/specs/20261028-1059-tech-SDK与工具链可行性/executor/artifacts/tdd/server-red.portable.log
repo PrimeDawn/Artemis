@@ -1,0 +1,80 @@
+=== server-red Run ===
+Command: powershell -NoProfile -Command "npm.cmd --prefix receiver test; exit $LASTEXITCODE"
+Timestamp: 2026-10-28T05:53:27.040189+00:00
+
+> @artemis/receiver@0.1.0-dev test
+> npm run build && node --test dist/test/*.test.js
+
+
+> @artemis/receiver@0.1.0-dev build
+> tsc -p tsconfig.json
+
+✔ PORT is 3000 only when the value is absent (1.1594ms)
+✔ accept decimal port 0 (0.1095ms)
+✔ accept decimal port 3000 (0.0808ms)
+✔ accept decimal port 65535 (0.0522ms)
+✔ accept decimal port 00080 (0.0661ms)
+✔ reject port "" without fallback (0.303ms)
+✔ reject port "-1" without fallback (0.0889ms)
+✔ reject port "65536" without fallback (0.0525ms)
+✔ reject port "abc" without fallback (0.0668ms)
+✔ reject port "1.5" without fallback (0.1144ms)
+✔ reject port " 3000" without fallback (0.0582ms)
+✔ reject port "3000 " without fallback (0.0643ms)
+✔ reject port "+80" without fallback (0.0552ms)
+✔ reject port "0x50" without fallback (0.0487ms)
+✔ reject port "1e3" without fallback (0.0367ms)
+✔ reject port "NaN" without fallback (0.0436ms)
+✔ reject port "999999999999999999999" without fallback (0.0703ms)
+✖ public server API serves the exact health contract and route boundaries (0.5912ms)
+✖ public close is concurrent-safe and releases the listening port (0.1173ms)
+✖ startup rejects with the original EADDRINUSE code (0.1047ms)
+ℹ tests 20
+ℹ suites 0
+ℹ pass 17
+ℹ fail 3
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 93.7731
+
+✖ failing tests:
+
+test at dist\test\server.test.js:4:1
+✖ public server API serves the exact health contract and route boundaries (0.5912ms)
+  Error: Receiver startup is not implemented
+      at startReceiver (file:///%PROJECT_ROOT%/receiver/dist/src/server.js:6:11)
+      at TestContext.<anonymous> (file:///%PROJECT_ROOT%/receiver/dist/test/server.test.js:5:27)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1325:25)
+      at Test.start (node:internal/test_runner/test:1191:17)
+      at startSubtestAfterBootstrap (node:internal/test_runner/harness:385:17)
+
+test at dist\test\server.test.js:28:1
+✖ public close is concurrent-safe and releases the listening port (0.1173ms)
+  Error: Receiver startup is not implemented
+      at startReceiver (file:///%PROJECT_ROOT%/receiver/dist/src/server.js:6:11)
+      at TestContext.<anonymous> (file:///%PROJECT_ROOT%/receiver/dist/test/server.test.js:29:25)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1325:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:911:18)
+      at Test.postRun (node:internal/test_runner/test:1465:19)
+      at Test.run (node:internal/test_runner/test:1390:12)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:385:3)
+
+test at dist\test\server.test.js:35:1
+✖ startup rejects with the original EADDRINUSE code (0.1047ms)
+  Error: Receiver startup is not implemented
+      at startReceiver (file:///%PROJECT_ROOT%/receiver/dist/src/server.js:6:11)
+      at TestContext.<anonymous> (file:///%PROJECT_ROOT%/receiver/dist/test/server.test.js:36:25)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1325:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:911:18)
+      at Test.postRun (node:internal/test_runner/test:1465:19)
+      at Test.run (node:internal/test_runner/test:1390:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:911:7)
+
+--- stderr ---
+
+Exit code: 1
+Finished: 2026-10-28T05:53:30.076880+00:00

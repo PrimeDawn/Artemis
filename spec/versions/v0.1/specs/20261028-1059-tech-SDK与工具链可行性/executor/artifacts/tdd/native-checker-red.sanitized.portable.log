@@ -1,0 +1,398 @@
+=== native-checker-red Run ===
+Command: python scripts/tests/test_verify_native_libs.py
+Timestamp: 2026-10-28T06:02:28.503114+00:00
+
+--- stderr ---
+test_16kb_load_passes (__main__.NativeChecks.test_16kb_load_passes) ... ERROR
+test_4kb_load_fails (__main__.NativeChecks.test_4kb_load_fails) ... ERROR
+test_corrupt_elf_fails (__main__.NativeChecks.test_corrupt_elf_fails) ... ERROR
+test_isolated_relro_load_is_valid_even_with_nonzero_end_modulo (__main__.NativeChecks.test_isolated_relro_load_is_valid_even_with_nonzero_end_modulo) ... ERROR
+test_missing_64bit_abi_fails (__main__.NativeChecks.test_missing_64bit_abi_fails) ... ERROR
+test_missing_archive_input_fails (__main__.NativeChecks.test_missing_archive_input_fails) ... ERROR
+test_shared_relro_end_must_be_16kb_aligned (__main__.NativeChecks.test_shared_relro_end_must_be_16kb_aligned) ... ERROR
+
+======================================================================
+ERROR: test_16kb_load_passes (__main__.NativeChecks.test_16kb_load_passes)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "%PROJECT_ROOT%\scripts\tests\test_verify_native_libs.py", line 34, in run_case
+    with zipfile.ZipFile(archive, 'w') as z:
+         ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^
+  File "E:\Dev\miniconda\Lib\zipfile\__init__.py", line 1383, in __init__
+    self.fp = io.open(file, filemode)
+              ~~~~~~~^^^^^^^^^^^^^^^^
+PermissionError: [Errno 13] Permission denied: '%USERPROFILE%\\AppData\\Local\\Packages\\sandbox.{a30946e8-e5bd-42cf-ae0b-510839dde7bb}\\AC\\Temp\\tmpxdpcceyv\\fixture.apk'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "E:\Dev\miniconda\Lib\shutil.py", line 631, in _rmtree_unsafe
+    os.rmdir(path)
+    ~~~~~~~~^^^^^^
+PermissionError: [WinError 5] 拒绝访问。: '%USERPROFILE%\\AppData\\Local\\Packages\\sandbox.{a30946e8-e5bd-42cf-ae0b-510839dde7bb}\\AC\\Temp\\tmpxdpcceyv'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "%PROJECT_ROOT%\scripts\tests\test_verify_native_libs.py", line 47, in test_16kb_load_passes
+    code, report = self.run_case()
+                   ~~~~~~~~~~~~~^^
+  File "%PROJECT_ROOT%\scripts\tests\test_verify_native_libs.py", line 31, in run_case
+    with tempfile.TemporaryDirectory() as temporary:
+         ~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "E:\Dev\miniconda\Lib\tempfile.py", line 951, in __exit__
+    self.cleanup()
+    ~~~~~~~~~~~~^^
+  File "E:\Dev\miniconda\Lib\tempfile.py", line 955, in cleanup
+    self._rmtree(self.name, ignore_errors=self._ignore_cleanup_errors)
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\Dev\miniconda\Lib\tempfile.py", line 935, in _rmtree
+    _shutil.rmtree(name, onexc=onexc)
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^
+  File "E:\Dev\miniconda\Lib\shutil.py", line 790, in rmtree
+    return _rmtree_unsafe(path, onexc)
+  File "E:\Dev\miniconda\Lib\shutil.py", line 635, in _rmtree_unsafe
+    onexc(os.rmdir, path, err)
+    ~~~~~^^^^^^^^^^^^^^^^^^^^^
+  File "E:\Dev\miniconda\Lib\tempfile.py", line 907, in onexc
+    _resetperms(path)
+    ~~~~~~~~~~~^^^^^^
+  File "E:\Dev\miniconda\Lib\tempfile.py", line 283, in _resetperms
+    _dont_follow_symlinks(_os.chmod, path, 0o700)
+    ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\Dev\miniconda\Lib\tempfile.py", line 272, in _dont_follow_symlinks
+    func(path, *args, follow_symlinks=False)
+    ~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+PermissionError: [WinError 5] 拒绝访问。: '%USERPROFILE%\\AppData\\Local\\Packages\\sandbox.{a30946e8-e5bd-42cf-ae0b-510839dde7bb}\\AC\\Temp\\tmpxdpcceyv'
+
+======================================================================
+ERROR: test_4kb_load_fails (__main__.NativeChecks.test_4kb_load_fails)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "%PROJECT_ROOT%\scripts\tests\test_verify_native_libs.py", line 34, in run_case
+    with zipfile.ZipFile(archive, 'w') as z:
+         ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^
+  File "E:\Dev\miniconda\Lib\zipfile\__init__.py", line 1383, in __init__
+    self.fp = io.open(file, filemode)
+              ~~~~~~~^^^^^^^^^^^^^^^^
+PermissionError: [Errno 13] Permission denied: '%USERPROFILE%\\AppData\\Local\\Packages\\sandbox.{a30946e8-e5bd-42cf-ae0b-510839dde7bb}\\AC\\Temp\\tmpqjw78aeb\\fixture.apk'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "E:\Dev\miniconda\Lib\shutil.py", line 631, in _rmtree_unsafe
+    os.rmdir(path)
+    ~~~~~~~~^^^^^^
+PermissionError: [WinError 5] 拒绝访问。: '%USERPROFILE%\\AppData\\Local\\Packages\\sandbox.{a30946e8-e5bd-42cf-ae0b-510839dde7bb}\\AC\\Temp\\tmpqjw78aeb'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "%PROJECT_ROOT%\scripts\tests\test_verify_native_libs.py", line 53, in test_4kb_load_fails
+    code, report = self.run_case(alignment=4096)
+                   ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+  File "%PROJECT_ROOT%\scripts\tests\test_verify_native_libs.py", line 31, in run_case
+    with tempfile.TemporaryDirectory() as temporary:
+         ~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "E:\Dev\miniconda\Lib\tempfile.py", line 951, in __exit__
+    self.cleanup()
+    ~~~~~~~~~~~~^^
+  File "E:\Dev\miniconda\Lib\tempfile.py", line 955, in cleanup
+    self._rmtree(self.name, ignore_errors=self._ignore_cleanup_errors)
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\Dev\miniconda\Lib\tempfile.py", line 935, in _rmtree
+    _shutil.rmtree(name, onexc=onexc)
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^
+  File "E:\Dev\miniconda\Lib\shutil.py", line 790, in rmtree
+    return _rmtree_unsafe(path, onexc)
+  File "E:\Dev\miniconda\Lib\shutil.py", line 635, in _rmtree_unsafe
+    onexc(os.rmdir, path, err)
+    ~~~~~^^^^^^^^^^^^^^^^^^^^^
+  File "E:\Dev\miniconda\Lib\tempfile.py", line 907, in onexc
+    _resetperms(path)
+    ~~~~~~~~~~~^^^^^^
+  File "E:\Dev\miniconda\Lib\tempfile.py", line 283, in _resetperms
+    _dont_follow_symlinks(_os.chmod, path, 0o700)
+    ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\Dev\miniconda\Lib\tempfile.py", line 272, in _dont_follow_symlinks
+    func(path, *args, follow_symlinks=False)
+    ~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+PermissionError: [WinError 5] 拒绝访问。: '%USERPROFILE%\\AppData\\Local\\Packages\\sandbox.{a30946e8-e5bd-42cf-ae0b-510839dde7bb}\\AC\\Temp\\tmpqjw78aeb'
+
+======================================================================
+ERROR: test_corrupt_elf_fails (__main__.NativeChecks.test_corrupt_elf_fails)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "%PROJECT_ROOT%\scripts\tests\test_verify_native_libs.py", line 34, in run_case
+    with zipfile.ZipFile(archive, 'w') as z:
+         ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^
+  File "E:\Dev\miniconda\Lib\zipfile\__init__.py", line 1383, in __init__
+    self.fp = io.open(file, filemode)
+              ~~~~~~~^^^^^^^^^^^^^^^^
+PermissionError: [Errno 13] Permission denied: '%USERPROFILE%\\AppData\\Local\\Packages\\sandbox.{a30946e8-e5bd-42cf-ae0b-510839dde7bb}\\AC\\Temp\\tmpauvzkz6u\\fixture.apk'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "E:\Dev\miniconda\Lib\shutil.py", line 631, in _rmtree_unsafe
+    os.rmdir(path)
+    ~~~~~~~~^^^^^^
+PermissionError: [WinError 5] 拒绝访问。: '%USERPROFILE%\\AppData\\Local\\Packages\\sandbox.{a30946e8-e5bd-42cf-ae0b-510839dde7bb}\\AC\\Temp\\tmpauvzkz6u'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "%PROJECT_ROOT%\scripts\tests\test_verify_native_libs.py", line 68, in test_corrupt_elf_fails
+    self.assertEqual(self.run_case(corrupt=True)[0], 1)
+                     ~~~~~~~~~~~~~^^^^^^^^^^^^^^
+  File "%PROJECT_ROOT%\scripts\tests\test_verify_native_libs.py", line 31, in run_case
+    with tempfile.TemporaryDirectory() as temporary:
+         ~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "E:\Dev\miniconda\Lib\tempfile.py", line 951, in __exit__
+    self.cleanup()
+    ~~~~~~~~~~~~^^
+  File "E:\Dev\miniconda\Lib\tempfile.py", line 955, in cleanup
+    self._rmtree(self.name, ignore_errors=self._ignore_cleanup_errors)
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\Dev\miniconda\Lib\tempfile.py", line 935, in _rmtree
+    _shutil.rmtree(name, onexc=onexc)
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^
+  File "E:\Dev\miniconda\Lib\shutil.py", line 790, in rmtree
+    return _rmtree_unsafe(path, onexc)
+  File "E:\Dev\miniconda\Lib\shutil.py", line 635, in _rmtree_unsafe
+    onexc(os.rmdir, path, err)
+    ~~~~~^^^^^^^^^^^^^^^^^^^^^
+  File "E:\Dev\miniconda\Lib\tempfile.py", line 907, in onexc
+    _resetperms(path)
+    ~~~~~~~~~~~^^^^^^
+  File "E:\Dev\miniconda\Lib\tempfile.py", line 283, in _resetperms
+    _dont_follow_symlinks(_os.chmod, path, 0o700)
+    ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\Dev\miniconda\Lib\tempfile.py", line 272, in _dont_follow_symlinks
+    func(path, *args, follow_symlinks=False)
+    ~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+PermissionError: [WinError 5] 拒绝访问。: '%USERPROFILE%\\AppData\\Local\\Packages\\sandbox.{a30946e8-e5bd-42cf-ae0b-510839dde7bb}\\AC\\Temp\\tmpauvzkz6u'
+
+======================================================================
+ERROR: test_isolated_relro_load_is_valid_even_with_nonzero_end_modulo (__main__.NativeChecks.test_isolated_relro_load_is_valid_even_with_nonzero_end_modulo)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "%PROJECT_ROOT%\scripts\tests\test_verify_native_libs.py", line 34, in run_case
+    with zipfile.ZipFile(archive, 'w') as z:
+         ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^
+  File "E:\Dev\miniconda\Lib\zipfile\__init__.py", line 1383, in __init__
+    self.fp = io.open(file, filemode)
+              ~~~~~~~^^^^^^^^^^^^^^^^
+PermissionError: [Errno 13] Permission denied: '%USERPROFILE%\\AppData\\Local\\Packages\\sandbox.{a30946e8-e5bd-42cf-ae0b-510839dde7bb}\\AC\\Temp\\tmpq1fgll0d\\fixture.apk'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "E:\Dev\miniconda\Lib\shutil.py", line 631, in _rmtree_unsafe
+    os.rmdir(path)
+    ~~~~~~~~^^^^^^
+PermissionError: [WinError 5] 拒绝访问。: '%USERPROFILE%\\AppData\\Local\\Packages\\sandbox.{a30946e8-e5bd-42cf-ae0b-510839dde7bb}\\AC\\Temp\\tmpq1fgll0d'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "%PROJECT_ROOT%\scripts\tests\test_verify_native_libs.py", line 62, in test_isolated_relro_load_is_valid_even_with_nonzero_end_modulo
+    code, report = self.run_case(relro='isolated')
+                   ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^
+  File "%PROJECT_ROOT%\scripts\tests\test_verify_native_libs.py", line 31, in run_case
+    with tempfile.TemporaryDirectory() as temporary:
+         ~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "E:\Dev\miniconda\Lib\tempfile.py", line 951, in __exit__
+    self.cleanup()
+    ~~~~~~~~~~~~^^
+  File "E:\Dev\miniconda\Lib\tempfile.py", line 955, in cleanup
+    self._rmtree(self.name, ignore_errors=self._ignore_cleanup_errors)
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\Dev\miniconda\Lib\tempfile.py", line 935, in _rmtree
+    _shutil.rmtree(name, onexc=onexc)
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^
+  File "E:\Dev\miniconda\Lib\shutil.py", line 790, in rmtree
+    return _rmtree_unsafe(path, onexc)
+  File "E:\Dev\miniconda\Lib\shutil.py", line 635, in _rmtree_unsafe
+    onexc(os.rmdir, path, err)
+    ~~~~~^^^^^^^^^^^^^^^^^^^^^
+  File "E:\Dev\miniconda\Lib\tempfile.py", line 907, in onexc
+    _resetperms(path)
+    ~~~~~~~~~~~^^^^^^
+  File "E:\Dev\miniconda\Lib\tempfile.py", line 283, in _resetperms
+    _dont_follow_symlinks(_os.chmod, path, 0o700)
+    ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\Dev\miniconda\Lib\tempfile.py", line 272, in _dont_follow_symlinks
+    func(path, *args, follow_symlinks=False)
+    ~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+PermissionError: [WinError 5] 拒绝访问。: '%USERPROFILE%\\AppData\\Local\\Packages\\sandbox.{a30946e8-e5bd-42cf-ae0b-510839dde7bb}\\AC\\Temp\\tmpq1fgll0d'
+
+======================================================================
+ERROR: test_missing_64bit_abi_fails (__main__.NativeChecks.test_missing_64bit_abi_fails)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "%PROJECT_ROOT%\scripts\tests\test_verify_native_libs.py", line 34, in run_case
+    with zipfile.ZipFile(archive, 'w') as z:
+         ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^
+  File "E:\Dev\miniconda\Lib\zipfile\__init__.py", line 1383, in __init__
+    self.fp = io.open(file, filemode)
+              ~~~~~~~^^^^^^^^^^^^^^^^
+PermissionError: [Errno 13] Permission denied: '%USERPROFILE%\\AppData\\Local\\Packages\\sandbox.{a30946e8-e5bd-42cf-ae0b-510839dde7bb}\\AC\\Temp\\tmp3_93bvqm\\fixture.apk'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "E:\Dev\miniconda\Lib\shutil.py", line 631, in _rmtree_unsafe
+    os.rmdir(path)
+    ~~~~~~~~^^^^^^
+PermissionError: [WinError 5] 拒绝访问。: '%USERPROFILE%\\AppData\\Local\\Packages\\sandbox.{a30946e8-e5bd-42cf-ae0b-510839dde7bb}\\AC\\Temp\\tmp3_93bvqm'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "%PROJECT_ROOT%\scripts\tests\test_verify_native_libs.py", line 71, in test_missing_64bit_abi_fails
+    self.assertEqual(self.run_case(omit='x86_64')[0], 1)
+                     ~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "%PROJECT_ROOT%\scripts\tests\test_verify_native_libs.py", line 31, in run_case
+    with tempfile.TemporaryDirectory() as temporary:
+         ~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "E:\Dev\miniconda\Lib\tempfile.py", line 951, in __exit__
+    self.cleanup()
+    ~~~~~~~~~~~~^^
+  File "E:\Dev\miniconda\Lib\tempfile.py", line 955, in cleanup
+    self._rmtree(self.name, ignore_errors=self._ignore_cleanup_errors)
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\Dev\miniconda\Lib\tempfile.py", line 935, in _rmtree
+    _shutil.rmtree(name, onexc=onexc)
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^
+  File "E:\Dev\miniconda\Lib\shutil.py", line 790, in rmtree
+    return _rmtree_unsafe(path, onexc)
+  File "E:\Dev\miniconda\Lib\shutil.py", line 635, in _rmtree_unsafe
+    onexc(os.rmdir, path, err)
+    ~~~~~^^^^^^^^^^^^^^^^^^^^^
+  File "E:\Dev\miniconda\Lib\tempfile.py", line 907, in onexc
+    _resetperms(path)
+    ~~~~~~~~~~~^^^^^^
+  File "E:\Dev\miniconda\Lib\tempfile.py", line 283, in _resetperms
+    _dont_follow_symlinks(_os.chmod, path, 0o700)
+    ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\Dev\miniconda\Lib\tempfile.py", line 272, in _dont_follow_symlinks
+    func(path, *args, follow_symlinks=False)
+    ~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+PermissionError: [WinError 5] 拒绝访问。: '%USERPROFILE%\\AppData\\Local\\Packages\\sandbox.{a30946e8-e5bd-42cf-ae0b-510839dde7bb}\\AC\\Temp\\tmp3_93bvqm'
+
+======================================================================
+ERROR: test_missing_archive_input_fails (__main__.NativeChecks.test_missing_archive_input_fails)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "%PROJECT_ROOT%\scripts\tests\test_verify_native_libs.py", line 34, in run_case
+    with zipfile.ZipFile(archive, 'w') as z:
+         ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^
+  File "E:\Dev\miniconda\Lib\zipfile\__init__.py", line 1383, in __init__
+    self.fp = io.open(file, filemode)
+              ~~~~~~~^^^^^^^^^^^^^^^^
+PermissionError: [Errno 13] Permission denied: '%USERPROFILE%\\AppData\\Local\\Packages\\sandbox.{a30946e8-e5bd-42cf-ae0b-510839dde7bb}\\AC\\Temp\\tmpzrcsnjnn\\fixture.apk'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "E:\Dev\miniconda\Lib\shutil.py", line 631, in _rmtree_unsafe
+    os.rmdir(path)
+    ~~~~~~~~^^^^^^
+PermissionError: [WinError 5] 拒绝访问。: '%USERPROFILE%\\AppData\\Local\\Packages\\sandbox.{a30946e8-e5bd-42cf-ae0b-510839dde7bb}\\AC\\Temp\\tmpzrcsnjnn'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "%PROJECT_ROOT%\scripts\tests\test_verify_native_libs.py", line 74, in test_missing_archive_input_fails
+    self.assertEqual(self.run_case(no_input=True)[0], 1)
+                     ~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "%PROJECT_ROOT%\scripts\tests\test_verify_native_libs.py", line 31, in run_case
+    with tempfile.TemporaryDirectory() as temporary:
+         ~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "E:\Dev\miniconda\Lib\tempfile.py", line 951, in __exit__
+    self.cleanup()
+    ~~~~~~~~~~~~^^
+  File "E:\Dev\miniconda\Lib\tempfile.py", line 955, in cleanup
+    self._rmtree(self.name, ignore_errors=self._ignore_cleanup_errors)
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\Dev\miniconda\Lib\tempfile.py", line 935, in _rmtree
+    _shutil.rmtree(name, onexc=onexc)
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^
+  File "E:\Dev\miniconda\Lib\shutil.py", line 790, in rmtree
+    return _rmtree_unsafe(path, onexc)
+  File "E:\Dev\miniconda\Lib\shutil.py", line 635, in _rmtree_unsafe
+    onexc(os.rmdir, path, err)
+    ~~~~~^^^^^^^^^^^^^^^^^^^^^
+  File "E:\Dev\miniconda\Lib\tempfile.py", line 907, in onexc
+    _resetperms(path)
+    ~~~~~~~~~~~^^^^^^
+  File "E:\Dev\miniconda\Lib\tempfile.py", line 283, in _resetperms
+    _dont_follow_symlinks(_os.chmod, path, 0o700)
+    ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\Dev\miniconda\Lib\tempfile.py", line 272, in _dont_follow_symlinks
+    func(path, *args, follow_symlinks=False)
+    ~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+PermissionError: [WinError 5] 拒绝访问。: '%USERPROFILE%\\AppData\\Local\\Packages\\sandbox.{a30946e8-e5bd-42cf-ae0b-510839dde7bb}\\AC\\Temp\\tmpzrcsnjnn'
+
+======================================================================
+ERROR: test_shared_relro_end_must_be_16kb_aligned (__main__.NativeChecks.test_shared_relro_end_must_be_16kb_aligned)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "%PROJECT_ROOT%\scripts\tests\test_verify_native_libs.py", line 34, in run_case
+    with zipfile.ZipFile(archive, 'w') as z:
+         ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^
+  File "E:\Dev\miniconda\Lib\zipfile\__init__.py", line 1383, in __init__
+    self.fp = io.open(file, filemode)
+              ~~~~~~~^^^^^^^^^^^^^^^^
+PermissionError: [Errno 13] Permission denied: '%USERPROFILE%\\AppData\\Local\\Packages\\sandbox.{a30946e8-e5bd-42cf-ae0b-510839dde7bb}\\AC\\Temp\\tmpno1sgzmf\\fixture.apk'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "E:\Dev\miniconda\Lib\shutil.py", line 631, in _rmtree_unsafe
+    os.rmdir(path)
+    ~~~~~~~~^^^^^^
+PermissionError: [WinError 5] 拒绝访问。: '%USERPROFILE%\\AppData\\Local\\Packages\\sandbox.{a30946e8-e5bd-42cf-ae0b-510839dde7bb}\\AC\\Temp\\tmpno1sgzmf'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "%PROJECT_ROOT%\scripts\tests\test_verify_native_libs.py", line 58, in test_shared_relro_end_must_be_16kb_aligned
+    self.assertEqual(self.run_case(relro='unsafe')[0], 1)
+                     ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+  File "%PROJECT_ROOT%\scripts\tests\test_verify_native_libs.py", line 31, in run_case
+    with tempfile.TemporaryDirectory() as temporary:
+         ~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "E:\Dev\miniconda\Lib\tempfile.py", line 951, in __exit__
+    self.cleanup()
+    ~~~~~~~~~~~~^^
+  File "E:\Dev\miniconda\Lib\tempfile.py", line 955, in cleanup
+    self._rmtree(self.name, ignore_errors=self._ignore_cleanup_errors)
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\Dev\miniconda\Lib\tempfile.py", line 935, in _rmtree
+    _shutil.rmtree(name, onexc=onexc)
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^
+  File "E:\Dev\miniconda\Lib\shutil.py", line 790, in rmtree
+    return _rmtree_unsafe(path, onexc)
+  File "E:\Dev\miniconda\Lib\shutil.py", line 635, in _rmtree_unsafe
+    onexc(os.rmdir, path, err)
+    ~~~~~^^^^^^^^^^^^^^^^^^^^^
+  File "E:\Dev\miniconda\Lib\tempfile.py", line 907, in onexc
+    _resetperms(path)
+    ~~~~~~~~~~~^^^^^^
+  File "E:\Dev\miniconda\Lib\tempfile.py", line 283, in _resetperms
+    _dont_follow_symlinks(_os.chmod, path, 0o700)
+    ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\Dev\miniconda\Lib\tempfile.py", line 272, in _dont_follow_symlinks
+    func(path, *args, follow_symlinks=False)
+    ~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+PermissionError: [WinError 5] 拒绝访问。: '%USERPROFILE%\\AppData\\Local\\Packages\\sandbox.{a30946e8-e5bd-42cf-ae0b-510839dde7bb}\\AC\\Temp\\tmpno1sgzmf'
+
+----------------------------------------------------------------------
+Ran 7 tests in 0.053s
+
+FAILED (errors=7)
+
+Exit code: 1
+Finished: 2026-10-28T06:02:28.713741+00:00

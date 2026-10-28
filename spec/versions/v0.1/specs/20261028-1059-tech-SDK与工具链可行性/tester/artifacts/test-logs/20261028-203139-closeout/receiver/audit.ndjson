@@ -1,0 +1,44 @@
+{"at":"2026-10-28T12:34:40.053Z","kind":"launch","port":""}
+{"at":"2026-10-28T12:34:40.120Z","kind":"stderr","text":"{\"event\":\"receiver_error\",\"code\":\"RangeError\",\"message\":\"PORT must be a decimal integer from 0 to 65535\"}\n"}
+{"at":"2026-10-28T12:34:40.127Z","kind":"process_exit","code":1,"signal":null}
+{"at":"2026-10-28T12:34:40.130Z","kind":"launch","port":"-1"}
+{"at":"2026-10-28T12:34:40.196Z","kind":"stderr","text":"{\"event\":\"receiver_error\",\"code\":\"RangeError\",\"message\":\"PORT must be a decimal integer from 0 to 65535\"}\n"}
+{"at":"2026-10-28T12:34:40.203Z","kind":"process_exit","code":1,"signal":null}
+{"at":"2026-10-28T12:34:40.206Z","kind":"launch","port":"65536"}
+{"at":"2026-10-28T12:34:40.271Z","kind":"stderr","text":"{\"event\":\"receiver_error\",\"code\":\"RangeError\",\"message\":\"PORT must be a decimal integer from 0 to 65535\"}\n"}
+{"at":"2026-10-28T12:34:40.282Z","kind":"process_exit","code":1,"signal":null}
+{"at":"2026-10-28T12:34:40.282Z","kind":"launch","port":"abc"}
+{"at":"2026-10-28T12:34:40.348Z","kind":"stderr","text":"{\"event\":\"receiver_error\",\"code\":\"RangeError\",\"message\":\"PORT must be a decimal integer from 0 to 65535\"}\n"}
+{"at":"2026-10-28T12:34:40.355Z","kind":"process_exit","code":1,"signal":null}
+{"at":"2026-10-28T12:34:40.358Z","kind":"launch","port":"1.5"}
+{"at":"2026-10-28T12:34:40.423Z","kind":"stderr","text":"{\"event\":\"receiver_error\",\"code\":\"RangeError\",\"message\":\"PORT must be a decimal integer from 0 to 65535\"}\n"}
+{"at":"2026-10-28T12:34:40.431Z","kind":"process_exit","code":1,"signal":null}
+{"at":"2026-10-28T12:34:40.434Z","kind":"launch","port":" 3000"}
+{"at":"2026-10-28T12:34:40.503Z","kind":"stderr","text":"{\"event\":\"receiver_error\",\"code\":\"RangeError\",\"message\":\"PORT must be a decimal integer from 0 to 65535\"}\n"}
+{"at":"2026-10-28T12:34:40.511Z","kind":"process_exit","code":1,"signal":null}
+{"at":"2026-10-28T12:34:40.514Z","kind":"launch","port":"3000 "}
+{"at":"2026-10-28T12:34:40.579Z","kind":"stderr","text":"{\"event\":\"receiver_error\",\"code\":\"RangeError\",\"message\":\"PORT must be a decimal integer from 0 to 65535\"}\n"}
+{"at":"2026-10-28T12:34:40.586Z","kind":"process_exit","code":1,"signal":null}
+{"at":"2026-10-28T12:34:40.589Z","kind":"case_result","id":"TC-11","status":"pass","startedAt":"2026-10-28T12:34:40.044Z","finishedAt":"2026-10-28T12:34:40.586Z","detail":{"invalidValues":["","-1","65536","abc","1.5"," 3000","3000 "],"exitCode":1}}
+{"at":"2026-10-28T12:34:40.590Z","kind":"launch","port":"0"}
+{"at":"2026-10-28T12:34:40.671Z","kind":"stdout","line":"{\"event\":\"receiver_started\",\"host\":\"127.0.0.1\",\"port\":52412}"}
+{"at":"2026-10-28T12:34:40.711Z","kind":"http","path":"/healthz","method":"GET","status":200,"contentType":"application/json; charset=utf-8","allow":null,"body":{"service":"artemis-receiver","status":"ok","version":"0.1.0-dev"}}
+{"at":"2026-10-28T12:34:40.713Z","kind":"case_result","id":"TC-12","status":"pass","startedAt":"2026-10-28T12:34:40.685Z","finishedAt":"2026-10-28T12:34:40.711Z","detail":{"realCli":true}}
+{"at":"2026-10-28T12:34:40.714Z","kind":"http","path":"/missing","method":"GET","status":404,"contentType":"application/json; charset=utf-8","allow":null,"body":{"error":"not_found"}}
+{"at":"2026-10-28T12:34:40.715Z","kind":"http","path":"/healthz?x=1","method":"GET","status":404,"contentType":"application/json; charset=utf-8","allow":null,"body":{"error":"not_found"}}
+{"at":"2026-10-28T12:34:40.717Z","kind":"case_result","id":"TC-13","status":"pass","startedAt":"2026-10-28T12:34:40.711Z","finishedAt":"2026-10-28T12:34:40.715Z","detail":{"exactPathBoundary":true}}
+{"at":"2026-10-28T12:34:40.720Z","kind":"http","path":"/healthz","method":"POST","status":405,"contentType":"application/json; charset=utf-8","allow":"GET","body":{"error":"method_not_allowed"}}
+{"at":"2026-10-28T12:34:40.720Z","kind":"case_result","id":"TC-14","status":"pass","startedAt":"2026-10-28T12:34:40.715Z","finishedAt":"2026-10-28T12:34:40.719Z","detail":{"unparsedBodyAcceptedForRejection":true}}
+{"at":"2026-10-28T12:34:40.720Z","kind":"fixture_cleanup","method":"forced process termination; not graceful-exit evidence"}
+{"at":"2026-10-28T12:34:40.725Z","kind":"process_exit","code":null,"signal":"SIGTERM"}
+{"at":"2026-10-28T12:34:40.745Z","kind":"launch","port":"52415"}
+{"at":"2026-10-28T12:34:40.831Z","kind":"stderr","text":"{\"event\":\"receiver_error\",\"code\":\"EADDRINUSE\",\"message\":\"listen EADDRINUSE: address already in use 127.0.0.1:52415\"}\n"}
+{"at":"2026-10-28T12:34:40.839Z","kind":"process_exit","code":1,"signal":null}
+{"at":"2026-10-28T12:34:40.850Z","kind":"case_result","id":"TC-15","status":"pass","startedAt":"2026-10-28T12:34:40.725Z","finishedAt":"2026-10-28T12:34:40.840Z","detail":{"errorCode":"EADDRINUSE","exitCode":1}}
+{"at":"2026-10-28T12:34:41.369Z","kind":"console_signal","result":{"status":"pass","transport":"GenerateConsoleCtrlEvent(CTRL_C_EVENT, 0)","stdout":["{\"event\":\"receiver_started\",\"host\":\"127.0.0.1\",\"port\":52417}","{\"event\":\"receiver_stopped\"}"],"stderr":[],"forcedCleanup":false,"started":{"event":"receiver_started","host":"127.0.0.1","port":52417},"signalSenderExitCode":0,"childExitCode":0,"stoppedEvent":true,"portRebindPassed":true}}
+{"at":"2026-10-28T12:34:41.369Z","kind":"launch","port":"52417"}
+{"at":"2026-10-28T12:34:41.451Z","kind":"stdout","line":"{\"event\":\"receiver_started\",\"host\":\"127.0.0.1\",\"port\":52417}"}
+{"at":"2026-10-28T12:34:41.461Z","kind":"http","path":"/healthz","method":"GET","status":200,"contentType":"application/json; charset=utf-8","allow":null,"body":{"service":"artemis-receiver","status":"ok","version":"0.1.0-dev"}}
+{"at":"2026-10-28T12:34:41.462Z","kind":"fixture_cleanup","method":"forced process termination; not graceful-exit evidence"}
+{"at":"2026-10-28T12:34:41.466Z","kind":"process_exit","code":null,"signal":"SIGTERM"}
+{"at":"2026-10-28T12:34:41.466Z","kind":"case_result","id":"TC-16","status":"pass","startedAt":"2026-10-28T12:34:40.840Z","finishedAt":"2026-10-28T12:34:41.466Z","detail":{"closeIdempotent":true,"portRebind":true,"signal":{"status":"pass","transport":"GenerateConsoleCtrlEvent(CTRL_C_EVENT, 0)","stdout":["{\"event\":\"receiver_started\",\"host\":\"127.0.0.1\",\"port\":52417}","{\"event\":\"receiver_stopped\"}"],"stderr":[],"forcedCleanup":false,"started":{"event":"receiver_started","host":"127.0.0.1","port":52417},"signalSenderExitCode":0,"childExitCode":0,"stoppedEvent":true,"portRebindPassed":true}}}

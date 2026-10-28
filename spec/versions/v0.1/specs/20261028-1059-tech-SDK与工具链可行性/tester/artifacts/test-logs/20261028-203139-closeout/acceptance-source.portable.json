@@ -1,0 +1,18 @@
+{
+  "acceptance": [
+    "记录可核验的WebRTC SDK来源、版本、许可证、ABI和Android版本兼容结论。",
+    "按文档可重复构建最小APK并启动PC实验服务，保留命令、环境和结果。",
+    "核验Android原生库页面大小要求，明确未完成的真机验证和阻断。"
+  ],
+  "source_ref": {
+    "end_line": null,
+    "locator": "file:///%PROJECT_ROOT%/work-ledger.yaml",
+    "pointer": "/work_items/1",
+    "section_fingerprint": "sha256:97e9fe1ce3cc2558a6ec59296c5aab2cfc2e75edb98eec472a71071e8563ca0a",
+    "source_fingerprint": "sha256:116d255495ba4d8ef524d3cb93edd2b8d10fcfd49a21728b8336ed8154622c9a",
+    "source_id": "01M6053F99TPKH9CTXQRXRM8EC",
+    "source_revision": 24,
+    "start_line": null
+  },
+  "project_revision": 263
+}

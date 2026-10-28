@@ -1,0 +1,14 @@
+{
+  "command": "powershell -NoProfile -File .cache/emulator-readiness.ps1",
+  "startedAt": "2026-10-28T10:17:54.628195+00:00",
+  "finishedAt": "2026-10-28T10:17:55.484263+00:00",
+  "exitCode": 0,
+  "expectedExitCode": 0,
+  "durationSeconds": 0.857,
+  "stdoutSha256": "7beefec6427caafed0d5dc0cf50493d18fd906de0157dd2d73218a1a7729cad8",
+  "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "log": "emulator-readiness.log",
+  "redactions": [
+    "personal user-root path"
+  ]
+}

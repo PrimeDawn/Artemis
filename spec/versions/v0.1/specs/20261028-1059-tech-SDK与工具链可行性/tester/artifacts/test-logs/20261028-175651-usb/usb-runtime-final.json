@@ -1,0 +1,14 @@
+{
+  "command": "python tests/android-runtime-smoke.py --sdk-root %USERPROFILE%\\AppData\\Local\\Android\\Sdk --report-dir spec/versions/v0.1/specs/20261028-1059-tech-SDK\u4e0e\u5de5\u5177\u94fe\u53ef\u884c\u6027/tester/artifacts/test-logs/20261028-175651-usb/runtime-final --skip-install",
+  "startedAt": "2026-10-28T10:14:09.594584+00:00",
+  "finishedAt": "2026-10-28T10:14:14.404683+00:00",
+  "exitCode": 0,
+  "expectedExitCode": 0,
+  "durationSeconds": 4.811,
+  "stdoutSha256": "ac079f29b682eaf6ec315d58408d47092f50a0d869432a9746a043e850c620f2",
+  "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "log": "usb-runtime-final.log",
+  "redactions": [
+    "personal user-root path"
+  ]
+}

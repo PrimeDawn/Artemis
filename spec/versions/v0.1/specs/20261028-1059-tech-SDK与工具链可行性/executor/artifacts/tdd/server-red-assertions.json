@@ -1,0 +1,14 @@
+{
+  "command": "powershell -NoProfile -Command \"npm.cmd --prefix receiver test; exit $LASTEXITCODE\"",
+  "startedAt": "2026-10-28T05:54:31.572552+00:00",
+  "finishedAt": "2026-10-28T05:54:34.572024+00:00",
+  "exitCode": 1,
+  "expectedExitCode": 1,
+  "durationSeconds": 3.0,
+  "stdoutSha256": "52f0c3835e1688fb4eb914e29d6d84ee34a06315fb82fc45067f8ae910ba99ea",
+  "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "log": "server-red-assertions.log",
+  "redactions": [
+    "personal user-root path"
+  ]
+}

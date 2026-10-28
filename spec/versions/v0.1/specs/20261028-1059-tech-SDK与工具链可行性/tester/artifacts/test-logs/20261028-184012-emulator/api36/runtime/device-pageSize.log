@@ -1,0 +1,8 @@
+Command: %USERPROFILE%\AppData\Local\Android\Sdk\platform-tools\adb.exe -e shell getconf PAGE_SIZE
+Timestamp: 2026-10-28T10:52:39.084237+00:00
+16384
+
+--- stderr ---
+
+Exit code: 0
+Finished: 2026-10-28T10:52:39.152461+00:00

@@ -1,0 +1,59 @@
+=== receiver-green Run ===
+Command: powershell -NoProfile -Command "npm.cmd --prefix receiver test; exit $LASTEXITCODE"
+Timestamp: 2026-10-28T05:56:42.027515+00:00
+
+> @artemis/receiver@0.1.0-dev test
+> npm run build && node --test dist/test/*.test.js
+
+
+> @artemis/receiver@0.1.0-dev build
+> tsc -p tsconfig.json
+
+✔ PORT is 3000 only when the value is absent (1.1672ms)
+✔ accept decimal port 0 (0.1019ms)
+✔ accept decimal port 3000 (0.0778ms)
+✔ accept decimal port 65535 (0.0494ms)
+✔ accept decimal port 00080 (0.0624ms)
+✔ reject port "" without fallback (0.2714ms)
+✔ reject port "-1" without fallback (0.0853ms)
+✔ reject port "65536" without fallback (0.0579ms)
+✔ reject port "abc" without fallback (0.0607ms)
+✔ reject port "1.5" without fallback (0.0962ms)
+✔ reject port " 3000" without fallback (0.0563ms)
+✔ reject port "3000 " without fallback (0.0594ms)
+✔ reject port "+80" without fallback (0.047ms)
+✔ reject port "0x50" without fallback (0.0415ms)
+✔ reject port "1e3" without fallback (0.0326ms)
+✔ reject port "NaN" without fallback (0.0376ms)
+✔ reject port "999999999999999999999" without fallback (0.0483ms)
+✖ public server API serves the exact health contract and route boundaries (19.3069ms)
+✔ public close is concurrent-safe and releases the listening port (2.8971ms)
+✔ startup rejects with the original EADDRINUSE code (1.3738ms)
+ℹ tests 20
+ℹ suites 0
+ℹ pass 19
+ℹ fail 1
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 117.0735
+
+✖ failing tests:
+
+test at dist\test\server.test.js:10:1
+✖ public server API serves the exact health contract and route boundaries (19.3069ms)
+  [TypeError: fetch failed] {
+    [cause]: Error: connect EACCES 127.0.0.1:62250
+        at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1706:16) {
+      errno: -4092,
+      code: 'EACCES',
+      syscall: 'connect',
+      address: '127.0.0.1',
+      port: 62250
+    }
+  }
+
+--- stderr ---
+
+Exit code: 1
+Finished: 2026-10-28T05:56:45.070024+00:00

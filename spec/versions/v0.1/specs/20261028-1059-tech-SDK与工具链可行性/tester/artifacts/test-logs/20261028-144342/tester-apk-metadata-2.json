@@ -1,0 +1,14 @@
+{
+  "command": "python .cache/inspect-built-apk.py --aapt %USERPROFILE%/AppData/Local/Android/Sdk/build-tools/36.0.0/aapt.exe --report spec/versions/v0.1/specs/20261028-1059-tech-SDK\u4e0e\u5de5\u5177\u94fe\u53ef\u884c\u6027/tester/artifacts/test-logs/20261028-144342/build-2-apk.json",
+  "startedAt": "2026-10-28T06:56:47.220100+00:00",
+  "finishedAt": "2026-10-28T06:56:47.380840+00:00",
+  "exitCode": 0,
+  "expectedExitCode": 0,
+  "durationSeconds": 0.161,
+  "stdoutSha256": "8f3d07057c404c1e54b236d062251b68d977ff5bfddf786baa87112c2da38cb1",
+  "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "log": "tester-apk-metadata-2.log",
+  "redactions": [
+    "personal user-root path"
+  ]
+}

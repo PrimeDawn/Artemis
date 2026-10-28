@@ -1,0 +1,66 @@
+{
+  "createdAt": "2026-10-28T08:03:40.641550+00:00",
+  "replacements": [
+    "%USERPROFILE%",
+    "%USERPROFILE%",
+    "%PROJECT_ROOT%"
+  ],
+  "files": [
+    {
+      "original": "spec/versions/v0.1/specs/20261028-1059-tech-SDK与工具链可行性/executor/artifacts/android/gradle-configuration-official.log",
+      "originalSha256": "53d27b58551465d84eafdad9dac9b5745ea575c3b73e7ddf54abf4f4614d21a9",
+      "sanitized": "spec/versions/v0.1/specs/20261028-1059-tech-SDK与工具链可行性/executor/artifacts/android/gradle-configuration-official.sanitized.log",
+      "sanitizedSha256": "e4076dd02c8e42cc12f4723ffb0078e66ff9c6612aa090990935e2460b4e2d4f",
+      "operation": "Personal user-root and workspace-root substitution only; original transcript bytes retained locally; no tests re-executed."
+    },
+    {
+      "original": "spec/versions/v0.1/specs/20261028-1059-tech-SDK与工具链可行性/executor/artifacts/environment/sdk-cli-download.log",
+      "originalSha256": "3ae4848a9a154ada81290bb081a3c136fcbc055f73a321e16eeae131ea25aa09",
+      "sanitized": "spec/versions/v0.1/specs/20261028-1059-tech-SDK与工具链可行性/executor/artifacts/environment/sdk-cli-download.sanitized.log",
+      "sanitizedSha256": "348ee0dd9803dd22a847e524a50b8032437c774d5a54450cf0c9067f9e3c6831",
+      "operation": "Personal user-root and workspace-root substitution only; original transcript bytes retained locally; no tests re-executed."
+    },
+    {
+      "original": "spec/versions/v0.1/specs/20261028-1059-tech-SDK与工具链可行性/executor/artifacts/environment/sdk-license-guard.log",
+      "originalSha256": "2a02e212ef0cb1f3fcb4d40840088677a1a3957afcee4c80d4325e83e062f669",
+      "sanitized": "spec/versions/v0.1/specs/20261028-1059-tech-SDK与工具链可行性/executor/artifacts/environment/sdk-license-guard.sanitized.log",
+      "sanitizedSha256": "2eeb4b124d260a870e0535849102d17bf1ef0eabcba6365583006dd7d9402c87",
+      "operation": "Personal user-root and workspace-root substitution only; original transcript bytes retained locally; no tests re-executed."
+    },
+    {
+      "original": "spec/versions/v0.1/specs/20261028-1059-tech-SDK与工具链可行性/executor/artifacts/tdd/native-checker-red-assertions.log",
+      "originalSha256": "0a45c50f473cc1cce11ad1144e35c42983f8b438f7fe5ec81d73996e14ac37d6",
+      "sanitized": "spec/versions/v0.1/specs/20261028-1059-tech-SDK与工具链可行性/executor/artifacts/tdd/native-checker-red-assertions.sanitized.log",
+      "sanitizedSha256": "368b09a18b987d1b91bde4e85a253d90f5e94963c6d5d44b6237617275144d84",
+      "operation": "Personal user-root and workspace-root substitution only; original transcript bytes retained locally; no tests re-executed."
+    },
+    {
+      "original": "spec/versions/v0.1/specs/20261028-1059-tech-SDK与工具链可行性/executor/artifacts/tdd/native-checker-red.log",
+      "originalSha256": "84b1b9bbcac9188f6dcfb4b74000aed3333daf6aaf77ea3d2ebedbdc07e8b3c6",
+      "sanitized": "spec/versions/v0.1/specs/20261028-1059-tech-SDK与工具链可行性/executor/artifacts/tdd/native-checker-red.sanitized.log",
+      "sanitizedSha256": "50b2c09933f0027cce06f665297da9ccd3b48c31652660066eb81727b93ffe3d",
+      "operation": "Personal user-root and workspace-root substitution only; original transcript bytes retained locally; no tests re-executed."
+    },
+    {
+      "original": "spec/versions/v0.1/specs/20261028-1059-tech-SDK与工具链可行性/executor/artifacts/tdd/native-relro-padding-red.log",
+      "originalSha256": "86e10bbde166d8d022ed096204f9ef5e3b0d7a25ad9cbe409d4ab072e923b48a",
+      "sanitized": "spec/versions/v0.1/specs/20261028-1059-tech-SDK与工具链可行性/executor/artifacts/tdd/native-relro-padding-red.sanitized.log",
+      "sanitizedSha256": "9ed467e3f4616e58eb5d2b565495b4d4c558e924131d81ea83b1ee7c25dbe922",
+      "operation": "Personal user-root and workspace-root substitution only; original transcript bytes retained locally; no tests re-executed."
+    },
+    {
+      "original": "spec/versions/v0.1/specs/20261028-1059-tech-SDK与工具链可行性/tester/artifacts/test-logs/20261028-144342/collect-independent-results-final.log",
+      "originalSha256": "08ffc561ebbe2cbfe7f40011b78fe41cc70bc08fb2e793492e4ba2e36c168545",
+      "sanitized": "spec/versions/v0.1/specs/20261028-1059-tech-SDK与工具链可行性/tester/artifacts/test-logs/20261028-144342/collect-independent-results-final.sanitized.log",
+      "sanitizedSha256": "fb2004f0eba4832e5ba33aecf418a40bbef11ecdbdcaef56cb5a50363e390fcf",
+      "operation": "Personal user-root and workspace-root substitution only; original transcript bytes retained locally; no tests re-executed."
+    },
+    {
+      "original": "spec/versions/v0.1/specs/20261028-1059-tech-SDK与工具链可行性/tester/artifacts/test-logs/20261028-144342/collect-independent-results.log",
+      "originalSha256": "550faaa1fa5b2510fbe684b0a2771ec300842685deb9add15420d1b641143f95",
+      "sanitized": "spec/versions/v0.1/specs/20261028-1059-tech-SDK与工具链可行性/tester/artifacts/test-logs/20261028-144342/collect-independent-results.sanitized.log",
+      "sanitizedSha256": "841d871bde7ad30e53620d65919cf5fbf015350a2319db5928655f56f0246499",
+      "operation": "Personal user-root and workspace-root substitution only; original transcript bytes retained locally; no tests re-executed."
+    }
+  ]
+}

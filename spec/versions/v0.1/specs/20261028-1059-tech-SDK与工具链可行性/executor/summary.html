@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>实现总结 — SDK与工具链可行性</title>
+<meta name="rk:title" content="实现总结">
+<meta name="rk:type" content="summary">
+<meta name="rk:version" content="v0.1">
+<meta name="rk:category" content="tech">
+<meta name="rk:spec-dir" content="spec/versions/v0.1/specs/20261028-1059-tech-SDK与工具链可行性">
+<meta name="rk:role" content="spec-executor">
+<meta name="rk:mode" content="gated">
+<meta name="rk:status" content="archived">
+<meta name="rk:created" content="2026-10-28">
+<meta name="rk:updated" content="2026-10-28">
+<meta name="rk:revision" content="8">
+<meta name="rk:git-branch" content="tech/spec-20261028-1059-sdk-toolchain">
+<meta name="rk:base-branch" content="dev">
+<meta name="rk:pr-url" content="https://github.com/PrimeDawn/Artemis/pull/1">
+<meta name="rk:tags" content="spec,sdk,toolchain,summary">
+<link rel="rk-version-plan" href="../../../plan.html">
+<link rel="rk-plan" href="../writer/plan.html"><link rel="rk-test-plan" href="../tester/test-plan.html">
+<link rel="rk-test-report" href="../tester/test-report.html">
+<link rel="rk-ledger" href="../lead/team-context.md"><link rel="rk-exploration" href="../explorer/exploration-report.html">
+<link rel="stylesheet" href="../../../../../../html-report/assets/rk-report.css">
+<script defer src="../rk-manifest.js"></script><script defer src="../../../../../../html-report/assets/rk-report.js"></script>
+<link rel="rk-end-report" href="../ender/end-report.html">
+</head><body><nav class="rk-nav"></nav>
+<header class="rk-head"><h1>实现总结：SDK与工具链可行性</h1><div class="rk-meta">
+<span><b>类型</b> summary</span><span><b>版本</b> v0.1</span><span><b>属性</b> tech</span>
+<span><b>Spec</b> <code>spec/versions/v0.1/specs/20261028-1059-tech-SDK与工具链可行性</code></span>
+<span><b>角色</b> spec-executor</span><span><b>模式</b> gated</span><span><b>状态</b> <del class="rk-del" data-rev="7"> <del class="rk-del" data-rev="2">未确认</del><ins class="rk-ins" data-rev="2">已确认</ins></del><ins class="rk-ins" data-rev="7">archived</ins></span>
+<span><b>分支</b> <code>tech/spec-20261028-1059-sdk-toolchain</code> ← <code>dev</code></span><span><b>PR</b> <a href="https://github.com/PrimeDawn/Artemis/pull/1">https://github.com/PrimeDawn/Artemis/pull/1</a></span>
+<span><b>创建</b> 2026-10-28</span><span><b>更新</b> 2026-10-28</span><span><b>修订</b> r8</span>
+</div></header><nav class="rk-revbar"></nav>
+<section class="rk-verdict"><div class="rk-verdict-label">实施阶段结论</div><p>最小Android工程、PC实验服务、依赖锁定与验证入口已交付；两次clean构建及29项聚焦测试通过。<del class="rk-del" data-rev="3">等待gate-3实现确认后，再由spec-tester独立验证。</del><ins class="rk-ins" data-rev="3">gate-3已由用户确认，独立测试结果见tester/test-report.html。</ins></p></section>
+<h2>修订历史</h2><table class="rk-revs"><thead><tr><th>修订</th><th>日期</th><th>修改人</th><th>改了什么</th><th>原因</th></tr></thead><tbody><tr><td>r1</td><td>2026-10-28</td><td>spec-executor</td><td>初版，记录实现与真实运行结果</td><td>用户gate-2确认及D-007至D-010</td></tr><tr class="rk-added" data-rev="2"><td>r2</td><td>2026-10-28</td><td>TeamLead</td><td>用户确认实现并放行独立测试</td><td>账本D-011</td></tr><tr class="rk-added" data-rev="3"><td>r3</td><td>2026-10-28</td><td>TeamLead</td><td>登记独立测试报告关联；验收边界不变</td><td>本轮测试报告及账本D-011、D-012</td></tr><tr class="rk-added" data-rev="4"><td>r4</td><td>2026-10-28</td><td>TeamLead</td><td>登记收尾报告反链</td><td>收尾报告已形成；保留原阶段观察与结论</td></tr><tr class="rk-added" data-rev="5"><td>r5</td><td>2026-10-28</td><td>TeamLead</td><td>原诊断日志保留本地，关联可入库脱敏副本</td><td>项目Git规则禁止提交个人机器路径；原始证据字节不变</td></tr><tr class="rk-added" data-rev="6"><td>r6</td><td>2026-10-28</td><td>TeamLead</td><td>历史日志及来源JSON使用可移植副本</td><td>保留原件字节，派生副本仅替换绝对本机根路径</td></tr><tr class="rk-added" data-rev="7"><td>r7</td><td>2026-10-28</td><td>TeamLead / spec-ender</td><td>登记当前Spec收尾及环境迁移后的验收边界</td><td>按D-019收尾授权；保留原始证据与修订历史</td></tr><tr class="rk-added" data-rev="8"><td>r8</td><td>2026-10-28</td><td>TeamLead / spec-ender</td><td>写回真实PR链接与交付状态</td><td>按D-019收尾授权；保留原始证据与修订历史</td></tr></tbody></table><section class="rk-added" data-rev="8"><h2>GitHub交付</h2><p>当前Spec已提交并推送，<a href="https://github.com/PrimeDawn/Artemis/pull/1">向dev的PR已创建</a>，首个Spec已原位归档。合并由用户处理。</p></section><section class="rk-added" data-rev="7"><h2>收尾登记</h2><p>按D-019完成当前Spec原位归档。<a href="../ender/end-report.html">收尾报告</a>和<a href="../tester/test-report.html">测试报告</a>记录迁移后16项新鲜复测与19项同APK验收覆盖。原计划与实现内容保留，后续媒体工作按原版本规划推进。</p></section>
+
+<h2>1. 完成的功能</h2>
+<table><thead><tr><th>交付</th><th>plan对应</th><th>实现与可观察结果</th><th>状态</th></tr></thead><tbody>
+<tr><td>环境与来源锁定</td><td>T1 / FR-01</td><td>官方CLI19、API36 revision2、Build Tools36.0.0、Platform-Tools37.0.1；JDK17.0.19、Node24.18.0。所需SDK许可由用户明确授权后接受。</td><td>完成，预检通过</td></tr>
+<tr><td>Android最小工程</td><td>T2 / FR-02</td><td>AGP8.13.2、Gradle8.13、Kotlin/Compose编译插件2.3.10；min29/target36。静态Compose页，无相机/麦克风权限。</td><td>两次clean构建成功</td></tr>
+<tr><td>原生依赖与包装校验</td><td>T3 / FR-01/02</td><td>构建前强制校验Maven WebRTC哈希；最终APK有4个ABI、8个.so，64位LOAD/RELRO及zipalign通过。</td><td>静态检查通过</td></tr>
+<tr><td>PC实验服务</td><td>T4 / FR-03</td><td>Node内置HTTP，只监听127.0.0.1；精确GET /healthz、404/405、端口解析、EADDRINUSE及close幂等。</td><td>20项聚焦测试通过</td></tr>
+<tr><td>校验工具与复现文档</td><td>T6 / FR-04</td><td>SDK准备、环境预检、原生检查脚本；README、工具链文档、固定来源/哈希、完整WebRTC通知。原生检查器9项聚焦测试通过。</td><td>完成</td></tr>
+<tr><td>独立CLI集成及条件设备验证</td><td>T5，tester所有权</td><td>tests/receiver-smoke.mjs、设备SmokeTest、安装/JNI/API29/16KB运行由测试阶段创建与执行。</td><td>尚未进入；不列已通过</td></tr>
+</tbody></table>
+
+<h2>2. 变更的文件</h2>
+<table><thead><tr><th>文件</th><th>变更</th><th>说明</th></tr></thead><tbody>
+<tr><td>android/settings.gradle.kts、build.gradle.kts、gradle.properties、gradle/libs.versions.toml</td><td>新增</td><td>固定编译链；默认官方仓库，artemisMirror=true切换镜像优先</td></tr>
+<tr><td>android/gradlew、gradlew.bat、gradle/wrapper/gradle-wrapper.jar及properties</td><td>新增</td><td>官方Wrapper及分发SHA256校验</td></tr>
+<tr><td>android/app/build.gradle.kts、proguard-rules.pro、src/main/AndroidManifest.xml、MainActivity.kt及values资源</td><td>新增</td><td>最小静态Compose工程；WebRTC Maven AAR构建前强制校验</td></tr>
+<tr><td>receiver/package.json、package-lock.json、tsconfig.json、.node-version、src/{config,server,cli}.ts</td><td>新增</td><td>固定Node开发链、健康服务与CLI</td></tr>
+<tr><td>receiver/test/{config,server}.test.ts、scripts/tests/test_verify_native_libs.py</td><td>新增</td><td>executor拥有的聚焦测试，保留断言级RED/GREEN</td></tr>
+<tr><td>scripts/bootstrap-android-sdk.ps1、verify-toolchain.ps1、verify-native-libs.py</td><td>新增</td><td>限定根安装、缺项失败、只读ELF及固定AAR检查</td></tr>
+<tr><td>docs/toolchain.md、dependency-provenance.md、toolchain-lock.json、third-party/WEBRTC-150.7871.01.md</td><td>新增</td><td>复现步骤与来源；保留原版本完整通知</td></tr>
+<tr><td>README.md、.gitignore、版本/Spec报告与台账</td><td>修改</td><td>实际入口、缓存忽略、证据日志可追踪与阶段状态</td></tr>
+</tbody></table>
+
+<h2>3. 本轮自检与证据</h2>
+<p>以下结果来自当前工作树的实际命令运行。源HEAD仍为0fe4114，代码尚未提交；环境报告标注dirty并保存源码快照，不能把该HEAD当作已包含当前实现。未创建最终测试报告或AWR完工证据。</p>
+<table><thead><tr><th>验证</th><th>实际结果</th><th>证据</th></tr></thead><tbody>
+<tr><td>工具链预检</td><td>JDK/Node/API36/Build Tools/adb/CLI全部pass；假SDK根明确退出1</td><td><a href="artifacts/environment/preflight-final.json">环境报告</a>；<a href="artifacts/environment/preflight-missing-sdk.log">缺项反例</a></td></tr>
+<tr><td>第一次clean assembleDebug</td><td>退出0，39项任务；WebRTC哈希校验通过</td><td><a href="artifacts/android/android-clean-build-1.log">原始日志</a>；<a href="artifacts/android/build-1-apk.json">APK配置/哈希</a></td></tr>
+<tr><td>第二次clean assembleDebug</td><td>退出0，39项执行；生成当前APK</td><td><a href="artifacts/android/android-clean-build-2.log">原始日志</a>；<a href="artifacts/android/build-2-apk.json">APK配置/哈希</a></td></tr>
+<tr><td>当前APK配置</td><td>74,654,500字节；包名io.github.primedawn.artemis，min29/target36，4个ABI；两次观察SHA256相同</td><td><code>c57bc1be8329a9fc50d1258b43a0cf78d0451be78be37c0388bf684a01f8816a</code></td></tr>
+<tr><td>最终ELF/RELRO与ZIP</td><td>8个.so静态检查pass；zipalign退出0，Verification successful</td><td><a href="artifacts/native/apk-check-build-2.json">原生检查</a>；<a href="artifacts/android/apk-zipalign-build-2.log">ZIP检查</a></td></tr>
+<tr><td>receiver干净安装/编译/聚焦行为</td><td>npm ci --ignore-scripts退出0，20项通过</td><td><a href="artifacts/receiver/receiver-clean-install.log">安装</a>；<a href="artifacts/tdd/receiver-final-unit.log">最终测试</a></td></tr>
+<tr><td>原生检查器</td><td>9项通过；覆盖4KB拒绝、损坏ELF、缺ABI、RELRO共享段与独立段/填充边界</td><td><a href="artifacts/tdd/native-relro-padding-green.log">最终聚焦测试</a></td></tr>
+<tr><td>CLI自检</td><td>观察到receiver_started，host=127.0.0.1；无效PORT返回receiver_error及退出1。PTY Ctrl+C未形成正常关闭证据。</td><td><a href="artifacts/receiver/cli-start-stop.log">启动/终止记录</a>；<a href="artifacts/receiver/cli-invalid-port.log">无效端口</a></td></tr>
+</tbody></table>
+<p>本轮官方仓库可用，因此未启用镜像；镜像切换入口保留，但不宣称已实测镜像可用性。构建提示两种native库未剥离符号、按原样打包，没有为此引入额外NDK或改变二进制。</p>
+
+<h3>TDD轨迹</h3>
+<ul><li>端口：<del class="rk-del" data-rev="6"><a href="artifacts/tdd/config-red-verified.log">config RED（退出1，断言失败）</a>（本地原件）</del><ins class="rk-ins" data-rev="6"><a href="artifacts/tdd/config-red-verified.portable.log">config RED（退出1，断言失败）（可移植副本）</a></ins> → <a href="artifacts/tdd/receiver-final-unit.log">GREEN</a>。</li>
+<li>服务公共函数：<del class="rk-del" data-rev="6"><a href="artifacts/tdd/server-red-assertions.log">server RED（doesNotReject断言失败）</a>（本地原件）</del><ins class="rk-ins" data-rev="6"><a href="artifacts/tdd/server-red-assertions.portable.log">server RED（doesNotReject断言失败）（可移植副本）</a></ins> → 同一最终GREEN。</li>
+<li>原生脚本：<del class="rk-del" data-rev="5"><a href="artifacts/tdd/native-checker-red-assertions.log">初始7项断言RED</a>（仅本地原件）</del><ins class="rk-ins" data-rev="5"><a href="artifacts/tdd/native-checker-red-assertions.sanitized.log">初始7项断言RED（脱敏副本）</a></ins>；随后<del class="rk-del" data-rev="5"><a href="artifacts/tdd/native-relro-padding-red.log">填充例外RED</a>（仅本地原件）</del><ins class="rk-ins" data-rev="5"><a href="artifacts/tdd/native-relro-padding-red.sanitized.log">填充例外RED（脱敏副本）</a></ins> → <a href="artifacts/tdd/native-relro-padding-green.log">9项GREEN</a>。</li></ul>
+<p>早期沙箱临时目录/loopback权限失败、报告输出编码错误及直接抛stub错误的记录均保留为过程诊断，未作为上述有效RED或最终通过的依据。</p>
+
+<h2>4. 遇到的问题与处理</h2>
+<ul><li>旧Kotlin jvmTarget DSL在2.3.10报错，已改compilerOptions，不改变版本选择。</li>
+<li>PowerShell环境缺少Get-FileHash，SDK脚本改用.NET哈希与ZIP；首次CLI校验失败记录保留。</li>
+<li>首次native检查将RELRO的填充字节误判，已增加失败测试并按“保护范围不覆盖可写数据”修正独立LOAD判据；保留原失败APK报告。</li>
+<li>loopback和脚本执行的沙箱限制通过已授权的本机验证解决；没有关闭TLS或校验。</li></ul>
+
+<h2>5. 设计差异与未验证范围</h2>
+<p>补充两个聚焦测试文件及RELRO填充用例，支持原计划的可观察行为；业务范围不变。许可由用户明确授权接受；镜像源按用户偏好可切换，固定Maven坐标/哈希保持强制。</p>
+<div class="rk-cal warn"><div class="t">下一阶段需独立验证</div><p>CLI子进程端口冲突/退出、真实终端信号处理及独立集成由tester复测。一次PTY Ctrl+C导致外层会话结束，未观察receiver_stopped，因此未判优雅退出通过；结束后未发现该端口仍监听。API close幂等与端口复用已有聚焦测试。</p></div>
+<div class="rk-cal risk"><div class="t">设备与媒体没有实测</div><p>本轮未检查设备连接，也未安装APK、加载JNI、验证API29或16KB系统运行；不推断S24是否连接。配对、信令、摄像头、麦克风与OBS链路尚未实现。</p></div>
+
+<p class="rk-added" data-rev="3">后续独立测试已闭环上述CLI关闭证据缺口：真实Windows CTRL_C_EVENT产生receiver_stopped、退出0，端口复用与重启通过。设备三项仍未实测，结论见独立测试报告。</p>
+<h2>6. 交接</h2><p>请用户确认本实现总结。gate-3通过后由spec-tester创建并执行其拥有的独立CLI与条件设备用例，产出test-report.html；随后再经gate-4和收尾流程。当前Spec保持in_progress，尚未提交、推送或创建PR。</p>
+<h2>关联产物</h2><h3>本报告引用</h3><ul class="rk-links">
+<li><a href="../writer/plan.html" data-rk-link="plan">已确认实现计划</a></li><li><a href="../tester/test-plan.html" data-rk-link="test-plan">已确认测试计划</a></li>
+<li><a href="../explorer/exploration-report.html" data-rk-link="exploration">探索报告</a></li><li><a href="../lead/team-context.md" data-rk-link="ledger">运行账本与决策</a></li>
+<li class="rk-added" data-rev="3"><a href="../tester/test-report.html" data-rk-link="test-report">本轮独立测试报告</a></li></ul><h3>引用本报告</h3><ul class="rk-backlinks"><li class="rk-added" data-rev="4"><a href="../ender/end-report.html" data-rk-backlink="end-report">收尾报告</a></li><li><a href="../writer/plan.html" data-rk-backlink="plan">实现计划</a></li><li><a href="../tester/test-plan.html" data-rk-backlink="test-plan">测试计划</a></li><li><del class="rk-del" data-rev="4">最终测试报告尚未创建，产生后补齐反链。</del><ins class="rk-ins" data-rev="4">现有报告关联已补齐；本轮无独立审查报告。</ins></li><li class="rk-added" data-rev="3"><a href="../tester/test-report.html" data-rk-backlink="test-report">独立测试报告</a></li></ul>
+</body></html>

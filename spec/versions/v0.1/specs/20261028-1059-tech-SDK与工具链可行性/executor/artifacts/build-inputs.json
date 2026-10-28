@@ -1,0 +1,44 @@
+{
+  "downloads": [
+    {
+      "url": "https://raw.githubusercontent.com/gradle/gradle/v8.13.0/gradle/wrapper/gradle-wrapper.jar",
+      "path": "android/gradle/wrapper/gradle-wrapper.jar",
+      "sha256": "81a82aaea5abcc8ff68b3dfcb58b3c3c429378efd98e7433460610fecd7ae45f",
+      "bytes": 43705,
+      "checkedAt": "2026-10-28T05:58:12.150320+00:00"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/gradle/gradle/v8.13.0/gradlew",
+      "path": "android/gradlew",
+      "sha256": "c76f16038b4e70b84ed0b3b9e08e82a8ecaf66ec0efdfdecdece92520fa3cecb",
+      "bytes": 8774,
+      "checkedAt": "2026-10-28T05:58:12.702807+00:00"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/gradle/gradle/v8.13.0/gradlew.bat",
+      "path": "android/gradlew.bat",
+      "sha256": "0f3ed8f03b50934cb8c48b15a470d5c20a30a5385825e48b55bcc8ea3d8f8e18",
+      "bytes": 2894,
+      "checkedAt": "2026-10-28T05:58:13.334303+00:00"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/webrtc-sdk/android/v150.7871.01/LICENSE",
+      "path": ".cache/webrtc-publisher-LICENSE",
+      "sha256": "e6b282fe6c0fb353928923470457f31b44cbab203effd60c0cde4a5bb96c8aec",
+      "bytes": 1068,
+      "checkedAt": "2026-10-28T05:58:14.018380+00:00"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/webrtc-sdk/android/v150.7871.01/Licenses/WEBRTC.md",
+      "path": ".cache/webrtc-WEBRTC.md",
+      "sha256": "d1f9382c6878ac024155fd6d44a5977329108bb8b0a01cea40e4a2f1d7de252e",
+      "bytes": 788358,
+      "checkedAt": "2026-10-28T05:58:14.933134+00:00"
+    },
+    {
+      "path": "docs/third-party/WEBRTC-150.7871.01.md",
+      "sha256": "1ccc637af6460cb1524f8eac4960d1ee6aea4a173af5eb85aacba2ec2ea9357d",
+      "bytes": 789701
+    }
+  ]
+}

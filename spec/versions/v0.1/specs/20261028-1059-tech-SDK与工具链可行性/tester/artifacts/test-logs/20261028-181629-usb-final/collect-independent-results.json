@@ -1,0 +1,14 @@
+{
+  "command": "E:\\Dev\\miniconda\\python.exe tests/collect-sdk-results.py --run-dir spec/versions/v0.1/specs/20261028-1059-tech-SDK\u4e0e\u5de5\u5177\u94fe\u53ef\u884c\u6027/tester/artifacts/test-logs/20261028-181629-usb-final --runtime-report spec/versions/v0.1/specs/20261028-1059-tech-SDK\u4e0e\u5de5\u5177\u94fe\u53ef\u884c\u6027/tester/artifacts/test-logs/20261028-175651-usb/runtime-final/runtime-results.json",
+  "startedAt": "2026-10-28T10:17:31.350455+00:00",
+  "finishedAt": "2026-10-28T10:17:32.144432+00:00",
+  "exitCode": 0,
+  "expectedExitCode": 0,
+  "durationSeconds": 0.794,
+  "stdoutSha256": "b1c5149575ca7e29950a6bc77e7f6b6c33ec80f859ae63c27851de6123fc4365",
+  "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "log": "collect-independent-results.log",
+  "redactions": [
+    "personal user-root path"
+  ]
+}

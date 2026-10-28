@@ -1,0 +1,8 @@
+Command: E:\Dev\Artemis\Android\Sdk\platform-tools\adb.exe -e shell getprop ro.build.version.sdk
+Timestamp: 2026-10-28T12:12:16.082197+00:00
+36
+
+--- stderr ---
+
+Exit code: 0
+Finished: 2026-10-28T12:12:16.208346+00:00

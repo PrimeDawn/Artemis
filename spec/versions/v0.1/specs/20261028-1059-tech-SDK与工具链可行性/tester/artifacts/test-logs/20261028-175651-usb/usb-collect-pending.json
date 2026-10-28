@@ -1,0 +1,14 @@
+{
+  "command": "python .cache/collect-usb-supplement.py",
+  "startedAt": "2026-10-28T10:13:14.532179+00:00",
+  "finishedAt": "2026-10-28T10:13:14.649718+00:00",
+  "exitCode": 0,
+  "expectedExitCode": 0,
+  "durationSeconds": 0.118,
+  "stdoutSha256": "ec054b17cb832896013488d9b8df1aaa588f259246bce71eac3f2050dba3206e",
+  "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "log": "usb-collect-pending.log",
+  "redactions": [
+    "personal user-root path"
+  ]
+}

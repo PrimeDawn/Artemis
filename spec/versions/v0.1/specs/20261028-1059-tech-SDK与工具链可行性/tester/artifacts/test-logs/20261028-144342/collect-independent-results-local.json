@@ -1,0 +1,14 @@
+{
+  "command": "python tests/collect-sdk-results.py --run-dir spec/versions/v0.1/specs/20261028-1059-tech-SDK\u4e0e\u5de5\u5177\u94fe\u53ef\u884c\u6027/tester/artifacts/test-logs/20261028-144342",
+  "startedAt": "2026-10-28T07:02:12.817994+00:00",
+  "finishedAt": "2026-10-28T07:02:13.451074+00:00",
+  "exitCode": 0,
+  "expectedExitCode": 0,
+  "durationSeconds": 0.634,
+  "stdoutSha256": "a9d09d1c6c0cd35d3aa11d12ac8f4fe4663be62d2553990245f5a9eb03929e75",
+  "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "log": "collect-independent-results-local.log",
+  "redactions": [
+    "personal user-root path"
+  ]
+}

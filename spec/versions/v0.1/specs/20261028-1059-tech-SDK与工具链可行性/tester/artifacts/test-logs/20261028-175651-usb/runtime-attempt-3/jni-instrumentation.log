@@ -1,0 +1,30 @@
+Command: %USERPROFILE%\AppData\Local\Android\Sdk\platform-tools\adb.exe -d shell am instrument -w -r -e class io.github.primedawn.artemis.WebRtcSdkSmokeTest io.github.primedawn.artemis.test/androidx.test.runner.AndroidJUnitRunner
+Timestamp: 2026-10-28T10:08:07.935348+00:00
+INSTRUMENTATION_STATUS: class=io.github.primedawn.artemis.WebRtcSdkSmokeTest
+INSTRUMENTATION_STATUS: current=1
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=1
+INSTRUMENTATION_STATUS: stream=
+io.github.primedawn.artemis.WebRtcSdkSmokeTest:
+INSTRUMENTATION_STATUS: test=nativeFactoryCanBeCreatedAndReleased
+INSTRUMENTATION_STATUS_CODE: 1
+INSTRUMENTATION_STATUS: class=io.github.primedawn.artemis.WebRtcSdkSmokeTest
+INSTRUMENTATION_STATUS: current=1
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=1
+INSTRUMENTATION_STATUS: stream=.
+INSTRUMENTATION_STATUS: test=nativeFactoryCanBeCreatedAndReleased
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_RESULT: stream=
+
+Time: 0.088
+
+OK (1 test)
+
+
+INSTRUMENTATION_CODE: -1
+
+--- stderr ---
+
+Exit code: 0
+Finished: 2026-10-28T10:08:09.001595+00:00

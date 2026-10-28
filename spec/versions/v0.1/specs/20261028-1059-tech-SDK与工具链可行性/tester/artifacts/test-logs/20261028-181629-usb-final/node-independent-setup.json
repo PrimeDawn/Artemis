@@ -1,0 +1,14 @@
+{
+  "command": "powershell -NoProfile -Command \"npm.cmd --prefix receiver ci --ignore-scripts --no-audit --no-fund; if($LASTEXITCODE -ne 0){exit $LASTEXITCODE}; npm.cmd --prefix receiver test; exit $LASTEXITCODE\"",
+  "startedAt": "2026-10-28T10:16:31.086696+00:00",
+  "finishedAt": "2026-10-28T10:16:34.195649+00:00",
+  "exitCode": 0,
+  "expectedExitCode": 0,
+  "durationSeconds": 3.11,
+  "stdoutSha256": "e2033e379deefa1de50477eed4809338d87c552336254183858ec2a64d064d94",
+  "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "log": "node-independent-setup.log",
+  "redactions": [
+    "personal user-root path"
+  ]
+}

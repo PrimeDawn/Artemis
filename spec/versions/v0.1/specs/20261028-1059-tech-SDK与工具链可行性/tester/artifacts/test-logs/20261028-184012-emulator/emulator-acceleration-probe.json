@@ -1,0 +1,14 @@
+{
+  "command": "python .cache/emulator-setup-task.py acceleration",
+  "startedAt": "2026-10-28T10:44:59.578033+00:00",
+  "finishedAt": "2026-10-28T10:44:59.908141+00:00",
+  "exitCode": 0,
+  "expectedExitCode": 0,
+  "durationSeconds": 0.331,
+  "stdoutSha256": "4b1f8240ee2fe4558560946084390830ee108b8cff47672ebc5cf1452257e843",
+  "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "log": "emulator-acceleration-probe.log",
+  "redactions": [
+    "personal user-root path"
+  ]
+}

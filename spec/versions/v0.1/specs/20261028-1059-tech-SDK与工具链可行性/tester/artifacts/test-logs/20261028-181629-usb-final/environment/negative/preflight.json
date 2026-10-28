@@ -1,0 +1,55 @@
+﻿{
+    "schemaVersion":  1,
+    "runId":  "20261028-101630",
+    "verifiedAt":  "2026-10-28T10:16:30.9116914+00:00",
+    "sourceSha":  "0fe4114b07a5d0dbdca2489c71934eed56070fdc",
+    "dirty":  true,
+    "workingTreeDiffSha256":  "bd8de35fc9733919d0772313634c020ece64f4ca82b85b6e52d1ca45566631a2",
+    "commands":  [
+
+                 ],
+    "checks":  [
+                   {
+                       "id":  "jdk17",
+                       "status":  "pass",
+                       "reason":  "JDK 17 is required."
+                   },
+                   {
+                       "id":  "node24",
+                       "status":  "pass",
+                       "reason":  "Node 24 is required."
+                   },
+                   {
+                       "id":  "platform-api36",
+                       "status":  "fail",
+                       "reason":  "platforms/android-36/android.jar"
+                   },
+                   {
+                       "id":  "build-tools36",
+                       "status":  "fail",
+                       "reason":  "build-tools/36.0.0/zipalign.exe"
+                   },
+                   {
+                       "id":  "platform-tools",
+                       "status":  "fail",
+                       "reason":  "platform-tools/adb.exe"
+                   },
+                   {
+                       "id":  "cli-tools19",
+                       "status":  "fail",
+                       "reason":  "cmdline-tools/19.0/bin/sdkmanager.bat"
+                   }
+               ],
+    "environment":  {
+                        "jdkVersion":  "17.0.19",
+                        "nodeVersion":  "v24.18.0",
+                        "sdkPackages":  [
+
+                                        ],
+                        "deviceChecked":  false,
+                        "deviceSummary":  null
+                    },
+    "artifacts":  [
+
+                  ]
+}

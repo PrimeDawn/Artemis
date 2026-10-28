@@ -1,0 +1,9 @@
+=== collect-independent-results Run ===
+Command: E:\Dev\miniconda\python.exe tests/collect-sdk-results.py --run-dir spec/versions/v0.1/specs/20261028-1059-tech-SDK与工具链可行性/tester/artifacts/test-logs/20261028-181629-usb-final --runtime-report spec/versions/v0.1/specs/20261028-1059-tech-SDK与工具链可行性/tester/artifacts/test-logs/20261028-175651-usb/runtime-final/runtime-results.json
+Timestamp: 2026-10-28T10:17:31.350455+00:00
+{"requiredPassed": 16, "requiredTotal": 16, "notRun": 2, "passedRequired": true, "snapshotSha256": "55a32065714a96619255442950c75ae8bc5d04641de9dff513a61a10040b74ee", "productionChanges": []}
+
+--- stderr ---
+
+Exit code: 0
+Finished: 2026-10-28T10:17:32.144432+00:00

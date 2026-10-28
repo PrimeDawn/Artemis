@@ -1,0 +1,14 @@
+{
+  "command": "python .cache/check-ending-awr.py",
+  "startedAt": "2026-10-28T12:40:04.300731+00:00",
+  "finishedAt": "2026-10-28T12:40:04.779619+00:00",
+  "exitCode": 1,
+  "expectedExitCode": 1,
+  "durationSeconds": 0.48,
+  "stdoutSha256": "3812771bc113c8af789ad2f56ab9010619ca6452908ead8eb11c7c1d3c87e953",
+  "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "log": "awr-global-gap-check.log",
+  "redactions": [
+    "personal user-root path"
+  ]
+}

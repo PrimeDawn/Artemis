@@ -1,0 +1,14 @@
+{
+  "command": "python .cache/inspect-artemis-ui.py",
+  "startedAt": "2026-10-28T10:06:14.998515+00:00",
+  "finishedAt": "2026-10-28T10:06:17.843855+00:00",
+  "exitCode": 0,
+  "expectedExitCode": 0,
+  "durationSeconds": 2.846,
+  "stdoutSha256": "57eb03c0b28b83976e56daa5dbf31dc0ae12c749e867e80926a454c10caa92a1",
+  "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "log": "usb-ui-diagnostic.log",
+  "redactions": [
+    "personal user-root path"
+  ]
+}

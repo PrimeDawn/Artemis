@@ -1,0 +1,14 @@
+{
+  "command": "powershell -NoProfile -Command \"$env:PORT=\\\"invalid\\\"; node receiver/dist/src/cli.js; exit $LASTEXITCODE\"",
+  "startedAt": "2026-10-28T06:13:52.499045+00:00",
+  "finishedAt": "2026-10-28T06:13:52.776124+00:00",
+  "exitCode": 1,
+  "expectedExitCode": 1,
+  "durationSeconds": 0.278,
+  "stdoutSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "stderrSha256": "daf627bf17c3d97ac2fcf1550b4a330ed6a95d8255e9769b13e97aaf892e93f0",
+  "log": "cli-invalid-port.log",
+  "redactions": [
+    "personal user-root path"
+  ]
+}

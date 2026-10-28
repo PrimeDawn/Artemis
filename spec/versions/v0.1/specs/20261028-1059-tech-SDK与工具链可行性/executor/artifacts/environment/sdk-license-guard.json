@@ -1,0 +1,14 @@
+{
+  "command": "powershell -NoProfile -File scripts/bootstrap-android-sdk.ps1 -SdkRoot %USERPROFILE%/AppData/Local/Android/Sdk",
+  "startedAt": "2026-10-28T05:53:02.692265+00:00",
+  "finishedAt": "2026-10-28T05:53:03.017796+00:00",
+  "exitCode": 2,
+  "expectedExitCode": 2,
+  "durationSeconds": 0.326,
+  "stdoutSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "stderrSha256": "5629274905e76fa0d7bd22a8194518095a718b2c3574a0f354984129275a7da0",
+  "log": "sdk-license-guard.log",
+  "redactions": [
+    "personal user-root path"
+  ]
+}

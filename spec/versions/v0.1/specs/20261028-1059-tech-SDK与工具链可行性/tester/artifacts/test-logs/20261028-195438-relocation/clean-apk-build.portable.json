@@ -1,0 +1,14 @@
+{
+  "command": "%PROJECT_ROOT%\\android\\gradlew.bat -p android --offline --no-daemon --console=plain clean :app:assembleDebug :app:assembleDebugAndroidTest",
+  "startedAt": "2026-10-28T12:07:29.507089+00:00",
+  "finishedAt": "2026-10-28T12:08:01.603976+00:00",
+  "exitCode": 0,
+  "expectedExitCode": 0,
+  "durationSeconds": 32.098,
+  "stdoutSha256": "b2eec4dc8000acbc254c4df903ad12adb327c0912c632bb3d6c04dc70ab4db25",
+  "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "log": "clean-apk-build.log",
+  "redactions": [
+    "personal user-root path"
+  ]
+}

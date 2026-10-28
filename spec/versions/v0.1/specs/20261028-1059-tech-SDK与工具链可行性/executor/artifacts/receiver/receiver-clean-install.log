@@ -1,0 +1,10 @@
+=== receiver-clean-install Run ===
+Command: powershell -NoProfile -Command "npm.cmd --prefix receiver ci --ignore-scripts --no-audit --no-fund; exit $LASTEXITCODE"
+Timestamp: 2026-10-28T06:11:27.963989+00:00
+
+added 3 packages in 693ms
+
+--- stderr ---
+
+Exit code: 0
+Finished: 2026-10-28T06:11:29.112455+00:00

@@ -1,0 +1,8 @@
+Command: %USERPROFILE%\AppData\Local\Android\Sdk\platform-tools\adb.exe -d shell getprop ro.product.model
+Timestamp: 2026-10-28T10:04:14.807773+00:00
+SM-S9210
+
+--- stderr ---
+
+Exit code: 0
+Finished: 2026-10-28T10:04:14.886024+00:00

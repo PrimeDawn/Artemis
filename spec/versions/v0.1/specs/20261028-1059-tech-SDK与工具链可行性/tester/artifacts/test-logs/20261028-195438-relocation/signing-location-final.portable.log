@@ -1,0 +1,38 @@
+=== signing-location-final Run ===
+Command: %PROJECT_ROOT%\android\gradlew.bat -p android --offline --no-daemon --console=plain :app:signingReport
+Timestamp: 2026-10-28T12:07:18.988755+00:00
+To honour the JVM settings for this build a single-use Daemon process will be forked. For more on this, please refer to https://docs.gradle.org/8.13/userguide/gradle_daemon.html#sec:disabling_the_daemon in the Gradle documentation.
+Daemon will be stopped at the end of the build 
+
+> Task :app:signingReport
+Variant: debug
+Config: debug
+Store: E:\Dev\Artemis\.android\debug.keystore
+Alias: AndroidDebugKey
+MD5: 10:38:AE:55:35:D6:43:D5:BB:F9:71:23:5D:E8:17:F6
+SHA1: 32:DD:28:AB:BC:97:BC:68:B1:25:1E:8D:D7:7D:A0:F1:BA:12:CA:4C
+SHA-256: 99:E6:B4:15:4D:8F:F3:AD:01:8A:1C:3E:EF:E2:9E:9C:E1:AB:E2:79:B5:58:B7:F9:1C:00:17:DB:A9:54:38:EA
+Valid until: 2056年10月20日星期五
+----------
+Variant: release
+Config: null
+Store: null
+Alias: null
+----------
+Variant: debugAndroidTest
+Config: debug
+Store: E:\Dev\Artemis\.android\debug.keystore
+Alias: AndroidDebugKey
+MD5: 10:38:AE:55:35:D6:43:D5:BB:F9:71:23:5D:E8:17:F6
+SHA1: 32:DD:28:AB:BC:97:BC:68:B1:25:1E:8D:D7:7D:A0:F1:BA:12:CA:4C
+SHA-256: 99:E6:B4:15:4D:8F:F3:AD:01:8A:1C:3E:EF:E2:9E:9C:E1:AB:E2:79:B5:58:B7:F9:1C:00:17:DB:A9:54:38:EA
+Valid until: 2056年10月20日星期五
+----------
+
+BUILD SUCCESSFUL in 10s
+1 actionable task: 1 executed
+
+--- stderr ---
+
+Exit code: 0
+Finished: 2026-10-28T12:07:29.403998+00:00

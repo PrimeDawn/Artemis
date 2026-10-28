@@ -4,7 +4,7 @@
 
 Artemis 计划通过原生安卓 App 采集视频与麦克风音频，在局域网内通过 WebRTC 传入 Windows 上的 OBS 浏览器源。电脑侧提供本地配对、信令和控制页面，音视频不由 Node.js 服务转码。
 
-当前已建立 [v0.1 技术预研规划](spec/versions/v0.1/plan.html)，尚无可运行的 App、接收服务或经过验证的音视频链路。范围和验收目标见 [产品规划](产品规划.md)；版本状态以 [运行账本](spec/versions/v0.1/version-context.md) 为准。
+当前按 [v0.1 技术预研规划](spec/versions/v0.1/plan.html)建立首个工具链工程：Android 静态验证页与本机健康检查服务。音视频采集、配对和 OBS 接收仍未实现。范围和验收目标见 [产品规划](产品规划.md)；版本状态以 [运行账本](spec/versions/v0.1/version-context.md) 为准。
 
 ## 计划技术与目录
 
@@ -12,11 +12,25 @@ Artemis 计划通过原生安卓 App 采集视频与麦克风音频，在局域�
 | --- | --- | --- |
 | `android/` | 安卓采集与推流 App | Kotlin、Jetpack Compose、原生 WebRTC SDK |
 | `receiver/` | 电脑本地服务、控制页与 OBS 接收页 | Node.js、TypeScript、WebSocket、浏览器 WebRTC API |
-| `protocol/` | 配对、信令、状态与错误码约定 | 由首个技术 Spec 确定 |
+| `protocol/` | 配对、信令、状态与错误码约定 | 由离线配对与信令 Spec 确定 |
 | `docs/` | 使用指南与维护文档 | Markdown |
 | `spec/` | 版本计划、Spec、测试证据与项目记忆 | R&K Flow |
 
-前三个业务模块及开发工具链将在技术预研与基础工程阶段建立；依赖版本尚未锁定。
+`android/` 与 `receiver/` 已有最小工程；`protocol/` 尚未建立。固定工具链见 [toolchain-lock.json](docs/toolchain-lock.json)，来源与许可证见 [依赖来源](docs/dependency-provenance.md)。
+
+## 构建与运行
+
+Windows 准备 JDK 17、Node 24、Android API 36 和 Build Tools 36.0.0，具体安装、许可和镜像切换见 [工具链复现指南](docs/toolchain.md)。
+
+```powershell
+# JAVA_HOME 与 ANDROID_HOME 指向本机 JDK 17 和 SDK；不提交个人路径。
+.\android\gradlew.bat -p android --no-daemon clean :app:assembleDebug
+npm --prefix receiver ci --ignore-scripts
+npm --prefix receiver test
+npm --prefix receiver start
+```
+
+PC 服务仅监听 `127.0.0.1:3000`，`GET /healthz` 用于检查进程可用性；Ctrl+C 关闭。它还不能接收手机媒体。Android 构建产物为 `android/app/build/outputs/apk/debug/app-debug.apk`；设备运行与正式集成结果以当前 Spec 测试报告为准。
 
 ## 研发工作流
 

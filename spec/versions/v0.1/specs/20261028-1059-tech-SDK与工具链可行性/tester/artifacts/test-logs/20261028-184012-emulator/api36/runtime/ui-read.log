@@ -1,0 +1,7 @@
+Command: %USERPROFILE%\AppData\Local\Android\Sdk\platform-tools\adb.exe -e exec-out cat /data/local/tmp/artemis-sdk-ui.xml
+Timestamp: 2026-10-28T10:53:01.157152+00:00
+App-only UI tree saved; other package nodes were not persisted.
+--- stderr ---
+
+Exit code: 0
+Finished: 2026-10-28T10:53:01.238782+00:00

@@ -1,0 +1,46 @@
+=== node-independent-setup Run ===
+Command: powershell -NoProfile -Command "npm.cmd --prefix receiver ci --ignore-scripts --no-audit --no-fund; if($LASTEXITCODE -ne 0){exit $LASTEXITCODE}; npm.cmd --prefix receiver test; exit $LASTEXITCODE"
+Timestamp: 2026-10-28T12:34:35.101827+00:00
+
+added 3 packages in 720ms
+
+> @artemis/receiver@0.1.0-dev test
+> npm run build && node --test dist/test/*.test.js
+
+
+> @artemis/receiver@0.1.0-dev build
+> tsc -p tsconfig.json
+
+✔ PORT is 3000 only when the value is absent (1.5401ms)
+✔ accept decimal port 0 (0.1263ms)
+✔ accept decimal port 3000 (0.0963ms)
+✔ accept decimal port 65535 (0.0535ms)
+✔ accept decimal port 00080 (0.0717ms)
+✔ reject port "" without fallback (0.2722ms)
+✔ reject port "-1" without fallback (0.084ms)
+✔ reject port "65536" without fallback (0.0722ms)
+✔ reject port "abc" without fallback (0.0676ms)
+✔ reject port "1.5" without fallback (0.1722ms)
+✔ reject port " 3000" without fallback (0.0683ms)
+✔ reject port "3000 " without fallback (0.0844ms)
+✔ reject port "+80" without fallback (0.0582ms)
+✔ reject port "0x50" without fallback (0.0388ms)
+✔ reject port "1e3" without fallback (0.0408ms)
+✔ reject port "NaN" without fallback (0.0843ms)
+✔ reject port "999999999999999999999" without fallback (0.0974ms)
+✔ public server API serves the exact health contract and route boundaries (56.8438ms)
+✔ public close is concurrent-safe and releases the listening port (2.988ms)
+✔ startup rejects with the original EADDRINUSE code (1.5783ms)
+ℹ tests 20
+ℹ suites 0
+ℹ pass 20
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 156.2878
+
+--- stderr ---
+
+Exit code: 0
+Finished: 2026-10-28T12:34:38.597580+00:00

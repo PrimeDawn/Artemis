@@ -1,0 +1,14 @@
+{
+  "command": "%USERPROFILE%/AppData/Local/Android/Sdk/build-tools/36.0.0/zipalign.exe -c -P 16 -v 4 android/app/build/outputs/apk/debug/app-debug.apk",
+  "startedAt": "2026-10-28T06:11:31.457617+00:00",
+  "finishedAt": "2026-10-28T06:11:31.473277+00:00",
+  "exitCode": 0,
+  "expectedExitCode": 0,
+  "durationSeconds": 0.016,
+  "stdoutSha256": "b10a0200b17da4c8cb23690069d96f3d61ae589da05f99c9c932a062af17eb14",
+  "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "log": "apk-zipalign-build-2.log",
+  "redactions": [
+    "personal user-root path"
+  ]
+}

@@ -1,0 +1,9 @@
+=== collect-independent-results-local Run ===
+Command: python tests/collect-sdk-results.py --run-dir spec/versions/v0.1/specs/20261028-1059-tech-SDK与工具链可行性/tester/artifacts/test-logs/20261028-144342
+Timestamp: 2026-10-28T07:02:12.817994+00:00
+{"requiredPassed": 16, "requiredTotal": 16, "notRun": 3, "passedRequired": true, "snapshotSha256": "5c60e9d2bfa832bd7237361284923b38c77f5f469703f65ade007f6a624335f2", "productionChanges": []}
+
+--- stderr ---
+
+Exit code: 0
+Finished: 2026-10-28T07:02:13.451074+00:00

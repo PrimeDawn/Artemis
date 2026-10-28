@@ -1,0 +1,14 @@
+{
+  "command": "python .cache/check-emulator-delivery-final.py",
+  "startedAt": "2026-10-28T11:11:13.969447+00:00",
+  "finishedAt": "2026-10-28T11:11:14.775045+00:00",
+  "exitCode": 0,
+  "expectedExitCode": 0,
+  "durationSeconds": 0.817,
+  "stdoutSha256": "4508c44202866577e87a2a8350008bceb9cbd285d5b572da397f9b44baee5a08",
+  "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "log": "emulator-delivery-validation-final.log",
+  "redactions": [
+    "personal user-root path"
+  ]
+}

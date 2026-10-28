@@ -1,0 +1,12 @@
+{
+  "createdAt": "2026-10-28T11:04:24.437705+00:00",
+  "files": [
+    {
+      "original": "spec/versions/v0.1/specs/20261028-1059-tech-SDK与工具链可行性/tester/artifacts/test-logs/20261028-184012-emulator/emulator-package-observation.log",
+      "originalSha256": "ff5b6f2f6398e982f27fa7a376cad7a8a8a93c164a3a8701142afafe9727d3ce",
+      "portable": "spec/versions/v0.1/specs/20261028-1059-tech-SDK与工具链可行性/tester/artifacts/test-logs/20261028-184012-emulator/emulator-package-observation.portable.log",
+      "portableSha256": "c07785b815fc72603d4ce0dc947a24188cdb9f6f4b5fc068fdd33f01a1c34403",
+      "operation": "Replace absolute local root paths only; original bytes retained locally."
+    }
+  ]
+}

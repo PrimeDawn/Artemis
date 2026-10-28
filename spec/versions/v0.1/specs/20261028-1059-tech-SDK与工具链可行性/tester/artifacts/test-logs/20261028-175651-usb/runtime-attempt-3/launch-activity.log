@@ -1,0 +1,13 @@
+Command: %USERPROFILE%\AppData\Local\Android\Sdk\platform-tools\adb.exe -d shell am start -W -n io.github.primedawn.artemis/.MainActivity
+Timestamp: 2026-10-28T10:08:09.002361+00:00
+Starting: Intent { cmp=io.github.primedawn.artemis/.MainActivity }
+Status: ok
+LaunchState: UNKNOWN (0)
+Activity: io.github.primedawn.artemis/.MainActivity
+WaitTime: 85
+Complete
+
+--- stderr ---
+
+Exit code: 0
+Finished: 2026-10-28T10:08:09.204619+00:00
