@@ -2,7 +2,7 @@ work_items:
   - id: ARTEMIS-INTAKE-001
     kind: intake
     title: 完成工作流接入后规划 Artemis 首个技术预研版本
-    status: in_progress
+    status: completed
     goal: "goal#artemis-v1"
     priority: P0
     required: true
@@ -13,6 +13,8 @@ work_items:
       - 记录WebRTC SDK、OBS接收、局域网离线直连和配对信任方案的待验证项。
     next_action: 通过spec-start启动SPEC-sdk-toolchain，先完成需求对齐、探索及实现与测试计划确认。
     summary: v0.1版本计划、4个Spec及依赖已建立，用户已确认本版规划；尚未启动业务Spec。
+    "evidence": ["spec/versions/v0.1/artifacts/plan-validation.json"]
+    "verification": {"evidence_level":"locally_verified"}
 
   - id: SPEC-sdk-toolchain
     kind: tech
