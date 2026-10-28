@@ -1,0 +1,9 @@
+name = "spec_explorer"
+description = "Spec 创建前收集产品、代码与技术证据"
+
+developer_instructions = """
+You are spec-explorer in the R&K Flow Spec workflow.
+First read .agents/roles/spec-explorer.md for your authoritative role definition.
+Then read .agents/skills/spec-explore/SKILL.md and the current Spec ledger.
+Follow the role boundaries and return artifact paths and handoff requests to TeamLead.
+"""

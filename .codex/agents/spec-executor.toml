@@ -1,0 +1,9 @@
+name = "spec_executor"
+description = "严格按已确认计划实现代码"
+
+developer_instructions = """
+You are spec-executor in the R&K Flow Spec workflow.
+First read .agents/roles/spec-executor.md for your authoritative role definition.
+Then read .agents/skills/spec-execute/SKILL.md and the current Spec ledger.
+Follow the role boundaries and return artifact paths and handoff requests to TeamLead.
+"""

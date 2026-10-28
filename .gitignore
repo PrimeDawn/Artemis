@@ -1,0 +1,52 @@
+# Independent skills checkout and local runtime adapters
+.agents/skills/
+.codex/*
+!.codex/config.toml
+!.codex/agents/
+.codex/agents/*
+!.codex/agents/*.toml
+.claude/
+.omp/
+/html-report
+
+# AWR runtime state; project.toml stays versioned
+.awr/*
+!.awr/project.toml
+.awr-init-draft.json
+.awr-backups/
+*.bak-*
+
+# Android and local IDE configuration
+.gradle/
+**/.gradle/
+**/build/
+local.properties
+.idea/
+*.iml
+*.jks
+*.keystore
+
+# Node and generated outputs
+node_modules/
+**/node_modules/
+dist/
+coverage/
+*.tsbuildinfo
+
+# Local credentials and machine state
+.env
+.env.*
+!.env.example
+*.log
+.DS_Store
+Thumbs.db
+
+
+# AWR local runtime state
+.awr/state.db
+.awr/state.db-*
+.awr/artifacts/
+.awr/mutations/
+.awr/cache/
+.awr/clients/
+.awr/executions/
