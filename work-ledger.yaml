@@ -2,7 +2,7 @@ work_items:
   - id: ARTEMIS-INTAKE-001
     kind: intake
     title: 完成工作流接入后规划 Artemis 首个技术预研版本
-    status: ready
+    status: in_progress
     goal: "goal#artemis-v1"
     priority: P0
     required: true
@@ -11,5 +11,100 @@ work_items:
       - 以产品规划.md确认一期目标、边界和验收目标，区分计划与实测结果。
       - 通过version-start规划首个版本，并将M0技术预研拆分为有明确验收标准的Spec。
       - 记录WebRTC SDK、OBS接收、局域网离线直连和配对信任方案的待验证项。
-    next_action: 由用户发起version-start，确定首个版本号、目标与技术预研范围，再通过spec-start启动具体任务。
-    summary: 当前只有产品规划和研发环境；尚无业务实现、音视频测试或产品验收证据。本条不自动启动开发。
+    next_action: 通过spec-start启动SPEC-sdk-toolchain，先完成需求对齐、探索及实现与测试计划确认。
+    summary: v0.1版本计划、4个Spec及依赖已建立，用户已确认本版规划；尚未启动业务Spec。
+
+  - id: SPEC-sdk-toolchain
+    kind: tech
+    title: SDK 与工具链可行性
+    status: planned
+    goal: "goal#artemis-v0.1"
+    milestone: VERSION-v0.1
+    priority: P0
+    required: true
+    depends_on: []
+    acceptance:
+      - 记录可核验的WebRTC SDK来源、版本、许可证、ABI和Android版本兼容结论。
+      - 按文档可重复构建最小APK并启动PC实验服务，保留命令、环境和结果。
+      - 核验Android原生库页面大小要求，明确未完成的真机验证和阻断。
+    next_action: 通过spec-start建立SDK与工具链Spec，完成探索、设计和测试计划确认。
+    summary: v0.1技术预研规划项，尚未启动Spec或业务实现。
+    tags: [v0.1, tech, m0]
+    paths:
+      - spec/versions/v0.1/version-context.md
+      - spec/versions/v0.1/plan.html
+
+  - id: SPEC-offline-pairing
+    kind: tech
+    title: 离线配对与信令信任
+    status: planned
+    goal: "goal#artemis-v0.1"
+    milestone: VERSION-v0.1
+    priority: P0
+    required: true
+    depends_on:
+      - SPEC-sdk-toolchain
+    acceptance:
+      - 断公网保留局域网时可完成配对和信令，不依赖公网信令、STUN、TURN或CDN。
+      - 验证配对有效期、撤销和未配对请求拒绝，知道IP本身不能取得媒体接收权限。
+      - 保留TLS证书信任、二维码绑定或替代信任方案的实测取舍及操作步骤。
+    next_action: 工具链验证完成后，通过spec-start建立离线配对与信令信任Spec。
+    summary: v0.1技术预研规划项，尚未启动Spec或业务实现。
+    tags: [v0.1, tech, m0]
+    paths:
+      - spec/versions/v0.1/version-context.md
+      - spec/versions/v0.1/plan.html
+
+  - id: SPEC-media-obs
+    kind: tech
+    title: 手机到 OBS 的最小音视频链路
+    status: planned
+    goal: "goal#artemis-v0.1"
+    milestone: VERSION-v0.1
+    priority: P0
+    required: true
+    depends_on:
+      - SPEC-sdk-toolchain
+      - SPEC-offline-pairing
+    acceptance:
+      - S24与指定Windows和OBS环境中同时接收摄像头画面及内置麦克风，录制可回看音视频。
+      - 以720p/30fps为基线记录实际编码、分辨率和帧率，Node.js不转码或逐帧中转。
+      - 单活动接收端下可停止采集并释放相机、麦克风和连接，再次启动有效。
+    next_action: 前置Spec完成后，通过spec-start设计并验证最小音视频链路。
+    summary: v0.1技术预研规划项，尚未启动Spec或业务实现。
+    tags: [v0.1, tech, m0]
+    paths:
+      - spec/versions/v0.1/version-context.md
+      - spec/versions/v0.1/plan.html
+
+  - id: SPEC-validation-baseline
+    kind: tech
+    title: 真机验证基线与复现交付
+    status: planned
+    goal: "goal#artemis-v0.1"
+    milestone: VERSION-v0.1
+    priority: P1
+    required: true
+    depends_on:
+      - SPEC-media-obs
+    acceptance:
+      - 固定并记录设备和软件环境，断公网完成配对至OBS音视频接收的端到端复测。
+      - 连续推流至少10分钟并重复启停至少3次，保留结果及异常记录。
+      - 实测延迟与音画偏差并对照300ms和150ms产品目标，超标项明确处置，不记为达标。
+      - 提供可复现实验APK、PC启动步骤、依赖许可证和研究结论；不替代全部一期验收。
+    next_action: 链路Spec完成后，通过spec-start制定真机验证和实验原型交付方案。
+    summary: v0.1技术预研规划项，尚未启动Spec或业务实现。
+    tags: [v0.1, tech, m0]
+    paths:
+      - spec/versions/v0.1/version-context.md
+      - spec/versions/v0.1/plan.html
+
+milestones:
+  - id: VERSION-v0.1
+    title: v0.1 最小音视频链路技术预研
+    status: planned
+    summary: 对应版本运行账本的规划中状态，以v0.1文档为版本状态权威来源。
+    scope: SDK与工具链、离线配对信令、手机到OBS链路、真机验证和实验原型复现交付。
+    acceptance:
+      - 四个入版技术Spec均完成并保留真实验证证据。
+      - 实验原型可复现，关键路线与性能差距有明确处置结论。
