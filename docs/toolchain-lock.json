@@ -1,0 +1,40 @@
+{
+  "schemaVersion": 1,
+  "android": {
+    "minSdk": 29,
+    "compileSdk": 36,
+    "targetSdk": 36,
+    "buildTools": "36.0.0",
+    "jdkMajor": 17,
+    "agp": "8.13.2",
+    "gradle": "8.13",
+    "kotlin": "2.3.10",
+    "composeBom": "2025.10.01",
+    "activityCompose": "1.11.0",
+    "testRunner": "1.7.0",
+    "testJunit": "1.3.0",
+    "gradleDistributionSha256": "20f1b1176237254a6fc204d8434196fa11a4cfb387567519c61556e8710aed78",
+    "gradleWrapperSha256": "81a82aaea5abcc8ff68b3dfcb58b3c3c429378efd98e7433460610fecd7ae45f",
+    "commandlineToolsUrl": "https://dl.google.com/android/repository/commandlinetools-win-13114758_latest.zip",
+    "commandlineToolsSha1": "54a582f3bf73e04253602f2d1c80bd5868aac115"
+  },
+  "node": { "version": "24.18.0", "npm": "11.16.0", "typescript": "6.0.3", "nodeTypes": "24.10.1" },
+  "webrtc": {
+    "coordinate": "io.github.webrtc-sdk:android:150.7871.01",
+    "aarSha256": "0a1627b1a48c2bc17d9a40d62fc47bd45166f44a311e95917f147c402de379b0",
+    "releaseTag": "v150.7871.01",
+    "sourceUrl": "https://github.com/webrtc-sdk/android/tree/v150.7871.01",
+    "manifestMinSdk": 21,
+    "abis": ["armeabi-v7a", "arm64-v8a", "x86", "x86_64"],
+    "licenseFiles": ["docs/third-party/WEBRTC-150.7871.01.md"],
+    "distributionNote": "Maven classes have Java 17 version headers; GitHub release classes have Java 21 headers. All 433 class payloads apart from headers, and all native libraries, matched during read-only comparison. Do not substitute the GitHub AAR hash for the Maven hash."
+  },
+  "sources": [
+    { "component": "AGP compatibility", "url": "https://developer.android.com/build/releases/agp-8-13-0-release-notes", "checkedAt": "2026-10-28" },
+    { "component": "Kotlin compatibility", "url": "https://kotlinlang.org/docs/gradle-configure-project.html", "checkedAt": "2026-10-28" },
+    { "component": "Gradle distribution", "url": "https://services.gradle.org/distributions/gradle-8.13-bin.zip.sha256", "checkedAt": "2026-10-28" },
+    { "component": "Gradle wrapper", "url": "https://services.gradle.org/distributions/gradle-8.13-wrapper.jar.sha256", "checkedAt": "2026-10-28" },
+    { "component": "WebRTC Maven", "url": "https://repo.maven.apache.org/maven2/io/github/webrtc-sdk/android/150.7871.01/", "checkedAt": "2026-10-28" },
+    { "component": "Android 16KB ELF and RELRO rules", "url": "https://developer.android.com/guide/practices/page-sizes", "checkedAt": "2026-10-28" }
+  ]
+}

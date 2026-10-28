@@ -1,0 +1,9 @@
+=== device-inventory Run ===
+Command: E:\Dev\miniconda\python.exe tests/android-device-probe.py --sdk-root %USERPROFILE%\AppData\Local\Android\Sdk --report-dir spec/versions/v0.1/specs/20261028-1059-tech-SDK与工具链可行性/tester/artifacts/test-logs/20261028-155217-ending/device
+Timestamp: 2026-10-28T07:53:18.378913+00:00
+{"verifiedAt": "2026-10-28T07:53:18.485841+00:00", "adbExitCode": 0, "devices": [], "cases": [{"id": "TC-D1", "status": "not-run", "devices": [], "reason": "No authorized Android API29+ device is connected"}, {"id": "TC-D2", "status": "not-run", "devices": [], "reason": "No authorized API29 device or emulator is connected"}, {"id": "TC-D3", "status": "not-run", "devices": [], "reason": "No authorized 16KB device or emulator is connected"}], "privacy": "Complete ADB serial identifiers were kept only in process memory and not persisted."}
+
+--- stderr ---
+
+Exit code: 0
+Finished: 2026-10-28T07:53:18.491581+00:00

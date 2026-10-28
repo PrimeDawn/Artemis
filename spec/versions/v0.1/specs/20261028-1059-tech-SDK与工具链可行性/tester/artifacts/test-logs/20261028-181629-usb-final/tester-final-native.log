@@ -1,0 +1,9 @@
+=== tester-final-native Run ===
+Command: E:\Dev\miniconda\python.exe scripts/verify-native-libs.py --apk android/app/build/outputs/apk/debug/app-debug.apk --report spec/versions/v0.1/specs/20261028-1059-tech-SDK与工具链可行性/tester/artifacts/test-logs/20261028-181629-usb-final/native-apk.json
+Timestamp: 2026-10-28T10:17:29.923670+00:00
+{"passed": true, "libraries": 8, "errors": []}
+
+--- stderr ---
+
+Exit code: 0
+Finished: 2026-10-28T10:17:30.104080+00:00

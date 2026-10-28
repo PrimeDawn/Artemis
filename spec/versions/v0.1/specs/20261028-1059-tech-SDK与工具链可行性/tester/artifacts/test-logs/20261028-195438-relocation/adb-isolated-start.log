@@ -1,0 +1,10 @@
+=== adb-isolated-start Run ===
+Command: E:\Dev\Artemis\Android\Sdk\platform-tools\adb.exe start-server
+Timestamp: 2026-10-28T12:09:43.346160+00:00
+
+--- stderr ---
+* cannot start server on remote host
+error: cannot connect to daemon at tcp:127.0.0.1:5038: cannot connect to 127.0.0.1:5038: 由于目标计算机积极拒绝，无法连接。 (10061)
+
+Exit code: 4294967295
+Finished: 2026-10-28T12:09:45.417380+00:00

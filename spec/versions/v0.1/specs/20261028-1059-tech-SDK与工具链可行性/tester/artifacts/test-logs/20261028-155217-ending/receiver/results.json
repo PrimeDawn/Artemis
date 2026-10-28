@@ -1,0 +1,128 @@
+{
+  "schemaVersion": 1,
+  "sourceSha": "0fe4114b07a5d0dbdca2489c71934eed56070fdc",
+  "verifiedAt": "2026-10-28T07:52:25.232Z",
+  "scope": "Independent real CLI and public API tests",
+  "passed": true,
+  "cases": [
+    {
+      "id": "TC-11",
+      "status": "pass",
+      "startedAt": "2026-10-28T07:52:23.881Z",
+      "finishedAt": "2026-10-28T07:52:24.393Z",
+      "detail": {
+        "invalidValues": [
+          "",
+          "-1",
+          "65536",
+          "abc",
+          "1.5",
+          " 3000",
+          "3000 "
+        ],
+        "exitCode": 1
+      }
+    },
+    {
+      "id": "TC-12",
+      "status": "pass",
+      "startedAt": "2026-10-28T07:52:24.474Z",
+      "finishedAt": "2026-10-28T07:52:24.499Z",
+      "detail": {
+        "realCli": true
+      }
+    },
+    {
+      "id": "TC-13",
+      "status": "pass",
+      "startedAt": "2026-10-28T07:52:24.499Z",
+      "finishedAt": "2026-10-28T07:52:24.503Z",
+      "detail": {
+        "exactPathBoundary": true
+      }
+    },
+    {
+      "id": "TC-14",
+      "status": "pass",
+      "startedAt": "2026-10-28T07:52:24.503Z",
+      "finishedAt": "2026-10-28T07:52:24.506Z",
+      "detail": {
+        "unparsedBodyAcceptedForRejection": true
+      }
+    },
+    {
+      "id": "TC-15",
+      "status": "pass",
+      "startedAt": "2026-10-28T07:52:24.512Z",
+      "finishedAt": "2026-10-28T07:52:24.614Z",
+      "detail": {
+        "errorCode": "EADDRINUSE",
+        "exitCode": 1
+      }
+    },
+    {
+      "id": "TC-16",
+      "status": "pass",
+      "startedAt": "2026-10-28T07:52:24.614Z",
+      "finishedAt": "2026-10-28T07:52:25.197Z",
+      "detail": {
+        "closeIdempotent": true,
+        "portRebind": true,
+        "signal": {
+          "status": "pass",
+          "transport": "GenerateConsoleCtrlEvent(CTRL_C_EVENT, 0)",
+          "stdout": [
+            "{\"event\":\"receiver_started\",\"host\":\"127.0.0.1\",\"port\":62868}",
+            "{\"event\":\"receiver_stopped\"}"
+          ],
+          "stderr": [],
+          "forcedCleanup": false,
+          "started": {
+            "event": "receiver_started",
+            "host": "127.0.0.1",
+            "port": 62868
+          },
+          "signalSenderExitCode": 0,
+          "childExitCode": 0,
+          "stoppedEvent": true,
+          "portRebindPassed": true
+        }
+      }
+    }
+  ],
+  "inputs": [
+    {
+      "path": "receiver/src/config.ts",
+      "sha256": "8aedf876e9fac745f0804be30ed0dff9407ffaf6367b597fffcc8a8b3d1c5305"
+    },
+    {
+      "path": "receiver/src/server.ts",
+      "sha256": "fd41edbac1fee08d6b1bfde0d011d60af02664f89ad887406f016aa8a79aba8c"
+    },
+    {
+      "path": "receiver/src/cli.ts",
+      "sha256": "369c642716d48c4544ab9b099ae907819767ca7ea0d41855005e733c13b39b00"
+    },
+    {
+      "path": "receiver/dist/src/config.js",
+      "sha256": "c78014ce19359b0d310c69eea59f21a542b7682375381513b75e294f45eea4ba"
+    },
+    {
+      "path": "receiver/dist/src/server.js",
+      "sha256": "de447fe65e3108fef52f9c78947c4f5298058b323724feb6b5c0e0c195b59211"
+    },
+    {
+      "path": "receiver/dist/src/cli.js",
+      "sha256": "5953e4906e50a81f38de877e9e47b83bc63cf7c42f72927aedeb2ed9ac4bc76a"
+    },
+    {
+      "path": "tests/receiver-smoke.mjs",
+      "sha256": "6f6d961d47dde092c996049bb3c6493a82fed6edc081609e4148a7331bd5b482"
+    },
+    {
+      "path": "tests/windows-cli-signal.py",
+      "sha256": "57979820257412397cee540c22e9c91186c5832e2a0ebfc082dd18162bba885c"
+    }
+  ],
+  "processesRemaining": 0
+}

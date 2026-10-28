@@ -1,0 +1,13 @@
+=== emulator-avd-create Run ===
+Command: python .cache/emulator-setup-task.py create
+Timestamp: 2026-10-28T10:48:22.427069+00:00
+Auto-selecting single ABI x86_64
+Auto-selecting single ABI x86_64
+
+
+{"task": "create", "childExitCode": 0}
+
+--- stderr ---
+
+Exit code: 0
+Finished: 2026-10-28T10:48:25.198890+00:00

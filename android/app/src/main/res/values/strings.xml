@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Artemis</string>
+    <string name="prototype_title">工具链验证工程</string>
+    <string name="prototype_description">当前构建用于开发环境验证。音视频采集与连接暂未启用。</string>
+</resources>

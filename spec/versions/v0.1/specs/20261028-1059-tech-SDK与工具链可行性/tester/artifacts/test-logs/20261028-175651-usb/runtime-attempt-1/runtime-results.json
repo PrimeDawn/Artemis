@@ -1,0 +1,22 @@
+{
+  "verifiedAt": "2026-10-28T10:01:07.930282+00:00",
+  "status": "not-run",
+  "reason": "No single authorized USB device is available",
+  "cases": [
+    {
+      "id": "TC-D1",
+      "status": "not-run",
+      "reason": "USB debug connection not ready"
+    },
+    {
+      "id": "TC-D2",
+      "status": "not-run",
+      "reason": "USB debug connection not ready"
+    },
+    {
+      "id": "TC-D3",
+      "status": "not-run",
+      "reason": "USB debug connection not ready"
+    }
+  ]
+}

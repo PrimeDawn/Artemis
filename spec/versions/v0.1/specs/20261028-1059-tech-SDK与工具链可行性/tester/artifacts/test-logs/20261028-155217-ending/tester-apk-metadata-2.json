@@ -1,0 +1,14 @@
+{
+  "command": "E:\\Dev\\miniconda\\python.exe .cache/inspect-built-apk.py --aapt %USERPROFILE%\\AppData\\Local\\Android\\Sdk/build-tools/36.0.0/aapt.exe --report spec/versions/v0.1/specs/20261028-1059-tech-SDK\u4e0e\u5de5\u5177\u94fe\u53ef\u884c\u6027/tester/artifacts/test-logs/20261028-155217-ending/build-2-apk.json",
+  "startedAt": "2026-10-28T07:53:17.229483+00:00",
+  "finishedAt": "2026-10-28T07:53:17.383128+00:00",
+  "exitCode": 0,
+  "expectedExitCode": 0,
+  "durationSeconds": 0.154,
+  "stdoutSha256": "8898501fd59787fe9e41bae34b3400d69057aaa766c4fadb8f12128898274328",
+  "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "log": "tester-apk-metadata-2.log",
+  "redactions": [
+    "personal user-root path"
+  ]
+}

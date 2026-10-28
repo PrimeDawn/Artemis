@@ -1,0 +1,425 @@
+{
+  "blocked_count": 4,
+  "branch_id": null,
+  "counts": {
+    "completed": 1,
+    "in_progress": 1,
+    "planned": 3
+  },
+  "current": [
+    {
+      "archived": false,
+      "blocker": null,
+      "external_key": "SPEC-sdk-toolchain",
+      "freshness": "fresh",
+      "id": "01M605YSDSGT2VQQXJXQH59F49",
+      "milestone": "VERSION-v0.1",
+      "next_action": "等待用户确认最新19/19测试报告及原收尾方案：AWR仅按当前Spec处理未来规划依赖的范围例外、两条经验写入、原位归档、提交/推送并创建向dev的PR；合并仍需另行授权。",
+      "ordinary_completion": null,
+      "ordinary_work_policy": null,
+      "owner": null,
+      "priority": "P0",
+      "raw_status": "in_progress",
+      "revision": 19,
+      "source_ref": {
+        "end_line": null,
+        "locator": "file:///%PROJECT_ROOT%/work-ledger.yaml",
+        "pointer": "/work_items/1",
+        "section_fingerprint": "sha256:97e9fe1ce3cc2558a6ec59296c5aab2cfc2e75edb98eec472a71071e8563ca0a",
+        "source_fingerprint": "sha256:116d255495ba4d8ef524d3cb93edd2b8d10fcfd49a21728b8336ed8154622c9a",
+        "source_id": "01M6053F99TPKH9CTXQRXRM8EC",
+        "source_revision": 24,
+        "start_line": null
+      },
+      "source_revision": 24,
+      "status": "in_progress",
+      "summary": "本次新增 Android SDK、两个AVD、配置、下载及项目npm缓存已迁入E:\\Dev\\Artemis；原C盘副本清除。迁移后离线APK构建及签名、两个模拟器安装/页面/JNI、12项配置与缓存检查和20项服务测试通过。已有JDK与ADB身份保留，未执行原收尾动作。",
+      "title": "SDK 与工具链可行性"
+    }
+  ],
+  "current_total": 1,
+  "freshness_basis": "source_refresh",
+  "next_action": "等待用户确认最新19/19测试报告及原收尾方案：AWR仅按当前Spec处理未来规划依赖的范围例外、两条经验写入、原位归档、提交/推送并创建向dev的PR；合并仍需另行授权。",
+  "ok": true,
+  "organization": {
+    "actions": [
+      {
+        "done_when": "The selected work has no unresolved required prerequisite or active blocker.",
+        "id": "dependencies",
+        "instruction": "Inspect cited required dependencies and blockers. Repair missing links/cycles and declare actual prerequisites; do not mark prerequisites completed just to unlock work.",
+        "required_fields": [
+          "depends_on",
+          "blocker",
+          "next_action"
+        ]
+      },
+      {
+        "done_when": "Each criterion is covered by a current, hash-verified report at the required evidence level; no business or release gate is inferred.",
+        "id": "evidence",
+        "instruction": "Review the original completion claim and its actual reports. Bind every acceptance criterion to a passing report for the intended source SHA; source status and evidence level alone do not prove completion. Recheck with an explicit source SHA.",
+        "required_fields": [
+          "work_item",
+          "source_sha",
+          "command",
+          "scope",
+          "verified_at",
+          "checks[].criteria",
+          "report digest"
+        ]
+      },
+      {
+        "done_when": "The fresh diagnosis resolves the selected work's structural gaps. Semantic uncertainties are resolved or explicitly deferred to unaffected work.",
+        "id": "recheck",
+        "instruction": "Run awr intake inspect --json after source edits. Follow remaining actions until the intended work appears in executable_work; review its context before claiming it. Do not treat draft generation as completion.",
+        "required_fields": []
+      }
+    ],
+    "business_checked_completed": 0,
+    "business_execution_ready": true,
+    "completion_basis": "Source status only; completion reports have not been verified for an explicit source SHA. This is not a release or business-acceptance decision.",
+    "completion_check_blocked": 0,
+    "completion_not_checked": 1,
+    "completion_verification_failed": 0,
+    "context_profile": "minimal",
+    "executable_work": [
+      "SPEC-sdk-toolchain"
+    ],
+    "executable_work_total": 1,
+    "gap_total": 7,
+    "gaps": [
+      {
+        "action": "dependencies",
+        "code": "dependency_not_completed",
+        "detail": "required dependency has source status planned",
+        "source_refs": [
+          {
+            "end_line": null,
+            "locator": "file:///%PROJECT_ROOT%/work-ledger.yaml",
+            "pointer": "/work_items/3",
+            "section_fingerprint": "sha256:851ccbc293e7f52a3e09c28369e8c22c654eb27aec9b734e7b32d655f360dd13",
+            "source_fingerprint": "sha256:116d255495ba4d8ef524d3cb93edd2b8d10fcfd49a21728b8336ed8154622c9a",
+            "source_id": "01M6053F99TPKH9CTXQRXRM8EC",
+            "source_revision": 24,
+            "start_line": null
+          }
+        ],
+        "target": "SPEC-media-obs"
+      },
+      {
+        "action": "dependencies",
+        "code": "dependency_not_completed",
+        "detail": "required dependency has source status in_progress",
+        "source_refs": [
+          {
+            "end_line": null,
+            "locator": "file:///%PROJECT_ROOT%/work-ledger.yaml",
+            "pointer": "/work_items/3",
+            "section_fingerprint": "sha256:851ccbc293e7f52a3e09c28369e8c22c654eb27aec9b734e7b32d655f360dd13",
+            "source_fingerprint": "sha256:116d255495ba4d8ef524d3cb93edd2b8d10fcfd49a21728b8336ed8154622c9a",
+            "source_id": "01M6053F99TPKH9CTXQRXRM8EC",
+            "source_revision": 24,
+            "start_line": null
+          }
+        ],
+        "target": "SPEC-media-obs"
+      },
+      {
+        "action": "dependencies",
+        "code": "dependency_not_completed",
+        "detail": "required dependency has source status in_progress",
+        "source_refs": [
+          {
+            "end_line": null,
+            "locator": "file:///%PROJECT_ROOT%/work-ledger.yaml",
+            "pointer": "/work_items/2",
+            "section_fingerprint": "sha256:97b13e04172e89bd6cf0c9cb9f36dcef3305c7a835d6d3c969f517ebac927452",
+            "source_fingerprint": "sha256:116d255495ba4d8ef524d3cb93edd2b8d10fcfd49a21728b8336ed8154622c9a",
+            "source_id": "01M6053F99TPKH9CTXQRXRM8EC",
+            "source_revision": 24,
+            "start_line": null
+          }
+        ],
+        "target": "SPEC-offline-pairing"
+      },
+      {
+        "action": "dependencies",
+        "code": "dependency_not_completed",
+        "detail": "required dependency has source status planned",
+        "source_refs": [
+          {
+            "end_line": null,
+            "locator": "file:///%PROJECT_ROOT%/work-ledger.yaml",
+            "pointer": "/work_items/4",
+            "section_fingerprint": "sha256:abf00a35371ec3ccf72fc59d48c61627c8512d457f78b0e96221e9bb4fdd49f7",
+            "source_fingerprint": "sha256:116d255495ba4d8ef524d3cb93edd2b8d10fcfd49a21728b8336ed8154622c9a",
+            "source_id": "01M6053F99TPKH9CTXQRXRM8EC",
+            "source_revision": 24,
+            "start_line": null
+          }
+        ],
+        "target": "SPEC-validation-baseline"
+      },
+      {
+        "action": "dependencies",
+        "code": "dependency_not_completed",
+        "detail": "required dependency has source status planned",
+        "source_refs": [
+          {
+            "end_line": null,
+            "locator": "file:///%PROJECT_ROOT%/work-ledger.yaml",
+            "pointer": "/work_items/4",
+            "section_fingerprint": "sha256:abf00a35371ec3ccf72fc59d48c61627c8512d457f78b0e96221e9bb4fdd49f7",
+            "source_fingerprint": "sha256:116d255495ba4d8ef524d3cb93edd2b8d10fcfd49a21728b8336ed8154622c9a",
+            "source_id": "01M6053F99TPKH9CTXQRXRM8EC",
+            "source_revision": 24,
+            "start_line": null
+          }
+        ],
+        "target": "SPEC-validation-baseline"
+      },
+      {
+        "action": "dependencies",
+        "code": "dependency_not_completed",
+        "detail": "required dependency has source status in_progress",
+        "source_refs": [
+          {
+            "end_line": null,
+            "locator": "file:///%PROJECT_ROOT%/work-ledger.yaml",
+            "pointer": "/work_items/4",
+            "section_fingerprint": "sha256:abf00a35371ec3ccf72fc59d48c61627c8512d457f78b0e96221e9bb4fdd49f7",
+            "source_fingerprint": "sha256:116d255495ba4d8ef524d3cb93edd2b8d10fcfd49a21728b8336ed8154622c9a",
+            "source_id": "01M6053F99TPKH9CTXQRXRM8EC",
+            "source_revision": 24,
+            "start_line": null
+          }
+        ],
+        "target": "SPEC-validation-baseline"
+      },
+      {
+        "action": "evidence",
+        "code": "completion_not_checked",
+        "detail": "Not checked in this query: no explicit source SHA was supplied. This is neither a verification failure nor proof of completion. Inspect the original report and its recorded source version; never fill historical evidence with current HEAD.",
+        "source_refs": [
+          {
+            "end_line": null,
+            "locator": "file:///%PROJECT_ROOT%/work-ledger.yaml",
+            "pointer": "/work_items/0",
+            "section_fingerprint": "sha256:b76fc13ebeff76e6d59f5a4c9342e6bfa12c203cd02ffe3f0a11756fe57b941a",
+            "source_fingerprint": "sha256:116d255495ba4d8ef524d3cb93edd2b8d10fcfd49a21728b8336ed8154622c9a",
+            "source_id": "01M6053F99TPKH9CTXQRXRM8EC",
+            "source_revision": 24,
+            "start_line": null
+          }
+        ],
+        "target": "ARTEMIS-INTAKE-001"
+      }
+    ],
+    "goal_total": 2,
+    "goals": [
+      {
+        "confirmation_basis": "source assertion; semantic judgment belongs to the Agent/user",
+        "key": "goal#artemis-v0.1",
+        "source_declared": true,
+        "source_ref": {
+          "end_line": 18,
+          "locator": "file:///%PROJECT_ROOT%/GOALS.md",
+          "pointer": "#artemis-v0.1",
+          "section_fingerprint": "sha256:69c4890ac4b098ba6319e978ebf7131c0730f223989fa3df92e5c12a06bf33d4",
+          "source_fingerprint": "sha256:d77a0e70cfcc772fc58ba60aa4bb78c9ecbe07e3ddc9351346c8715ac8b4a2b8",
+          "source_id": "01M6053F90SJARDKD4QYVGDQCP",
+          "source_revision": 10,
+          "start_line": 11
+        },
+        "status": "active",
+        "title": "v0.1 技术预研里程碑"
+      },
+      {
+        "confirmation_basis": "source assertion; semantic judgment belongs to the Agent/user",
+        "key": "goal#artemis-v1",
+        "source_declared": true,
+        "source_ref": {
+          "end_line": 10,
+          "locator": "file:///%PROJECT_ROOT%/GOALS.md",
+          "pointer": "#artemis-v1",
+          "section_fingerprint": "sha256:189e271296a3496fabbd231e88f047356ee8a1e7f6bdc5779a2f8f59b918b901",
+          "source_fingerprint": "sha256:d77a0e70cfcc772fc58ba60aa4bb78c9ecbe07e3ddc9351346c8715ac8b4a2b8",
+          "source_id": "01M6053F90SJARDKD4QYVGDQCP",
+          "source_revision": 10,
+          "start_line": 1
+        },
+        "status": "active",
+        "title": "Artemis 一期目标"
+      }
+    ],
+    "historical_gap_total": 1,
+    "minimal_structure": "Reuse authoritative material. A small project needs one source-declared goal and work items with id, title, status, goal, acceptance and next_action. Goals and work_items may share one YAML ledger. Add plans/milestones only when needed; do not create separate plan/rule files just to satisfy intake.",
+    "next_action": "Select an executable_work item, inspect its work context and claim ownership before execution. Findings on other items remain open.",
+    "ordinary_work_policies": [],
+    "project_revision": 263,
+    "recheck": [
+      "awr",
+      "intake",
+      "inspect",
+      "--json",
+      "--branch",
+      "main"
+    ],
+    "schema_version": 1,
+    "semantic_review": "AWR checks declared structure, references and evidence bindings. The Coding Agent must compare user intent, README, implementation and development history, record its reasoning and sources, and keep uncertain goals as draft/candidate/needs_confirmation. Ask the user only for intent that cannot be established. An active/confirmed goal is a source assertion, not proof that AWR understood or approved the business intent.",
+    "source_archived": 0,
+    "source_cancelled": 0,
+    "source_completed": 1,
+    "source_sha": null,
+    "sources": [
+      {
+        "domain": "goal",
+        "freshness": "fresh",
+        "locator": "file:///%PROJECT_ROOT%/GOALS.md",
+        "revision": 10,
+        "role": "primary"
+      },
+      {
+        "domain": "ledger",
+        "freshness": "fresh",
+        "locator": "file:///%PROJECT_ROOT%/work-ledger.yaml",
+        "revision": 24,
+        "role": "primary"
+      },
+      {
+        "domain": "plan",
+        "freshness": "fresh",
+        "locator": "file:///%PROJECT_ROOT%/%E4%BA%A7%E5%93%81%E8%A7%84%E5%88%92.md",
+        "revision": 1,
+        "role": "supporting"
+      },
+      {
+        "domain": "plan",
+        "freshness": "fresh",
+        "locator": "file:///%PROJECT_ROOT%/AGENTS.md",
+        "revision": 1,
+        "role": "supporting"
+      },
+      {
+        "domain": "plan",
+        "freshness": "fresh",
+        "locator": "file:///%PROJECT_ROOT%/README.md",
+        "revision": 3,
+        "role": "supporting"
+      },
+      {
+        "domain": "plan",
+        "freshness": "fresh",
+        "locator": "file:///%PROJECT_ROOT%/spec/context/experience/index.md",
+        "revision": 1,
+        "role": "supporting"
+      },
+      {
+        "domain": "plan",
+        "freshness": "fresh",
+        "locator": "file:///%PROJECT_ROOT%/spec/context/knowledge/index.md",
+        "revision": 1,
+        "role": "supporting"
+      },
+      {
+        "domain": "rules",
+        "freshness": "fresh",
+        "locator": "file:///%PROJECT_ROOT%/.agents/rules/awr-integration.md",
+        "revision": 1,
+        "role": "supporting"
+      },
+      {
+        "domain": "rules",
+        "freshness": "fresh",
+        "locator": "file:///%PROJECT_ROOT%/.agents/rules/coding-style.md",
+        "revision": 1,
+        "role": "supporting"
+      },
+      {
+        "domain": "rules",
+        "freshness": "fresh",
+        "locator": "file:///%PROJECT_ROOT%/.agents/rules/documentation.md",
+        "revision": 1,
+        "role": "supporting"
+      },
+      {
+        "domain": "rules",
+        "freshness": "fresh",
+        "locator": "file:///%PROJECT_ROOT%/.agents/rules/git-workflow.md",
+        "revision": 1,
+        "role": "supporting"
+      },
+      {
+        "domain": "rules",
+        "freshness": "fresh",
+        "locator": "file:///%PROJECT_ROOT%/.agents/rules/project-preferences.md",
+        "revision": 1,
+        "role": "supporting"
+      },
+      {
+        "domain": "rules",
+        "freshness": "fresh",
+        "locator": "file:///%PROJECT_ROOT%/.agents/rules/spec-workflow.md",
+        "revision": 1,
+        "role": "primary"
+      },
+      {
+        "domain": "rules",
+        "freshness": "fresh",
+        "locator": "file:///%PROJECT_ROOT%/.agents/rules/version-workflow.md",
+        "revision": 1,
+        "role": "supporting"
+      }
+    ],
+    "state": "ready",
+    "truncated": false,
+    "user_confirmed_completed": 0,
+    "verified_completed": 0
+  },
+  "project": "Artemis",
+  "project_id": "01M6053F8XJFR0ZPZ5F7D7XDES",
+  "project_revision": 263,
+  "read_only": false,
+  "ready_count": 0,
+  "snapshot": {
+    "coherent": true,
+    "project_revision": 263,
+    "source_currentness_verified": true,
+    "source_refresh_revision": 263,
+    "source_state_fingerprint": "sha256:e823a4e060d794b292b704482122492b67147591bcb9aa2f3a2baf9c33581bdc",
+    "storage": "private_memory",
+    "version": 1
+  },
+  "source_issues": [],
+  "source_refresh_performed": true,
+  "source_warnings": 0,
+  "suggested_work": {
+    "archived": false,
+    "blocker": null,
+    "external_key": "SPEC-sdk-toolchain",
+    "freshness": "fresh",
+    "id": "01M605YSDSGT2VQQXJXQH59F49",
+    "milestone": "VERSION-v0.1",
+    "next_action": "等待用户确认最新19/19测试报告及原收尾方案：AWR仅按当前Spec处理未来规划依赖的范围例外、两条经验写入、原位归档、提交/推送并创建向dev的PR；合并仍需另行授权。",
+    "ordinary_completion": null,
+    "ordinary_work_policy": null,
+    "owner": null,
+    "priority": "P0",
+    "raw_status": "in_progress",
+    "revision": 19,
+    "source_ref": {
+      "end_line": null,
+      "locator": "file:///%PROJECT_ROOT%/work-ledger.yaml",
+      "pointer": "/work_items/1",
+      "section_fingerprint": "sha256:97e9fe1ce3cc2558a6ec59296c5aab2cfc2e75edb98eec472a71071e8563ca0a",
+      "source_fingerprint": "sha256:116d255495ba4d8ef524d3cb93edd2b8d10fcfd49a21728b8336ed8154622c9a",
+      "source_id": "01M6053F99TPKH9CTXQRXRM8EC",
+      "source_revision": 24,
+      "start_line": null
+    },
+    "source_revision": 24,
+    "status": "in_progress",
+    "summary": "本次新增 Android SDK、两个AVD、配置、下载及项目npm缓存已迁入E:\\Dev\\Artemis；原C盘副本清除。迁移后离线APK构建及签名、两个模拟器安装/页面/JNI、12项配置与缓存检查和20项服务测试通过。已有JDK与ADB身份保留，未执行原收尾动作。",
+    "title": "SDK 与工具链可行性"
+  },
+  "total": 5
+}

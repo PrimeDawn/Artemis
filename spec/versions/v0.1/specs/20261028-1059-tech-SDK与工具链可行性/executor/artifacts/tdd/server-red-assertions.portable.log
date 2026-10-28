@@ -1,0 +1,124 @@
+=== server-red-assertions Run ===
+Command: powershell -NoProfile -Command "npm.cmd --prefix receiver test; exit $LASTEXITCODE"
+Timestamp: 2026-10-28T05:54:31.572552+00:00
+
+> @artemis/receiver@0.1.0-dev test
+> npm run build && node --test dist/test/*.test.js
+
+
+> @artemis/receiver@0.1.0-dev build
+> tsc -p tsconfig.json
+
+✔ PORT is 3000 only when the value is absent (1.7603ms)
+✔ accept decimal port 0 (0.1248ms)
+✔ accept decimal port 3000 (0.0741ms)
+✔ accept decimal port 65535 (0.0503ms)
+✔ accept decimal port 00080 (0.0686ms)
+✔ reject port "" without fallback (0.3419ms)
+✔ reject port "-1" without fallback (0.087ms)
+✔ reject port "65536" without fallback (0.0578ms)
+✔ reject port "abc" without fallback (0.0761ms)
+✔ reject port "1.5" without fallback (0.0988ms)
+✔ reject port " 3000" without fallback (0.0607ms)
+✔ reject port "3000 " without fallback (0.0671ms)
+✔ reject port "+80" without fallback (0.0473ms)
+✔ reject port "0x50" without fallback (0.0349ms)
+✔ reject port "1e3" without fallback (0.0344ms)
+✔ reject port "NaN" without fallback (0.0505ms)
+✔ reject port "999999999999999999999" without fallback (0.0737ms)
+✖ public server API serves the exact health contract and route boundaries (0.9315ms)
+✖ public close is concurrent-safe and releases the listening port (0.1438ms)
+✖ startup rejects with the original EADDRINUSE code (0.1515ms)
+ℹ tests 20
+ℹ suites 0
+ℹ pass 17
+ℹ fail 3
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 91.0661
+
+✖ failing tests:
+
+test at dist\test\server.test.js:10:1
+✖ public server API serves the exact health contract and route boundaries (0.9315ms)
+  AssertionError [ERR_ASSERTION]: Got unwanted rejection.
+  Actual message: "Receiver startup is not implemented"
+      at async openReceiver (file:///%PROJECT_ROOT%/receiver/dist/test/server.test.js:6:5)
+      at async TestContext.<anonymous> (file:///%PROJECT_ROOT%/receiver/dist/test/server.test.js:11:21)
+      at async Test.run (node:internal/test_runner/test:1332:7)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:385:3) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: Error: Receiver startup is not implemented
+        at startReceiver (file:///%PROJECT_ROOT%/receiver/dist/src/server.js:6:11)
+        at file:///%PROJECT_ROOT%/receiver/dist/test/server.test.js:6:61
+        at waitForActual (node:assert:632:21)
+        at strict.doesNotReject (node:assert:789:39)
+        at openReceiver (file:///%PROJECT_ROOT%/receiver/dist/test/server.test.js:6:18)
+        at TestContext.<anonymous> (file:///%PROJECT_ROOT%/receiver/dist/test/server.test.js:11:27)
+        at Test.runInAsyncScope (node:async_hooks:227:14)
+        at Test.run (node:internal/test_runner/test:1325:25)
+        at Test.start (node:internal/test_runner/test:1191:17)
+        at startSubtestAfterBootstrap (node:internal/test_runner/harness:385:17),
+    expected: undefined,
+    operator: 'doesNotReject',
+    diff: 'simple'
+  }
+
+test at dist\test\server.test.js:34:1
+✖ public close is concurrent-safe and releases the listening port (0.1438ms)
+  AssertionError [ERR_ASSERTION]: Got unwanted rejection.
+  Actual message: "Receiver startup is not implemented"
+      at async openReceiver (file:///%PROJECT_ROOT%/receiver/dist/test/server.test.js:6:5)
+      at async TestContext.<anonymous> (file:///%PROJECT_ROOT%/receiver/dist/test/server.test.js:35:19)
+      at async Test.run (node:internal/test_runner/test:1332:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:911:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: Error: Receiver startup is not implemented
+        at startReceiver (file:///%PROJECT_ROOT%/receiver/dist/src/server.js:6:11)
+        at file:///%PROJECT_ROOT%/receiver/dist/test/server.test.js:6:61
+        at waitForActual (node:assert:632:21)
+        at strict.doesNotReject (node:assert:789:39)
+        at openReceiver (file:///%PROJECT_ROOT%/receiver/dist/test/server.test.js:6:18)
+        at TestContext.<anonymous> (file:///%PROJECT_ROOT%/receiver/dist/test/server.test.js:35:25)
+        at Test.runInAsyncScope (node:async_hooks:227:14)
+        at Test.run (node:internal/test_runner/test:1325:25)
+        at Test.processPendingSubtests (node:internal/test_runner/test:911:18)
+        at Test.postRun (node:internal/test_runner/test:1465:19),
+    expected: undefined,
+    operator: 'doesNotReject',
+    diff: 'simple'
+  }
+
+test at dist\test\server.test.js:41:1
+✖ startup rejects with the original EADDRINUSE code (0.1515ms)
+  AssertionError [ERR_ASSERTION]: Got unwanted rejection.
+  Actual message: "Receiver startup is not implemented"
+      at async openReceiver (file:///%PROJECT_ROOT%/receiver/dist/test/server.test.js:6:5)
+      at async TestContext.<anonymous> (file:///%PROJECT_ROOT%/receiver/dist/test/server.test.js:42:19)
+      at async Test.run (node:internal/test_runner/test:1332:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:911:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: Error: Receiver startup is not implemented
+        at startReceiver (file:///%PROJECT_ROOT%/receiver/dist/src/server.js:6:11)
+        at file:///%PROJECT_ROOT%/receiver/dist/test/server.test.js:6:61
+        at waitForActual (node:assert:632:21)
+        at strict.doesNotReject (node:assert:789:39)
+        at openReceiver (file:///%PROJECT_ROOT%/receiver/dist/test/server.test.js:6:18)
+        at TestContext.<anonymous> (file:///%PROJECT_ROOT%/receiver/dist/test/server.test.js:42:25)
+        at Test.runInAsyncScope (node:async_hooks:227:14)
+        at Test.run (node:internal/test_runner/test:1325:25)
+        at Test.processPendingSubtests (node:internal/test_runner/test:911:18)
+        at Test.postRun (node:internal/test_runner/test:1465:19),
+    expected: undefined,
+    operator: 'doesNotReject',
+    diff: 'simple'
+  }
+
+--- stderr ---
+
+Exit code: 1
+Finished: 2026-10-28T05:54:34.572024+00:00

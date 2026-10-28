@@ -1,0 +1,8 @@
+Command: %USERPROFILE%\AppData\Local\Android\Sdk\platform-tools\adb.exe -d shell getprop ro.build.version.release
+Timestamp: 2026-10-28T10:14:09.854115+00:00
+16
+
+--- stderr ---
+
+Exit code: 0
+Finished: 2026-10-28T10:14:09.928494+00:00

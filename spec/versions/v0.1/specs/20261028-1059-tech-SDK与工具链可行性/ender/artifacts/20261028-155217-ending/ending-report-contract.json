@@ -1,0 +1,14 @@
+{
+  "command": "python .cache/check-ending-delivery.py",
+  "startedAt": "2026-10-28T08:00:33.842210+00:00",
+  "finishedAt": "2026-10-28T08:00:34.438090+00:00",
+  "exitCode": 0,
+  "expectedExitCode": 0,
+  "durationSeconds": 0.607,
+  "stdoutSha256": "279bced4c937e2b92062233c0ff7368f033336189bcbbc830a6461c784a10219",
+  "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "log": "ending-report-contract.log",
+  "redactions": [
+    "personal user-root path"
+  ]
+}

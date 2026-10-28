@@ -1,0 +1,14 @@
+=== preflight-selected-root Run ===
+Command: powershell -NoProfile -File scripts/verify-toolchain.ps1 -ReportPath spec/versions/v0.1/specs/20261028-1059-tech-SDK与工具链可行性/tester/artifacts/test-logs/20261028-195438-relocation/environment/preflight.json
+Timestamp: 2026-10-28T12:06:49.245688+00:00
+jdk17: pass
+node24: pass
+platform-api36: pass
+build-tools36: pass
+platform-tools: pass
+cli-tools19: pass
+
+--- stderr ---
+
+Exit code: 0
+Finished: 2026-10-28T12:06:50.091154+00:00

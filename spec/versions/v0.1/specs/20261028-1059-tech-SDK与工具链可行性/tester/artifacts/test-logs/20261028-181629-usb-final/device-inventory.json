@@ -1,0 +1,14 @@
+{
+  "command": "E:\\Dev\\miniconda\\python.exe tests/android-device-probe.py --sdk-root %USERPROFILE%\\AppData\\Local\\Android\\Sdk --report-dir spec/versions/v0.1/specs/20261028-1059-tech-SDK\u4e0e\u5de5\u5177\u94fe\u53ef\u884c\u6027/tester/artifacts/test-logs/20261028-181629-usb-final/device",
+  "startedAt": "2026-10-28T10:17:30.844065+00:00",
+  "finishedAt": "2026-10-28T10:17:31.270340+00:00",
+  "exitCode": 0,
+  "expectedExitCode": 0,
+  "durationSeconds": 0.427,
+  "stdoutSha256": "fa423b06f65f2f0e635a19e2ad284daa4f6c39d87e6123b540805757176ed202",
+  "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "log": "device-inventory.log",
+  "redactions": [
+    "personal user-root path"
+  ]
+}

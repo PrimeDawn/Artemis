@@ -1,0 +1,99 @@
+{
+  "coordinate": "io.github.webrtc-sdk:android:150.7871.01",
+  "aar_url": "https://repo.maven.apache.org/maven2/io/github/webrtc-sdk/android/150.7871.01/android-150.7871.01.aar",
+  "aar_bytes": 49147033,
+  "aar_sha256": "0a1627b1a48c2bc17d9a40d62fc47bd45166f44a311e95917f147c402de379b0",
+  "native_libraries": [
+    {
+      "path": "jni/armeabi-v7a/libjingle_peerconnection_so.so",
+      "bits": 32,
+      "size": 6809404,
+      "sha256": "762f3d5e1c4c69c3f02f2383540f40e1142cb631e9d99e86bdb1602f4c277559",
+      "load_alignments": [
+        4096,
+        4096,
+        4096
+      ],
+      "load_alignment_at_least_16kb": false
+    },
+    {
+      "path": "jni/arm64-v8a/libjingle_peerconnection_so.so",
+      "bits": 64,
+      "size": 12287312,
+      "sha256": "7b299113fcd743de7dc5559686b21fc2681b2c8598347d8dc0743d2e004995ca",
+      "load_alignments": [
+        16384,
+        16384,
+        16384
+      ],
+      "load_alignment_at_least_16kb": true
+    },
+    {
+      "path": "jni/x86_64/libjingle_peerconnection_so.so",
+      "bits": 64,
+      "size": 16166352,
+      "sha256": "0717afcc43da0c1aabd904f9ef0653efc8f3d37b5750f39a123697e7910b623a",
+      "load_alignments": [
+        16384,
+        16384,
+        16384
+      ],
+      "load_alignment_at_least_16kb": true
+    },
+    {
+      "path": "jni/x86/libjingle_peerconnection_so.so",
+      "bits": 32,
+      "size": 12818648,
+      "sha256": "80e7b1b7e07bb5a53841a8cacabf942a6f3eb8ee9759a1731741dd912f367f19",
+      "load_alignments": [
+        4096,
+        4096,
+        4096
+      ],
+      "load_alignment_at_least_16kb": false
+    }
+  ],
+  "sdk_classes": {
+    "org/webrtc/PeerConnectionFactory.class": true,
+    "org/webrtc/Camera2Enumerator.class": true,
+    "org/webrtc/audio/JavaAudioDeviceModule.class": true
+  },
+  "manifest_text": null,
+  "manifest_is_binary": false,
+  "pom": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<project xsi:schemaLocation=\"http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd\" xmlns=\"http://maven.apache.org/POM/4.0.0\"\n    xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\">\n  <modelVersion>4.0.0</modelVersion>\n  <groupId>io.github.webrtc-sdk</groupId>\n  <artifactId>android</artifactId>\n  <version>150.7871.01</version>\n  <packaging>aar</packaging>\n  <name>WebRTC Android SDK</name>\n  <description>WebRTC Android SDK</description>\n  <url>https://github.com/webrtc-sdk/android</url>\n  <licenses>\n    <license>\n      <name>The 3-Clause BSD License</name>\n      <url>https://opensource.org/license/bsd-3-clause/</url>\n      <distribution>repo</distribution>\n    </license>\n  </licenses>\n  <developers>\n    <developer>\n      <id>webrtc-sdk</id>\n      <name>webrtc-sdk</name>\n    </developer>\n  </developers>\n  <scm>\n    <connection>scm:git:git://github.com/webrtc-sdk/android.git</connection>\n    <developerConnection>scm:git:ssh://git@github.com/webrtc-sdk/android.git</developerConnection>\n    <url>https://github.com/webrtc-sdk/android</url>\n  </scm>\n</project>\n",
+  "limitations": [
+    "ELF PT_LOAD alignment was inspected inside the AAR only. Final APK ZIP alignment, native initialization and actual 16KB-device behavior remain unverified.",
+    "The repository MIT license does not replace WebRTC and bundled third-party notices."
+  ],
+  "typescript_latest": {
+    "version": "7.0.2",
+    "engines": {
+      "node": ">=16.20.0"
+    },
+    "license": "Apache-2.0",
+    "url": "https://registry.npmjs.org/typescript/latest"
+  },
+  "types_node_24_10_1": {
+    "version": "24.10.1",
+    "engines": null,
+    "license": "MIT",
+    "url": "https://registry.npmjs.org/@types%2fnode/24.10.1"
+  },
+  "compose_bom": {
+    "available": true,
+    "url": "https://dl.google.com/dl/android/maven2/androidx/compose/compose-bom/2025.10.01/compose-bom-2025.10.01.pom",
+    "sha256": "7bfbf7a73afedae434570d97f6b78aa1e13df779009a81577baea7c434ab09da"
+  },
+  "activity_compose": {
+    "available": true,
+    "url": "https://dl.google.com/dl/android/maven2/androidx/activity/activity-compose/1.11.0/activity-compose-1.11.0.pom",
+    "sha256": "d4156a6498962c42bd7eb389ccd3f7e0036da5f7add2c84adcfbcb594ad2670b"
+  },
+  "kotlin_plugin": {
+    "available": true,
+    "url": "https://repo.maven.apache.org/maven2/org/jetbrains/kotlin/kotlin-gradle-plugin/2.3.10/kotlin-gradle-plugin-2.3.10.pom",
+    "sha256": "e5f98d709772fefdd758fd0a39c4f7c759f2f0171d1aa0cc0cc2b9f0bb6fe395"
+  },
+  "manifest_min_sdk": 21,
+  "manifest_target_sdk": 23
+}

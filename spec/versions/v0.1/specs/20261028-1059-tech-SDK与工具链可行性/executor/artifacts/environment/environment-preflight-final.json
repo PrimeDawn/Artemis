@@ -1,0 +1,14 @@
+{
+  "command": "powershell -NoProfile -File scripts/verify-toolchain.ps1 -SdkRoot %USERPROFILE%/AppData/Local/Android/Sdk -ReportPath spec/versions/v0.1/specs/20261028-1059-tech-SDK\u4e0e\u5de5\u5177\u94fe\u53ef\u884c\u6027/executor/artifacts/environment/preflight-final.json",
+  "startedAt": "2026-10-28T06:19:59.869933+00:00",
+  "finishedAt": "2026-10-28T06:20:00.582409+00:00",
+  "exitCode": 0,
+  "expectedExitCode": 0,
+  "durationSeconds": 0.713,
+  "stdoutSha256": "682021ba538fc1dfc08e306f3f60dfd79a521797d48de572fc7f0551c6b7fa10",
+  "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "log": "environment-preflight-final.log",
+  "redactions": [
+    "personal user-root path"
+  ]
+}

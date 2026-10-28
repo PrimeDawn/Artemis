@@ -1,6 +1,6 @@
 ---
 version: v0.1
-status: 规划中
+status: 执行中
 created: 2026-10-28
 updated: 2026-10-28
 target_freeze_date: 待定
@@ -17,17 +17,17 @@ scope_confirmation: 用户已于2026-10-28确认v0.1规划
 
 验证 Artemis 的核心技术路线：在可信局域网内，让 Galaxy S24 / Android 16 的摄像头与内置麦克风通过 WebRTC 同步传入 Windows 上的 OBS 浏览器源，并形成可复现的实验原型和选型证据。
 
-本版本对应产品规划 M0 技术预研。为验证所需建立的最小安卓端、PC 信令服务和接收页属于研究原型；完整产品基础工程、成熟交互和面向普通用户的分发仍属于后续版本。当前没有业务代码、真机记录或音视频验收结论。
+本版本对应产品规划 M0 技术预研。为验证所需建立的最小安卓端、PC 信令服务和接收页属于研究原型；完整产品基础工程、成熟交互和面向普通用户的分发仍属于后续版本。当前已交付最小工具链工程，已记录手机、Android10和16KB模拟器的安装与JNI结果；音视频链路尚未实现。
 
 来源：[产品规划](../../../产品规划.md) 的第 3、4、7、8 节；[版本规划报告](plan.html)。
 
 ## 2. 规划 Spec 清单
 
-以下是稳定的规划标识。实际 Spec 目录由 spec-start 启动时按时间戳创建；本次不预建角色目录或启动实现。
+以下是稳定的规划标识。实际 Spec 目录由 spec-start 启动时按时间戳创建；SDK 与工具链 Spec 当前计划19项全部实测通过，覆盖手机、Android10和16KB模拟器；首个Spec按用户继续剩余流程的授权原位归档，后续三项仍按原依赖启动。
 
 | 规划标识 | 属性 | 标题 / 目标 | 负责人 | 状态 | 依赖前置 |
 |---|---|---|---|---|---|
-| SPEC-sdk-toolchain | tech | 验证 WebRTC SDK 来源、许可证、ABI 与工具链，建立可复现构建入口 | 待 spec-start 分配 | 未启动 | 无 |
+| SPEC-sdk-toolchain | tech | [SDK 与工具链可行性](specs/20261028-1059-tech-SDK与工具链可行性/lead/team-context.md) | TeamLead（按角色协议串行执行） | done·已原位归档 | 无 |
 | SPEC-offline-pairing | tech | 验证无公网依赖的配对、信令与证书信任方案 | 待 spec-start 分配 | 未启动 | SPEC-sdk-toolchain |
 | SPEC-media-obs | tech | 打通安卓摄像头和内置麦克风到 OBS 的最小 WebRTC 链路 | 待 spec-start 分配 | 未启动 | SPEC-sdk-toolchain、SPEC-offline-pairing |
 | SPEC-validation-baseline | tech | 真机实测、风险结论和实验原型复现交付 | 待 spec-start 分配 | 未启动 | SPEC-media-obs |
@@ -70,7 +70,7 @@ scope_confirmation: 用户已于2026-10-28确认v0.1规划
 
 | 编号 | 风险 / 外部依赖 | 当前状态 | 应对与阻断条件 |
 |---|---|---|---|
-| R-01 | WebRTC SDK 来源、许可证及二进制兼容性 | 未验证 | 首个 Spec 实测选型；来源或许可证不清晰时不进入链路实现 |
+| R-01 | WebRTC SDK 来源、许可证及二进制兼容性 | 来源、可重复构建、APK静态检查及三环境安装/JNI已验证；媒体兼容由后续Spec验收 | 首个 Spec 实测选型；来源或许可证不清晰时不进入链路实现 |
 | R-02 | S24、Windows 与 OBS 的实际可用性及版本 | 待验证环境盘点 | 缺设备可继续文档和构建检查，不能完成真机验收 |
 | R-03 | OBS 内核的编码协商和音频路由 | 未验证 | 固定 OBS 版本，录制回看确认音视频；记录 H.264 / VP8 结果 |
 | R-04 | 局域网候选直连、隔离与防火墙 | 未验证 | 记录网络拓扑，断公网复测；不静默引入公网中继 |
@@ -94,6 +94,7 @@ scope_confirmation: 用户已于2026-10-28确认v0.1规划
 |---|---|---|---|---|
 | 2026-10-28 | 初始规划 | 4 个 tech Spec | 用户明确要求“好，那按照v0.1开始新版本”；沿用已讨论的最小链路技术预研目标，细化范围待本次计划审阅 | user（版本号与里程碑目标） |
 | 2026-10-28 | 规划确认 | 4 个 tech Spec 及研究验收门槛 | 用户明确选择“确认 v0.1 规划”；冻结和发布日期待定，业务实现另行通过 spec-start 启动 | user |
+| 2026-10-28 | 启动首个Spec | SPEC-sdk-toolchain | 用户明确要求“开启首个spec吧”，并选择逐阶段确认；实现仍待gate-2放行 | user |
 
 ## 7. 决策记录
 
@@ -103,17 +104,38 @@ scope_confirmation: 用户已于2026-10-28确认v0.1规划
 | D-002 | 整期产品一次交付或先完成 M0 | 本版本只验证 M0 最小链路 | 产品规划第 8 节；此前说明的首版定位为技术预研，完整一期验收不变 | TeamLead（按既定目标细化，待审阅） |
 | D-003 | 在 YAML 中使用未知 work_groups 字段或官方 milestone 关系 | 使用 milestone 分组与 part_of 关系 | AWR 0.6 yaml-ledger-v1 官方契约支持 milestones 和 work.milestone；不变更源适配器 | TeamLead |
 | D-004 | 确认当前规划或先调整范围 | 确认当前 v0.1 规划 | 用户本轮明确确认 4 个技术 Spec 的范围及顺序；未授权自动启动业务实现 | user |
+| D-005 | 继续仅规划或启动首个SDK/工具链Spec | 首个Spec进入探索，版本转执行中 | 用户明确要求开启首个Spec，并选择gated + serial；Git基线dev，具体分支和句柄见Spec账本 | user |
 
 ## 8. AWR 映射与接续
 
 - 版本目标键：goal#artemis-v0.1（GOALS.md）。
 - 版本工作组：milestone VERSION-v0.1；4 个工作项使用同名稳定 Spec 标识及 milestone 关系，依赖保存在 work-ledger.yaml。
-- AWR 为上述权威文本建立投影；work status 为 planned，未认领且尚未启动；ready 不替代 R&K 门禁。
-- 本次规划沿用接入工作项 ARTEMIS-INTAKE-001，会话句柄记录在本地 .awr/ 下；业务 Spec 仍未启动。
-- 下一步：审阅 plan.html 后，通过 spec-start 启动 SPEC-sdk-toolchain，确定实现与测试方案。
+- AWR 为上述权威文本建立投影；SPEC-sdk-toolchain为in_progress，另外3项仍为planned；ready不替代R&K门禁。
+- ARTEMIS-INTAKE-001已完成规划接入；首个Spec的工作分支、运行路径和句柄保存在对应lead/team-context.md。
+- 下一步：审阅首个Spec的收尾报告、两条经验草稿与AWR全局检查范围处置；确认后才原位归档及提交/推送/PR。
 
 ## 9. 文档关联
 
+- 用户于2026-10-28决定将TC-D1安装/JNI、TC-D2 Android10、TC-D3 16KB运行留待后续补测，日期待定；状态保持未实测。详细条件、通过标准与接续点见[延期补测清单](../../../docs/validation-followups.md)。此记录不变更v0.1原验收边界。
+
 - 本账本引用并被引用：[版本规划报告](plan.html)。
 - 依据：[产品规划](../../../产品规划.md)、[项目目标](../../../GOALS.md)、[工作台账](../../../work-ledger.yaml)。
-- 后续 Spec 报告、发布报告与复盘尚未创建；创建时在两侧补齐关联。
+- 首个Spec：[探索报告](specs/20261028-1059-tech-SDK与工具链可行性/explorer/exploration-report.html)、[实现计划](specs/20261028-1059-tech-SDK与工具链可行性/writer/plan.html)、[测试计划](specs/20261028-1059-tech-SDK与工具链可行性/tester/test-plan.html)；其余Spec、发布与复盘报告尚未创建。
+
+- 实施阶段新增：[实现总结](specs/20261028-1059-tech-SDK与工具链可行性/executor/summary.html)，两次APK构建及29项聚焦测试通过，独立测试报告已形成并确认。
+
+- [独立测试报告](specs/20261028-1059-tech-SDK与工具链可行性/tester/test-report.html)：本轮16项必测通过、无产品失败，3项设备延期未实测；gate-4已由用户明确继续流程放行。
+
+- [首个Spec收尾报告](specs/20261028-1059-tech-SDK与工具链可行性/ender/end-report.html)：本轮16项必测复测通过；归档及经验写入待确认。AWR全局检查6项均为后续规划Spec的未完成依赖，范围处置待确认，未修改依赖或完工状态。
+
+## USB补测阶段记录（历史）
+
+- 用户连接USB手机并授权调试后，TC-D1在SM-S9210 / Android16 / arm64-v8a / 4096字节页面环境完成安装、验证页、截图及JNI测试；完整复核17项通过，0项最终失败。
+- TC-D2 Android10和TC-D3 16KB运行因所连手机系统/页面大小不符仍未实测，本机尚无对应模拟器与镜像。清单已更新为DEVICE-001完成、DEVICE-002/003待测。
+- 最新测试报告待确认；此前AWR全局范围例外、经验写入及归档/提交/推送/PR尚未批准。
+
+## 最新模拟器补测：19项全部通过
+
+- 原TC-D2/D3已由官方Android10和16KB镜像完成。三环境同APK绑定有效，19通过、0失败、0未测；此前环境缺失记录为阶段历史。
+- 模拟器实际自检WHPX可用，未更改Windows功能或重启。两个AVD在测试后均退出0。
+- 最新测试报告及原收尾方案仍待确认；未批准归档、经验写入、提交/推送/PR或AWR范围例外。

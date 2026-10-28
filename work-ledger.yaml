@@ -19,7 +19,7 @@ work_items:
   - id: SPEC-sdk-toolchain
     kind: tech
     title: SDK 与工具链可行性
-    status: planned
+    status: completed
     goal: "goal#artemis-v0.1"
     milestone: VERSION-v0.1
     priority: P0
@@ -29,12 +29,24 @@ work_items:
       - 记录可核验的WebRTC SDK来源、版本、许可证、ABI和Android版本兼容结论。
       - 按文档可重复构建最小APK并启动PC实验服务，保留命令、环境和结果。
       - 核验Android原生库页面大小要求，明确未完成的真机验证和阻断。
-    next_action: 通过spec-start建立SDK与工具链Spec，完成探索、设计和测试计划确认。
-    summary: v0.1技术预研规划项，尚未启动Spec或业务实现。
+    next_action: "审阅PR #1并由用户决定合入dev；后续按spec-start启动离线配对与信令Spec。"
+    summary: "首个SDK工具链Spec已交付并原位归档：19项验收覆盖，迁移后16必测新鲜通过；真实实现提交与三环境同APK证据已核对，经验和项目偏好已维护，PR #1已创建。"
     tags: [v0.1, tech, m0]
     paths:
+      - spec/versions/v0.1/specs/20261028-1059-tech-SDK与工具链可行性/lead/team-context.md
+      - spec/versions/v0.1/specs/20261028-1059-tech-SDK与工具链可行性/explorer/exploration-report.html
+      - spec/versions/v0.1/specs/20261028-1059-tech-SDK与工具链可行性/writer/plan.html
+      - spec/versions/v0.1/specs/20261028-1059-tech-SDK与工具链可行性/tester/test-plan.html
+      - spec/versions/v0.1/specs/20261028-1059-tech-SDK与工具链可行性/executor/summary.html
+      - spec/versions/v0.1/specs/20261028-1059-tech-SDK与工具链可行性/tester/test-report.html
+      - docs/validation-followups.md
+      - docs/android-compatibility-testing.md
+      - tests/collect-runtime-matrix.py
       - spec/versions/v0.1/version-context.md
       - spec/versions/v0.1/plan.html
+
+    evidence: ["spec/versions/v0.1/specs/20261028-1059-tech-SDK与工具链可行性/tester/test-report.html","spec/versions/v0.1/specs/20261028-1059-tech-SDK与工具链可行性/tester/artifacts/test-logs/20261028-203139-closeout/committed-completion-report.json"]
+    "verification": {"evidence_level":"locally_verified"}
 
   - id: SPEC-offline-pairing
     kind: tech
@@ -94,18 +106,19 @@ work_items:
       - 连续推流至少10分钟并重复启停至少3次，保留结果及异常记录。
       - 实测延迟与音画偏差并对照300ms和150ms产品目标，超标项明确处置，不记为达标。
       - 提供可复现实验APK、PC启动步骤、依赖许可证和研究结论；不替代全部一期验收。
-    next_action: 链路Spec完成后，通过spec-start制定真机验证和实验原型交付方案。
+    next_action: 链路Spec完成后，通过spec-start制定真机验证和实验原型交付方案；启动时复核docs/validation-followups.md中的延期设备项，具备对应环境时补测。
     summary: v0.1技术预研规划项，尚未启动Spec或业务实现。
     tags: [v0.1, tech, m0]
     paths:
       - spec/versions/v0.1/version-context.md
       - spec/versions/v0.1/plan.html
+      - docs/validation-followups.md
 
 milestones:
   - id: VERSION-v0.1
     title: v0.1 最小音视频链路技术预研
-    status: planned
-    summary: 对应版本运行账本的规划中状态，以v0.1文档为版本状态权威来源。
+    status: in_progress
+    summary: 首个SDK与工具链Spec执行中，其余3项尚未启动，以v0.1文档为版本状态权威来源。
     scope: SDK与工具链、离线配对信令、手机到OBS链路、真机验证和实验原型复现交付。
     acceptance:
       - 四个入版技术Spec均完成并保留真实验证证据。

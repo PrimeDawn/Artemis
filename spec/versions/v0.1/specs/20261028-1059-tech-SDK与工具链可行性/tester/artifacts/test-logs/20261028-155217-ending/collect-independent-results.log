@@ -1,0 +1,9 @@
+=== collect-independent-results Run ===
+Command: E:\Dev\miniconda\python.exe tests/collect-sdk-results.py --run-dir spec/versions/v0.1/specs/20261028-1059-tech-SDK与工具链可行性/tester/artifacts/test-logs/20261028-155217-ending
+Timestamp: 2026-10-28T07:53:18.575122+00:00
+{"requiredPassed": 16, "requiredTotal": 16, "notRun": 3, "passedRequired": true, "snapshotSha256": "fefd3d8435cbf27339680fbb57e9105bd54ee039915958bc10a4be28c260d352", "productionChanges": []}
+
+--- stderr ---
+
+Exit code: 0
+Finished: 2026-10-28T07:53:19.316227+00:00

@@ -1,0 +1,12 @@
+{
+  "apiRequired": 36,
+  "pageSizeRequired": 16384,
+  "avd": "artemis_api36_16k",
+  "startedAt": "2026-10-28T12:11:42.174878+00:00",
+  "status": "fail",
+  "bootCompletedAt": "2026-10-28T12:12:13.111964+00:00",
+  "runtimeExitCode": 1,
+  "error": "{\"startedAt\": \"2026-10-28T12:12:15.729655+00:00\", \"device\": {\"id\": \"emulator-device-1\", \"kind\": \"emulator\", \"manufacturer\": \"Google\", \"model\": \"sdk_gphone16k_x86_64\", \"android\": \"16\", \"api\": \"36\", \"abi\": \"x86_64\", \"pageSize\": \"16384\"}, \"cases\": [], \"scope\": \"The current built APK on one authorized device; no other system version is inferred.\", \"artifacts\": [{\"path\": \"android/app/build/outputs/apk/debug/app-debug.apk\", \"bytes\": 74654500, \"sha256\": \"c57bc1be8329a9fc50d1258b43a0cf78d0451be78be37c0388bf684a01f8816a\"}, {\"path\": \"android/app/build/outputs/apk/androidTest/debug/app-debug-androidTest.apk\", \"bytes\": 813165, \"sha256\": \"0a309ae74a4a68a8c31320e4d63f62164e735083b86c73ec98dd36cc945b5d65\"}], \"installation\": \"Both APKs installed in this run\", \"jniPassed\": true, \"status\": \"fail\", \"error\": \"AssertionError: Expected Artemis UI text absent: Artemis\", \"finishedAt\": \"2026-10-28T12:12:43.875652+00:00\"}\r\n",
+  "emulatorExitCode": 0,
+  "finishedAt": "2026-10-28T12:12:45.844243+00:00"
+}

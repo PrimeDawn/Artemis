@@ -1,0 +1,14 @@
+{
+  "command": "%PROJECT_ROOT%\\android\\gradlew.bat -p android --offline --no-daemon --console=plain :app:signingReport",
+  "startedAt": "2026-10-28T12:07:18.988755+00:00",
+  "finishedAt": "2026-10-28T12:07:29.403998+00:00",
+  "exitCode": 0,
+  "expectedExitCode": 0,
+  "durationSeconds": 10.416,
+  "stdoutSha256": "eb68b0cf58a999777fc1ddf225a6cbcfc1d7f0dfe86a04d2e23a9ac1b5aa0334",
+  "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "log": "signing-location-final.log",
+  "redactions": [
+    "personal user-root path"
+  ]
+}

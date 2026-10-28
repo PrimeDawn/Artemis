@@ -1,0 +1,8 @@
+Command: %USERPROFILE%\AppData\Local\Android\Sdk\platform-tools\adb.exe -d shell uiautomator dump /data/local/tmp/artemis-sdk-ui.xml
+Timestamp: 2026-10-28T10:08:09.205029+00:00
+UI hierchary dumped to: /data/local/tmp/artemis-sdk-ui.xml
+
+--- stderr ---
+
+Exit code: 0
+Finished: 2026-10-28T10:08:11.389844+00:00

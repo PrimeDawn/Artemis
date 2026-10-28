@@ -1,0 +1,10 @@
+=== signing-location Run ===
+Command: android/gradlew.bat -p android --offline --no-daemon --console=plain :app:signingReport
+Timestamp: 2026-10-28T12:06:50.985961+00:00
+
+--- stderr ---
+'android' is not recognized as an internal or external command,
+operable program or batch file.
+
+Exit code: 1
+Finished: 2026-10-28T12:06:51.050592+00:00

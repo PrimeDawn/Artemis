@@ -1,0 +1,14 @@
+{
+  "command": "powershell -NoProfile -File .cache/install-approved-sdk.ps1",
+  "startedAt": "2026-10-28T05:58:54.332866+00:00",
+  "finishedAt": "2026-10-28T05:59:33.861505+00:00",
+  "exitCode": 0,
+  "expectedExitCode": 0,
+  "durationSeconds": 39.529,
+  "stdoutSha256": "e54dd1a30db813aacbad5380d6daf0e45021592b144ae78e8c24e56b5ea22d60",
+  "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "log": "sdk-packages-install.log",
+  "redactions": [
+    "personal user-root path"
+  ]
+}

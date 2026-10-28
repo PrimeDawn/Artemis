@@ -1,0 +1,14 @@
+{
+  "command": "powershell -NoProfile -File .cache/gradle-build.ps1",
+  "startedAt": "2026-10-28T06:09:04.900689+00:00",
+  "finishedAt": "2026-10-28T06:09:30.531225+00:00",
+  "exitCode": 0,
+  "expectedExitCode": 0,
+  "durationSeconds": 25.631,
+  "stdoutSha256": "d97c18aadb0ad5bc746d7f2bd5745a3a90b4829a1ef8282e7faf37eaf96330b4",
+  "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "log": "android-clean-build-2.log",
+  "redactions": [
+    "personal user-root path"
+  ]
+}

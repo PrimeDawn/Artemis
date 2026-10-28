@@ -1,0 +1,21 @@
+[
+  {
+    "status": "pass",
+    "transport": "GenerateConsoleCtrlEvent(CTRL_C_EVENT, 0)",
+    "stdout": [
+      "{\"event\":\"receiver_started\",\"host\":\"127.0.0.1\",\"port\":62868}",
+      "{\"event\":\"receiver_stopped\"}"
+    ],
+    "stderr": [],
+    "forcedCleanup": false,
+    "started": {
+      "event": "receiver_started",
+      "host": "127.0.0.1",
+      "port": 62868
+    },
+    "signalSenderExitCode": 0,
+    "childExitCode": 0,
+    "stoppedEvent": true,
+    "portRebindPassed": true
+  }
+]

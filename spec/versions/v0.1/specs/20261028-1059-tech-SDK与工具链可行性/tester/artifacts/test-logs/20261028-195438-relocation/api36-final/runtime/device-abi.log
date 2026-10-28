@@ -1,0 +1,8 @@
+Command: E:\Dev\Artemis\Android\Sdk\platform-tools\adb.exe -e shell getprop ro.product.cpu.abi
+Timestamp: 2026-10-28T12:12:16.209096+00:00
+x86_64
+
+--- stderr ---
+
+Exit code: 0
+Finished: 2026-10-28T12:12:16.321384+00:00

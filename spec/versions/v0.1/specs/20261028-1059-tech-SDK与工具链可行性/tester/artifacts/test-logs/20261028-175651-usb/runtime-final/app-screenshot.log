@@ -1,0 +1,7 @@
+Command: %USERPROFILE%\AppData\Local\Android\Sdk\platform-tools\adb.exe -d exec-out screencap -p
+Timestamp: 2026-10-28T10:14:14.090034+00:00
+Binary output: 80288 bytes, SHA256 e42e29d8b6af150f392d99a58198ad6fc09ee319d63a2e0f3821a5e8066632b3
+--- stderr ---
+
+Exit code: 0
+Finished: 2026-10-28T10:14:14.396544+00:00

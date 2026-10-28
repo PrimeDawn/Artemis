@@ -1,0 +1,8 @@
+Command: %USERPROFILE%\AppData\Local\Android\Sdk\platform-tools\adb.exe -d shell pm path io.github.primedawn.artemis
+Timestamp: 2026-10-28T10:13:32.726808+00:00
+package:/data/app/~~ihQ1VGm6wi9-B8i3JbKOcQ==/io.github.primedawn.artemis-JV301zcWBp-EyOEV4omSFw==/base.apk
+
+--- stderr ---
+
+Exit code: 0
+Finished: 2026-10-28T10:13:32.847241+00:00

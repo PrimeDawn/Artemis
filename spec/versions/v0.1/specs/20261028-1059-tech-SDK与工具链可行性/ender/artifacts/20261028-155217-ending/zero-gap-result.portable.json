@@ -1,0 +1,134 @@
+{
+  "passed": false,
+  "blockingGaps": [
+    {
+      "action": "dependencies",
+      "code": "dependency_not_completed",
+      "detail": "required dependency has source status planned",
+      "source_refs": [
+        {
+          "end_line": null,
+          "locator": "file:///%PROJECT_ROOT%/work-ledger.yaml",
+          "pointer": "/work_items/3",
+          "section_fingerprint": "sha256:851ccbc293e7f52a3e09c28369e8c22c654eb27aec9b734e7b32d655f360dd13",
+          "source_fingerprint": "sha256:ed9188cfae82084cbb668b9b7433e55e71fab967fe4d0b14cf13e3083d2defe3",
+          "source_id": "01M6053F99TPKH9CTXQRXRM8EC",
+          "source_revision": 18,
+          "start_line": null
+        }
+      ],
+      "target": "SPEC-media-obs"
+    },
+    {
+      "action": "dependencies",
+      "code": "dependency_not_completed",
+      "detail": "required dependency has source status in_progress",
+      "source_refs": [
+        {
+          "end_line": null,
+          "locator": "file:///%PROJECT_ROOT%/work-ledger.yaml",
+          "pointer": "/work_items/3",
+          "section_fingerprint": "sha256:851ccbc293e7f52a3e09c28369e8c22c654eb27aec9b734e7b32d655f360dd13",
+          "source_fingerprint": "sha256:ed9188cfae82084cbb668b9b7433e55e71fab967fe4d0b14cf13e3083d2defe3",
+          "source_id": "01M6053F99TPKH9CTXQRXRM8EC",
+          "source_revision": 18,
+          "start_line": null
+        }
+      ],
+      "target": "SPEC-media-obs"
+    },
+    {
+      "action": "dependencies",
+      "code": "dependency_not_completed",
+      "detail": "required dependency has source status in_progress",
+      "source_refs": [
+        {
+          "end_line": null,
+          "locator": "file:///%PROJECT_ROOT%/work-ledger.yaml",
+          "pointer": "/work_items/2",
+          "section_fingerprint": "sha256:97b13e04172e89bd6cf0c9cb9f36dcef3305c7a835d6d3c969f517ebac927452",
+          "source_fingerprint": "sha256:ed9188cfae82084cbb668b9b7433e55e71fab967fe4d0b14cf13e3083d2defe3",
+          "source_id": "01M6053F99TPKH9CTXQRXRM8EC",
+          "source_revision": 18,
+          "start_line": null
+        }
+      ],
+      "target": "SPEC-offline-pairing"
+    },
+    {
+      "action": "dependencies",
+      "code": "dependency_not_completed",
+      "detail": "required dependency has source status planned",
+      "source_refs": [
+        {
+          "end_line": null,
+          "locator": "file:///%PROJECT_ROOT%/work-ledger.yaml",
+          "pointer": "/work_items/4",
+          "section_fingerprint": "sha256:abf00a35371ec3ccf72fc59d48c61627c8512d457f78b0e96221e9bb4fdd49f7",
+          "source_fingerprint": "sha256:ed9188cfae82084cbb668b9b7433e55e71fab967fe4d0b14cf13e3083d2defe3",
+          "source_id": "01M6053F99TPKH9CTXQRXRM8EC",
+          "source_revision": 18,
+          "start_line": null
+        }
+      ],
+      "target": "SPEC-validation-baseline"
+    },
+    {
+      "action": "dependencies",
+      "code": "dependency_not_completed",
+      "detail": "required dependency has source status planned",
+      "source_refs": [
+        {
+          "end_line": null,
+          "locator": "file:///%PROJECT_ROOT%/work-ledger.yaml",
+          "pointer": "/work_items/4",
+          "section_fingerprint": "sha256:abf00a35371ec3ccf72fc59d48c61627c8512d457f78b0e96221e9bb4fdd49f7",
+          "source_fingerprint": "sha256:ed9188cfae82084cbb668b9b7433e55e71fab967fe4d0b14cf13e3083d2defe3",
+          "source_id": "01M6053F99TPKH9CTXQRXRM8EC",
+          "source_revision": 18,
+          "start_line": null
+        }
+      ],
+      "target": "SPEC-validation-baseline"
+    },
+    {
+      "action": "dependencies",
+      "code": "dependency_not_completed",
+      "detail": "required dependency has source status in_progress",
+      "source_refs": [
+        {
+          "end_line": null,
+          "locator": "file:///%PROJECT_ROOT%/work-ledger.yaml",
+          "pointer": "/work_items/4",
+          "section_fingerprint": "sha256:abf00a35371ec3ccf72fc59d48c61627c8512d457f78b0e96221e9bb4fdd49f7",
+          "source_fingerprint": "sha256:ed9188cfae82084cbb668b9b7433e55e71fab967fe4d0b14cf13e3083d2defe3",
+          "source_id": "01M6053F99TPKH9CTXQRXRM8EC",
+          "source_revision": 18,
+          "start_line": null
+        }
+      ],
+      "target": "SPEC-validation-baseline"
+    }
+  ],
+  "ignoredGaps": [
+    {
+      "action": "evidence",
+      "code": "completion_not_checked",
+      "detail": "Not checked in this query: no explicit source SHA was supplied. This is neither a verification failure nor proof of completion. Inspect the original report and its recorded source version; never fill historical evidence with current HEAD.",
+      "source_refs": [
+        {
+          "end_line": null,
+          "locator": "file:///%PROJECT_ROOT%/work-ledger.yaml",
+          "pointer": "/work_items/0",
+          "section_fingerprint": "sha256:b76fc13ebeff76e6d59f5a4c9342e6bfa12c203cd02ffe3f0a11756fe57b941a",
+          "source_fingerprint": "sha256:ed9188cfae82084cbb668b9b7433e55e71fab967fe4d0b14cf13e3083d2defe3",
+          "source_id": "01M6053F99TPKH9CTXQRXRM8EC",
+          "source_revision": 18,
+          "start_line": null
+        }
+      ],
+      "target": "ARTEMIS-INTAKE-001"
+    }
+  ],
+  "sourceShaAudit": "Not final completion; implementation remains uncommitted pending gated approval."
+}

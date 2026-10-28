@@ -1,0 +1,28 @@
+=== usb-driver-observation Run ===
+Command: powershell -NoProfile -File .cache/pnp-usb-check.ps1
+Timestamp: 2026-10-28T10:02:25.532801+00:00
+{
+    "verifiedAt":  "2026-10-28T10:02:32.5610454+00:00",
+    "present":  [
+                    {
+                        "Class":  "USB",
+                        "FriendlyName":  "SAMSUNG Mobile USB Composite Device ",
+                        "Status":  "OK"
+                    }
+                ],
+    "drivers":  [
+                    {
+                        "DeviceName":  "SAMSUNG Mobile USB Composite Device ",
+                        "DeviceClass":  "USB",
+                        "DriverProviderName":  "SAMSUNG Electronics Co., Ltd. ",
+                        "DriverVersion":  "2.21.4.0",
+                        "IsSigned":  true
+                    }
+                ],
+    "privacy":  "Device serial and PnP instance identifiers omitted."
+}
+
+--- stderr ---
+
+Exit code: 0
+Finished: 2026-10-28T10:02:32.613909+00:00

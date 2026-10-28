@@ -1,0 +1,14 @@
+{
+  "command": "E:\\Dev\\Nodejs\\npm.cmd --prefix receiver ci --offline --ignore-scripts",
+  "startedAt": "2026-10-28T12:23:41.465834+00:00",
+  "finishedAt": "2026-10-28T12:23:45.152915+00:00",
+  "exitCode": 0,
+  "expectedExitCode": 0,
+  "durationSeconds": 3.688,
+  "stdoutSha256": "725cd0a9aa9de8a496c58652e7825411eee27f3f20ea72d438ec14139565e533",
+  "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "log": "npm-offline-cache-reuse.log",
+  "redactions": [
+    "personal user-root path"
+  ]
+}

@@ -1,0 +1,11 @@
+{
+  "apiRequired": 29,
+  "pageSizeRequired": 4096,
+  "avd": "artemis_api29",
+  "startedAt": "2026-10-28T10:48:48.544522+00:00",
+  "status": "pass",
+  "bootCompletedAt": "2026-10-28T10:49:09.298102+00:00",
+  "runtimeExitCode": 0,
+  "emulatorExitCode": 0,
+  "finishedAt": "2026-10-28T10:49:23.765438+00:00"
+}

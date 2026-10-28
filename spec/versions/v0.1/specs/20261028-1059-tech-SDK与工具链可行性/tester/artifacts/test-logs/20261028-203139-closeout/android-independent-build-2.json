@@ -1,0 +1,14 @@
+{
+  "command": "powershell -NoProfile -File .cache/closeout-gradle.ps1 -IncludeInstrumentation",
+  "startedAt": "2026-10-28T12:35:13.354169+00:00",
+  "finishedAt": "2026-10-28T12:35:42.407429+00:00",
+  "exitCode": 0,
+  "expectedExitCode": 0,
+  "durationSeconds": 29.054,
+  "stdoutSha256": "db825d53ea72e0068e640450a47f0d158d63ec718f03005f35108803824dd7a2",
+  "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "log": "android-independent-build-2.log",
+  "redactions": [
+    "personal user-root path"
+  ]
+}

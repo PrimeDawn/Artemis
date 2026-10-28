@@ -1,0 +1,9 @@
+=== adb-server Run ===
+Command: E:\Dev\Artemis\Android\Sdk/platform-tools/adb.exe server-status
+Timestamp: 2026-10-28T12:08:02.161024+00:00
+
+--- stderr ---
+error: unknown host service
+
+Exit code: 1
+Finished: 2026-10-28T12:08:02.285391+00:00
