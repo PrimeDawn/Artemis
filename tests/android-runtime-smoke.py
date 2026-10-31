@@ -23,6 +23,8 @@ p.add_argument('--skip-install', action='store_true', help='Verify installed APK
 p.add_argument('--device-kind', choices=['usb', 'emulator'], default='usb')
 p.add_argument('--expected-api', type=int)
 p.add_argument('--expected-page-size', type=int)
+p.add_argument('--expected-title', default='工具链验证工程')
+p.add_argument('--expected-description', default='当前构建用于开发环境验证。音视频采集与连接暂未启用。')
 a = p.parse_args()
 root = Path.cwd().resolve()
 out = a.report_dir.resolve()
@@ -130,7 +132,7 @@ try:
     command('ui-read', ['exec-out', 'cat', dump_path], project_ui_only=True)
     ui = ET.parse(out / 'artemis-ui.xml')
     texts = [node.get('text', '') for node in ui.getroot().iter('node')]
-    for text in ['Artemis', '工具链验证工程', '当前构建用于开发环境验证。音视频采集与连接暂未启用。']:
+    for text in ['Artemis', a.expected_title, a.expected_description]:
         assert text in texts, f'Expected Artemis UI text absent: {text}'
     screenshot = command('app-screenshot', ['exec-out', 'screencap', '-p'], binary=True)
     assert screenshot.startswith(b'\x89PNG\r\n\x1a\n'), 'Invalid device screenshot'

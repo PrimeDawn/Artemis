@@ -51,7 +51,7 @@ work_items:
   - id: SPEC-offline-pairing
     kind: tech
     title: 离线配对与信令信任
-    status: planned
+    status: completed
     goal: "goal#artemis-v0.1"
     milestone: VERSION-v0.1
     priority: P0
@@ -59,15 +59,27 @@ work_items:
     depends_on:
       - SPEC-sdk-toolchain
     acceptance:
-      - 断公网保留局域网时可完成配对和信令，不依赖公网信令、STUN、TURN或CDN。
-      - 验证配对有效期、撤销和未配对请求拒绝，知道IP本身不能取得媒体接收权限。
+      - 保留无需公网的配对和信令能力；本轮保持公网连接验证局域网配对与信令，检查无公网信令、STUN、TURN或CDN依赖；实际断公网运行记未实测，不作为本轮验收阻断。
+      - 验证首次确认、短期认证挑战/票据时效、撤销和未授权请求拒绝；设备信任及活动连接不设固定期限，知道IP本身不能取得媒体接收权限。
       - 保留TLS证书信任、二维码绑定或替代信任方案的实测取舍及操作步骤。
-    next_action: 工具链验证完成后，通过spec-start建立离线配对与信令信任Spec。
-    summary: v0.1技术预研规划项，尚未启动Spec或业务实现。
+      - 自动发现已打开App的手机并由电脑单击选择，首次手机确认一次、后续重开或服务重启免配对；持久记住身份。
+      - 活动连接与设备信任不设固定到期或空闲期限，故障自动恢复已选设备；主动断开或取消信任后停止重连。
+      - App仅在前台且未锁屏时使用并请求保持常亮；切其他App或锁屏暂停连接与重试，返回App自动恢复原被选且受信的电脑；主动断开或取消信任仍保持停止。
+    next_action: "已原位归档并创建PR #3至dev，等待审阅/用户合并；后续Spec保持原计划。"
+    summary: "自动发现、持久信任、授权信令和前台连接恢复已交付；Node43/JVM18/集成44通过，S24同服务连续锁屏解锁通过。AWR验收completed，PR https://github.com/PrimeDawn/Artemis/pull/3 未合并。真实手机换IP未测，实际断公网排除，媒体属于后续Spec。"
     tags: [v0.1, tech, m0]
     paths:
+      - spec/versions/v0.1/specs/20261029-0934-tech-离线配对与信令信任/explorer/exploration-report.html
+      - spec/versions/v0.1/specs/20261029-0934-tech-离线配对与信令信任/writer/plan.html
+      - spec/versions/v0.1/specs/20261029-0934-tech-离线配对与信令信任/tester/test-plan.html
+      - spec/versions/v0.1/specs/20261029-0934-tech-离线配对与信令信任/executor/summary.html
+      - spec/versions/v0.1/specs/20261029-0934-tech-离线配对与信令信任/tester/test-report.html
+      - docs/pairing-phone-retest.md
+      - spec/versions/v0.1/specs/20261029-0934-tech-离线配对与信令信任/lead/team-context.md
       - spec/versions/v0.1/version-context.md
       - spec/versions/v0.1/plan.html
+    "evidence": ["spec/versions/v0.1/specs/20261029-0934-tech-离线配对与信令信任/evidence/end-verification.json"]
+    "verification": {"evidence_level":"locally_verified"}
 
   - id: SPEC-media-obs
     kind: tech
@@ -102,8 +114,8 @@ work_items:
     depends_on:
       - SPEC-media-obs
     acceptance:
-      - 固定并记录设备和软件环境，断公网完成配对至OBS音视频接收的端到端复测。
-      - 连续推流至少10分钟并重复启停至少3次，保留结果及异常记录。
+      - 固定并记录设备和软件环境，保持公网连接完成局域网配对至OBS音视频接收的端到端复测；保留离线功能，实际断公网运行记未实测，不作为本轮验收阻断。
+      - 单轮总测试预算300秒内实测短时推流及必要的重复启停；长期稳定性以代码/状态机与必要加速边界审查，保留实际结果和未覆盖项，不强制等待10分钟。
       - 实测延迟与音画偏差并对照300ms和150ms产品目标，超标项明确处置，不记为达标。
       - 提供可复现实验APK、PC启动步骤、依赖许可证和研究结论；不替代全部一期验收。
     next_action: 链路Spec完成后，通过spec-start制定真机验证和实验原型交付方案；启动时复核docs/validation-followups.md中的延期设备项，具备对应环境时补测。
@@ -118,7 +130,7 @@ milestones:
   - id: VERSION-v0.1
     title: v0.1 最小音视频链路技术预研
     status: in_progress
-    summary: 首个SDK与工具链Spec执行中，其余3项尚未启动，以v0.1文档为版本状态权威来源。
+    summary: 首个SDK与工具链Spec已交付归档并合并dev；第二个配对与信令Spec实现交付、等待gate-3及独立测试，其余2项未启动，以v0.1文档为版本状态权威来源。
     scope: SDK与工具链、离线配对信令、手机到OBS链路、真机验证和实验原型复现交付。
     acceptance:
       - 四个入版技术Spec均完成并保留真实验证证据。

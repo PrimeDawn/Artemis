@@ -6,6 +6,9 @@ activity-compose = "1.11.0"
 webrtc = "150.7871.01"
 test-runner = "1.7.0"
 test-junit = "1.3.0"
+okhttp = "5.4.0"
+junit4 = "4.13.2"
+json = "20250517"
 
 [libraries]
 compose-bom = { module = "androidx.compose:compose-bom", version.ref = "compose-bom" }
@@ -15,6 +18,11 @@ activity-compose = { module = "androidx.activity:activity-compose", version.ref 
 webrtc = { module = "io.github.webrtc-sdk:android", version.ref = "webrtc" }
 test-runner = { module = "androidx.test:runner", version.ref = "test-runner" }
 test-junit = { module = "androidx.test.ext:junit", version.ref = "test-junit" }
+okhttp = { module = "com.squareup.okhttp3:okhttp", version.ref = "okhttp" }
+okhttp-tls = { module = "com.squareup.okhttp3:okhttp-tls", version.ref = "okhttp" }
+mockwebserver = { module = "com.squareup.okhttp3:mockwebserver3", version.ref = "okhttp" }
+junit4 = { module = "junit:junit", version.ref = "junit4" }
+json = { module = "org.json:json", version.ref = "json" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

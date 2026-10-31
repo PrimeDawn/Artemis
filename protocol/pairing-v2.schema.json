@@ -1,0 +1,663 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:artemis:pairing:v2",
+  "title": "Artemis local trust and signaling v2",
+  "$defs": {
+    "peer": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "publicKeySpki",
+        "label"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/digest"
+        },
+        "publicKeySpki": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9_-]+$",
+          "maxLength": 342
+        },
+        "label": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 64,
+          "pattern": "^[^\\u0000-\\u001f\\u007f]+$"
+        }
+      }
+    },
+    "uuid": {
+      "type": "string",
+      "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-4[0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}$"
+    },
+    "digest": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9_-]{43}$"
+    },
+    "signature": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9_-]+$",
+      "maxLength": 107
+    },
+    "signal": {
+      "oneOf": [
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "v",
+            "kind",
+            "id",
+            "sessionId",
+            "epoch",
+            "payload"
+          ],
+          "properties": {
+            "v": {
+              "const": 2
+            },
+            "kind": {
+              "const": "offer"
+            },
+            "id": {
+              "$ref": "#/$defs/uuid"
+            },
+            "sessionId": {
+              "$ref": "#/$defs/uuid"
+            },
+            "epoch": {
+              "$ref": "#/$defs/uuid"
+            },
+            "payload": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "type",
+                "sdp"
+              ],
+              "properties": {
+                "type": {
+                  "const": "offer"
+                },
+                "sdp": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 32768
+                }
+              }
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "v",
+            "kind",
+            "id",
+            "sessionId",
+            "epoch",
+            "payload"
+          ],
+          "properties": {
+            "v": {
+              "const": 2
+            },
+            "kind": {
+              "const": "answer"
+            },
+            "id": {
+              "$ref": "#/$defs/uuid"
+            },
+            "sessionId": {
+              "$ref": "#/$defs/uuid"
+            },
+            "epoch": {
+              "$ref": "#/$defs/uuid"
+            },
+            "payload": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "type",
+                "sdp"
+              ],
+              "properties": {
+                "type": {
+                  "const": "answer"
+                },
+                "sdp": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 32768
+                }
+              }
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "v",
+            "kind",
+            "id",
+            "sessionId",
+            "epoch",
+            "payload"
+          ],
+          "properties": {
+            "v": {
+              "const": 2
+            },
+            "kind": {
+              "const": "ice-candidate"
+            },
+            "id": {
+              "$ref": "#/$defs/uuid"
+            },
+            "sessionId": {
+              "$ref": "#/$defs/uuid"
+            },
+            "epoch": {
+              "$ref": "#/$defs/uuid"
+            },
+            "payload": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "candidate",
+                "sdpMid",
+                "sdpMLineIndex"
+              ],
+              "properties": {
+                "candidate": {
+                  "type": [
+                    "string",
+                    "null"
+                  ],
+                  "maxLength": 2048
+                },
+                "sdpMid": {
+                  "type": [
+                    "string",
+                    "null"
+                  ],
+                  "maxLength": 256
+                },
+                "sdpMLineIndex": {
+                  "type": [
+                    "integer",
+                    "null"
+                  ],
+                  "minimum": 0
+                }
+              }
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "v",
+            "kind",
+            "id",
+            "sessionId",
+            "epoch",
+            "payload"
+          ],
+          "properties": {
+            "v": {
+              "const": 2
+            },
+            "kind": {
+              "const": "bye"
+            },
+            "id": {
+              "$ref": "#/$defs/uuid"
+            },
+            "sessionId": {
+              "$ref": "#/$defs/uuid"
+            },
+            "epoch": {
+              "$ref": "#/$defs/uuid"
+            },
+            "payload": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "reason"
+              ],
+              "properties": {
+                "reason": {
+                  "enum": [
+                    "user",
+                    "disconnect"
+                  ]
+                }
+              }
+            }
+          }
+        }
+      ]
+    }
+  },
+  "oneOf": [
+    {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "v",
+        "kind",
+        "device"
+      ],
+      "properties": {
+        "v": {
+          "const": 2
+        },
+        "kind": {
+          "const": "hello"
+        },
+        "device": {
+          "$ref": "#/$defs/peer"
+        }
+      }
+    },
+    {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "v",
+        "kind",
+        "pc",
+        "challengeId",
+        "connectionId",
+        "nonce",
+        "expiresAt",
+        "signature"
+      ],
+      "properties": {
+        "v": {
+          "const": 2
+        },
+        "kind": {
+          "const": "challenge"
+        },
+        "pc": {
+          "$ref": "#/$defs/peer"
+        },
+        "challengeId": {
+          "$ref": "#/$defs/uuid"
+        },
+        "connectionId": {
+          "$ref": "#/$defs/uuid"
+        },
+        "nonce": {
+          "$ref": "#/$defs/digest"
+        },
+        "expiresAt": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "signature": {
+          "$ref": "#/$defs/signature"
+        }
+      }
+    },
+    {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "v",
+        "kind",
+        "deviceId",
+        "challengeId",
+        "connectionId",
+        "signature"
+      ],
+      "properties": {
+        "v": {
+          "const": 2
+        },
+        "kind": {
+          "const": "proof"
+        },
+        "deviceId": {
+          "$ref": "#/$defs/digest"
+        },
+        "challengeId": {
+          "$ref": "#/$defs/uuid"
+        },
+        "connectionId": {
+          "$ref": "#/$defs/uuid"
+        },
+        "signature": {
+          "$ref": "#/$defs/signature"
+        }
+      }
+    },
+    {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "v",
+        "kind",
+        "pcId",
+        "deviceId",
+        "requestId",
+        "nonce"
+      ],
+      "properties": {
+        "v": {
+          "const": 2
+        },
+        "kind": {
+          "const": "enroll-request"
+        },
+        "pcId": {
+          "$ref": "#/$defs/digest"
+        },
+        "deviceId": {
+          "$ref": "#/$defs/digest"
+        },
+        "requestId": {
+          "$ref": "#/$defs/uuid"
+        },
+        "nonce": {
+          "$ref": "#/$defs/digest"
+        }
+      }
+    },
+    {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "v",
+        "kind",
+        "pcId",
+        "deviceId",
+        "requestId",
+        "nonce",
+        "allow",
+        "signature"
+      ],
+      "properties": {
+        "v": {
+          "const": 2
+        },
+        "kind": {
+          "const": "enroll-decision"
+        },
+        "pcId": {
+          "$ref": "#/$defs/digest"
+        },
+        "deviceId": {
+          "$ref": "#/$defs/digest"
+        },
+        "requestId": {
+          "$ref": "#/$defs/uuid"
+        },
+        "nonce": {
+          "$ref": "#/$defs/digest"
+        },
+        "allow": {
+          "type": "boolean"
+        },
+        "signature": {
+          "$ref": "#/$defs/signature"
+        }
+      }
+    },
+    {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "v",
+        "kind",
+        "pcId"
+      ],
+      "properties": {
+        "v": {
+          "const": 2
+        },
+        "kind": {
+          "const": "trusted"
+        },
+        "pcId": {
+          "$ref": "#/$defs/digest"
+        }
+      }
+    },
+    {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "v",
+        "kind",
+        "manual"
+      ],
+      "properties": {
+        "v": {
+          "const": 2
+        },
+        "kind": {
+          "const": "activated"
+        },
+        "manual": {
+          "type": "boolean"
+        }
+      }
+    },
+    {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "v",
+        "kind",
+        "ticket"
+      ],
+      "properties": {
+        "v": {
+          "const": 2
+        },
+        "kind": {
+          "const": "auth"
+        },
+        "ticket": {
+          "$ref": "#/$defs/digest"
+        }
+      }
+    },
+    {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "v",
+        "kind"
+      ],
+      "properties": {
+        "v": {
+          "const": 2
+        },
+        "kind": {
+          "const": "disconnect"
+        }
+      }
+    },
+    {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "v",
+        "kind"
+      ],
+      "properties": {
+        "v": {
+          "const": 2
+        },
+        "kind": {
+          "const": "denied"
+        }
+      }
+    },
+    {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "v",
+        "kind"
+      ],
+      "properties": {
+        "v": {
+          "const": 2
+        },
+        "kind": {
+          "const": "revoked"
+        }
+      }
+    },
+    {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "v",
+        "kind",
+        "code",
+        "requestId"
+      ],
+      "properties": {
+        "v": {
+          "const": 2
+        },
+        "kind": {
+          "const": "error"
+        },
+        "code": {
+          "type": "string",
+          "pattern": "^E_[A-Z_]+$"
+        },
+        "requestId": {
+          "$ref": "#/$defs/uuid"
+        }
+      }
+    },
+    {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "v",
+        "kind",
+        "signal"
+      ],
+      "properties": {
+        "v": {
+          "const": 2
+        },
+        "kind": {
+          "const": "signal"
+        },
+        "signal": {
+          "$ref": "#/$defs/signal"
+        }
+      }
+    },
+    {
+      "$ref": "#/$defs/signal"
+    },
+    {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "v",
+        "kind",
+        "sessionId",
+        "epoch"
+      ],
+      "properties": {
+        "v": {
+          "const": 2
+        },
+        "kind": {
+          "const": "waiting"
+        },
+        "sessionId": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/uuid"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "epoch": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/uuid"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "v",
+        "kind",
+        "sessionId",
+        "epoch"
+      ],
+      "properties": {
+        "v": {
+          "const": 2
+        },
+        "kind": {
+          "const": "ready"
+        },
+        "sessionId": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/uuid"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "epoch": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/uuid"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "v",
+        "kind"
+      ],
+      "properties": {
+        "v": {
+          "const": 2
+        },
+        "kind": {
+          "const": "request-enrollment"
+        }
+      }
+    }
+  ]
+}
