@@ -51,6 +51,17 @@ dependencies {
     webrtcAudit(libs.webrtc)
     androidTestImplementation(libs.test.runner)
     androidTestImplementation(libs.test.junit)
+    implementation(libs.okhttp)
+    testImplementation(libs.junit4)
+    testImplementation(libs.json)
+    testImplementation(libs.okhttp.tls)
+    testImplementation(libs.mockwebserver)
+}
+
+tasks.withType<Test>().configureEach {
+    val testTemp = rootProject.layout.buildDirectory.dir("test-tmp")
+    doFirst { testTemp.get().asFile.mkdirs() }
+    systemProperty("java.io.tmpdir", testTemp.get().asFile.absolutePath)
 }
 
 // writer/plan.html section 3.1: the Maven AAR hash applies even when using a mirror.

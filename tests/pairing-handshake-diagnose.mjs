@@ -1,0 +1,28 @@
+import {runContext,startService,controlSession,delay,invariant} from './pairing-test-support.mjs';
+import {loadOrCreateIdentity} from '../receiver/dist/src/identity.js';import {publishDiscovery} from '../receiver/dist/src/discovery.js';
+import {createServer,connect} from 'node:net';import {networkInterfaces} from 'node:os';import {execFile} from 'node:child_process';import {promisify} from 'node:util';import {writeFile} from 'node:fs/promises';import {join} from 'node:path';
+import {Server as HttpsServer} from 'node:https';
+const args=Object.fromEntries(process.argv.slice(2).map(x=>{const i=x.indexOf('=');return[x.slice(2,i),x.slice(i+1)];})),run=await runContext(args.out,'I007 actual TLS blackhole recovery');
+const deadline=Date.parse(args.start)+280000,exec=promisify(execFile),adb='E:/Dev/Artemis/Android/Sdk/platform-tools/adb.exe',app='io.github.primedawn.artemis';let s,c,proxy,advertisement,error,first,phase=0,connections=0;const sockets=new Set(),phases=[];
+const left=()=>{const n=deadline-Date.now();if(n<=0)throw Error('E_TEST_BUDGET');return n;};
+async function device(...a){return(await exec(adb,a,{timeout:Math.min(8000,left()),windowsHide:true})).stdout.trim();}
+const shell=(...a)=>device('shell',...a);
+const originalListen=HttpsServer.prototype.listen;
+async function wait(fn,message,ms){const end=Date.now()+Math.min(ms,left());while(Date.now()<end){if(await fn())return;await delay(100);}throw Error(message);}
+async function snapshot(label){const pid=await shell('pidof',app),port=await device('forward','tcp:0','jdwp:'+pid);try{const r=await exec('C:/Program Files/BellSoft/LibericaJDK-17/bin/java.exe',['--add-modules','jdk.jdi','-cp','.cache/diag-classes','ArtemisRuntimeSnapshot',port],{timeout:8000,windowsHide:true});await writeFile(join(run.out,label+'-runtime.json'),r.stdout);}finally{await exec(adb,['forward','--remove','tcp:'+port],{timeout:5000,windowsHide:true});}}
+try{
+ const host=Object.values(networkInterfaces()).flat().find(a=>a?.family==='IPv4'&&!a.internal&&a.address.startsWith('192.168.'))?.address;invariant(host,'Actual LAN');
+ // Diagnostic plumbing only: retain the production public Host and same port while
+ // placing its TLS listener behind a byte-transparent LAN proxy. No Host rewrite.
+ HttpsServer.prototype.listen=function(...a){if(a[1]===host)a[1]='127.0.0.1';return originalListen.apply(this,a);};
+ s=await startService(run,{lanHost:host,testOnly:true});HttpsServer.prototype.listen=originalListen;c=await controlSession(s);const realPort=Number(new URL(s.lan).port);
+ proxy=createServer(socket=>{sockets.add(socket);socket.once('close',()=>sockets.delete(socket));connections++;if(!first){first=socket;void run.event('actual-tcp-held-before-tls',{phase,remote:socket.remoteAddress});socket.on('data',b=>{void run.event('held-clienthello-bytes',{phase,bytes:b.length});});return;}const upstream=connect(realPort,'127.0.0.1');sockets.add(upstream);upstream.once('close',()=>sockets.delete(upstream));socket.on('error',()=>upstream.destroy());upstream.on('error',()=>socket.destroy());socket.pipe(upstream).pipe(socket);void run.event('actual-tcp-forwarded-to-production',{phase});});
+ await new Promise((ok,no)=>{proxy.once('error',no);proxy.listen(realPort,host,ok);});const port=proxy.address().port;const identity=await loadOrCreateIdentity(s.config);advertisement=await publishDiscovery({...s.config,tlsPort:port},identity,e=>{error??=e;});await writeFile(join(run.out,'endpoint.json'),JSON.stringify({host,backendHost:'127.0.0.1',productionPort:realPort,advertisedProxyPort:port,pcId:s.pcId,hostHeaderUnchanged:true,fault:'First real TCP connection is accepted but TLS bytes are held; later connections transparently forward to the actual pinned production service'},null,2));
+ for(phase=1;phase<=2;phase++){
+  await shell('am','force-stop',app);for(const x of sockets)x.destroy();await wait(async()=>!(await c.state()).devices.some(d=>d.online),'Previous real phone transport must be offline',3000);first=undefined;connections=0;await shell('am','start','-n',app+'/.MainActivity');await wait(()=>!!first,'Actual phone must reach TCP fault gate',10000);const start=Date.now();
+  await run.test('I007.handshake-must-recover-'+phase,async()=>{await wait(async()=>(await c.state()).devices.some(d=>d.online),'TCP accepted but TLS setup never completes or retries within 10 seconds',10000);invariant(connections>=2,'Recovery needs a second real TCP, without tester releasing the held first socket');return {elapsedMs:Date.now()-start,connections,firstSocketReleasedByTester:false};}).catch(e=>{error??=e;});
+  phases.push({phase,elapsedMs:Date.now()-start,connections,authenticated:(await c.state()).devices.some(d=>d.online)});await snapshot('phase-'+phase);
+ }
+ // Normalize the fault without changing App, identity, or endpoint: EOF lets its existing retry run.
+ first?.destroy();await run.test('I007.recovery-after-explicit-tcp-failure',async()=>{await wait(async()=>(await c.state()).devices.some(d=>d.online),'EOF must unblock existing reconnect',10000);return {connections,realProductionProof:true};});
+}catch(e){error??=e;}finally{HttpsServer.prototype.listen=originalListen;await advertisement?.close().catch(()=>{});for(const x of sockets)x.destroy();if(proxy)await new Promise(ok=>proxy.close(ok));await s?.close().catch(()=>{});await writeFile(join(run.out,'phases.json'),JSON.stringify(phases,null,2));await writeFile(join(run.out,'budget.json'),JSON.stringify({startedAt:args.start,finishedAt:new Date().toISOString(),elapsedSeconds:(Date.now()-Date.parse(args.start))/1000},null,2));await run.finish(error);}if(error)process.exitCode=1;

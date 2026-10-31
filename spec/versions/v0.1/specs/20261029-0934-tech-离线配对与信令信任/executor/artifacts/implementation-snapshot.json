@@ -1,0 +1,455 @@
+{
+  "capturedAt": "2026-10-29T04:35:42.689382+00:00",
+  "scope": "Implementation focused evidence only; no independent integration acceptance or real-phone verification.",
+  "gitBranch": "tech/spec-20261028-2248-offline-pairing",
+  "gitBaselineHead": "334efb7725be8dbc1ec810c83fc7ee2892776c98",
+  "workingTreeSourceDigest": "a6a9efa88333df2bf809544fbfbea6ecb0008ff109dd31ec36dcb225f7fc2639",
+  "sources": [
+    {
+      "path": "android/app/build.gradle.kts",
+      "sha256": "ca6bc902671a2a9271226bfa7431067f9612f745bfa21516124a470afb032902"
+    },
+    {
+      "path": "android/app/proguard-rules.pro",
+      "sha256": "3b4d215a984e538b8d16e1f7797e88bac688e0307e0b83254ef46feb15812c71"
+    },
+    {
+      "path": "android/app/src/androidTest/java/io/github/primedawn/artemis/WebRtcSdkSmokeTest.kt",
+      "sha256": "d312f8719a66e6619910cc2daed4348b934870f56af46bae04d246071564200a"
+    },
+    {
+      "path": "android/app/src/androidTest/java/io/github/primedawn/artemis/pairing/ConnectionInstrumentedTest.kt",
+      "sha256": "5fc82105963ca481007df5c8bbfad6e2b1daa1a3d142796a395a6e95a1c70f89"
+    },
+    {
+      "path": "android/app/src/main/AndroidManifest.xml",
+      "sha256": "7d0cf4844d03d82f07752e6159f64dd13037479af1a08d3746cd4e5afdcbbf81"
+    },
+    {
+      "path": "android/app/src/main/java/io/github/primedawn/artemis/ArtemisApplication.kt",
+      "sha256": "0c3f016134bac40c2273f504c5f099f88d5328735b44c7704cb8ecec6342cbcb"
+    },
+    {
+      "path": "android/app/src/main/java/io/github/primedawn/artemis/MainActivity.kt",
+      "sha256": "72deb8655ecc1b0e5553b3a347327e45a2d499154af363243cdc5cc02ff828bb"
+    },
+    {
+      "path": "android/app/src/main/java/io/github/primedawn/artemis/pairing/ConnectionController.kt",
+      "sha256": "9dc3abb2a88d6d530ed2bb8cebb0c2353379262a98ae3344c1f5691e5a7644f6"
+    },
+    {
+      "path": "android/app/src/main/java/io/github/primedawn/artemis/pairing/ConnectionScreen.kt",
+      "sha256": "a6c1ed5c4106ab34cad2c8c802921f5b1c5cb1bb9bdae41889abbd89e2c92196"
+    },
+    {
+      "path": "android/app/src/main/java/io/github/primedawn/artemis/pairing/DeviceClient.kt",
+      "sha256": "fa80ac3c2b81481a778fd9fbfec0a5f770bab99ab38605be24902e78ea225f17"
+    },
+    {
+      "path": "android/app/src/main/java/io/github/primedawn/artemis/pairing/DeviceIdentity.kt",
+      "sha256": "2466ee63b97c136ded05c6364f8d4f321b0f7552bf06fbf9226f525840a24d12"
+    },
+    {
+      "path": "android/app/src/main/java/io/github/primedawn/artemis/pairing/Models.kt",
+      "sha256": "43f5aac4d4dae4f22cfc95d3c18d3b3c14f0e7a6d8e6946cda997b1b442fc37c"
+    },
+    {
+      "path": "android/app/src/main/java/io/github/primedawn/artemis/pairing/NsdDiscoveryClient.kt",
+      "sha256": "35f29d22019dec52dfbf056e4fbcc62ed2bab1a4e3f907745eca6b7c27040bd3"
+    },
+    {
+      "path": "android/app/src/main/java/io/github/primedawn/artemis/pairing/PinnedTrustManager.kt",
+      "sha256": "0b0155f8073246f43fcf15dfd3ac696defd4e0caf06b0010592aedbfbb701453"
+    },
+    {
+      "path": "android/app/src/main/java/io/github/primedawn/artemis/pairing/TrustRepository.kt",
+      "sha256": "bf1d0928dcd0c89ec113acdcb36a33f3e6fa7ace42ee8638a4bdf1f4343e63ae"
+    },
+    {
+      "path": "android/app/src/main/res/values/strings.xml",
+      "sha256": "7ed08dd338a0a807e031a65d6f0adb5899ec8a0ec3a2d7ef44c74a941e33a5e9"
+    },
+    {
+      "path": "android/app/src/main/res/values/themes.xml",
+      "sha256": "d1aa2ab2940c27a05a25f8a3bad22fabba555edcca7a723f450c7f3abc039223"
+    },
+    {
+      "path": "android/app/src/test/java/io/github/primedawn/artemis/pairing/ConnectionControllerTest.kt",
+      "sha256": "e3432a9fd558b0fd757c00cb2aa9f6ee3bcc1fad0111d2d467d0b1c86b0986e3"
+    },
+    {
+      "path": "android/app/src/test/java/io/github/primedawn/artemis/pairing/ConnectionUnitTest.kt",
+      "sha256": "330e1fb9dceb9d77ad2f3e1487fce54f1520d5326d0a99e3afab2f828e81e4fd"
+    },
+    {
+      "path": "android/app/src/test/java/io/github/primedawn/artemis/pairing/DeviceTransportTest.kt",
+      "sha256": "1d4b2be06ba9b3b2820940d1968ab55d13151aed8e20146b2884172f4ea8a33a"
+    },
+    {
+      "path": "android/build.gradle.kts",
+      "sha256": "7af865aea3e2dde810363caa1c3f9eed33324aa47f1c7e281034d4bd69129b3d"
+    },
+    {
+      "path": "android/gradle.properties",
+      "sha256": "dacba4d15f3e8ad90fb3d2308763fd56f904e93c82809899d73fb9520950b6f9"
+    },
+    {
+      "path": "android/gradle/libs.versions.toml",
+      "sha256": "2c7763f28cd560a2aedbed730c83bc69540e4cbb29fe02ccdababfda30a29f10"
+    },
+    {
+      "path": "android/gradle/wrapper/gradle-wrapper.jar",
+      "sha256": "81a82aaea5abcc8ff68b3dfcb58b3c3c429378efd98e7433460610fecd7ae45f"
+    },
+    {
+      "path": "android/gradle/wrapper/gradle-wrapper.properties",
+      "sha256": "771795cf9eded83bfe7d538887684504469545246afa414b08c25b38fd6afcf8"
+    },
+    {
+      "path": "android/gradlew",
+      "sha256": "c76f16038b4e70b84ed0b3b9e08e82a8ecaf66ec0efdfdecdece92520fa3cecb"
+    },
+    {
+      "path": "android/gradlew.bat",
+      "sha256": "0f3ed8f03b50934cb8c48b15a470d5c20a30a5385825e48b55bcc8ea3d8f8e18"
+    },
+    {
+      "path": "android/settings.gradle.kts",
+      "sha256": "e146e8f6020dee28dd9ab7ce9cc2989245c2ebdf2e41a2ec549b29780646be7b"
+    },
+    {
+      "path": "protocol/pairing-v2.md",
+      "sha256": "b06b459f5d12323c5569efd1fd3f80e24847e8bc576ddafc2abb105aea4d2814"
+    },
+    {
+      "path": "protocol/pairing-v2.schema.json",
+      "sha256": "716e8dc7fe0cde941efe6f2acf9d94dd6224ae65b165618d8f76ccc39a725195"
+    },
+    {
+      "path": "receiver/.node-version",
+      "sha256": "55075b5ec4e8b31936cbbc282b8829116d1fd48f2f2f1856dee592a6650700ce"
+    },
+    {
+      "path": "receiver/.npmrc",
+      "sha256": "c5eba148604b2ef29ecec1fffdff39c87ad13c75e6171453f2b304d85274ccc1"
+    },
+    {
+      "path": "receiver/package-lock.json",
+      "sha256": "84318808bb0272e014e04af34346653147333cbb6c9373c615f60426d541b016"
+    },
+    {
+      "path": "receiver/package.json",
+      "sha256": "082ac78b762e12e856de7a2c2800bb51f25bd5afc3180a64b318b2741914a28c"
+    },
+    {
+      "path": "receiver/public/app.css",
+      "sha256": "805d5e299038227d5f6092833d31ab2771b3a290dc8fca197a1d4ac9b69c95d5"
+    },
+    {
+      "path": "receiver/public/control.html",
+      "sha256": "dfad764cbd76c5ee25cbcb9f445f700e4e74baa37ceb5e784b6744ada290e16d"
+    },
+    {
+      "path": "receiver/public/control.js",
+      "sha256": "af74a8e29c479e6066f17b836c8d892124e28fb09055ea45c7f4943c2d12afdd"
+    },
+    {
+      "path": "receiver/public/receiver.html",
+      "sha256": "6e9319680eeb4d172e486262d7fe9410da13c736d27176abd8698f283658207a"
+    },
+    {
+      "path": "receiver/public/receiver.js",
+      "sha256": "1b2cf53aac26e0304c4503d1f76ab19e3e42686718b1383694a7eb49d9176707"
+    },
+    {
+      "path": "receiver/src/cli.ts",
+      "sha256": "369c642716d48c4544ab9b099ae907819767ca7ea0d41855005e733c13b39b00"
+    },
+    {
+      "path": "receiver/src/config.ts",
+      "sha256": "8aedf876e9fac745f0804be30ed0dff9407ffaf6367b597fffcc8a8b3d1c5305"
+    },
+    {
+      "path": "receiver/src/connection-manager.ts",
+      "sha256": "73b65ce57ad65530b93adc7654268ac1b83fa1812cddedda4807a1b73851ca02"
+    },
+    {
+      "path": "receiver/src/control-http.ts",
+      "sha256": "7a3e20e2d4ea3883189defecfe5090fb50a17a3974499fa0abcf84ba095e935f"
+    },
+    {
+      "path": "receiver/src/device-broker.ts",
+      "sha256": "4dfe10b3d067043704abe47c3104ee106c09e4da93bb49b12ddb64e013ad7017"
+    },
+    {
+      "path": "receiver/src/discovery.ts",
+      "sha256": "9757a786246b78496672fa1d8981e4d347477b4a472eefb4f8e75da1c1ded15c"
+    },
+    {
+      "path": "receiver/src/identity.ts",
+      "sha256": "7d20b4ca60d127ca065595c48dc4ef8c67057441d2763f9cc65707fc804987b7"
+    },
+    {
+      "path": "receiver/src/pairing-cli.ts",
+      "sha256": "82b191c4f6cc33ae07cccdc7eca797aa988a548933fd48c9fe0fe149462dcfc7"
+    },
+    {
+      "path": "receiver/src/pairing-config.ts",
+      "sha256": "9669a366161bf66f4495f8d38ffea49fb5c93936a79fce041e43a09f64536595"
+    },
+    {
+      "path": "receiver/src/pairing-server.ts",
+      "sha256": "d7ef1ee580ac3e8d1cf16273484f7d9510935b22c1544aabde82431f7abe56cc"
+    },
+    {
+      "path": "receiver/src/protocol.ts",
+      "sha256": "7beff29cf1ee2bf3910d5e1363a35f43c1d3bd29f32d245eb714aabbc78e7f26"
+    },
+    {
+      "path": "receiver/src/server.ts",
+      "sha256": "fd41edbac1fee08d6b1bfde0d011d60af02664f89ad887406f016aa8a79aba8c"
+    },
+    {
+      "path": "receiver/src/signaling.ts",
+      "sha256": "1d6738b0bdc32de46455e167f3e8a1520905c19f9f08c7d50a8a43db4f412805"
+    },
+    {
+      "path": "receiver/src/trust-repository.ts",
+      "sha256": "b542eee3d73d69531c813c4b6b0291626c39ffa764963e9646be65c2e11c7866"
+    },
+    {
+      "path": "receiver/test/config.test.ts",
+      "sha256": "498d63c378bd0d2322c04559def9f544319cc0c29103b86ec33b84900fe378f8"
+    },
+    {
+      "path": "receiver/test/connection-manager.test.ts",
+      "sha256": "48c0e12bfeb3d444695805871885c72431892caacf8c87230c6ff879e10e379c"
+    },
+    {
+      "path": "receiver/test/control-http.test.ts",
+      "sha256": "226f23ce4934b4ede0dcb8e6f888b8d40521c54ccc9dcedf54faddbe7485d1be"
+    },
+    {
+      "path": "receiver/test/device-broker.test.ts",
+      "sha256": "ed548518b1800b3108e65ebf7d9326f959c2e92f0eb2312881daf9f7f4538a2b"
+    },
+    {
+      "path": "receiver/test/identity.test.ts",
+      "sha256": "fcb967ef71900234a696f0f46241dedd98fabdce88e073e6c28128a0618263df"
+    },
+    {
+      "path": "receiver/test/pairing-config.test.ts",
+      "sha256": "1f27a47b803fe90bd49a9a51e8cc92434299933a667aed601a37de10cfa4a404"
+    },
+    {
+      "path": "receiver/test/pairing-server.test.ts",
+      "sha256": "686205dd31eb0c49b29f5057aa092d4a27063b317a2a36afe91774f50d38b81a"
+    },
+    {
+      "path": "receiver/test/protocol.test.ts",
+      "sha256": "7218542862ede77dd445cf6a74470ac395bbc6d3486cdcd0ed9191d150e095d2"
+    },
+    {
+      "path": "receiver/test/server.test.ts",
+      "sha256": "3a07168281534c51fcff7a9b4f2a7691478b0bc4afdfa00233d53c15600742e6"
+    },
+    {
+      "path": "receiver/test/trust-repository.test.ts",
+      "sha256": "04be40f448aa379b2131cafa6015dc90e8745e5a90ac02b38cb0dc6c51a812c1"
+    },
+    {
+      "path": "receiver/tsconfig.json",
+      "sha256": "e53263e6453893ebbed78ba1216a8fdf36beb9ee98c07e0f2b0715ba781b52ee"
+    },
+    {
+      "path": "scripts/bootstrap-android-sdk.ps1",
+      "sha256": "958b49ba13aacae8477e86aa52a4ac9cb9564bfd01589c9c0f425e56d16b2819"
+    },
+    {
+      "path": "scripts/create-local-tls.ps1",
+      "sha256": "09d8b6663973189077c5ac89f9497ea631c6d705441d643c7776b3b01e23d8d0"
+    },
+    {
+      "path": "scripts/rk-awr-checkpoint.ps1",
+      "sha256": "164c4cfe7fe75a07789a1093d9f914b9874aee694ae67c76d05cfeaf4349ef92"
+    },
+    {
+      "path": "scripts/rk-awr-checkpoint.sh",
+      "sha256": "f53cf4047aeadcc9fd713d27b902fd155696ce226dfebc380966e3e9f24431ac"
+    },
+    {
+      "path": "scripts/tests/test_verify_native_libs.py",
+      "sha256": "302440d86997528fd0c0836f26ecc145dbfca641f90c6168a43aae996aacde9f"
+    },
+    {
+      "path": "scripts/verify-native-libs.py",
+      "sha256": "cbefb53d6f1e85ec8d9d383fcf1a681edb5f0d4b0016b923b19f6be402585f31"
+    },
+    {
+      "path": "scripts/verify-toolchain.ps1",
+      "sha256": "55d6cbb7c76ffce208925bc6ee1a0877bc578e26ab4edd1d737dda3d38547032"
+    },
+    {
+      "path": "tests/android-device-probe.py",
+      "sha256": "488f73cba56ba45cc06cf686193195d007529cb615c770f0137630c6c0ea274e"
+    },
+    {
+      "path": "tests/android-runtime-smoke.py",
+      "sha256": "f6c615baca020b9f14ff503ad51ec3d6766901d07ae55a074393a501dc7fb375"
+    },
+    {
+      "path": "tests/collect-runtime-matrix.py",
+      "sha256": "870b6698dcf0f2e4006b7b95be9a4e284ed57c5656001ac9faff98dcc2047525"
+    },
+    {
+      "path": "tests/collect-sdk-results.py",
+      "sha256": "08d89a8f414cb238262b0a023339f141a12fdbb9f14e1e770b823096a32a31e9"
+    },
+    {
+      "path": "tests/receiver-smoke.mjs",
+      "sha256": "6f6d961d47dde092c996049bb3c6493a82fed6edc081609e4148a7331bd5b482"
+    },
+    {
+      "path": "tests/toolchain-provenance.py",
+      "sha256": "283717aab93c9be8666cf48ebec7a0d6efe81b1d9458f898d355e17c682b7412"
+    },
+    {
+      "path": "tests/windows-cli-signal.py",
+      "sha256": "57979820257412397cee540c22e9c91186c5832e2a0ebfc082dd18162bba885c"
+    }
+  ],
+  "nodeTests": 43,
+  "androidJvmTests": 11,
+  "androidEmulatorComponentTests": 3,
+  "junit": [
+    {
+      "file": "spec/versions/v0.1/specs/20261029-0934-tech-离线配对与信令信任/executor/artifacts/junit/TEST-io.github.primedawn.artemis.pairing.ConnectionControllerTest.xml",
+      "sha256": "e73d644d35e669568665b8b71454325d13039c7f2cda98de152e8b44fc1ad426",
+      "tests": 3,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "file": "spec/versions/v0.1/specs/20261029-0934-tech-离线配对与信令信任/executor/artifacts/junit/TEST-io.github.primedawn.artemis.pairing.ConnectionUnitTest.xml",
+      "sha256": "ca223782200b9c68f80f12f7f30fcce438a0ab8dd465d139409728055f302004",
+      "tests": 5,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "file": "spec/versions/v0.1/specs/20261029-0934-tech-离线配对与信令信任/executor/artifacts/junit/TEST-io.github.primedawn.artemis.pairing.DeviceTransportTest.xml",
+      "sha256": "dd3b4798751a8511d094c5c467b8e913ed15ef75504c535a4484f962cb9b611b",
+      "tests": 3,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    }
+  ],
+  "apks": [
+    {
+      "path": "android/app/build/outputs/apk/debug/app-debug.apk",
+      "sha256": "739a874363fb50428cc07d785e7d95b1ec9380004ae25e6b790dcb5debb1e8ee",
+      "bytes": 76263035
+    },
+    {
+      "path": "android/app/build/outputs/apk/androidTest/debug/app-debug-androidTest.apk",
+      "sha256": "9dc270575b6fff8bdf7cce293b94584ba959119221088753a8dbbe8cd9e417eb",
+      "bytes": 826100
+    }
+  ],
+  "okhttpAar": [
+    {
+      "name": "okhttp.aar",
+      "sha256": "0e9cbf6c7c373a5f0b0cde7f773185eb69b485faa19f76bcfab3310badbda901",
+      "matchesOfficialObservation": true
+    }
+  ],
+  "nodePackages": [
+    {
+      "path": "node_modules/@leichtgewicht/ip-codec",
+      "version": "2.0.5",
+      "license": "MIT",
+      "resolved": "https://registry.npmjs.org/@leichtgewicht/ip-codec/-/ip-codec-2.0.5.tgz",
+      "integrity": "sha512-Vo+PSpZG2/fmgmiNzYK9qWRh8h/CHrwD0mo1h1DzL4yzHNSfWYujGTYsWGreD000gcgmZ7K4Ys6Tx9TxtsKdDw=="
+    },
+    {
+      "path": "node_modules/@types/node",
+      "version": "24.10.1",
+      "license": "MIT",
+      "resolved": "https://registry.npmjs.org/@types/node/-/node-24.10.1.tgz",
+      "integrity": "sha512-GNWcUTRBgIRJD5zj+Tq0fKOJ5XZajIiBroOF0yvj2bSU1WvNdYS/dn9UxwsujGW4JX06dnHyjV2y9rRaybH0iQ=="
+    },
+    {
+      "path": "node_modules/@types/ws",
+      "version": "8.18.2",
+      "license": "MIT",
+      "resolved": "https://registry.npmjs.org/@types/ws/-/ws-8.18.2.tgz",
+      "integrity": "sha512-67MQl+fpWKVTT1NYdnmo3U4sc/xPo/zQBncVnI74qmQa0z/b+1g6iYqNmGCPbxO+zz2aklb08a0oHfegiVd0/w=="
+    },
+    {
+      "path": "node_modules/bonjour-service",
+      "version": "1.4.4",
+      "license": "MIT",
+      "resolved": "https://registry.npmjs.org/bonjour-service/-/bonjour-service-1.4.4.tgz",
+      "integrity": "sha512-jCZcVv7eoc4QesRscwEZtSROBen+6LpKAmBIsQYQrsAeVHLyMXWX/t6eIV5KiRZYNUBl8eVqImEEMQ8L5+c/Kw=="
+    },
+    {
+      "path": "node_modules/dns-packet",
+      "version": "5.6.1",
+      "license": "MIT",
+      "resolved": "https://registry.npmjs.org/dns-packet/-/dns-packet-5.6.1.tgz",
+      "integrity": "sha512-l4gcSouhcgIKRvyy99RNVOgxXiicE+2jZoNmaNmZ6JXiGajBOJAesk1OBlJuM5k2c+eudGdLxDqXuPCKIj6kpw=="
+    },
+    {
+      "path": "node_modules/fast-deep-equal",
+      "version": "3.1.3",
+      "license": "MIT",
+      "resolved": "https://registry.npmjs.org/fast-deep-equal/-/fast-deep-equal-3.1.3.tgz",
+      "integrity": "sha512-f3qQ9oQy9j2AhBe/H9VC91wLmKBCCU/gDOnKNAYG5hswO7BLKj09Hc5HYNz9cGI++xlpDCIgDaitVs03ATR84Q=="
+    },
+    {
+      "path": "node_modules/multicast-dns",
+      "version": "7.2.5",
+      "license": "MIT",
+      "resolved": "https://registry.npmjs.org/multicast-dns/-/multicast-dns-7.2.5.tgz",
+      "integrity": "sha512-2eznPJP8z2BFLX50tf0LuODrpINqP1RVIm/CObbTcBRITQgmC/TjcREF1NeTBzIcR5XO/ukWo+YHOjBbFwIupg=="
+    },
+    {
+      "path": "node_modules/thunky",
+      "version": "1.1.0",
+      "license": "MIT",
+      "resolved": "https://registry.npmjs.org/thunky/-/thunky-1.1.0.tgz",
+      "integrity": "sha512-eHY7nBftgThBqOyHGVN+l8gF0BucP09fMo0oO/Lb0w1OF80dJv+lDVpXG60WMQvkcxAkNybKsrEIE3ZtKGmPrA=="
+    },
+    {
+      "path": "node_modules/typescript",
+      "version": "6.0.3",
+      "license": "Apache-2.0",
+      "resolved": "https://registry.npmjs.org/typescript/-/typescript-6.0.3.tgz",
+      "integrity": "sha512-y2TvuxSZPDyQakkFRPZHKFm+KKVqIisdg9/CZwm9ftvKXLP8NRWj38/ODjNbr43SsoXqNuAisEf1GdCxqWcdBw=="
+    },
+    {
+      "path": "node_modules/undici-types",
+      "version": "7.16.0",
+      "license": "MIT",
+      "resolved": "https://registry.npmjs.org/undici-types/-/undici-types-7.16.0.tgz",
+      "integrity": "sha512-Zz+aZWSj8LE6zoxD+xrjh4VfkIG8Ya6LvYkZqtUQGJPZjYl53ypCaUwWqo7eI0x66KBGeRo+mlBEkMSeSZ38Nw=="
+    },
+    {
+      "path": "node_modules/ws",
+      "version": "8.22.0",
+      "license": "MIT",
+      "resolved": "https://registry.npmjs.org/ws/-/ws-8.22.0.tgz",
+      "integrity": "sha512-Ydggc987+RO0AnWtZ/7Wq9FtNvcrL1b/RO0ud9mWjUPgDrsAAwQSF51sm2hm1XofbU/4jkpGEsLFsZZxU+1DOg=="
+    }
+  ],
+  "pending": [
+    "Independent HTTP/TLS/WS and real browser tests",
+    "Real Windows Ctrl+C and mDNS lifecycle",
+    "3900-second real soak",
+    "Real S24 LAN/NSD and background/OBS/media"
+  ],
+  "internetDisconnected": false
+}
