@@ -1,0 +1,46 @@
+﻿=== Artemis 手机画面链路 测试运行 20261101-2359-run-002 ===
+开始时间: 2026-11-01T23:54:11.8645915+08:00
+工作树提交: babea59 docs(spec): 手机画面链路阶段二定稿
+
+### TC-01 Kotlin 帧头单测
+Command: gradlew -p android testDebugUnitTest --tests io.github.primedawn.artemis.media.MediaWireTest
+Timestamp: 2026-11-01T23:54:39.2107913+08:00
+To honour the JVM settings for this build a single-use Daemon process will be forked. For more on this, please refer to https://docs.gradle.org/8.13/userguide/gradle_daemon.html#sec:disabling_the_daemon in the Gradle documentation.
+Daemon will be stopped at the end of the build 
+> Task :app:preBuild
+> Task :app:preDebugBuild
+> Task :app:preDebugUnitTestBuild
+BUILD SUCCESSFUL in 27s
+Exit code: 0
+
+### TC-02 原生构建
+Command: powershell -File native/build.ps1
+Timestamp: 2026-11-01T23:54:51.4760109+08:00
+BUILD OK: C:\workspace\Artemis\native\out\ArtemisCamera.dll
+BUILD OK: C:\workspace\Artemis\native\out\synthetic-producer.exe
+BUILD OK: C:\workspace\Artemis\native\out\artemis-decode-host.exe
+Exit code: 0
+
+### TC-03 / TC-04 解码进程与共享内存
+Command: artemis-decode-host.exe --port 3450 ; feed-stream.ps1 ; shm-probe.exe
+Timestamp: 2026-11-01T23:54:58.4882511+08:00
+feed: sent_nals=63
+probe: magic=0x41435456 version=1 1280x720 stride=5120 format=1 writeIndex=120 frameIndex=59 pts=2066646
+Exit code: 0
+
+### 解码进程输出
+decode-host: listening on 127.0.0.1:3450
+decode-host: media channel connected
+decode-host: media channel closed, frames=60
+
+
+### TC-10 媒体自动重连
+Command: stop artemis-decode-host ; start artemis-decode-host ; shm-probe.exe（手机端不做任何操作）
+Timestamp: 2026-11-01T23:55:16.4834324+08:00
+重连前探针: mapping=absent
+恢复后探针1: mapping=absent
+恢复后探针2: mapping=absent
+Exit code: 0
+
+### 接收服务 media 事件
+

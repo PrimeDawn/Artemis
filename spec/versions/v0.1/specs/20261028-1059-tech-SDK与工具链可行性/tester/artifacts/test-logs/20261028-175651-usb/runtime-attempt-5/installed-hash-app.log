@@ -1,8 +1,0 @@
-Command: %USERPROFILE%\AppData\Local\Android\Sdk\platform-tools\adb.exe -d shell sha256sum /data/app/~~ihQ1VGm6wi9-B8i3JbKOcQ==/io.github.primedawn.artemis-JV301zcWBp-EyOEV4omSFw==/base.apk
-Timestamp: 2026-10-28T10:13:32.847676+00:00
-c57bc1be8329a9fc50d1258b43a0cf78d0451be78be37c0388bf684a01f8816a  /data/app/~~ihQ1VGm6wi9-B8i3JbKOcQ==/io.github.primedawn.artemis-JV301zcWBp-EyOEV4omSFw==/base.apk
-
---- stderr ---
-
-Exit code: 0
-Finished: 2026-10-28T10:13:33.012393+00:00

@@ -1,17 +1,17 @@
-﻿---
+---
 type: team-context
 schema_version: 1
 team_name: spec-20261101-1857-手机画面链路
 spec_dir: spec/versions/v0.1/specs/20261101-1857-tech-手机画面链路
 task_description: 手机 Camera2 采集 + MediaCodec 编码 H.264，经 TCP 传到 PC，FFmpeg 解码后写入共享内存，让 OBS 的 Artemis Camera 显示手机实时画面
-status: running
-phase: exploration
+status: archived
+phase: archived
 runtime: generic
 mode: gated
 execution: serial
 git_branch: tech/spec-20261101-1857-phone-media
 base_branch: dev
-pr_url:
+pr_url: https://github.com/PrimeDawn/Artemis/pull/6
 created_at: 2026-11-01T18:57:00+08:00
 updated_at: 2026-11-01T18:57:00+08:00
 ---
@@ -35,15 +35,22 @@ updated_at: 2026-11-01T18:57:00+08:00
 | T-001 | spec-explorer | 探索传输格式、编码参数与解码依赖 | done | explorer/exploration-report.html | 2026-11-01T19:15:00+08:00 | spec-explorer |
 | T-002 | spec-writer | 编写实现方案 | done | writer/plan.html | 2026-11-01T19:18:00+08:00 | spec-writer |
 | T-003 | spec-tester | 编写测试计划 | done | tester/test-plan.html | 2026-11-01T19:18:00+08:00 | spec-tester |
-| T-004 | spec-executor | 实现手机端采集编码与 PC 端接收解码 | pending | executor/summary.html | | spec-executor |
-| T-005 | spec-tester | 独立测试（手机画面出现在 OBS） | pending | tester/test-report.html | | spec-tester |
-| T-006 | spec-ender | 收尾归档与 PR | pending | ender/end-report.html | | spec-ender |
+| T-004 | spec-executor | 实现手机端采集编码与 PC 端接收解码 | done | executor/summary.html | 2026-11-01T22:30:00+08:00 | spec-executor |
+| T-005 | spec-tester | 独立测试（手机画面出现在 OBS） | done | tester/test-report.html | 2026-11-01T23:10:00+08:00 | spec-tester |
+| T-006 | spec-ender | 收尾归档与 PR | done | ender/end-report.html | 2026-11-02T00:05:00+08:00 | spec-ender |
 
 ## 问题闭环记录
 
 | 问题号 | 分类 | 发现者 | 负责角色 | 问题 | 解决方案 | 关联产物 | 状态 | 更新者 |
 |--------|------|--------|----------|------|----------|----------|------|--------|
 | I-001 | env | TeamLead | TeamLead | 本机无 FFmpeg 开发库，无法链接 libavcodec | 已装到 `C:\DEV\ArtemisEnv\ffmpeg`；链接验证通过（avcodec 63.25.102 / avutil 61.20.100 / swscale 10.6.100，h264 解码器存在，YUV420P→BGRA 可创建） | 本文件 | closed | TeamLead |
+
+| I-002 | bug | spec-executor | spec-executor | 解码组件启动即退出 | avcodec-63.dll 依赖 swresample-7.dll 未拷贝，构建脚本补齐 | executor/artifacts/decode-host-stream-test.log | closed | spec-executor |
+| I-003 | bug | spec-executor | spec-executor | 配置帧单独送包报错、断流后解码器状态未复位、FFmpeg 日志噪声 | 配置帧缓存后拼帧、新增 Decoder::reset()、日志回调过滤 | executor/artifacts/dh-out.txt | closed | spec-executor |
+| I-004 | bug | spec-tester | spec-debugger | 已连接后接收服务收不到 /media 升级 | 媒体连接使用默认 OkHttpClient，未复用证书固定；新增 pinnedClientFor | debugger/debug-001-fix.html | verified | spec-debugger |
+| I-005 | bug | spec-tester | spec-debugger | 媒体绑定被拒 media_bind_rejected | 绑定消息误用包名作设备标识，改为手机身份 ID | debugger/debug-002-fix.html | verified | spec-debugger |
+| I-006 | bug | user | spec-debugger | 画面高频闪烁色条 | 读共享内存失败即回退色条；改为保持上一帧 | debugger/debug-003-fix.html | verified | spec-debugger |
+| I-007 | bug | spec-tester | spec-debugger | 解码进程重启后画面不恢复 | 无重连策略、服务端不关手机连接、send 返回值不代表存活；补心跳与配置帧重发 | debugger/debug-004-fix.html | verified | spec-debugger |
 
 ## 决策记录
 
@@ -83,11 +90,11 @@ updated_at: 2026-11-01T18:57:00+08:00
 
 | 门禁 | 确认对象 | 决策 | 判定方式 | 决策时间 | 备注 |
 |------|----------|------|----------|----------|------|
-| gate-1 | 需求对齐 | pass | user | 2026-11-01T18:57:00+08:00 | 用户要求「先去看参考，别人怎么做的、为什么选那个做法」；已调研 scrcpy 并据此定 FFmpeg |
-| gate-2 | 方案与测试计划 | pending | user | | 待审阅 writer/plan.html（含改写 D-002 为 D-004）与 tester/test-plan.html；FFmpeg 依赖已就位 |
-| gate-3 | 实现确认 | pending | user | | |
-| gate-4 | 测试报告 | pending | user | | |
-| gate-5 | 归档 | pending | user | | |
+| gate-1 | 需求对齐 | pass | user | 2026-11-01T18:57:00+08:00 | 用户要求先看参考实现；已调研 scrcpy 并据此定 FFmpeg |
+| gate-2 | 方案与测试计划 | pass | user | 2026-11-01T22:01:00+08:00 | 用户执行 /spec-execute 视为放行 |
+| gate-3 | 实现确认 | pass | user | 2026-11-01T22:45:00+08:00 | 用户执行 /spec-test 视为放行 |
+| gate-4 | 测试报告 | pass | user | 2026-11-02T00:00:00+08:00 | 用户指示按当前工作区提交并收尾 |
+| gate-5 | 归档 | pass | user | 2026-11-02T00:05:00+08:00 | 本报告归档 |
 
 ## 角色交接
 

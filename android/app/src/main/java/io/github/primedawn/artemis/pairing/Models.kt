@@ -16,7 +16,7 @@ data class PeerIdentity(val id: String, val publicKeySpki: ByteArray, val label:
 data class TrustRecord(val peer: PeerIdentity, val trustedAt: Long, val expiresAt: Long? = null)
 data class DiscoveredPc(val peer: PeerIdentity, val address: InetAddress, val port: Int)
 enum class ConnectionStatus { DISCOVERING, AVAILABLE, AWAITING_APPROVAL, CONNECTING, CONNECTED, RECONNECTING, BUSY, IDENTITY_CHANGED, ERROR, PAUSED }
-data class ConnectionUiState(val status: ConnectionStatus = ConnectionStatus.DISCOVERING, val pcLabel: String? = null, val approvalRequestId: String? = null, val errorCode: String? = null, val pcIdentityHint: String? = null)
+data class ConnectionUiState(val status: ConnectionStatus = ConnectionStatus.DISCOVERING, val pcLabel: String? = null, val approvalRequestId: String? = null, val errorCode: String? = null, val pcIdentityHint: String? = null, val pcId: String? = null, val sessionId: String? = null, val host: String? = null, val port: Int? = null, val spki: ByteArray? = null)
 sealed interface ClientSignal {
     data class Description(val id: String, val sessionId: String, val epoch: String, val type: String, val sdp: String) : ClientSignal
     data class Candidate(val id: String, val sessionId: String, val epoch: String, val candidate: String?, val sdpMid: String?, val sdpMLineIndex: Int?) : ClientSignal

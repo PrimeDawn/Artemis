@@ -3,7 +3,7 @@ import { PairingError,parsePeer,canonicalProof,verifyIdentityProof,type Clock,ty
 import type { TrustRepository } from './trust-repository.js';
 export interface DeviceChannel { connectionId: string; send(event: unknown): void; close(code: number): void }
 export interface ConnectionManager {
-  devices(): DeviceView[]; state(): PublicState; select(deviceId: string): Promise<void>; disconnect(): Promise<void>; forget(deviceId: string): Promise<void>;
+  devices(): DeviceView[]; state(): PublicState; activeDevice(): string | null; select(deviceId: string): Promise<void>; disconnect(): Promise<void>; forget(deviceId: string): Promise<void>;
   subscribe(listener: (state: PublicState) => void): () => void; close(): Promise<void>;
   registerDevice(peer: PeerIdentity, channel: DeviceChannel, pcId: string): void; lostDevice(id: string, channel: DeviceChannel): void;
   decide(id: string, requestId: string, nonce: string, allow: boolean, signature: string): Promise<void>;
@@ -13,24 +13,25 @@ export function createConnectionManager(repo: TrustRepository, clock: Clock, ran
   const online=new Map<string,{peer:PeerIdentity;channel:DeviceChannel;pcId:string}>();
   const listeners=new Set<(state:PublicState)=>void>();
   let approval:{id:string;requestId:string;nonce:string;connectionId:string}|null=null;
-  let sessionId:string|null=null,closed=false;
+  let sessionId:string|null=null,activeDeviceId:string|null=null,closed=false;
   let operations=Promise.resolve();
   function fail(code:string,status=409):never{throw new PairingError(code,status);}
   function devices():DeviceView[]{
     const all=new Map(repo.list().map(r=>[r.peer.id,r.peer]));for(const [id,p]of online)all.set(id,p.peer);
     const intent=repo.readIntent();return [...all.values()].map(device=>({device:structuredClone(device),online:online.has(device.id),trusted:repo.find(device.id)!==null,state:approval?.id===device.id?'awaiting-approval':intent.deviceId===device.id&&intent.desired==='connected'?(sessionId?'connected':'reconnecting'):'available'}));
   }
-  function state():PublicState{return {devices:devices(),intent:repo.readIntent(),sessionId,expiresAt:null};}
+  function activeDevice():string|null{return activeDeviceId;}
+function state():PublicState{return {devices:devices(),intent:repo.readIntent(),sessionId,expiresAt:null};}
   function emit(){const value=state();for(const f of listeners)f(value);}
   function sender(){const intent=repo.readIntent();return intent.deviceId?online.get(intent.deviceId):undefined;}
   // Wire contract: the phone validates the exact key set `v,kind,sessionId,epoch` (DeviceClient.kt:70),
   // so `epoch` stays present as null even though the receiver channel no longer exists.
   function sendState(){const kind=sessionId?'ready':'waiting';const event={v:2,kind,sessionId,epoch:null};sender()?.channel.send(event);emit();}
-  function clearSession(){sessionId=null;}
-  function activate(id:string,manual=true){if(closed)return;const p=online.get(id);if(!p||!repo.find(id))return;clearSession();sessionId=randomUUID();p.channel.send({v:2,kind:'activated',manual});sendState();}
+  function clearSession(){sessionId=null;activeDeviceId=null;}
+  function activate(id:string,manual=true){if(closed)return;const p=online.get(id);if(!p||!repo.find(id))return;clearSession();sessionId=randomUUID();activeDeviceId=id;p.channel.send({v:2,kind:'activated',manual});sendState();}
   function run(action:()=>Promise<void>):Promise<void>{const work=operations.then(()=>{if(closed)fail('E_CLOSED');return action();});operations=work.catch(()=>{});return work;}
   return {
-    devices,state,subscribe:f=>{listeners.add(f);return()=>listeners.delete(f);},
+    devices,state,activeDevice,subscribe:f=>{listeners.add(f);return()=>listeners.delete(f);},
     registerDevice:(input,channel,pcId)=>{
       if(closed)fail('E_CLOSED');const peer=parsePeer(input);
       const known=repo.find(peer.id);if(known&&known.peer.publicKeySpki!==peer.publicKeySpki)fail('E_IDENTITY_CHANGED');

@@ -23,6 +23,8 @@ class ArtemisApplication : Application() {
     @Volatile private var discovery: NsdDiscoveryClient? = null
     private val foreground = AtomicBoolean(false)
     private var foregroundOwner: WeakReference<Any>? = null
+    // 媒体连接绑定需要手机身份 ID（不是包名）；启动协程里赋值，未就绪前为空。
+    @Volatile var deviceId: String = ""; private set
     private val main = Handler(Looper.getMainLooper())
     private val bootstrap = Executors.newSingleThreadExecutor { r -> Thread(r,"Artemis-startup").apply { isDaemon=true } }
     private var networks: ConnectivityManager? = null
@@ -36,6 +38,7 @@ class ArtemisApplication : Application() {
                 val repository=FileTrustRepository(File(noBackupFilesDir,"pairing"))
                 val label=Build.MODEL.filter { it.code>=32 && it.code!=127 }.take(64).ifBlank { "Android phone" }
                 val identity=KeystoreDeviceIdentity(label)
+                deviceId = identity.peer().id
                 val nsd=NsdDiscoveryClient(this)
                 val runtime=ConnectionController(nsd,OkHttpDeviceClient(identity),repository,{ connectionState=it },{ main.post(it) })
                 synchronized(this@ArtemisApplication) {

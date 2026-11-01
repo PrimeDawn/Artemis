@@ -1,7 +1,0 @@
-Command: E:\Dev\Artemis\Android\Sdk\platform-tools\adb.exe -e exec-out screencap -p
-Timestamp: 2026-10-28T12:15:20.550695+00:00
-Binary output: 63030 bytes, SHA256 08b07916df10b22316052a4ce03d6ef85a1c5c4921a11d5c1eda706fc52ec5fa
---- stderr ---
-
-Exit code: 0
-Finished: 2026-10-28T12:15:20.996304+00:00

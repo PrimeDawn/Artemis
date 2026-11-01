@@ -109,7 +109,7 @@ class ConnectionController(private val discovery: DiscoveryClient, private val c
                 if (value.sessionId != null) {
                     if (pc.peer.id in renewingConsent) return
                     if (pc.peer.id !in activated || repository.get(pc.peer.id) == null || repository.isSuppressed(pc.peer.id)) { client.disconnectPeer(pc.peer.id); return }
-                    activePc = pc.peer.id; attempts[pc.peer.id] = 0; state(ConnectionUiState(ConnectionStatus.CONNECTED, pc.peer.label))
+                    activePc = pc.peer.id; attempts[pc.peer.id] = 0; state(ConnectionUiState(ConnectionStatus.CONNECTED, pc.peer.label, pcId = pc.peer.id, sessionId = value.sessionId, host = pc.address.hostAddress, port = pc.port, spki = pc.peer.publicKeySpki))
                 } else if (activePc == null || activePc == pc.peer.id) { if (activePc == pc.peer.id) activePc = null; activated.remove(pc.peer.id); state(ConnectionUiState(ConnectionStatus.AVAILABLE, pc.peer.label)) }
             }
             is ServerEvent.Trusted -> { pending = null; renewingConsent.remove(pc.peer.id) }

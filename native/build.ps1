@@ -1,7 +1,8 @@
 ﻿# 编译 Artemis Camera 过滤器与合成帧 producer。
 # 依据 writer/plan.html §4：不引入 CMake，直接调用 cl.exe。
 param(
-    [string]$VsRoot = 'C:\DEV\ArtemisEnv\VS2022BuildTools'
+    [string]$VsRoot = 'C:\DEV\ArtemisEnv\VS2022BuildTools',
+    [string]$FfmpegRoot = 'C:\DEV\ArtemisEnv\ffmpeg\ffmpeg-master-latest-win64-gpl-shared'
 )
 
 $ErrorActionPreference = 'Stop'
@@ -22,6 +23,11 @@ $filterSources = @(
     (Join-Path $root 'artemis-camera\FrameSource.cpp')
 )
 $producerSources = @((Join-Path $root 'synthetic-producer\main.cpp'))
+$decodeSources = @(
+    (Join-Path $root 'decode-host\main.cpp'),
+    (Join-Path $root 'decode-host\Decoder.cpp'),
+    (Join-Path $root 'decode-host\SharedWriter.cpp')
+)
 
 $common = '/nologo /EHsc /std:c++17 /O2 /W3 /utf-8 /DUNICODE /D_UNICODE /DNOMINMAX /DWIN32_LEAN_AND_MEAN'
 
@@ -29,8 +35,9 @@ $dll = "cl $common /LD `"$($filterSources -join '" "')`" /Fe:`"$out\ArtemisCamer
        "/link /EXPORT:DllGetClassObject /EXPORT:DllCanUnloadNow /EXPORT:DllRegisterServer /EXPORT:DllUnregisterServer " +
        "ole32.lib oleaut32.lib uuid.lib strmiids.lib advapi32.lib user32.lib"
 $exe = "cl $common `"$($producerSources -join '" "')`" /Fe:`"$out\synthetic-producer.exe`" /link kernel32.lib"
+$decode = "cl $common /I`"$FfmpegRoot\include`" `"$($decodeSources -join '" "')`" /Fe:`"$out\artemis-decode-host.exe`" /link /LIBPATH:`"$FfmpegRoot\lib`" avcodec.lib avutil.lib swscale.lib ws2_32.lib"
 
-$script = "call `"$($vcvars.FullName)`" >nul && $dll && $exe"
+$script = "call `"$($vcvars.FullName)`" >nul && $dll && $exe && $decode"
 Write-Host "Building Artemis Camera..."
 $output = cmd /c $script 2>&1
 $code = $LASTEXITCODE
@@ -43,11 +50,17 @@ if ($code -ne 0) {
 
 $dllPath = Join-Path $out 'ArtemisCamera.dll'
 $exePath = Join-Path $out 'synthetic-producer.exe'
-if (-not (Test-Path $dllPath) -or -not (Test-Path $exePath)) {
+$decodePath = Join-Path $out 'artemis-decode-host.exe'
+if (-not (Test-Path $dllPath) -or -not (Test-Path $exePath) -or -not (Test-Path $decodePath)) {
     Write-Host "BUILD FAILED: expected artifacts missing" -ForegroundColor Red
     exit 3
 }
 
 Write-Host "BUILD OK: $dllPath"
 Write-Host "BUILD OK: $exePath"
+Write-Host "BUILD OK: $decodePath"
+foreach ($dll in @('avcodec-63.dll','avutil-61.dll','swscale-10.dll','swresample-7.dll')) {
+    $source = Join-Path $FfmpegRoot "bin\$dll"
+    if (Test-Path $source) { Copy-Item $source (Join-Path $out $dll) -Force }
+}
 exit 0
