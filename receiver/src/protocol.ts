@@ -8,7 +8,7 @@ export interface TrustRecord { peer: PeerIdentity; trustedAt: number; expiresAt:
 export interface ConnectIntent { deviceId: string | null; desired: 'connected' | 'disconnected' }
 export interface DeviceView { device: PeerIdentity; online: boolean; trusted: boolean; state: 'available' | 'awaiting-approval' | 'connecting' | 'connected' | 'reconnecting' | 'busy' | 'identity-changed' }
 export interface PublicState { devices: DeviceView[]; intent: ConnectIntent; sessionId: string | null; expiresAt: null }
-export interface PairingConfig { controlHost: '127.0.0.1'; controlPort: number; lanHost: string; tlsPort: number; dataDir: string; opensslPath: string; testOnly?: boolean }
+export interface PairingConfig { controlHost: '127.0.0.1'; controlPort: number; lanHost: string; tlsPort: number; dataDir: string; opensslPath: string; mediaPort?: number; testOnly?: boolean }
 export interface TlsIdentity { peer: PeerIdentity; privateKeyPem: Buffer; certificatePem: Buffer; certificateExpiresAt: number; ipAddress: string }
 export type SafeLogger = (event: { name: string; requestId: string; code: string | null }) => void;
 export class PairingError extends Error {

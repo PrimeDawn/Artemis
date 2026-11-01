@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>测试计划 · 手机画面链路</title>
+
+<meta name="rk:title" content="测试计划：手机画面链路">
+<meta name="rk:type" content="test-plan">
+<meta name="rk:version" content="v0.1">
+<meta name="rk:category" content="tech">
+<meta name="rk:spec-dir" content="spec/versions/v0.1/specs/20261101-1857-tech-手机画面链路">
+<meta name="rk:role" content="spec-tester">
+<meta name="rk:mode" content="gated">
+<meta name="rk:created" content="2026-11-01">
+<meta name="rk:updated" content="2026-11-01">
+<meta name="rk:revision" content="1">
+<meta name="rk:git-branch" content="tech/spec-20261101-1857-phone-media">
+<meta name="rk:base-branch" content="dev">
+<meta name="rk:pr-url" content="">
+<meta name="rk:tags" content="spec,test-plan,media,obs">
+
+<link rel="rk-plan" href="../writer/plan.html">
+<link rel="rk-ledger" href="../lead/team-context.md">
+<link rel="stylesheet" href="../../../../../../html-report/assets/rk-report.css">
+<script defer src="../rk-manifest.js"></script>
+<script defer src="../../../../../../html-report/assets/rk-report.js"></script>
+</head>
+<body>
+
+<header class="rk-head">
+<h1>测试计划：手机画面链路</h1>
+<div class="rk-meta">
+<span><b>类型</b> test-plan</span>
+<span><b>Spec</b> <code>20261101-1857-tech-手机画面链路</code></span>
+<span><b>角色</b> spec-tester</span>
+<span><b>模式</b> gated</span>
+<span><b>分支</b> <code>tech/spec-20261101-1857-phone-media</code> ← <code>dev</code></span>
+<span><b>PR</b> —</span>
+<span><b>创建</b> 2026-11-01</span>
+<span><b>修订</b> r1（2026-11-01）</span>
+</div>
+</header>
+
+<nav class="rk-revbar"></nav>
+
+<section class="rk-verdict">
+<div class="rk-verdict-label">结论</div>
+<p>真值只有一条：OBS 里的画面必须是手机正在对着的东西。其余用例保证这条链路可重复、可定位失败点。</p>
+</section>
+
+<h2>修订历史</h2>
+<table class="rk-revs">
+<thead><tr><th>修订</th><th>日期</th><th>修改人</th><th>改了什么</th><th>原因</th></tr></thead>
+<tbody>
+<tr><td>r1</td><td>2026-11-01</td><td>spec-tester</td><td>初版：9 项用例与环境要求</td><td>依据 writer/plan.html</td></tr>
+</tbody>
+</table>
+
+<h2>1. 环境</h2>
+<table>
+<thead><tr><th>项</th><th>要求</th><th>当前</th></tr></thead>
+<tbody>
+<tr><td>设备</td><td>Android 设备，含 Camera2</td><td>模拟器可用；真机 Galaxy S24 已授权</td></tr>
+<tr><td>OBS</td><td>33.x，已注册 Artemis Camera</td><td>已就绪</td></tr>
+<tr><td>FFmpeg</td><td>预编译 shared 包</td><td>下载中</td></tr>
+<tr><td>网络</td><td>手机与 PC 同一局域网</td><td>需实测</td></tr>
+</tbody>
+</table>
+
+<h2>2. 用例</h2>
+<table>
+<thead><tr><th>编号</th><th>用例</th><th>期望</th></tr></thead>
+<tbody>
+<tr><td>TC-01</td><td>Kotlin 单元测试（帧头编解码）</td><td>12 字节帧头往返一致，标志位正确</td></tr>
+<tr><td>TC-02</td><td><code>decode-host</code> 构建</td><td>退出 0，产出 exe，能加载 FFmpeg DLL</td></tr>
+<tr><td>TC-03</td><td>解码进程接收首包</td><td>收到 CONFIG 后建立解码器，日志可见</td></tr>
+<tr><td>TC-04</td><td>共享内存写入</td><td>解码进程运行后，探针能读到非零帧号递增</td></tr>
+<tr><td>TC-05</td><td>OBS 显示手机画面</td><td>画面内容与手机取景一致，可辨认</td></tr>
+<tr><td>TC-06</td><td>帧率与延迟</td><td>OBS 统计接近 30fps；记录端到端延迟实测值</td></tr>
+<tr><td>TC-07</td><td>手机断开</td><td>OBS 保留最后一帧，不崩溃、不冻结</td></tr>
+<tr><td>TC-08</td><td>重新连接</td><td>画面恢复，无需重启 OBS 或解码进程</td></tr>
+<tr><td>TC-09</td><td>回滚</td><td>停掉解码进程后回到合成画面</td></tr>
+</tbody>
+</table>
+
+<h2>3. 证据要求</h2>
+<ul>
+<li>命令类：日志含 <code>Command:</code>、退出码、ISO8601 时间戳</li>
+<li>画面类：OBS 截图，须能看出与手机取景一致（同一物体/同一角度）</li>
+<li>延迟：记录测量方法（如手机拍秒表、OBS 同屏对照）与实测值，不允许估算后当作实测</li>
+</ul>
+<p>不使用 mock：全程真实手机、真实 TLS 连接、真实解码进程、真实 OBS。</p>
+
+<h2>4. 通过标准</h2>
+<ol>
+<li>TC-01～TC-04 全部通过且退出 0。</li>
+<li>TC-05 有截图且内容可辨认为手机取景。</li>
+<li>TC-07 有断流前后两张截图。</li>
+<li>TC-06 给出实测延迟数值与测量方式。</li>
+</ol>
+
+<h2>5. 失败处置</h2>
+<table>
+<thead><tr><th>现象</th><th>先查</th></tr></thead>
+<tbody>
+<tr><td>OBS 仍是色条</td><td>解码进程是否在写共享内存；探针读帧号是否变化</td></tr>
+<tr><td>绿屏/花屏</td><td>像素格式与 stride；<code>sws_scale</code> 目标格式是否 BGRA</td></tr>
+<tr><td>帧率远低于 30</td><td>编码码率、WS 转发是否阻塞、解码是否软解瓶颈</td></tr>
+<tr><td>断流后 OBS 异常</td><td>过滤器在无新帧时的行为（应保留最后一帧）</td></tr>
+</tbody>
+</table>
+
+<h2>关联产物</h2>
+<h3>本报告引用</h3>
+<ul class="rk-links">
+<li><a href="../writer/plan.html" data-rk-link="plan">实现计划</a></li>
+<li><a href="../explorer/exploration-report.html" data-rk-link="exploration-report">探索报告</a></li>
+<li><a href="../lead/team-context.md" data-rk-link="ledger">运行账本</a></li>
+</ul>
+<h3>引用本报告</h3>
+<ul class="rk-backlinks">
+<li>tester/test-report.html（待创建）</li>
+</ul>
+
+</body>
+</html>

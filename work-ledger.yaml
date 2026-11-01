@@ -129,7 +129,7 @@ work_items:
   - id: SPEC-phone-media
     kind: tech
     title: 手机画面进 OBS（H.264 over TCP）
-    status: planned
+    status: completed
     goal: "goal#artemis-v0.1"
     milestone: VERSION-v0.1
     priority: P0
@@ -145,7 +145,7 @@ work_items:
     paths:
       - spec/versions/v0.1/version-context.md
       - spec/versions/v0.1/plan.html
-
+    verification: {evidence_level: locally_verified}
   - id: SPEC-audio-device
     kind: tech
     title: 虚拟麦克风（内核音频驱动）

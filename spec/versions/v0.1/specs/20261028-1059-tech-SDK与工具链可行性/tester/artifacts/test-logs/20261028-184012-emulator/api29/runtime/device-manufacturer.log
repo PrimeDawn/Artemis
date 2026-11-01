@@ -1,8 +1,0 @@
-Command: %USERPROFILE%\AppData\Local\Android\Sdk\platform-tools\adb.exe -e shell getprop ro.product.manufacturer
-Timestamp: 2026-10-28T10:49:11.146465+00:00
-unknown
-
---- stderr ---
-
-Exit code: 0
-Finished: 2026-10-28T10:49:11.491957+00:00

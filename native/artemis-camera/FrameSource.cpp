@@ -171,7 +171,21 @@ namespace artemis
             return;
         }
 
-        // 没有 producer：持续输出合成色条，画面上的帧号仍单调递增。
+        // 读取失败（写入中/映射尚未就绪）：若曾经读到过画面，继续输出上一帧，避免闪烁。
+        // 只有从未拿到过任何一帧时，才回退到合成色条。
+        if (lastCopyValid_ && !lastCopy_.empty())
+        {
+            const uint32_t copyStride = std::min(stride, static_cast<uint32_t>(lastCopy_.size() / std::max<uint32_t>(height, 1)));
+            for (uint32_t y = 0; y < height; ++y)
+            {
+                const uint64_t sourceOffset = static_cast<uint64_t>(y) * copyStride;
+                if (sourceOffset + copyStride > lastCopy_.size())
+                    break;
+                std::memcpy(destination + static_cast<uint64_t>(y) * stride, lastCopy_.data() + sourceOffset, std::min(stride, copyStride));
+            }
+            return;
+        }
+
         RenderBars(width, height, destination, stride, syntheticIndex_++);
     }
 }

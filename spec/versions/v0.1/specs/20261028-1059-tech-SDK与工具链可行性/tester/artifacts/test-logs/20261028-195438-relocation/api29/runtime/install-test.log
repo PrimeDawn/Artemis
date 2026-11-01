@@ -1,9 +1,0 @@
-Command: E:\Dev\Artemis\Android\Sdk\platform-tools\adb.exe -e install -r %PROJECT_ROOT%\android\app\build\outputs\apk\androidTest\debug\app-debug-androidTest.apk
-Timestamp: 2026-10-28T12:10:42.662307+00:00
-Performing Streamed Install
-Success
-
---- stderr ---
-
-Exit code: 0
-Finished: 2026-10-28T12:10:42.954614+00:00

@@ -19,6 +19,15 @@ class PinnedTrustManager(expectedSpkiSha256: ByteArray) : X509TrustManager {
     override fun checkClientTrusted(chain: Array<out X509Certificate>, authType: String) { throw java.security.cert.CertificateException("E_TLS_IDENTITY") }
     override fun getAcceptedIssuers(): Array<X509Certificate> = emptyArray()
 }
+fun pinnedClientFor(spki: ByteArray): OkHttpClient {
+    val trust = PinnedTrustManager(MessageDigest.getInstance("SHA-256").digest(spki))
+    val tls = SSLContext.getInstance("TLS").apply { init(null, arrayOf(trust), null) }
+    return OkHttpClient.Builder().sslSocketFactory(tls.socketFactory, trust)
+        .proxy(Proxy.NO_PROXY).followRedirects(false).followSslRedirects(false).retryOnConnectionFailure(false)
+        .connectTimeout(10, TimeUnit.SECONDS).writeTimeout(10, TimeUnit.SECONDS).readTimeout(5, TimeUnit.SECONDS)
+        .webSocketCloseTimeout(1, TimeUnit.SECONDS)
+        .callTimeout(0, TimeUnit.SECONDS).pingInterval(30, TimeUnit.SECONDS).build()
+}
 fun pinnedClient(pc: DiscoveredPc): OkHttpClient {
     val trust = PinnedTrustManager(MessageDigest.getInstance("SHA-256").digest(pc.peer.publicKeySpki))
     val tls = SSLContext.getInstance("TLS").apply { init(null, arrayOf(trust), null) }

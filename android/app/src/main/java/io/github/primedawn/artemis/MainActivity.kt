@@ -29,10 +29,28 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import io.github.primedawn.artemis.pairing.ConnectionScreen
+import io.github.primedawn.artemis.pairing.ConnectionStatus
+import io.github.primedawn.artemis.media.MediaSessionCoordinator
+import android.Manifest
+import android.content.pm.PackageManager
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.core.content.ContextCompat
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.remember
 
 // Spec2 writer/plan.html r2 §3.5: UI observes the Application-owned controller.
 class MainActivity : ComponentActivity() {
     private var visible = false
+    private val media by lazy { MediaSessionCoordinator(this) }
+    private var pendingMedia: (() -> Unit)? = null
+    private val cameraPermission = registerForActivityResult(ActivityResultContracts.RequestPermission()) { granted ->
+        if (granted) pendingMedia?.invoke()
+        pendingMedia = null
+    }
+    private fun ensureCameraThen(action: () -> Unit) {
+        val granted = ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED
+        if (granted) action() else { pendingMedia = action; cameraPermission.launch(Manifest.permission.CAMERA) }
+    }
     private val screenEvents = object : BroadcastReceiver() {
         override fun onReceive(context: Context, intent: Intent) {
             if (intent.action == Intent.ACTION_SCREEN_OFF) {
@@ -58,7 +76,22 @@ class MainActivity : ComponentActivity() {
             MaterialTheme(colorScheme = if (isSystemInDarkTheme()) darkColorScheme() else lightColorScheme()) {
                 Surface(modifier = Modifier.fillMaxSize()) {
                     val app=application as ArtemisApplication
-                    ConnectionScreen(app.connectionState,app::approve,app::disconnect,app::forgetCurrent)
+                    val state = app.connectionState
+                    val mediaHost = remember(state.sessionId) { state.host }
+                    LaunchedEffect(state.status, state.sessionId, state.host, state.port, state.pcId, state.spki) {
+                        val host = mediaHost
+                        val port = state.port
+                        val sessionId = state.sessionId
+                        val pcId = state.pcId
+                        val spki = state.spki
+                        android.util.Log.i("ArtemisMedia", "effect status=${state.status} host=$host port=$port session=$sessionId pc=$pcId spki=${spki?.size}")
+                        if (state.status == ConnectionStatus.CONNECTED && host != null && port != null && sessionId != null && pcId != null && spki != null) {
+                            ensureCameraThen { media.start(pcId, app.deviceId, host, port, sessionId, spki) }
+                        } else {
+                            media.stop()
+                        }
+                    }
+                    ConnectionScreen(state,app::approve,app::disconnect,app::forgetCurrent)
                 }
             }
         }
@@ -79,5 +112,9 @@ class MainActivity : ComponentActivity() {
         if (!isChangingConfigurations) (application as ArtemisApplication).setForeground(this,false)
         super.onStop()
     }
-    override fun onDestroy() { unregisterReceiver(screenEvents); super.onDestroy() }
+    override fun onDestroy() {
+        media.stop()
+        if (Build.VERSION.SDK_INT >= 33) unregisterReceiver(screenEvents) else unregisterReceiver(screenEvents)
+        super.onDestroy()
+    }
 }

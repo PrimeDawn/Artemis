@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>修复记录 · 媒体连接复用证书固定</title>
+
+<meta name="rk:title" content="修复记录：媒体连接复用证书固定">
+<meta name="rk:type" content="debug">
+<meta name="rk:version" content="v0.1">
+<meta name="rk:category" content="tech">
+<meta name="rk:spec-dir" content="spec/versions/v0.1/specs/20261101-1857-tech-手机画面链路">
+<meta name="rk:role" content="spec-debugger">
+<meta name="rk:mode" content="gated">
+<meta name="rk:created" content="2026-11-01">
+<meta name="rk:updated" content="2026-11-01">
+<meta name="rk:revision" content="1">
+<meta name="rk:git-branch" content="tech/spec-20261101-1857-phone-media">
+<meta name="rk:base-branch" content="dev">
+<meta name="rk:pr-url" content="">
+
+<link rel="rk-debug" href="debug-001.html">
+<link rel="rk-test-report" href="../tester/test-report.html">
+<link rel="rk-ledger" href="../lead/team-context.md">
+<link rel="stylesheet" href="../../../../../../html-report/assets/rk-report.css">
+<script defer src="../rk-manifest.js"></script>
+<script defer src="../../../../../../html-report/assets/rk-report.js"></script>
+</head>
+<body>
+
+<header class="rk-head">
+<h1>修复记录：媒体连接复用证书固定</h1>
+<div class="rk-meta">
+<span><b>类型</b> debug-fix</span>
+<span><b>编号</b> debug-001-fix（I-004）</span>
+<span><b>角色</b> spec-debugger</span>
+<span><b>分支</b> <code>tech/spec-20261101-1857-phone-media</code> ← <code>dev</code></span>
+<span><b>创建</b> 2026-11-01</span>
+<span><b>修订</b> r1（2026-11-01）</span>
+</div>
+</header>
+
+<nav class="rk-revbar"></nav>
+
+<section class="rk-verdict is-pass">
+<div class="rk-verdict-label">结果</div>
+<p>修复后接收服务出现 <code>media_bound</code>，解码进程出现 <code>media channel connected</code>，媒体通道建立成功。</p>
+</section>
+
+<h2>修订历史</h2>
+<table class="rk-revs">
+<thead><tr><th>修订</th><th>日期</th><th>修改人</th><th>改了什么</th><th>原因</th></tr></thead>
+<tbody>
+<tr><td>r1</td><td>2026-11-01</td><td>spec-debugger</td><td>初版：改动清单与复验</td><td>按 debug-001 结论实施</td></tr>
+</tbody>
+</table>
+
+<h2>1. 改动</h2>
+<table>
+<thead><tr><th>文件</th><th>改动</th></tr></thead>
+<tbody>
+<tr><td><code>pairing/PinnedTrustManager.kt</code></td><td>新增 <code>pinnedClientFor(spki: ByteArray)</code>，与 <code>pinnedClient(pc)</code> 使用同一套 <code>PinnedTrustManager</code>、同一组超时与 WebSocket 策略</td></tr>
+<tr><td><code>pairing/Models.kt</code></td><td><code>ConnectionUiState</code> 增加 <code>spki: ByteArray?</code></td></tr>
+<tr><td><code>pairing/ConnectionController.kt</code></td><td>会话建立时填入 <code>pc.peer.publicKeySpki</code></td></tr>
+<tr><td><code>media/MediaSessionCoordinator.kt</code></td><td><code>start</code> 接收 <code>spki</code>，改用 <code>pinnedClientFor(spki)</code></td></tr>
+<tr><td><code>MainActivity.kt</code></td><td>把 <code>state.spki</code> 传入启动调用</td></tr>
+</tbody>
+</table>
+
+<h2>2. 复验</h2>
+<pre>接收服务：{"name":"media_bound","requestId":"d9292bec-...","code":null}
+解码进程：decode-host: media channel connected
+共享内存：frameIndex 810 → 899（3 秒，约 29.7fps）</pre>
+<p>复验环境为真机 SM-S9210，画面最终在 OBS 画布可见。</p>
+
+<h2>3. 回归影响</h2>
+<ul>
+<li>控制连接仍走原有 <code>pinnedClient(pc)</code>，未改动</li>
+<li>媒体连接与配对复用同一证书固定策略，任一侧证书变化都会被同样拒绝</li>
+<li>未引入新的依赖</li>
+</ul>
+
+<h2>关联产物</h2>
+<h3>本报告引用</h3>
+<ul class="rk-links">
+<li><a href="debug-001.html" data-rk-link="debug">诊断记录</a></li>
+<li><a href="../tester/test-report.html" data-rk-link="test-report">测试报告</a></li>
+<li><a href="../lead/team-context.md" data-rk-link="ledger">运行账本</a></li>
+</ul>
+<h3>引用本报告</h3>
+<ul class="rk-backlinks">
+<li><a href="../tester/test-report.html" data-rk-backlink="test-report">测试报告</a></li>
+</ul>
+
+</body>
+</html>

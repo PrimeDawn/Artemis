@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>缺陷诊断 · 媒体绑定被拒</title>
+
+<meta name="rk:title" content="缺陷诊断：媒体绑定被拒">
+<meta name="rk:type" content="debug">
+<meta name="rk:version" content="v0.1">
+<meta name="rk:category" content="tech">
+<meta name="rk:spec-dir" content="spec/versions/v0.1/specs/20261101-1857-tech-手机画面链路">
+<meta name="rk:role" content="spec-debugger">
+<meta name="rk:mode" content="gated">
+<meta name="rk:created" content="2026-11-01">
+<meta name="rk:updated" content="2026-11-01">
+<meta name="rk:revision" content="1">
+<meta name="rk:git-branch" content="tech/spec-20261101-1857-phone-media">
+<meta name="rk:base-branch" content="dev">
+<meta name="rk:pr-url" content="">
+
+<link rel="rk-test-report" href="../tester/test-report.html">
+<link rel="rk-ledger" href="../lead/team-context.md">
+<link rel="stylesheet" href="../../../../../../html-report/assets/rk-report.css">
+<script defer src="../rk-manifest.js"></script>
+<script defer src="../../../../../../html-report/assets/rk-report.js"></script>
+</head>
+<body>
+
+<header class="rk-head">
+<h1>缺陷诊断：媒体绑定被拒</h1>
+<div class="rk-meta">
+<span><b>类型</b> debug</span>
+<span><b>编号</b> debug-002（I-005）</span>
+<span><b>角色</b> spec-debugger</span>
+<span><b>分支</b> <code>tech/spec-20261101-1857-phone-media</code> ← <code>dev</code></span>
+<span><b>创建</b> 2026-11-01</span>
+<span><b>修订</b> r1（2026-11-01）</span>
+</div>
+</header>
+
+<nav class="rk-revbar"></nav>
+
+<section class="rk-verdict">
+<div class="rk-verdict-label">结论</div>
+<p>媒体连接把应用包名当成了设备标识发给服务端，与会话里的真实设备 ID 不一致，绑定校验按设计拒绝。</p>
+</section>
+
+<h2>修订历史</h2>
+<table class="rk-revs">
+<thead><tr><th>修订</th><th>日期</th><th>修改人</th><th>改了什么</th><th>原因</th></tr></thead>
+<tbody>
+<tr><td>r1</td><td>2026-11-01</td><td>spec-debugger</td><td>初版：现象、根因与修复方案</td><td>I-004 修复后暴露的第二层问题</td></tr>
+</tbody>
+</table>
+
+<h2>1. 现象</h2>
+<pre>{"name":"media_bind_rejected","requestId":"","code":"E_INPUT"}</pre>
+<p>媒体连接已能被服务端接收（upgrade 成功），但首条绑定消息未通过校验，连接被关闭，解码进程仍无 <code>media channel connected</code>。</p>
+
+<h2>2. 定位</h2>
+<table>
+<thead><tr><th>检查点</th><th>结果</th></tr></thead>
+<tbody>
+<tr><td>服务端校验条件（<code>authorizeMediaHello</code>）</td><td>要求 <code>pcId</code>、<code>deviceId</code>、<code>sessionId</code> 与会话完全一致</td></tr>
+<tr><td>客户端发送内容</td><td><code>pcId</code> 正确；<code>sessionId</code> 正确；<code>deviceId</code> 传的是 <code>context.packageName</code></td></tr>
+<tr><td>会话中的 deviceId</td><td><code>manager.activeDevice()</code>，即手机身份 ID（43 字符 base64url）</td></tr>
+</tbody>
+</table>
+<p>两者永远不可能相等，因此每次绑定都被拒。</p>
+
+<h2>3. 根因</h2>
+<p><code>MediaSessionCoordinator.start</code> 组装 <code>MediaConnection</code> 时，设备标识位置复用了 <code>context.packageName</code>。包名是 <code>io.github.primedawn.artemis</code>，与身份 ID 无关。</p>
+
+<h2>4. 修复方案</h2>
+<ol>
+<li><code>ArtemisApplication</code> 暴露 <code>deviceId</code>（来自 <code>identity.peer().id</code>）</li>
+<li><code>MediaSessionCoordinator.start</code> 增加 <code>deviceId</code> 参数并传给 <code>MediaConnection</code></li>
+<li><code>MainActivity</code> 传入 <code>app.deviceId</code></li>
+</ol>
+
+<h2>关联产物</h2>
+<h3>本报告引用</h3>
+<ul class="rk-links">
+<li><a href="../tester/test-report.html" data-rk-link="test-report">测试报告</a></li>
+<li><a href="../lead/team-context.md" data-rk-link="ledger">运行账本</a></li>
+</ul>
+<h3>引用本报告</h3>
+<ul class="rk-backlinks">
+<li><a href="debug-002-fix.html" data-rk-backlink="fix">修复记录</a></li>
+</ul>
+
+</body>
+</html>

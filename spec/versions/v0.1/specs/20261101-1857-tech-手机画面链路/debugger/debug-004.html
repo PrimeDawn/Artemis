@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>缺陷诊断 · 媒体通道断开后不恢复</title>
+<meta name="rk:title" content="缺陷诊断：媒体通道断开后不恢复">
+<meta name="rk:type" content="debug">
+<meta name="rk:version" content="v0.1">
+<meta name="rk:category" content="tech">
+<meta name="rk:spec-dir" content="spec/versions/v0.1/specs/20261101-1857-tech-手机画面链路">
+<meta name="rk:role" content="spec-debugger">
+<meta name="rk:mode" content="gated">
+<meta name="rk:created" content="2026-11-01">
+<meta name="rk:updated" content="2026-11-01">
+<meta name="rk:revision" content="2">
+<meta name="rk:git-branch" content="tech/spec-20261101-1857-phone-media">
+<meta name="rk:base-branch" content="dev">
+<meta name="rk:pr-url" content="">
+<link rel="rk-test-report" href="../tester/test-report.html">
+<link rel="rk-ledger" href="../lead/team-context.md">
+<link rel="stylesheet" href="../../../../../../html-report/assets/rk-report.css">
+<script defer src="../rk-manifest.js"></script>
+<script defer src="../../../../../../html-report/assets/rk-report.js"></script>
+</head>
+<body>
+<header class="rk-head">
+<h1>缺陷诊断：媒体通道断开后不恢复</h1>
+<div class="rk-meta">
+<span><b>类型</b> debug</span>
+<span><b>编号</b> debug-004（I-007）</span>
+<span><b>角色</b> spec-debugger</span>
+<span><b>分支</b> <code>tech/spec-20261101-1857-phone-media</code> ← <code>dev</code></span>
+<span><b>创建</b> 2026-11-01</span>
+<span><b>修订</b> r2（2026-11-01）</span>
+</div>
+</header>
+<nav class="rk-revbar"></nav>
+<section class="rk-verdict">
+<div class="rk-verdict-label">结论</div>
+<p>三个独立原因叠加：手机端没有重连策略；接收服务在解码进程消失后不关闭手机连接；手机端只依据 <code>send()</code> 返回值判断连接状态，对端已消失仍继续发送。</p>
+</section>
+<h2>修订历史</h2>
+<table class="rk-revs">
+<thead><tr><th>修订</th><th>日期</th><th>修改人</th><th>改了什么</th><th>原因</th></tr></thead>
+<tbody>
+<tr><td>r1</td><td>2026-11-01</td><td>spec-debugger</td><td>初版：现象与初步定位</td><td>用户反馈画面不再恢复</td></tr>
+<tr><td>r2</td><td>2026-11-01</td><td>spec-debugger</td><td>补齐第三个根因（存活判断错误）与重连后缺参数集的问题</td><td>修复过程中逐层暴露</td></tr>
+</tbody>
+</table>
+<h2>1. 现象</h2>
+<p>解码进程退出后重新启动，手机仍显示「已连接」，但共享内存不再更新，OBS 画面停在最后一帧；必须重启手机 App 才能恢复。</p>
+<h2>2. 定位过程与根因</h2>
+<table>
+<thead><tr><th>层次</th><th>观测</th><th>根因</th></tr></thead>
+<tbody>
+<tr><td>接收服务</td><td>解码进程消失后手机连接仍保持，日志只有 <code>media_upstream_error</code></td><td>转发端收到上游错误后只记日志，不关闭手机侧 socket</td></tr>
+<tr><td>手机端重连</td><td>没有任何重连尝试</td><td><code>MediaSessionCoordinator</code> 只在连接状态变化时启动，媒体通道自身没有重连策略</td></tr>
+<tr><td>存活判断</td><td>服务端已记录 <code>media_upstream_lost</code>，手机仍在 <code>frames sent ok=true</code></td><td><code>send()</code> 只写入本地缓冲即返回 true，不能代表对端存活</td></tr>
+<tr><td>重连后画面</td><td>新连接建立但解码端 <code>frames=0</code></td><td>编码器只在启动时发过一次 SPS/PPS，新解码器没有参数集</td></tr>
+<tr><td>绑定顺序</td><td>服务端记录 <code>media_binary_before_bind</code></td><td>重连时 socket 在 <code>newWebSocket</code> 就赋值，帧可能先于绑定消息发出</td></tr>
+</tbody>
+</table>
+<h2>3. 修复方案</h2>
+<ol>
+<li>接收服务：上游 <code>error</code>/<code>close</code> 时关闭手机连接，日志 <code>media_upstream_lost</code></li>
+<li>接收服务：绑定后每 2 秒发一条心跳文本 <code>{"t":"ka"}</code></li>
+<li>手机端：心跳看门狗，超过 6 秒无服务端消息即取消连接并重连，间隔 1→5 秒递增</li>
+<li>手机端：缓存最近一次配置帧，重连就绪后先补发，再请求关键帧</li>
+<li>手机端：socket 只在绑定消息发出后赋值，避免二进制帧先于 hello</li>
+</ol>
+<h2>关联产物</h2>
+<h3>本报告引用</h3>
+<ul class="rk-links">
+<li><a href="../tester/test-report.html" data-rk-link="test-report">测试报告</a></li>
+<li><a href="../lead/team-context.md" data-rk-link="ledger">运行账本</a></li>
+</ul>
+<h3>引用本报告</h3>
+<ul class="rk-backlinks"><li><a href="debug-004-fix.html" data-rk-backlink="fix">修复记录</a></li></ul>
+</body>
+</html>
