@@ -129,7 +129,7 @@ work_items:
   - id: SPEC-phone-media
     kind: tech
     title: 手机画面进 OBS（H.264 over TCP）
-    status: planned
+    status: in_progress
     goal: "goal#artemis-v0.1"
     milestone: VERSION-v0.1
     priority: P0
