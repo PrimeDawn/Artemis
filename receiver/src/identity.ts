@@ -2,10 +2,10 @@ import type { PairingConfig, TlsIdentity } from './protocol.js';
 import { PairingError,parsePeer } from './protocol.js';
 import { generateKeyPairSync,createHash,createPrivateKey,createPublicKey,X509Certificate,randomUUID } from 'node:crypto';
 import { mkdir,readFile,writeFile,rename,unlink,realpath,access } from 'node:fs/promises';
-import { join } from 'node:path';import { hostname } from 'node:os';import { execFile } from 'node:child_process';import { promisify } from 'node:util';
+import { join,win32 } from 'node:path';import { hostname } from 'node:os';import { execFile } from 'node:child_process';import { promisify } from 'node:util';
 const exec=promisify(execFile),contexts=new WeakMap<TlsIdentity,PairingConfig>();
 async function protect(dir:string):Promise<void>{
-  if(!/^e:[\\/]/iu.test(await realpath(dir)))throw new PairingError('E_IDENTITY',500);
+  if(!win32.isAbsolute(await realpath(dir)))throw new PairingError('E_IDENTITY',500);
   if(process.platform==='win32'){
     const {stdout}=await exec('powershell.exe',['-NoProfile','-NonInteractive','-Command','[System.Security.Principal.WindowsIdentity]::GetCurrent().User.Value'],{windowsHide:true});
     const sid=stdout.trim();if(!/^S-1-[0-9-]+$/u.test(sid))throw new Error();

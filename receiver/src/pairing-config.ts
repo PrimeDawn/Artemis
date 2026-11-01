@@ -12,7 +12,7 @@ export function parsePairingConfig(env: NodeJS.ProcessEnv, interfaces: NodeJS.Di
   const assigned = Object.values(interfaces).flat().some(i => i?.family === 'IPv4' && i.address === lanHost && !i.internal);
   if (!privateIpv4(lanHost) || !assigned) fail();
   const dataDir = env.ARTEMIS_DATA_DIR ?? fail(), opensslPath = env.ARTEMIS_OPENSSL_PATH ?? fail();
-  if (!/^e:[\\/]/iu.test(dataDir) || !win32.isAbsolute(dataDir) || !win32.isAbsolute(opensslPath)) fail();
+  if (!win32.isAbsolute(dataDir) || !win32.isAbsolute(opensslPath)) fail();
   function port(raw: string | undefined, fallback: number): number {
     if (raw === undefined) return fallback;
     if (!/^[0-9]+$/u.test(raw)) return fail();
