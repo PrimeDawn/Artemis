@@ -2,3 +2,4 @@
 Command: Start-Process powershell -Verb RunAs -File native/register.ps1 -Action register
 Timestamp: 2026-11-01T13:42:13.8527927+08:00
 Elevated exit code: 0
+Exit code: 0
