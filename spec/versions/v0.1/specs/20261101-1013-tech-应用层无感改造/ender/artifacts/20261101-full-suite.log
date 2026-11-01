@@ -1,0 +1,108 @@
+﻿=== Full suite (pre-archive) ===
+Command: npm --prefix receiver test && gradlew testDebugUnitTest && pairing-integration trust/reconnect/limits && pairing-web-e2e
+Timestamp: 2026-11-01T11:44:33.0921681+08:00
+
+> @artemis/receiver@0.1.0-dev test
+> npm run build && node --test dist/test/*.test.js
+
+
+> @artemis/receiver@0.1.0-dev build
+> tsc -p tsconfig.json
+
+✔ legacy receiver page route is gone (1833.6176ms)
+✔ legacy receiver script route is gone (1490.4005ms)
+✔ public state served over real HTTP no longer exposes receiver channel fields (1144.5962ms)
+✔ waiting event over a real TLS device socket keeps the epoch key for phone compatibility (1146.9742ms)
+✔ PORT is 3000 only when the value is absent (5.5255ms)
+✔ accept decimal port 0 (0.4677ms)
+✔ accept decimal port 3000 (0.2375ms)
+✔ accept decimal port 65535 (0.1284ms)
+✔ accept decimal port 00080 (0.1893ms)
+✔ reject port "" without fallback (0.6669ms)
+✔ reject port "-1" without fallback (0.6906ms)
+✔ reject port "65536" without fallback (0.2948ms)
+✔ reject port "abc" without fallback (0.4782ms)
+✔ reject port "1.5" without fallback (0.5267ms)
+✔ reject port " 3000" without fallback (0.2261ms)
+✔ reject port "3000 " without fallback (0.1767ms)
+✔ reject port "+80" without fallback (0.1325ms)
+✔ reject port "0x50" without fallback (0.2323ms)
+✔ reject port "1e3" without fallback (9.5106ms)
+✔ reject port "NaN" without fallback (0.3999ms)
+✔ reject port "999999999999999999999" without fallback (0.2867ms)
+✔ unknown presence requires a click and a signed phone decision exactly once (57.4301ms)
+✔ 72 hours do not expire trusted active connection (25.3283ms)
+✔ socket loss restores remembered selection without approval, manual disconnect stops restore (48.3226ms)
+✔ temporary phone loss clears the session and recovery issues a fresh sessionId (27.8784ms)
+✔ forgetting another remembered device does not disconnect the selected device (31.1013ms)
+✔ activation distinguishes a new PC click from automatic resume after socket loss (17.5306ms)
+✔ only an already selected trusted phone may request renewed first consent (20.4999ms)
+✔ fresh proof of the same selected identity can replace a stale transport without waiting 90 seconds (18.6556ms)
+✔ control API requires a local session and CSRF; Host cannot be rebound (20.1159ms)
+✔ device socket issues a signed challenge and only accepts a matching private-key proof (27.3543ms)
+✔ identity survives restart and same-key renewal keeps the SPKI ID (3244.6049ms)
+✔ explicit assigned LAN address and absolute data directory are required (4.6209ms)
+✔ discovery advertises stable public identity and no credential (7.627ms)
+✔ a base64url identity containing underscores still produces a valid DNS hostname (0.8783ms)
+✔ pairing server binds two listeners and closes both without changing health service (1821.3031ms)
+✔ an exited process lock does not require manual repair before restart (1473.6944ms)
+✔ proof canonical bytes bind both peers, nonce and connection (2.26ms)
+✔ real P-256 proof verifies and rejects changed transcript (3.6226ms)
+✔ peer identity is derived from SPKI, not label/IP (5.1646ms)
+✔ public server API serves the exact health contract and route boundaries (143.2051ms)
+✔ public close is concurrent-safe and releases the listening port (9.2821ms)
+✔ startup rejects with the original EADDRINUSE code (7.3395ms)
+✔ trust and selected intent survive restart with no expiry; forget revokes (52.5756ms)
+✔ corrupt persisted trust fails closed and is preserved (7.9431ms)
+ℹ tests 45
+ℹ suites 0
+ℹ pass 45
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 5882.1767
+To honour the JVM settings for this build a single-use Daemon process will be forked. For more on this, please refer to https://docs.gradle.org/8.13/userguide/gradle_daemon.html#sec:disabling_the_daemon in the Gradle documentation.
+Daemon will be stopped at the end of the build 
+> Task :app:checkKotlinGradlePluginConfigurationErrors SKIPPED
+
+> Task :app:verifyWebRtcArtifact
+WebRTC Maven AAR SHA256 verified: 0a1627b1a48c2bc17d9a40d62fc47bd45166f44a311e95917f147c402de379b0
+
+> Task :app:preBuild
+> Task :app:preDebugBuild
+> Task :app:checkDebugAarMetadata UP-TO-DATE
+> Task :app:processDebugNavigationResources UP-TO-DATE
+> Task :app:compileDebugNavigationResources UP-TO-DATE
+> Task :app:generateDebugResValues UP-TO-DATE
+> Task :app:mapDebugSourceSetPaths UP-TO-DATE
+> Task :app:generateDebugResources UP-TO-DATE
+> Task :app:mergeDebugResources UP-TO-DATE
+> Task :app:packageDebugResources UP-TO-DATE
+> Task :app:parseDebugLocalResources UP-TO-DATE
+> Task :app:createDebugCompatibleScreenManifests UP-TO-DATE
+> Task :app:extractDeepLinksDebug UP-TO-DATE
+> Task :app:processDebugMainManifest UP-TO-DATE
+> Task :app:processDebugManifest UP-TO-DATE
+> Task :app:processDebugManifestForPackage UP-TO-DATE
+> Task :app:processDebugResources UP-TO-DATE
+> Task :app:compileDebugKotlin UP-TO-DATE
+> Task :app:javaPreCompileDebug UP-TO-DATE
+> Task :app:compileDebugJavaWithJavac NO-SOURCE
+> Task :app:bundleDebugClassesToRuntimeJar UP-TO-DATE
+> Task :app:bundleDebugClassesToCompileJar UP-TO-DATE
+> Task :app:compileDebugUnitTestKotlin UP-TO-DATE
+> Task :app:preDebugUnitTestBuild
+> Task :app:javaPreCompileDebugUnitTest UP-TO-DATE
+> Task :app:compileDebugUnitTestJavaWithJavac NO-SOURCE
+> Task :app:processDebugJavaRes UP-TO-DATE
+> Task :app:processDebugUnitTestJavaRes UP-TO-DATE
+> Task :app:testDebugUnitTest UP-TO-DATE
+
+BUILD SUCCESSFUL in 15s
+25 actionable tasks: 1 executed, 24 up-to-date
+{"scope":"independent trust","passed":true,"cases":6,"error":null}
+{"scope":"independent reconnect","passed":true,"cases":6,"error":null}
+{"scope":"independent limits","passed":true,"cases":3,"error":null}
+{"scope":"real installed Chromium browser E2E","passed":true,"cases":4,"error":null}
+Exit code: 0

@@ -41,7 +41,6 @@ export function createDeviceBroker(context:DeviceContext):{upgrade(req:IncomingM
     if(manager.state().intent.deviceId!==peer.id||!context.repository.find(peer.id))throw new PairingError('E_NOT_TRUSTED',403);
     if(m.kind==='request-enrollment'){object(m,['v','kind']);if(m.v!==2)throw new PairingError('E_INPUT');await manager.requestEnrollment(peer.id);return;}
     if(m.kind==='disconnect'){object(m,['v','kind']);if(m.v!==2)throw new PairingError('E_INPUT');await manager.disconnect();return;}
-    manager.route('sender',text);
     if(m.kind==='bye'&&(m.payload as {reason?:string})?.reason==='user')await manager.disconnect();
    }).catch(error=>{const code=error instanceof PairingError?error.code:'E_INTERNAL';context.log({name:'device_rejected',requestId,code});safeSend(ws,{v:2,kind:'error',code,requestId});ws.close(code==='E_TOO_LARGE'?1009:1008);});
   });

@@ -81,10 +81,10 @@ work_items:
     "evidence": ["spec/versions/v0.1/specs/20261029-0934-tech-离线配对与信令信任/evidence/end-verification.json"]
     "verification": {"evidence_level":"locally_verified"}
 
-  - id: SPEC-media-obs
+  - id: SPEC-app-refactor
     kind: tech
-    title: 手机到 OBS 的最小音视频链路
-    status: planned
+    title: 应用层无感改造
+    status: completed
     goal: "goal#artemis-v0.1"
     milestone: VERSION-v0.1
     priority: P0
@@ -93,12 +93,93 @@ work_items:
       - SPEC-sdk-toolchain
       - SPEC-offline-pairing
     acceptance:
-      - S24与指定Windows和OBS环境中同时接收摄像头画面及内置麦克风，录制可回看音视频。
-      - 以720p/30fps为基线记录实际编码、分辨率和帧率，Node.js不转码或逐帧中转。
-      - 单活动接收端下可停止采集并释放相机、麦克风和连接，再次启动有效。
-    next_action: 前置Spec完成后，通过spec-start设计并验证最小音视频链路。
-    summary: v0.1技术预研规划项，尚未启动Spec或业务实现。
-    tags: [v0.1, tech, m0]
+      - 移除 OBS 浏览器源形态：/receiver 页、/api/receiver-tickets、/ws/receiver、signaling 与接收通道相关类型不再存在，且仓库内无残留引用。
+      - 配对、信任、发现、审批、断开、忘记与控制页操作行为不变；手机端 UI 与连接状态提示不退化。
+      - android/ 目录零改动；JVM 单元测试 18 项（17 通过 + 1 跳过）通过；APK 可构建。
+      - receiver 测试保留配对/信任/发现用例通过，删除的接收端用例逐条给出理由。
+      - 产品文档与协议文档口径同步为系统摄像头/麦克风方向。
+    next_action: 已完成并原位归档；后续 Spec 可直接以本 Spec 的配对/信任基线为前置。
+    summary: 已交付并归档：接收端页面/票据/信令通道移除，配对与连接状态不退化，android 零改动；45 项 Node、18 项 JVM、集成 trust/reconnect/limits 与模拟器/真机端到端全部通过。
+    tags: [v0.1, tech, refactor]
+    paths:
+      - spec/versions/v0.1/version-context.md
+      - spec/versions/v0.1/plan.html
+      - spec/versions/v0.1/specs/20261101-1013-tech-应用层无感改造/lead/team-context.md
+    verification: {evidence_level: locally_verified}
+  - id: SPEC-device-layer
+    kind: tech
+    title: Windows 系统摄像头（DirectShow + 共享内存）
+    status: planned
+    goal: "goal#artemis-v0.1"
+    milestone: VERSION-v0.1
+    priority: P0
+    required: true
+    depends_on:
+      - SPEC-app-refactor
+    acceptance:
+      - 64 位 DirectShow 源过滤器从共享内存取帧，输出合成画面。
+      - OBS 能枚举 Artemis Camera 并录制 30 秒回看有画面。
+    next_action: 应用层改造完成后，通过 spec-start 建立设备层 Spec。
+    summary: 方向变更后的设备层地基，尚未启动。
+    tags: [v0.1, tech, device]
+    paths:
+      - spec/versions/v0.1/version-context.md
+      - spec/versions/v0.1/plan.html
+
+  - id: SPEC-phone-media
+    kind: tech
+    title: 手机画面进 OBS（H.264 over TCP）
+    status: planned
+    goal: "goal#artemis-v0.1"
+    milestone: VERSION-v0.1
+    priority: P0
+    required: true
+    depends_on:
+      - SPEC-device-layer
+    acceptance:
+      - 手机 Camera2 + MediaCodec 编码 H.264，经已配对鉴权的 TCP 传输。
+      - Windows 客户端 FFmpeg 解码并写入共享内存，OBS 看到手机实时画面。
+    next_action: 设备层完成后，通过 spec-start 建立媒体链路 Spec。
+    summary: 由原 SPEC-media-obs 的视频目标拆分而来，尚未启动。
+    tags: [v0.1, tech, media]
+    paths:
+      - spec/versions/v0.1/version-context.md
+      - spec/versions/v0.1/plan.html
+
+  - id: SPEC-audio-device
+    kind: tech
+    title: 虚拟麦克风（内核音频驱动）
+    status: planned
+    goal: "goal#artemis-v0.1"
+    milestone: VERSION-v0.1
+    priority: P1
+    required: true
+    depends_on:
+      - SPEC-device-layer
+    acceptance:
+      - 系统音频输入设备 Artemis Microphone 可被 OBS 枚举并录出声音。
+      - 驱动签名作为独立发布门禁，不计入功能验收。
+    next_action: 设备层完成后，通过 spec-start 建立音频设备 Spec。
+    summary: 由原 SPEC-media-obs 的音频目标拆分而来，尚未启动。
+    tags: [v0.1, tech, audio]
+    paths:
+      - spec/versions/v0.1/version-context.md
+      - spec/versions/v0.1/plan.html
+
+  - id: SPEC-media-obs
+    kind: tech
+    title: 手机到 OBS 的最小音视频链路（已作废）
+    status: cancelled
+    goal: "goal#artemis-v0.1"
+    milestone: VERSION-v0.1
+    priority: P0
+    required: false
+    depends_on: []
+    acceptance:
+      - 已由 SPEC-phone-media 与 SPEC-audio-device 替代，不再单独验收。
+    next_action: 无；目标已拆分到 SPEC-phone-media 与 SPEC-audio-device。
+    summary: 2026-11-01 方向变更后作废，未启动且无已合并代码。
+    tags: [v0.1, tech, superseded]
     paths:
       - spec/versions/v0.1/version-context.md
       - spec/versions/v0.1/plan.html
@@ -112,9 +193,10 @@ work_items:
     priority: P1
     required: true
     depends_on:
-      - SPEC-media-obs
+      - SPEC-phone-media
+      - SPEC-audio-device
     acceptance:
-      - 固定并记录设备和软件环境，保持公网连接完成局域网配对至OBS音视频接收的端到端复测；保留离线功能，实际断公网运行记未实测，不作为本轮验收阻断。
+      - 固定并记录设备和软件环境，保持公网连接完成局域网配对至 OBS 枚举 Artemis Camera / Artemis Microphone 并录出音画的端到端复测；保留离线功能，实际断公网运行记未实测，不作为本轮验收阻断。
       - 单轮总测试预算300秒内实测短时推流及必要的重复启停；长期稳定性以代码/状态机与必要加速边界审查，保留实际结果和未覆盖项，不强制等待10分钟。
       - 实测延迟与音画偏差并对照300ms和150ms产品目标，超标项明确处置，不记为达标。
       - 提供可复现实验APK、PC启动步骤、依赖许可证和研究结论；不替代全部一期验收。

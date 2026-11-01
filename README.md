@@ -2,7 +2,7 @@
 
 把手机变成电脑的摄像头和麦克风。
 
-Artemis 计划通过原生安卓 App 采集视频与麦克风音频，在局域网内通过 WebRTC 传入 Windows 上的 OBS 浏览器源。电脑侧提供本地配对、信令和控制页面，音视频不由 Node.js 服务转码。
+Artemis 计划通过原生安卓 App 采集视频与麦克风音频，在局域网内把画面与声音送到 Windows，并呈现为系统摄像头 `Artemis Camera` 与系统麦克风 `Artemis Microphone`。电脑侧提供本地配对与控制页面；OBS 只作为验收代表，不再是媒体接收端，音视频不由 Node.js 服务转码。
 
 当前按 [v0.1 技术预研规划](spec/versions/v0.1/plan.html)推进。Spec2的自动发现、电脑单击选手机、首次允许后持久信任、无固定连接期限、自动恢复及授权信令已实现。真实S24已完成首次连接与控制流程，前台常亮、切App暂停/返回恢复及省电锁屏→正常解锁连续恢复均有通过记录。最新连续流程全程同一服务，锁屏2649ms清除旧会话、解锁建立新会话。当前已原位归档，PR #3（https://github.com/PrimeDawn/Artemis/pull/3）待审阅、未合并；手机真实换IP仍未测，实际断公网按用户要求不测，音视频采集、媒体WebRTC及OBS播放尚未实现。 最新使用方式见[运行说明](docs/pairing-local-run.md)，验证范围见[现状核对报告](spec/versions/v0.1/specs/20261029-0934-tech-离线配对与信令信任/reviewer/review.html)。
 
@@ -11,8 +11,8 @@ Artemis 计划通过原生安卓 App 采集视频与麦克风音频，在局域�
 | 目录 | 职责 | 计划技术 |
 | --- | --- | --- |
 | `android/` | 安卓采集与推流 App | Kotlin、Jetpack Compose、原生 WebRTC SDK |
-| `receiver/` | 电脑本地服务、控制页与 OBS 接收页 | Node.js、TypeScript、WebSocket、浏览器 WebRTC API |
-| `protocol/` | 配对、信令、状态与错误码约定 | 由离线配对与信令 Spec 确定 |
+| `receiver/` | 电脑本地服务与控制页（配对、信任、连接状态） | Node.js、TypeScript、WebSocket |
+| `protocol/` | 配对、状态与错误码约定 | 由离线配对与信令 Spec 确定 |
 | `docs/` | 使用指南与维护文档 | Markdown |
 | `spec/` | 版本计划、Spec、测试证据与项目记忆 | R&K Flow |
 

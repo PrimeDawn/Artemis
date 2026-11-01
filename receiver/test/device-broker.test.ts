@@ -1,6 +1,5 @@
 import{test}from'node:test';import assert from'node:assert/strict';import{EventEmitter}from'node:events';import{generateKeyPairSync,createHash,randomBytes,sign}from'node:crypto';import{mkdtemp,rm}from'node:fs/promises';import{resolve,sep}from'node:path';import type WebSocket from'ws';
 import{createDeviceBroker}from'../src/device-broker.js';import{openTrustRepository}from'../src/trust-repository.js';import{createConnectionManager}from'../src/connection-manager.js';import{canonicalProof}from'../src/protocol.js';
-import{createReceiverBroker}from'../src/signaling.js';
 class Wire extends EventEmitter{sent:any[]=[];readyState=1;closed=0;send(value:string){this.sent.push(JSON.parse(value));}ping(){}close(code:number){this.closed=code;this.readyState=3;this.emit('close');}terminate(){this.close(1006);}frame(value:unknown){this.emit('message',Buffer.from(JSON.stringify(value)),false);}}
 function identity(){const key=generateKeyPairSync('ec',{namedCurve:'prime256v1'});const d=key.publicKey.export({type:'spki',format:'der'});return{key:key.privateKey,peer:{id:createHash('sha256').update(d).digest('base64url'),publicKeySpki:d.toString('base64url'),label:'fixture'}};}
 test('device socket issues a signed challenge and only accepts a matching private-key proof',async()=>{
@@ -9,12 +8,5 @@ test('device socket issues a signed challenge and only accepts a matching privat
  try{const wire=new Wire();broker.accept(wire as unknown as WebSocket);wire.frame({v:2,kind:'hello',device:phone.peer});await new Promise(setImmediate);const challenge=wire.sent.find(e=>e.kind==='challenge');assert.ok(challenge,'transport must challenge before registration');assert.equal(manager.devices().length,0);
  const bytes=canonicalProof('proof',pc.peer.id,phone.peer.id,challenge.challengeId,challenge.nonce,challenge.connectionId,'proof');wire.frame({v:2,kind:'proof',deviceId:phone.peer.id,challengeId:challenge.challengeId,connectionId:challenge.connectionId,signature:sign('sha256',bytes,phone.key).toString('base64url')});await new Promise(setImmediate);assert.equal(manager.devices().length,1);assert.equal(manager.state().sessionId,null);
  const hostile=new Wire();broker.accept(hostile as unknown as WebSocket);hostile.frame({v:2,kind:'hello',device:phone.peer});hostile.frame({v:2,kind:'proof',deviceId:phone.peer.id,challengeId:'old',connectionId:'old',signature:'bad'});await new Promise(setImmediate);assert.equal(hostile.closed,1008);
- }finally{await broker.close();await manager.close();await repo.close();assert.ok(dir.startsWith(resolve('../.cache')+sep));await rm(dir,{recursive:true,force:true});}
-});
-test('receiver socket consumes its first-frame ticket before receiving a signal epoch',async()=>{
- const dir=await mkdtemp(resolve('../.cache/receiver-unit-')),repo=await openTrustRepository(dir),clock={wallMs:()=>1000,monotonicMs:()=>0};const manager=createConnectionManager(repo,clock,randomBytes),phone=identity(),pc=identity();const channel={connectionId:'local-fixture',send:()=>{},close:()=>{}};
- const broker=createReceiverBroker({controlHost:'127.0.0.1',controlPort:3000,lanHost:'192.168.1.2',tlsPort:3443,dataDir:dir,opensslPath:'unused'},manager,clock,()=>{});
- try{await repo.trust(phone.peer,1);manager.registerDevice(phone.peer,channel,pc.peer.id);await manager.select(phone.peer.id);const ticket=manager.issueReceiverTicket();const wire=new Wire();broker.accept(wire as unknown as WebSocket);wire.frame({v:2,kind:'auth',ticket:ticket.ticket});await new Promise(setImmediate);assert.equal(manager.state().receiverConnected,true);assert.ok(wire.sent.find(e=>e.kind==='ready'));
- const replay=new Wire();broker.accept(replay as unknown as WebSocket);replay.frame({v:2,kind:'auth',ticket:ticket.ticket});await new Promise(setImmediate);assert.equal(replay.closed,1008);
  }finally{await broker.close();await manager.close();await repo.close();assert.ok(dir.startsWith(resolve('../.cache')+sep));await rm(dir,{recursive:true,force:true});}
 });
