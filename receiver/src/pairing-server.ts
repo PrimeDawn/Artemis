@@ -1,6 +1,6 @@
 import{PairingError,type PairingConfig,type SafeLogger}from'./protocol.js';
 import{createServer,type Server}from'node:http';import{createServer as createTlsServer,type Server as HttpsServer}from'node:https';import{networkInterfaces}from'node:os';import{randomBytes,randomUUID}from'node:crypto';import{open,unlink,readFile}from'node:fs/promises';import{join}from'node:path';import type{AddressInfo}from'node:net';
-import{loadOrCreateIdentity,renewCertificate}from'./identity.js';import{openTrustRepository}from'./trust-repository.js';import{createConnectionManager}from'./connection-manager.js';import{createControlHandler}from'./control-http.js';import{createDeviceBroker}from'./device-broker.js';import{createReceiverBroker}from'./signaling.js';import{publishDiscovery}from'./discovery.js';import{privateIpv4}from'./pairing-config.js';
+import{loadOrCreateIdentity,renewCertificate}from'./identity.js';import{openTrustRepository}from'./trust-repository.js';import{createConnectionManager}from'./connection-manager.js';import{createControlHandler}from'./control-http.js';import{createDeviceBroker}from'./device-broker.js';import{publishDiscovery}from'./discovery.js';import{privateIpv4}from'./pairing-config.js';
 export interface RunningPairingServer{controlAddress:string;lanAddress:string;close():Promise<void>}
 export async function startPairingServer(input:PairingConfig,log:SafeLogger=()=>{}):Promise<RunningPairingServer>{
  const config={...input};let identity=await loadOrCreateIdentity(config);
@@ -12,7 +12,7 @@ export async function startPairingServer(input:PairingConfig,log:SafeLogger=()=>
   await unlink(lockPath);try{lock=await open(lockPath,'wx',0o600);await lock.writeFile(String(process.pid));}catch{throw new PairingError('E_BUSY',409);}
  }
  const clock={wallMs:Date.now,monotonicMs:()=>performance.now()},repo=await openTrustRepository(config.dataDir).catch(async e=>{await lock.close();await unlink(lockPath);throw e;}),manager=createConnectionManager(repo,clock,randomBytes);
- let control:Server|undefined,lan:HttpsServer|undefined,device:ReturnType<typeof createDeviceBroker>|undefined,receiver:ReturnType<typeof createReceiverBroker>|undefined,discovery:Awaited<ReturnType<typeof publishDiscovery>>|undefined;
+ let control:Server|undefined,lan:HttpsServer|undefined,device:ReturnType<typeof createDeviceBroker>|undefined,discovery:Awaited<ReturnType<typeof publishDiscovery>>|undefined;
  let closing=false,maintenance=Promise.resolve(),timer:NodeJS.Timeout|undefined,closePromise:Promise<void>|undefined;
  const original=networkInterfaces();const adapter=Object.entries(original).find(([,list])=>list?.some(a=>a.address===config.lanHost))?.[0];
  async function listen(server:Server|HttpsServer,host:string,port:number){await new Promise<void>((resolve,reject)=>{server.once('error',reject);server.listen(port,host,()=>{server.off('error',reject);resolve();});});return(server.address() as AddressInfo).port;}
@@ -23,10 +23,10 @@ export async function startPairingServer(input:PairingConfig,log:SafeLogger=()=>
   lan.requestTimeout=5000;lan.headersTimeout=5000;lan.on('upgrade',(req,socket,head)=>device!.upgrade(req,socket,head));config.tlsPort=await listen(lan,config.lanHost,config.tlsPort);lan.on('error',()=>log({name:'lan_error',requestId:randomUUID(),code:'E_NETWORK'}));
   if(!config.testOnly)discovery=await publishDiscovery(config,identity,()=>log({name:'discovery_error',requestId:randomUUID(),code:'E_DISCOVERY'}));
  }
- async function close(){closing=true;if(timer)clearInterval(timer);await maintenance.catch(()=>{});await discovery?.close();await device?.close();await receiver?.close();await manager.close();await Promise.all([stop(lan),stop(control)]);await repo.close();await lock.close();await unlink(lockPath);}
+ async function close(){closing=true;if(timer)clearInterval(timer);await maintenance.catch(()=>{});await discovery?.close();await device?.close();await manager.close();await Promise.all([stop(lan),stop(control)]);await repo.close();await lock.close();await unlink(lockPath);}
  try{
   control=createServer((req,res)=>{void handler(req,res);});const handler=createControlHandler({config,manager,random:randomBytes,log});control.requestTimeout=5000;control.headersTimeout=5000;
-  config.controlPort=await listen(control,config.controlHost,config.controlPort);receiver=createReceiverBroker(config,manager,clock,log);control.on('upgrade',(req,socket,head)=>receiver!.upgrade(req,socket,head));control.on('error',()=>log({name:'control_error',requestId:randomUUID(),code:'E_NETWORK'}));await bindLan();
+  config.controlPort=await listen(control,config.controlHost,config.controlPort);control.on('error',()=>log({name:'control_error',requestId:randomUUID(),code:'E_NETWORK'}));await bindLan();
   if(!config.testOnly){timer=setInterval(()=>{maintenance=maintenance.then(async()=>{
     if(closing)return;
     const addresses=adapter?networkInterfaces()[adapter]:undefined;const ip=addresses?.find(a=>a.family==='IPv4'&&!a.internal&&privateIpv4(a.address))?.address;

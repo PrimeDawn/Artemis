@@ -14,11 +14,9 @@ test('unknown presence requires a click and a signed phone decision exactly once
  await assert.rejects(f.manager.decide(f.phone.peer.id,request.requestId,request.nonce,true,sign('sha256',bytes,f.phone.key).toString('base64url')));
  }finally{await f.cleanup();}
 });
-test('72 hours do not expire trusted active connection; tickets expire only before consumption',async()=>{
+test('72 hours do not expire trusted active connection',async()=>{
  const f=await fixture();try{await f.repo.trust(f.phone.peer,100);f.manager.registerDevice(f.phone.peer,f.channel,f.pc.peer.id);await f.manager.select(f.phone.peer.id);const session=f.manager.state().sessionId;assert.ok(session);
- const ticket=f.manager.issueReceiverTicket();f.manager.redeemReceiverTicket(ticket.ticket);const received:any[]=[];const receiver={send:(e:unknown)=>received.push(e),close:()=>{}};f.manager.attachReceiver(receiver);
- const epoch=f.manager.state().epoch;assert.ok(epoch);f.advance(72*60*60*1000);assert.equal(f.manager.state().sessionId,session);assert.equal(f.manager.state().epoch,epoch);
- f.manager.route('sender',JSON.stringify({v:2,id:randomUUID(),sessionId:session,epoch,kind:'offer',payload:{type:'offer',sdp:'v=0\r\n'}}));assert.equal(received.at(-1)?.kind,'signal');
+ f.advance(72*60*60*1000);assert.equal(f.manager.state().sessionId,session);
  await f.manager.disconnect();assert.equal(f.repo.readIntent().desired,'disconnected');assert.equal(f.manager.state().sessionId,null);
  }finally{await f.cleanup();}
 });
@@ -29,10 +27,10 @@ test('socket loss restores remembered selection without approval, manual disconn
  await f.manager.forget(f.phone.peer.id);assert.equal(f.repo.find(f.phone.peer.id),null);
  }finally{await f.cleanup();}
 });
-test('temporary phone loss keeps the authorized receiver and produces a fresh epoch on recovery',async()=>{
- const f=await fixture();try{await f.repo.trust(f.phone.peer,100);f.manager.registerDevice(f.phone.peer,f.channel,f.pc.peer.id);await f.manager.select(f.phone.peer.id);const t=f.manager.issueReceiverTicket();f.manager.redeemReceiverTicket(t.ticket);let closed=0;f.manager.attachReceiver({send:()=>{},close:()=>{closed++;}});const old=f.manager.state().epoch;
- f.manager.lostDevice(f.phone.peer.id,f.channel);assert.equal(closed,0);assert.equal(f.manager.state().receiverConnected,true);assert.equal(f.manager.state().epoch,null);
- f.manager.registerDevice(f.phone.peer,{...f.channel,connectionId:randomUUID()},f.pc.peer.id);assert.ok(f.manager.state().epoch);assert.notEqual(f.manager.state().epoch,old);
+test('temporary phone loss clears the session and recovery issues a fresh sessionId',async()=>{
+ const f=await fixture();try{await f.repo.trust(f.phone.peer,100);f.manager.registerDevice(f.phone.peer,f.channel,f.pc.peer.id);await f.manager.select(f.phone.peer.id);const old=f.manager.state().sessionId;assert.ok(old);
+ f.manager.lostDevice(f.phone.peer.id,f.channel);assert.equal(f.manager.state().sessionId,null);
+ f.manager.registerDevice(f.phone.peer,{...f.channel,connectionId:randomUUID()},f.pc.peer.id);const next=f.manager.state().sessionId;assert.ok(next);assert.notEqual(next,old);
  }finally{await f.cleanup();}
 });
 test('forgetting another remembered device does not disconnect the selected device',async()=>{

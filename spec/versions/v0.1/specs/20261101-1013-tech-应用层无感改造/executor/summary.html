@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>实现总结 · 应用层无感改造</title>
+
+<meta name="rk:title" content="实现总结：应用层无感改造">
+<meta name="rk:type" content="summary">
+<meta name="rk:version" content="v0.1">
+<meta name="rk:category" content="tech">
+<meta name="rk:spec-dir" content="spec/versions/v0.1/specs/20261101-1013-tech-应用层无感改造">
+<meta name="rk:role" content="spec-executor">
+<meta name="rk:mode" content="gated">
+<meta name="rk:created" content="2026-11-01">
+<meta name="rk:updated" content="2026-11-01">
+<meta name="rk:revision" content="2">
+<meta name="rk:git-branch" content="tech/spec-20261101-1013-app-refactor">
+<meta name="rk:base-branch" content="dev">
+<meta name="rk:pr-url" content="">
+<meta name="rk:tags" content="spec,summary,refactor,pairing">
+
+<link rel="rk-plan" href="../writer/plan.html">
+<link rel="rk-ledger" href="../lead/team-context.md">
+<link rel="stylesheet" href="../../../../../../html-report/assets/rk-report.css">
+<script defer src="../rk-manifest.js"></script>
+<script defer src="../../../../../../html-report/assets/rk-report.js"></script>
+</head>
+<body>
+
+<header class="rk-head">
+<h1>实现总结：应用层无感改造</h1>
+<div class="rk-meta">
+<span><b>类型</b> summary</span>
+<span><b>Spec</b> <code>20261101-1013-tech-应用层无感改造</code></span>
+<span><b>角色</b> spec-executor</span>
+<span><b>模式</b> gated</span>
+<span><b>分支</b> <code>tech/spec-20261101-1013-app-refactor</code> ← <code>dev</code></span>
+<span><b>PR</b> —</span>
+<span><b>创建</b> 2026-11-01</span>
+<span><b>修订</b> r2（2026-11-01）</span>
+</div>
+</header>
+
+<nav class="rk-revbar"></nav>
+
+<section class="rk-verdict is-pass">
+<div class="rk-verdict-label">实现结果</div>
+<p>plan 定义的改造全部落地：接收页、票据、<code>/ws/receiver</code> 与信令通道已移除，配对与连接状态行为保留，<code>android/</code> 零改动；<code>receiver</code> 测试 45/45、集成 <code>trust</code> 6/6 与 <code>reconnect</code> 6/6、Android 构建与 JVM 单测均通过。</p>
+</section>
+
+<h2>修订历史</h2>
+<table class="rk-revs">
+<thead><tr><th>修订</th><th>日期</th><th>修改人</th><th>改了什么</th><th>原因</th></tr></thead>
+<tbody>
+<tr><td>r1</td><td>2026-11-01</td><td>spec-executor</td><td>初版：改造范围、证据、偏离与未覆盖项</td><td>按 <code>writer/plan.html</code> 执行完毕</td></tr><tr class="rk-added" data-rev="2"><td>r2</td><td>2026-11-01</td><td>spec-executor</td><td>新增用例由 stub 通道改为真实服务 + 真实 TLS WebSocket 连接</td><td>按 <code>D-008</code>（尽可能少用 mock，非必要一律用真数据）</td></tr>
+</tbody>
+</table>
+
+<h2>1. 实现范围</h2>
+<table>
+<thead><tr><th>类别</th><th>内容</th><th>状态</th></tr></thead>
+<tbody>
+<tr><td>删除文件</td><td><code>receiver/src/signaling.ts</code>、<code>receiver/public/receiver.html</code>、<code>receiver/public/receiver.js</code></td><td>done</td></tr>
+<tr><td>连接管理</td><td><code>connection-manager.ts</code> 移除票据、接收通道、<code>epoch</code> 状态与 <code>route()</code></td><td>done</td></tr>
+<tr><td>协议类型</td><td><code>protocol.ts</code> 移除 <code>SignalEnvelope</code>、<code>decodeClientSignal</code>、<code>Role</code>、<code>PublicState.receiverConnected/epoch</code></td><td>done</td></tr>
+<tr><td>HTTP 与页面</td><td><code>control-http.ts</code> 去掉接收页资源与票据路由；<code>control.js</code>/<code>control.html</code> 去掉接收按钮</td><td>done</td></tr>
+<tr><td>服务装配</td><td><code>pairing-server.ts</code> 去掉 <code>createReceiverBroker</code> 与 <code>upgrade</code> 挂接；<code>device-broker.ts</code> 去掉 <code>route</code> 转发</td><td>done</td></tr>
+<tr><td>测试处置</td><td>删除 2 项纯接收端用例，重写 2 项混合用例，新增 4 项下线行为用例</td><td>done</td></tr>
+<tr><td>集成脚本</td><td><code>pairing-integration.mjs</code> 移除票据/信令用例；<code>pairing-web-e2e.mjs</code> 移除接收页与 RTC 用例；<code>pairing-test-support.mjs</code> 删除 <code>receiver()</code> 助手</td><td>done</td></tr>
+<tr><td>文档</td><td><code>protocol/pairing-v2.md</code>、<code>GOALS.md</code>、<code>README.md</code>、<code>产品规划.md</code>（典型流程第 6 步）</td><td>done</td></tr>
+</tbody>
+</table>
+
+<h2>2. 手机端为什么不需要改</h2>
+<div class="rk-cal key"><div class="t">wire 兼容做法</div>
+<p><code>sendState()</code> 仍输出 <code>{v:2,kind,sessionId,epoch:null}</code>，<code>epoch</code> 键保留为 <code>null</code>。原因：<span class="rk-ref">android/app/src/main/java/io/github/primedawn/artemis/pairing/DeviceClient.kt:70</span> 对键集合做严格校验，删键会让手机抛 <code>E_PROTOCOL</code> 断线。新增用例 <code>waiting event keeps the epoch key for phone wire compatibility</code> 守住这条。</p></div>
+<p><code>git diff --stat android/</code> 为空，确认手机端零改动。</p>
+
+<h2>3. 测试证据</h2>
+<table>
+<thead><tr><th>阶段</th><th>命令</th><th>结果</th><th>证据</th></tr></thead>
+<tbody>
+<tr><td>RED</td><td><code>npm --prefix receiver test</code></td><td>47 项，44 通过 / 3 失败（接收页、接收脚本、状态字段）</td><td><code>executor/artifacts/red-app-refactor.log</code></td></tr>
+<tr><td>GREEN</td><td><code>npm --prefix receiver test</code></td><td>45 项全通过，0 跳过</td><td><code>executor/artifacts/green-app-refactor.log</code></td></tr>
+<tr><td>集成 trust</td><td><code>node tests/pairing-integration.mjs --group trust</code></td><td>6/6 通过</td><td><code>executor/artifacts/green-integration-trust.log</code></td></tr>
+<tr><td>集成 reconnect</td><td><code>node tests/pairing-integration.mjs --group reconnect</code></td><td>6/6 通过</td><td><code>executor/artifacts/green-integration-reconnect.log</code></td></tr>
+<tr><td>Android</td><td><code>gradlew testDebugUnitTest :app:assembleDebug</code></td><td>BUILD SUCCESSFUL，18 项（17 通过 + 1 跳过）</td><td><code>executor/artifacts/green-android.log</code></td></tr>
+</tbody>
+</table>
+<p>用例数从 43 变为 45：删除 2 项接收端用例，新增 4 项下线行为与 wire 兼容用例，另 2 项混合用例重写后保留。<ins class="rk-ins" data-rev="2">新增用例不依赖 stub 通道与假仓库：路由与状态断言走真实 HTTP，wire 兼容断言走真实 TLS WebSocket 握手（<code>hello</code>/<code>proof</code>）。</ins></p>
+
+<h2>4. 实施期决策</h2>
+<table>
+<thead><tr><th>编号</th><th>议题</th><th>结论</th><th>依据</th></tr></thead>
+<tbody>
+<tr><td>D-006</td><td>协议 schema 如何处置</td><td>删除 <code>protocol/pairing-v2.schema.json</code>，并在协议文档去掉引用</td><td>该文件顶层 <code>oneOf</code> 仅引用 <code>#/$defs/signal</code>，内容全部是被下线的信令信封；保留会形成孤儿文档。设备消息的 schema 由后续 Spec 补充</td></tr>
+<tr><td>D-007</td><td>激活后的 <code>kind</code> 取值</td><td>按 plan 发 <code>ready</code>；集成脚本断言放宽为 <code>waiting|ready</code></td><td>手机端 <span class="rk-ref">ConnectionController.kt:108-113</span> 只按 <code>sessionId</code> 判连接，两种取值等价；旧脚本写死 <code>waiting</code> 属实现细节耦合</td></tr>
+</tbody>
+</table>
+
+<h2>5. 偏离与未覆盖</h2>
+<div class="rk-cal warn"><div class="t">产品文档只做了 plan 指定的一处</div>
+<p><code>产品规划.md</code> 按 plan §2.5 只改了典型流程第 6 步。其余章节（§3.1 架构图、§3.2 安卓 App 技术选型、§3.3 音视频格式）仍描述「WebRTC → OBS 浏览器源」路线，需要产品层整体改写，超出本 Spec 范围，未擅自修改。</p></div>
+<div class="rk-cal risk"><div class="t">真机未验证</div>
+<p>手机端行为由单元测试与模拟器阶段覆盖；按 D-005，真机不作为本 Spec 门禁，需要时由 TeamLead 提出。真实 LAN/TLS 路径尚未在本轮验证。</p></div>
+<div class="rk-cal warn"><div class="t">浏览器 e2e 未执行</div>
+<p><code>pairing-web-e2e.mjs</code> 已按 plan 移除接收页用例，但本轮未运行（需要 <code>playwright-core</code> 与 Chrome）。控制页改造的正确性目前由 <code>/control</code> 可加载与集成用例间接覆盖，最终以 spec-tester 的浏览器验证为准。</p></div>
+
+<h2>6. 交接</h2>
+<p>实现完成，等待 TeamLead 发起 <code>executor/summary.html</code> 确认（gate-3）。确认后由 spec-tester 执行独立测试与模拟器验证。未提交、未推送、未创建 PR。</p>
+
+<h2>关联产物</h2>
+<h3>本报告引用</h3>
+<ul class="rk-links">
+<li><a href="../writer/plan.html" data-rk-link="plan">实现计划</a></li>
+<li><a href="../explorer/exploration-report.html" data-rk-link="exploration-report">探索报告</a></li>
+<li><a href="../tester/test-plan.html" data-rk-link="test-plan">测试计划</a></li>
+<li><a href="../lead/team-context.md" data-rk-link="ledger">运行账本</a></li>
+</ul>
+<h3>引用本报告</h3>
+<ul class="rk-backlinks">
+<li>tester/test-report.html（待创建）</li>
+</ul>
+
+</body>
+</html>

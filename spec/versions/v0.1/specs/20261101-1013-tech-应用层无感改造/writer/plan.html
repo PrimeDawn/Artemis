@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>实现计划 · 应用层无感改造</title>
+
+<meta name="rk:title" content="实现计划：应用层无感改造">
+<meta name="rk:type" content="plan">
+<meta name="rk:version" content="v0.1">
+<meta name="rk:category" content="tech">
+<meta name="rk:spec-dir" content="spec/versions/v0.1/specs/20261101-1013-tech-应用层无感改造">
+<meta name="rk:role" content="spec-writer">
+<meta name="rk:mode" content="gated">
+<meta name="rk:created" content="2026-11-01">
+<meta name="rk:updated" content="2026-11-01">
+<meta name="rk:revision" content="3">
+<meta name="rk:git-branch" content="tech/spec-20261101-1013-app-refactor">
+<meta name="rk:base-branch" content="dev">
+<meta name="rk:pr-url" content="">
+<meta name="rk:tags" content="spec,plan,refactor,pairing">
+
+<link rel="rk-plan" href="../writer/plan.html">
+<link rel="rk-ledger" href="../lead/team-context.md">
+<link rel="stylesheet" href="../../../../../../html-report/assets/rk-report.css">
+<script defer src="../rk-manifest.js"></script>
+<script defer src="../../../../../../html-report/assets/rk-report.js"></script>
+</head>
+<body>
+
+<header class="rk-head">
+<h1>实现计划：应用层无感改造</h1>
+<div class="rk-meta">
+<span><b>类型</b> plan</span>
+<span><b>Spec</b> <code>20261101-1013-tech-应用层无感改造</code></span>
+<span><b>角色</b> spec-writer</span>
+<span><b>模式</b> gated</span>
+<span><b>分支</b> <code>tech/spec-20261101-1013-app-refactor</code> ← <code>dev</code></span>
+<span><b>PR</b> —</span>
+<span><b>创建</b> 2026-11-01</span>
+<span><b>修订</b> r3（2026-11-01）</span>
+</div>
+</header>
+
+<nav class="rk-revbar"></nav>
+
+<section class="rk-verdict">
+<div class="rk-verdict-label">结论</div>
+<p>只删 PC 端接收通道，<strong>手机端零改动、wire 消息零变化</strong>。关键约束：<code>waiting/ready</code> 事件必须继续携带 <code>epoch:null</code> 键，否则手机端严格键校验会抛 <code>E_PROTOCOL</code> 断线。</p>
+</section>
+
+<h2>修订历史</h2>
+<table class="rk-revs">
+<thead><tr><th>修订</th><th>日期</th><th>修改人</th><th>改了什么</th><th>原因</th></tr></thead>
+<tbody>
+<tr><td>r1</td><td>2026-11-01</td><td>spec-writer</td><td>初版：改造设计、实施顺序、测试处置与验收</td><td>依据探索报告与 D-001/D-003</td></tr>
+<tr class="rk-added" data-rev="2"><td>r2</td><td>2026-11-01</td><td>spec-writer</td><td>明确 72 小时断言用假时钟；验收去掉真机门禁，改为模拟器</td><td>按 <code>D-005</code>（禁止真实时长测试、真机按需再提）</td></tr><tr class="rk-added" data-rev="3"><td>r3</td><td>2026-11-01</td><td>spec-writer</td><td>真机是否补测改为由 TeamLead 判断并提出，不等待用户发起</td><td>按 <code>D-005</code>：用户明确「你需要真机你自己提」</td></tr>
+</tbody>
+</table>
+
+<h2>1. 设计前提（必须遵守）</h2>
+
+<div class="rk-cal risk"><div class="t">wire 兼容红线</div>
+<p><span class="rk-ref">android/app/src/main/java/io/github/primedawn/artemis/pairing/DeviceClient.kt:70</span> 对 <code>waiting</code>/<code>ready</code> 做 <code>WireCodec.exact(m,"v","kind","sessionId","epoch")</code> 严格键校验。改造后事件体必须继续包含 <code>epoch</code> 键并置为 <code>null</code>。删除该键会让手机抛 <code>E_PROTOCOL</code> 并断开——这正是本次要避免的回归。</p></div>
+
+<div class="rk-cal key"><div class="t">改动只发生在 PC 端</div>
+<p>手机端 <code>ConnectionController.kt:119</code> 丢弃信令、<code>:108-113</code> 只按 <code>sessionId</code> 判已连接，因此 <code>android/</code> 不需要任何改动。改造后 `git diff --stat android/` 必须为空。</p></div>
+
+<h2>2. 改造设计</h2>
+
+<h3>2.1 删除文件</h3>
+<table>
+<thead><tr><th>文件</th><th>说明</th></tr></thead>
+<tbody>
+<tr><td><code>receiver/public/receiver.html</code></td><td>接收验证页</td></tr>
+<tr><td><code>receiver/public/receiver.js</code></td><td>页面脚本，含「接收端」文案</td></tr>
+<tr><td><code>receiver/src/signaling.ts</code></td><td><code>/ws/receiver</code> 升级、鉴权、限速与转发</td></tr>
+</tbody>
+</table>
+
+<h3>2.2 <code>receiver/src/connection-manager.ts</code></h3>
+<table>
+<thead><tr><th>改动</th><th>具体</th></tr></thead>
+<tbody>
+<tr><td>接口删除</td><td><code>ReceiverChannel</code>；方法 <code>issueReceiverTicket</code>、<code>redeemReceiverTicket</code>、<code>attachReceiver</code>、<code>lostReceiver</code>、<code>route</code></td></tr>
+<tr><td>状态删除</td><td><code>receiver</code>、<code>ticket</code>、<code>reserved</code>、<code>epoch</code>、<code>ids</code>、<code>iceCount</code>、<code>invalidate()</code></td></tr>
+<tr><td><code>clearSession</code></td><td>去掉 <code>keepReceiver</code> 参数，只清 <code>sessionId</code></td></tr>
+<tr><td><code>activate</code></td><td>去掉 <code>epoch=randomUUID()</code> 与 <code>receiver?.send</code></td></tr>
+<tr><td><code>sendState</code></td><td><code>kind = sessionId ? 'ready' : 'waiting'</code>；事件体保留 <code>epoch:null</code></td></tr>
+<tr><td><code>state()</code></td><td><code>PublicState</code> 去掉 <code>receiverConnected</code>、<code>epoch</code></td></tr>
+<tr><td>保留</td><td><code>registerDevice</code>、<code>lostDevice</code>、<code>select</code>、<code>decide</code>、<code>requestEnrollment</code>、<code>disconnect</code>、<code>forget</code>、<code>devices</code>、<code>subscribe</code>、<code>close</code></td></tr>
+</tbody>
+</table>
+
+<h3>2.3 <code>receiver/src/protocol.ts</code></h3>
+<p>删除 <code>SignalEnvelope</code>、<code>decodeClientSignal</code>、<code>Role</code>；<code>PublicState</code> 去掉 <code>receiverConnected</code> 与 <code>epoch</code>。保留 <code>uuid</code>、<code>base64</code>、<code>object</code>、<code>parsePeer</code>、<code>canonicalProof</code>、<code>verifyIdentityProof</code>——这些被配对流程使用。</p>
+
+<h3>2.4 HTTP 与页面</h3>
+<table>
+<thead><tr><th>文件</th><th>改动</th></tr></thead>
+<tbody>
+<tr><td><code>receiver/src/control-http.ts</code></td><td>第 6 行 <code>assets</code> 去掉 <code>/receiver</code> 与 <code>/assets/receiver.js</code>；第 33 行删除 <code>/api/receiver-tickets</code> 分支</td></tr>
+<tr><td><code>receiver/public/control.js</code></td><td>第 1 行去掉 <code>receiver</code> 元素引用；第 7 行去掉 <code>receiver.disabled=…</code>；第 9 行删除按钮监听</td></tr>
+<tr><td><code>receiver/public/control.html</code></td><td>footer 删除 <code>&lt;button id="receiver"&gt;打开接收验证页&lt;/button&gt;</code></td></tr>
+<tr><td><code>receiver/src/pairing-server.ts</code></td><td>第 3 行删除 <code>createReceiverBroker</code> 引入；第 15 行删除 <code>receiver</code> 变量；第 26 行 <code>close()</code> 去掉 <code>receiver?.close()</code>；第 29 行删除 <code>control.on('upgrade',…)</code></td></tr>
+</tbody>
+</table>
+
+<h3>2.5 文档同步</h3>
+<table>
+<thead><tr><th>文件</th><th>改动</th></tr></thead>
+<tbody>
+<tr><td><code>protocol/pairing-v2.md</code></td><td>删除「接收端」地址、票据与信令章节；保留发现、配对、信任、证书续签</td></tr>
+<tr><td><code>GOALS.md</code></td><td>「WebRTC 传入 OBS 浏览器源」「OBS 接收网页」改为系统摄像头/麦克风方向</td></tr>
+<tr><td><code>产品规划.md</code></td><td>典型流程第 6 步「添加为 OBS 浏览器源」改为「OBS 选择 Artemis Camera / Artemis Microphone」</td></tr>
+<tr><td><code>README.md</code></td><td>简介与目录表的「OBS 浏览器源」表述同步</td></tr>
+</tbody>
+</table>
+
+<h3>2.6 顶层集成脚本</h3>
+<table>
+<thead><tr><th>文件</th><th>处置</th></tr></thead>
+<tbody>
+<tr><td><code>tests/pairing-test-support.mjs</code></td><td>删除 <code>receiver()</code> 助手（依赖接收票据）</td></tr>
+<tr><td><code>tests/pairing-web-e2e.mjs</code></td><td>删除接收页相关步骤，保留控制页选择/断开用例</td></tr>
+<tr><td>其余诊断脚本</td><td>若引用了 <code>/receiver</code> 或票据则同步移除；不删除脚本本身</td></tr>
+</tbody>
+</table>
+
+<h2>3. 实施顺序（每步后跑一次验证）</h2>
+<ol>
+<li>删 <code>signaling.ts</code> 与两个页面文件 → <code>npm --prefix receiver run build</code> 应因 import 报错，据此定位调用点</li>
+<li>改 <code>connection-manager.ts</code> 与 <code>protocol.ts</code> → 编译通过</li>
+<li>改 <code>control-http.ts</code> / <code>pairing-server.ts</code> → 编译通过，<code>/healthz</code> 仍返回 200</li>
+<li>改 <code>control.js</code> / <code>control.html</code> → 控制页可加载</li>
+<li>处置测试 → <code>npm --prefix receiver test</code> 全绿</li>
+<li>同步文档与顶层脚本</li>
+</ol>
+
+<h2>4. 测试用例处置（按 D-003：删）</h2>
+<table>
+<thead><tr><th>文件:行</th><th>用例</th><th>处置</th></tr></thead>
+<tbody>
+<tr><td><code>device-broker.test.ts:14</code></td><td>receiver socket consumes its first-frame ticket before receiving a signal epoch</td><td><strong>删除</strong>：被测接收通道已不存在</td></tr>
+<tr><td><code>protocol.test.ts:25</code></td><td>signal decoding preserves opaque mDNS candidate and checks role/epoch</td><td><strong>删除</strong>：<code>decodeClientSignal</code> 已删除</td></tr>
+<tr><td><code>connection-manager.test.ts:17</code></td><td>72 hours do not expire trusted active connection; tickets expire only before consumption</td><td><strong>重写</strong>：只保留「72 小时无到期」断言，删除票据/epoch/<code>route</code> 部分。这是 R-03 的真实需求，不是接收端残留。<ins class="rk-ins" data-rev="2">断言用假时钟 <code>f.advance(72*60*60*1000)</code> 推进，<strong>不真实等待</strong></ins></td></tr>
+<tr><td><code>connection-manager.test.ts:32</code></td><td>temporary phone loss keeps the authorized receiver and produces a fresh epoch on recovery</td><td><strong>重写</strong>：改为「手机短暂掉线后恢复，产生新 <code>sessionId</code>」，删除接收端与 epoch 断言</td></tr>
+</tbody>
+</table>
+<p>基线 43 项 → 预期 <strong>41 项</strong>（纯删 2 项，另 2 项改写不减少数量）。测试报告须给出删除前后对照与逐条理由，不得用「重写」掩盖功能缺失。</p>
+
+<h2>5. 验收标准</h2>
+<ol>
+<li><code>git diff --stat android/</code> 为空；JVM 单元测试 18 项（17 通过 + 1 跳过）通过；<code>:app:assembleDebug</code> 成功。</li>
+<li><code>npm --prefix receiver test</code> 通过，项数为预期值且无 skipped 掩盖。</li>
+<li>仓库内无 <code>/api/receiver-tickets</code>、<code>/ws/receiver</code>、<code>ReceiverChannel</code>、<code>issueReceiverTicket</code>、<code>decodeClientSignal</code> 的残留引用（<code>grep -r</code> 为空）。</li>
+<li>控制页可加载、可列设备、可连接、可断开、可取消信任；无「打开接收验证页」按钮。</li>
+<li><code>/healthz</code> 仍返回 <code>service:"artemis-receiver"</code>（产品服务名，不是接收页）。</li>
+<li><del class="rk-del" data-rev="2">模拟器：配对主路径与状态文案通过；真机：已连接、断开、取消信任三项人工核对通过。</del><ins class="rk-ins" data-rev="2">模拟器：配对主路径、已连接、断开、取消信任四项通过。本 Spec 不设真机门禁；确需验证真实 LAN/TLS 时，由 TeamLead 判断并主动提出真机补测，不等待用户发起。</ins></li>
+</ol>
+
+<h2>6. 风险与回滚</h2>
+<table>
+<thead><tr><th>风险</th><th>应对</th></tr></thead>
+<tbody>
+<tr><td>误删 <code>server.ts</code> 的健康服务</td><td>删除按文件与行号执行；保留 <code>startReceiver</code> 与 <code>artemis-receiver</code> 服务名</td></tr>
+<tr><td>漏删 <code>epoch</code> 键导致手机断线</td><td>测试计划含一条断言：<code>waiting</code> 事件体必须含 <code>epoch</code> 键</td></tr>
+<tr><td>控制页读 undefined 报错</td><td><code>control.js</code> 与 <code>PublicState</code> 同步改；控制页 e2e 验证</td></tr>
+</tbody>
+</table>
+<p>回滚：整个改动在一个分支上，若验收失败直接放弃分支即可，不涉及数据迁移（信任数据格式未变）。</p>
+
+<h2>关联产物</h2>
+<h3>本报告引用</h3>
+<ul class="rk-links">
+<li><a href="../explorer/exploration-report.html" data-rk-link="exploration-report">探索报告</a></li>
+<li><a href="../lead/team-context.md" data-rk-link="ledger">运行账本</a></li>
+<li><a href="../tester/test-plan.html" data-rk-link="test-plan">测试计划</a></li>
+</ul>
+<h3>引用本报告</h3>
+<ul class="rk-backlinks">
+<li><a href="../tester/test-plan.html" data-rk-backlink="test-plan">测试计划</a></li>
+<li>executor/summary.html（待创建）</li>
+</ul>
+
+</body>
+</html>

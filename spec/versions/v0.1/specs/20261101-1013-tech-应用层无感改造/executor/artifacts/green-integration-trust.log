@@ -1,0 +1,5 @@
+﻿=== Integration Smoke Run (trust group) ===
+Command: node tests/pairing-integration.mjs --group trust --report-dir .cache/app-refactor-trust
+Timestamp: 2026-11-01T10:39:02.0322381+08:00
+{"scope":"independent trust","passed":true,"cases":6,"error":null}
+Exit code: 0
