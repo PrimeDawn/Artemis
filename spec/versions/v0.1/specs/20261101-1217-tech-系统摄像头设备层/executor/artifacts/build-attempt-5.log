@@ -1,0 +1,18 @@
+﻿=== Build attempt 5 ===
+Command: powershell -NoProfile -File native/build.ps1
+Timestamp: 2026-11-01T13:41:46.4589515+08:00
+Building Artemis Camera...
+ArtemisCamera.cpp
+Filter.cpp
+Pin.cpp
+FrameSource.cpp
+正在生成代码...
+LINK : warning LNK4104: 导出符号“DllGetClassObject”应为 PRIVATE
+LINK : warning LNK4104: 导出符号“DllCanUnloadNow”应为 PRIVATE
+LINK : warning LNK4104: 导出符号“DllRegisterServer”应为 PRIVATE
+LINK : warning LNK4104: 导出符号“DllUnregisterServer”应为 PRIVATE
+  正在创建库 C:\workspace\Artemis\native\out\ArtemisCamera.lib 和对象 C:\workspace\Artemis\native\out\ArtemisCamera.exp
+main.cpp
+BUILD OK: C:\workspace\Artemis\native\out\ArtemisCamera.dll
+BUILD OK: C:\workspace\Artemis\native\out\synthetic-producer.exe
+Exit code: 0

@@ -104,3 +104,10 @@ Thumbs.db
 
 # Preserve the first portable derivative locally; v2 also redacts escaped JSON roots
 /spec/versions/v0.1/specs/20261028-1059-tech-SDK与工具链可行性/tester/artifacts/test-logs/20261028-184012-emulator/emulator-package-observation.portable.log
+
+# 原生构建产物
+native/out/
+*.obj
+*.lib
+*.exp
+*.pdb

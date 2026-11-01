@@ -109,7 +109,7 @@ work_items:
   - id: SPEC-device-layer
     kind: tech
     title: Windows 系统摄像头（DirectShow + 共享内存）
-    status: planned
+    status: completed
     goal: "goal#artemis-v0.1"
     milestone: VERSION-v0.1
     priority: P0
@@ -119,13 +119,13 @@ work_items:
     acceptance:
       - 64 位 DirectShow 源过滤器从共享内存取帧，输出合成画面。
       - OBS 能枚举 Artemis Camera 并录制 30 秒回看有画面。
-    next_action: 应用层改造完成后，通过 spec-start 建立设备层 Spec。
+    next_action: 已完成并原位归档；phone-media 可直接复用共享内存协议与注册方式。
     summary: 方向变更后的设备层地基，尚未启动。
     tags: [v0.1, tech, device]
     paths:
       - spec/versions/v0.1/version-context.md
       - spec/versions/v0.1/plan.html
-
+    verification: {evidence_level: locally_verified}
   - id: SPEC-phone-media
     kind: tech
     title: 手机画面进 OBS（H.264 over TCP）
