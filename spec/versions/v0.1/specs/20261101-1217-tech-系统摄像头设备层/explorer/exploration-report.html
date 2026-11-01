@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>探索报告 · 系统摄像头设备层</title>
+
+<meta name="rk:title" content="探索报告：系统摄像头设备层">
+<meta name="rk:type" content="exploration-report">
+<meta name="rk:version" content="v0.1">
+<meta name="rk:category" content="tech">
+<meta name="rk:spec-dir" content="spec/versions/v0.1/specs/20261101-1217-tech-系统摄像头设备层">
+<meta name="rk:role" content="spec-explorer">
+<meta name="rk:mode" content="gated">
+<meta name="rk:created" content="2026-11-01">
+<meta name="rk:updated" content="2026-11-01">
+<meta name="rk:revision" content="1">
+<meta name="rk:git-branch" content="tech/spec-20261101-1217-device-layer">
+<meta name="rk:base-branch" content="dev">
+<meta name="rk:pr-url" content="">
+<meta name="rk:tags" content="spec,exploration,directshow,ipc">
+
+<link rel="rk-ledger" href="../lead/team-context.md">
+<link rel="stylesheet" href="../../../../../../html-report/assets/rk-report.css">
+<script defer src="../rk-manifest.js"></script>
+<script defer src="../../../../../../html-report/assets/rk-report.js"></script>
+</head>
+<body>
+
+<header class="rk-head">
+<h1>探索报告：系统摄像头设备层</h1>
+<div class="rk-meta">
+<span><b>类型</b> exploration-report</span>
+<span><b>Spec</b> <code>20261101-1217-tech-系统摄像头设备层</code></span>
+<span><b>角色</b> spec-explorer</span>
+<span><b>模式</b> gated</span>
+<span><b>分支</b> <code>tech/spec-20261101-1217-device-layer</code> ← <code>dev</code></span>
+<span><b>PR</b> —</span>
+<span><b>创建</b> 2026-11-01</span>
+<span><b>修订</b> r1（2026-11-01）</span>
+</div>
+</header>
+
+<nav class="rk-revbar"></nav>
+
+<section class="rk-verdict">
+<div class="rk-verdict-label">结论</div>
+<p>DirectShow 源过滤器是唯一能让 OBS 把手机当系统摄像头的路线，最小可枚举实现由「COM DLL + CBaseFilter/CSourceStream + 注册到 VideoInputDeviceCategory」三部分组成；共享内存只承担帧传递，先做合成帧即可验证整条链路。</p>
+</section>
+
+<h2>修订历史</h2>
+<table class="rk-revs">
+<thead><tr><th>修订</th><th>日期</th><th>修改人</th><th>改了什么</th><th>原因</th></tr></thead>
+<tbody>
+<tr><td>r1</td><td>2026-11-01</td><td>spec-explorer</td><td>初版：参考实现分析、最小实现组成、IPC 协议草案与风险</td><td>gate-1 通过后启动探索</td></tr>
+</tbody>
+</table>
+
+<h2>1. 现状</h2>
+<table>
+<thead><tr><th>项</th><th>实际情况</th><th>来源</th></tr></thead>
+<tbody>
+<tr><td>仓库原生代码</td><td>无。`android/` 与 `receiver/` 之外没有 C++ 工程</td><td>仓库目录结构</td></tr>
+<tr><td>原生工具链</td><td>VS Build Tools、Windows SDK、CMake 均未安装</td><td><code>Test-Path</code> 检查，见账本 I-001</td></tr>
+<tr><td>验收工具</td><td>OBS 33 已安装（64 位）</td><td><code>C:\Program Files\obs-studio</code></td></tr>
+<tr><td>参考实现</td><td>本地有 <code>akvirtualcamera</code> 克隆（GPLv3）</td><td><code>C:\workspace\.inspect-refs\akvirtualcamera</code></td></tr>
+</tbody>
+</table>
+
+<h2>2. 参考实现分析</h2>
+<p>akvirtualcamera 是 Mac/Windows 双平台虚拟摄像头，Windows 侧就是 DirectShow 过滤器。它的结构可以直接借鉴，但**许可证是 GPLv3，不能复制代码进本项目**，只能参考结构与思路。</p>
+
+<h3>2.1 注册方式</h3>
+<p><span class="rk-ref">windows/dshow/VirtualCamera/src/plugininterface.cpp</span> 用 <code>ROOT_HKEY = HKEY_CLASSES_ROOT</code>、<code>SUBKEY_PREFIX = "CLSID"</code> 直接写注册表，而不是走 <code>IFilterMapper2</code>。这意味着注册与反注册都在 DLL 里手写，<code>regsvr32</code> 只是调用导出函数。</p>
+
+<h3>2.2 过滤器组成</h3>
+<table>
+<thead><tr><th>层次</th><th>职责</th><th>参考文件</th></tr></thead>
+<tbody>
+<tr><td>类工厂</td><td>实现 <code>IClassFactory</code>，供 COM 创建过滤器实例</td><td><code>VirtualCamera/src/classfactory.cpp</code></td></tr>
+<tr><td>过滤器</td><td>继承 <code>CBaseFilter</code>，枚举并创建输出引脚</td><td><code>BaseFilter/src/basefilter.cpp</code></td></tr>
+<tr><td>引脚</td><td>继承 <code>CSourceStream</code>/<code>CBasePin</code>，协商媒体类型并填 <code>IMediaSample</code></td><td><code>BaseFilter/src/pin.cpp</code></td></tr>
+<tr><td>样本</td><td>实现 <code>IMediaSample</code> 的缓冲区管理</td><td><code>BaseFilter/src/mediasample.cpp</code></td></tr>
+<tr><td>媒体类型枚举</td><td>提供可协商格式列表</td><td><code>BaseFilter/src/enummediatypes.cpp</code></td></tr>
+</tbody>
+</table>
+
+<h3>2.3 帧传递</h3>
+<p>参考实现把帧传递抽成 <code>VCamIPC</code>（<code>windows/VCamIPC/src/ipcbridge.cpp</code>），由独立的 Manager/Service 进程写帧，过滤器从共享内存读。这与我们计划的「producer → 共享内存 → 过滤器」一致。</p>
+
+<h3>2.4 像素格式</h3>
+<p>参考工程的测试程序按 <code>MEDIASUBTYPE_RGB32</code>（32bpp）与 <code>MEDIASUBTYPE_RGB24</code>（24bpp）判断（<span class="rk-ref">windows/dshow/Test/src/main.cpp:428</span>）。RGB32 对齐最简单，适合首版；NV12 更省带宽但要处理 stride 与色度平面。</p>
+
+<h2>3. 最小实现组成</h2>
+<table>
+<thead><tr><th>模块</th><th>内容</th><th>验收相关性</th></tr></thead>
+<tbody>
+<tr><td>COM DLL</td><td><code>DllGetClassObject</code>、<code>DllRegisterServer</code>、<code>DllUnregisterServer</code></td><td>没有它无法注册</td></tr>
+<tr><td>类工厂 + 过滤器</td><td>CLSID 固定，注册到 <code>CLSID_VideoInputDeviceCategory</code> 并带 <code>FriendlyName = Artemis Camera</code></td><td>OBS 列表里出现名字</td></tr>
+<tr><td>输出引脚</td><td>只支持一种媒体类型（RGB32、720p30），拒绝其他请求</td><td>OBS 能预览</td></tr>
+<tr><td>帧源</td><td>共享内存读取；无 producer 时输出黑色或色条</td><td>画面内容</td></tr>
+<tr><td>注册脚本</td><td><code>regsvr32</code> 安装/卸载，检查退出码</td><td>可重复安装</td></tr>
+</tbody>
+</table>
+
+<h2>4. 共享内存帧协议草案</h2>
+<p>协议只需要单调递增的帧号与固定布局，先满足「一写一读、不撕裂」。</p>
+<table>
+<thead><tr><th>字段</th><th>类型</th><th>说明</th></tr></thead>
+<tbody>
+<tr><td><code>magic</code> / <code>version</code></td><td>uint32</td><td>拒绝旧版本 producer</td></tr>
+<tr><td><code>width</code>, <code>height</code>, <code>stride</code></td><td>uint32</td><td>首版固定 1280×720、stride=width×4</td></tr>
+<tr><td><code>format</code></td><td>uint32</td><td>枚举值，首版只有 RGB32</td></tr>
+<tr><td><code>writeIndex</code></td><td>uint64</td><td>写入前 +1（奇数=写入中），写完 +1（偶数=稳定）</td></tr>
+<tr><td><code>frameIndex</code></td><td>uint64</td><td>producer 自增帧号，用于画面上的帧号与丢帧检测</td></tr>
+<tr><td><code>timestampUs</code></td><td>uint64</td><td>producer 侧时间戳</td></tr>
+<tr><td><code>frame[]</code></td><td>byte</td><td>双缓冲：两块 region 轮换，读者按 writeIndex 判断稳定块</td></tr>
+</tbody>
+</table>
+
+<h2>5. 风险</h2>
+<table>
+<thead><tr><th>风险</th><th>影响</th><th>应对</th></tr></thead>
+<tbody>
+<tr><td>注册写 HKCR 需要管理员</td><td><code>regsvr32</code> 失败</td><td>脚本显式检查退出码并提示以管理员运行</td></tr>
+<tr><td>GPLv3 参考代码</td><td>许可证污染</td><td>只参考结构，不复制源码；本 Spec 自写最小实现</td></tr>
+<tr><td>OBS 枚举缓存</td><td>注册后 OBS 列表不刷新</td><td>验收时重启 OBS；必要时检查 <code>CLSID_VideoInputDeviceCategory</code> 下条目</td></tr>
+<tr><td>VS Build Tools 安装未完成</td><td>无法编译</td><td>等待 winget 完成；失败则改用离线安装器</td></tr>
+<tr><td>DirectShow 头文件与 BaseClasses</td><td>缺少 <code>streams.h</code></td><td>Windows SDK 不默认带 BaseClasses；首版不使用 BaseClasses，直接实现 <code>IBaseFilter</code>/<code>IPin</code> 最小集合，或引入 Sample 源码并核对许可</td></tr>
+</tbody>
+</table>
+
+<h2>6. 建议实施顺序</h2>
+<ol>
+<li>先确认工具链装好：<code>cl</code> 可运行、<code>streams.h</code> 可包含</li>
+<li>写最小 DLL：类工厂 + 过滤器 + 一个输出引脚，内部产生色条</li>
+<li><code>regsvr32</code> 注册，用 OBS 验证「列表出现 Artemis Camera 且有画面」</li>
+<li>加入共享内存读取，producer 独立进程写合成帧（色条 + 帧号）</li>
+<li>验收：OBS 录 30 秒回看有画面，含帧号递增</li>
+</ol>
+
+<h2>7. 待确认</h2>
+<ul>
+<li>首版像素格式：RGB32（简单）还是 NV12（省带宽）。建议 RGB32，后续接媒体链路时再评估</li>
+<li>分辨率/帧率是否固定 720p30，还是允许 1080p 协商</li>
+<li>是否需要 32 位过滤器（当前判断：不需要）</li>
+</ul>
+
+<h2>关联产物</h2>
+<h3>本报告引用</h3>
+<ul class="rk-links">
+<li><a href="../lead/team-context.md" data-rk-link="ledger">运行账本</a></li>
+</ul>
+<h3>引用本报告</h3>
+<ul class="rk-backlinks">
+<li>writer/plan.html（待创建）</li>
+<li>tester/test-plan.html（待创建）</li>
+</ul>
+
+</body>
+</html>

@@ -54,7 +54,7 @@ Spec2的自动发现、电脑单击选手机、首次允许后持久信任、无
 | SPEC-sdk-toolchain | tech | [SDK 与工具链可行性](specs/20261028-1059-tech-SDK与工具链可行性/lead/team-context.md) | TeamLead（按角色协议串行执行） | done·已原位归档 | 无 |
 | SPEC-offline-pairing | tech | [离线配对与信令信任](specs/20261029-0934-tech-离线配对与信令信任/lead/team-context.md) | TeamLead（串行角色协议） | done（已归档，PR #3待合并） | SPEC-sdk-toolchain |
 | SPEC-app-refactor | tech | [应用层无感改造](specs/20261101-1013-tech-应用层无感改造/lead/team-context.md)：删除旧接收页与票据、文档改口径，配对/信任/信令行为不退化 | TeamLead（serial） | done·已原位归档 | SPEC-sdk-toolchain、SPEC-offline-pairing |
-| SPEC-device-layer | tech | Windows 系统摄像头：DirectShow 过滤器 + 共享内存 IPC，先输出合成画面 | 待 spec-start 分配 | 未启动 | SPEC-app-refactor |
+| SPEC-device-layer | tech | [系统摄像头设备层](specs/20261101-1217-tech-系统摄像头设备层/lead/team-context.md)：DirectShow 过滤器 + 共享内存 IPC，先输出合成画面 | TeamLead（serial） | 执行中 | SPEC-app-refactor |
 | SPEC-phone-media | tech | 手机画面进 OBS：Camera2 + MediaCodec + H.264 over TCP + FFmpeg 解码 | 待 spec-start 分配 | 未启动 | SPEC-device-layer |
 | SPEC-audio-device | tech | 虚拟麦克风：内核音频驱动与系统输入设备 | 待 spec-start 分配 | 未启动 | SPEC-device-layer |
 | SPEC-validation-baseline | tech | 真机实测、风险结论和实验原型复现交付（按系统设备口径重订） | 待 spec-start 分配 | 未启动 | SPEC-phone-media、SPEC-audio-device |

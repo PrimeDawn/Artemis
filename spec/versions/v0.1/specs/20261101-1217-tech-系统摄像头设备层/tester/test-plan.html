@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>测试计划 · 系统摄像头设备层</title>
+
+<meta name="rk:title" content="测试计划：系统摄像头设备层">
+<meta name="rk:type" content="test-plan">
+<meta name="rk:version" content="v0.1">
+<meta name="rk:category" content="tech">
+<meta name="rk:spec-dir" content="spec/versions/v0.1/specs/20261101-1217-tech-系统摄像头设备层">
+<meta name="rk:role" content="spec-tester">
+<meta name="rk:mode" content="gated">
+<meta name="rk:created" content="2026-11-01">
+<meta name="rk:updated" content="2026-11-01">
+<meta name="rk:revision" content="1">
+<meta name="rk:git-branch" content="tech/spec-20261101-1217-device-layer">
+<meta name="rk:base-branch" content="dev">
+<meta name="rk:pr-url" content="">
+<meta name="rk:tags" content="spec,test-plan,directshow,obs">
+
+<link rel="rk-plan" href="../writer/plan.html">
+<link rel="rk-ledger" href="../lead/team-context.md">
+<link rel="stylesheet" href="../../../../../../html-report/assets/rk-report.css">
+<script defer src="../rk-manifest.js"></script>
+<script defer src="../../../../../../html-report/assets/rk-report.js"></script>
+</head>
+<body>
+
+<header class="rk-head">
+<h1>测试计划：系统摄像头设备层</h1>
+<div class="rk-meta">
+<span><b>类型</b> test-plan</span>
+<span><b>Spec</b> <code>20261101-1217-tech-系统摄像头设备层</code></span>
+<span><b>角色</b> spec-tester</span>
+<span><b>模式</b> gated</span>
+<span><b>分支</b> <code>tech/spec-20261101-1217-device-layer</code> ← <code>dev</code></span>
+<span><b>PR</b> —</span>
+<span><b>创建</b> 2026-11-01</span>
+<span><b>修订</b> r1（2026-11-01）</span>
+</div>
+</header>
+
+<nav class="rk-revbar"></nav>
+
+<section class="rk-verdict">
+<div class="rk-verdict-label">结论</div>
+<p>验收的真值只有一个：OBS 里能选到 <code>Artemis Camera</code>、能看到画面、录 30 秒回看有画面。其余用例都是为了让这个结论可复现、可定位。</p>
+</section>
+
+<h2>修订历史</h2>
+<table class="rk-revs">
+<thead><tr><th>修订</th><th>日期</th><th>修改人</th><th>改了什么</th><th>原因</th></tr></thead>
+<tbody>
+<tr><td>r1</td><td>2026-11-01</td><td>spec-tester</td><td>初版：10 项用例、环境要求与通过标准</td><td>依据 writer/plan.html 与探索报告</td></tr>
+</tbody>
+</table>
+
+<h2>1. 环境</h2>
+<table>
+<thead><tr><th>项</th><th>要求</th><th>当前状态</th></tr></thead>
+<tbody>
+<tr><td>编译器</td><td>VS Build Tools 17.x，C++ 工作负载</td><td>安装中（安装器自更新阶段）</td></tr>
+<tr><td>Windows SDK</td><td>10.0.26100</td><td>随 Build Tools 安装</td></tr>
+<tr><td>OBS</td><td>33.x 64 位</td><td>已安装</td></tr>
+<tr><td>权限</td><td>注册过滤器需要管理员</td><td>需要用户/会话具备</td></tr>
+</tbody>
+</table>
+
+<h2>2. 用例</h2>
+<table>
+<thead><tr><th>编号</th><th>用例</th><th>步骤</th><th>期望</th></tr></thead>
+<tbody>
+<tr><td>TC-01</td><td>构建</td><td><code>powershell -File native/build.ps1</code></td><td>退出 0；产出 <code>ArtemisCamera.dll</code> 与 <code>synthetic-producer.exe</code></td></tr>
+<tr><td>TC-02</td><td>位数</td><td><code>dumpbin /headers</code> 查两个产物</td><td>均为 <code>x64</code></td></tr>
+<tr><td>TC-03</td><td>注册</td><td><code>register.ps1 -Action register</code></td><td>退出 0；<code>HKCR\CLSID\{7E1F3A10-...}</code> 与 <code>InprocServer32</code> 存在</td></tr>
+<tr><td>TC-04</td><td>设备类别</td><td>查 <code>HKCR\CLSID\{860BB310-5D01-11D0-BD3B-00A0C911CE86}\Instance</code> 下条目</td><td>存在本 CLSID，<code>FriendlyName</code> 为 <code>Artemis Camera</code></td></tr>
+<tr><td>TC-05</td><td>OBS 枚举</td><td>重启 OBS，添加「视频采集设备」</td><td>列表中出现 <code>Artemis Camera</code></td></tr>
+<tr><td>TC-06</td><td>OBS 预览</td><td>选中设备，观察预览</td><td>出现色条画面，不黑屏、不报错</td></tr>
+<tr><td>TC-07</td><td>帧号递增</td><td>启动 producer，连续两次截图比较</td><td>画面右下角帧号递增，说明帧来自共享内存</td></tr>
+<tr><td>TC-08</td><td>无 producer</td><td>关闭 producer，观察预览</td><td>输出黑帧但不卡死，OBS 不报设备丢失</td></tr>
+<tr><td>TC-09</td><td>录制回看</td><td>录 30 秒，回放</td><td>回看有画面</td></tr>
+<tr><td>TC-10</td><td>反注册</td><td><code>register.ps1 -Action unregister</code> 后重启 OBS</td><td>退出 0；列表不再出现该设备；重新注册后恢复</td></tr>
+</tbody>
+</table>
+
+<h2>3. 证据要求</h2>
+<table>
+<thead><tr><th>类别</th><th>形式</th></tr></thead>
+<tbody>
+<tr><td>命令类用例</td><td>日志含 <code>Command:</code>、<code>Exit code:</code>、ISO8601 时间戳，落在 <code>tester/artifacts/test-logs/</code></td></tr>
+<tr><td>注册表检查</td><td>导出键值的命令输出原文，不手抄</td></tr>
+<tr><td>OBS 类用例</td><td>截图（枚举列表、预览画面、录制回放），存 <code>tester/artifacts/test-logs/&lt;run-id&gt;/</code></td></tr>
+<tr><td>帧号递增</td><td>两次截图，文件名带时间先后</td></tr>
+</tbody>
+</table>
+<p>不使用 mock：所有用例都跑真实 DLL、真实注册表、真实 OBS。构建与注册的临时产物只落在 <code>native/out/</code> 与系统注册表，测试结束后反注册清理。</p>
+
+<h2>4. 通过标准</h2>
+<ol>
+<li>TC-01 至 TC-04、TC-10 命令类用例全部退出 0 且断言成立。</li>
+<li>TC-05、TC-06、TC-09 有截图且画面内容明确。</li>
+<li>TC-07 两次截图的帧号不同且递增。</li>
+<li>TC-08 描述清楚「无 producer 时的表现」，不要求有画面。</li>
+<li>任何一项失败必须记录实际输出，不得以「环境问题」跳过而不留证据。</li>
+</ol>
+
+<h2>5. 失败处置</h2>
+<table>
+<thead><tr><th>失败</th><th>处置</th></tr></thead>
+<tbody>
+<tr><td>编译失败</td><td>转 spec-debugger，保留完整编译器输出</td></tr>
+<tr><td>注册失败</td><td>先确认是否管理员权限；权限不足记 <code>env</code> 类问题，不判产品失败</td></tr>
+<tr><td>OBS 不枚举</td><td>查注册表键是否完整、位数是否 64、OBS 是否重启</td></tr>
+<tr><td>有设备但黑屏</td><td>查引脚是否拒绝协商媒体类型、帧线程是否启动</td></tr>
+<tr><td>帧号不递增</td><td>查共享内存名、producer 是否真在写、<code>writeIndex</code> 协议</td></tr>
+</tbody>
+</table>
+
+<h2>关联产物</h2>
+<h3>本报告引用</h3>
+<ul class="rk-links">
+<li><a href="../writer/plan.html" data-rk-link="plan">实现计划</a></li>
+<li><a href="../explorer/exploration-report.html" data-rk-link="exploration-report">探索报告</a></li>
+<li><a href="../lead/team-context.md" data-rk-link="ledger">运行账本</a></li>
+</ul>
+<h3>引用本报告</h3>
+<ul class="rk-backlinks">
+<li>tester/test-report.html（待创建）</li>
+</ul>
+
+</body>
+</html>

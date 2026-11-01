@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>实现计划 · 系统摄像头设备层</title>
+
+<meta name="rk:title" content="实现计划：系统摄像头设备层">
+<meta name="rk:type" content="plan">
+<meta name="rk:version" content="v0.1">
+<meta name="rk:category" content="tech">
+<meta name="rk:spec-dir" content="spec/versions/v0.1/specs/20261101-1217-tech-系统摄像头设备层">
+<meta name="rk:role" content="spec-writer">
+<meta name="rk:mode" content="gated">
+<meta name="rk:created" content="2026-11-01">
+<meta name="rk:updated" content="2026-11-01">
+<meta name="rk:revision" content="1">
+<meta name="rk:git-branch" content="tech/spec-20261101-1217-device-layer">
+<meta name="rk:base-branch" content="dev">
+<meta name="rk:pr-url" content="">
+<meta name="rk:tags" content="spec,plan,directshow,ipc">
+
+<link rel="rk-plan" href="../writer/plan.html">
+<link rel="rk-ledger" href="../lead/team-context.md">
+<link rel="stylesheet" href="../../../../../../html-report/assets/rk-report.css">
+<script defer src="../rk-manifest.js"></script>
+<script defer src="../../../../../../html-report/assets/rk-report.js"></script>
+</head>
+<body>
+
+<header class="rk-head">
+<h1>实现计划：系统摄像头设备层</h1>
+<div class="rk-meta">
+<span><b>类型</b> plan</span>
+<span><b>Spec</b> <code>20261101-1217-tech-系统摄像头设备层</code></span>
+<span><b>角色</b> spec-writer</span>
+<span><b>模式</b> gated</span>
+<span><b>分支</b> <code>tech/spec-20261101-1217-device-layer</code> ← <code>dev</code></span>
+<span><b>PR</b> —</span>
+<span><b>创建</b> 2026-11-01</span>
+<span><b>修订</b> r1（2026-11-01）</span>
+</div>
+</header>
+
+<nav class="rk-revbar"></nav>
+
+<section class="rk-verdict">
+<div class="rk-verdict-label">结论</div>
+<p>分两步交付：先让 OBS 枚举到带画面的 <code>Artemis Camera</code>（过滤器内部合成帧），再接上共享内存与独立 producer。这样即使 IPC 出问题，也能立刻判断是过滤器还是帧源的问题。</p>
+</section>
+
+<h2>修订历史</h2>
+<table class="rk-revs">
+<thead><tr><th>修订</th><th>日期</th><th>修改人</th><th>改了什么</th><th>原因</th></tr></thead>
+<tbody>
+<tr><td>r1</td><td>2026-11-01</td><td>spec-writer</td><td>初版：两阶段实现、IPC 协议、文件清单与验收</td><td>依据探索报告与 D-001/D-002</td></tr>
+</tbody>
+</table>
+
+<h2>1. 目录与文件</h2>
+<table>
+<thead><tr><th>路径</th><th>内容</th></tr></thead>
+<tbody>
+<tr><td><code>native/artemis-camera/ArtemisCamera.cpp</code></td><td>DLL 入口、类工厂、<code>DllRegisterServer</code>/<code>DllUnregisterServer</code></td></tr>
+<tr><td><code>native/artemis-camera/Filter.h/.cpp</code></td><td><code>IBaseFilter</code> 实现，枚举一个输出引脚</td></tr>
+<tr><td><code>native/artemis-camera/Pin.h/.cpp</code></td><td><code>IPin</code> + <code>IAMStreamConfig</code> + <code>IMemInputPin</code> 接收端，填充 <code>IMediaSample</code></td></tr>
+<tr><td><code>native/artemis-camera/FrameSource.h/.cpp</code></td><td>帧源抽象：阶段一合成色条，阶段二读共享内存</td></tr>
+<tr><td><code>native/artemis-camera/SharedFrame.h</code></td><td>共享内存头结构与常量，producer 与过滤器共用</td></tr>
+<tr><td><code>native/synthetic-producer/main.cpp</code></td><td>合成帧写入共享内存（色条 + 帧号）</td></tr>
+<tr><td><code>native/build.ps1</code></td><td>调用 <code>vcvars64.bat</code> 后编译 DLL 与 exe，输出到 <code>native/out/</code></td></tr>
+<tr><td><code>native/register.ps1</code></td><td><code>regsvr32</code> 注册/反注册，检查退出码</td></tr>
+</tbody>
+</table>
+<p>不引入 CMake：两个工程用 <code>cl.exe</code> 一条命令即可编译，避免多一个工具依赖。</p>
+
+<h2>2. 阶段一：可枚举的过滤器</h2>
+<ol>
+<li>实现 <code>DllGetClassObject</code> 与类工厂，CLSID 固定为 <code>{7E1F3A10-2C4B-4D8E-9A55-3F0C1B7D9E21}</code></li>
+<li>实现 <code>IBaseFilter</code>：<code>EnumPins</code> 返回一个输出引脚，<code>QueryFilterInfo</code> 返回 <code>Artemis Camera</code></li>
+<li>输出引脚只接受一种媒体类型：<code>MEDIASUBTYPE_RGB32</code>、<code>1280×720</code>、<code>30fps</code>；<code>IAMStreamConfig</code> 的 <code>GetStreamCaps</code> 返回同一项</li>
+<li>帧线程每秒 30 次填充 <code>IMediaSample</code>：画 8 条色条，右下角叠加帧号</li>
+<li><code>DllRegisterServer</code> 写两份注册表：<code>HKCR\CLSID\{...}\InprocServer32</code>（DLL 路径、<code>ThreadingModel=Both</code>）与 <code>HKCR\CLSID\{...}</code> 下的 <code>FriendlyName</code>/<code>FilterData</code>，并把 CLSID 登记到 <code>CLSID_VideoInputDeviceCategory</code></li>
+</ol>
+
+<h2>3. 阶段二：共享内存帧源</h2>
+<h3>3.1 共享内存布局</h3>
+<table>
+<thead><tr><th>偏移</th><th>字段</th><th>说明</th></tr></thead>
+<tbody>
+<tr><td>0</td><td><code>magic</code> (<code>0x41435456</code> 即 "ACTV")</td><td>拒绝非本协议映射</td></tr>
+<tr><td>4</td><td><code>version</code> = 1</td><td>不兼容即视为无帧</td></tr>
+<tr><td>8</td><td><code>width</code> = 1280</td><td>—</td></tr>
+<tr><td>12</td><td><code>height</code> = 720</td><td>—</td></tr>
+<tr><td>16</td><td><code>stride</code> = 5120</td><td><code>width*4</code></td></tr>
+<tr><td>20</td><td><code>format</code> = 1（RGB32）</td><td>枚举</td></tr>
+<tr><td>24</td><td><code>writeIndex</code> (uint64)</td><td>奇数=正在写，偶数=稳定</td></tr>
+<tr><td>32</td><td><code>frameIndex</code> (uint64)</td><td>producer 自增</td></tr>
+<tr><td>40</td><td><code>timestampUs</code> (uint64)</td><td>producer 侧时间</td></tr>
+<tr><td>64</td><td><code>frame[2][5120*720]</code></td><td>双缓冲，按 <code>writeIndex</code> 选择稳定块</td></tr>
+</tbody>
+</table>
+<p>映射名固定为 <code>Global\ArtemisCameraFrames</code>，过滤器以只读方式 <code>OpenFileMapping(FILE_MAP_READ)</code>；producer 不存在时过滤器输出黑帧并继续出流，不阻塞。</p>
+
+<h3>3.2 写入协议</h3>
+<ol>
+<li>producer 选目标块 <code>b = (frameIndex % 2)</code>，<code>writeIndex++</code>（变奇数）</li>
+<li>写像素与 <code>frameIndex</code>/<code>timestampUs</code></li>
+<li><code>writeIndex++</code>（变偶数，标记稳定）</li>
+<li>过滤器读 <code>writeIndex</code> 两次，相等且为偶数时才拷该块，否则沿用上一帧</li>
+</ol>
+
+<h2>4. 构建与注册</h2>
+<table>
+<thead><tr><th>命令</th><th>期望</th></tr></thead>
+<tbody>
+<tr><td><code>powershell -File native/build.ps1</code></td><td>退出 0，产出 <code>ArtemisCamera.dll</code> 与 <code>synthetic-producer.exe</code></td></tr>
+<tr><td><code>powershell -File native/register.ps1 -Action register</code></td><td>退出 0；需要管理员</td></tr>
+<tr><td><code>powershell -File native/register.ps1 -Action unregister</code></td><td>退出 0，CLSID 键被移除</td></tr>
+</tbody>
+</table>
+<p>注册脚本不静默吞失败：<code>regsvr32</code> 非 0 或注册表项缺失都返回非 0。</p>
+
+<h2>5. 验收</h2>
+<ol>
+<li>构建退出 0，两个产物存在且为 64 位（<code>dumpbin /headers</code> 显示 machine x64）</li>
+<li>注册后 <code>HKCR\CLSID\{7E1F3A10-...}</code> 与 <code>CLSID_VideoInputDeviceCategory</code> 下均存在对应项，<code>FriendlyName</code> 为 <code>Artemis Camera</code></li>
+<li>OBS「视频采集设备」列表出现 <code>Artemis Camera</code>，选中后有画面</li>
+<li>启动 producer 后画面出现帧号递增；不启动 producer 时仍有黑帧，不卡死</li>
+<li>用 OBS 录 30 秒，回看有画面</li>
+<li>反注册后 OBS 列表不再出现该设备；重新注册后恢复</li>
+</ol>
+
+<h2>6. 风险与回滚</h2>
+<table>
+<thead><tr><th>风险</th><th>应对</th></tr></thead>
+<tbody>
+<tr><td>没有 BaseClasses（<code>streams.h</code>）</td><td>本计划直接实现 <code>IBaseFilter</code>/<code>IPin</code> 最小集合，不依赖 SDK Samples</td></tr>
+<tr><td>注册需要管理员</td><td>脚本显式提示；失败返回非 0，不伪装成功</td></tr>
+<tr><td>OBS 缓存旧设备列表</td><td>注册后重启 OBS；验收前先关闭 OBS</td></tr>
+<tr><td>GPLv3 参考实现</td><td>只参考结构，不复制源码</td></tr>
+</tbody>
+</table>
+<p>回滚：反注册并删除 <code>native/out/</code> 即可，不涉及系统驱动，无残留风险。</p>
+
+<h2>关联产物</h2>
+<h3>本报告引用</h3>
+<ul class="rk-links">
+<li><a href="../explorer/exploration-report.html" data-rk-link="exploration-report">探索报告</a></li>
+<li><a href="../lead/team-context.md" data-rk-link="ledger">运行账本</a></li>
+<li><a href="../tester/test-plan.html" data-rk-link="test-plan">测试计划</a></li>
+</ul>
+<h3>引用本报告</h3>
+<ul class="rk-backlinks">
+<li><a href="../tester/test-plan.html" data-rk-backlink="test-plan">测试计划</a></li>
+<li>executor/summary.html（待创建）</li>
+</ul>
+
+</body>
+</html>

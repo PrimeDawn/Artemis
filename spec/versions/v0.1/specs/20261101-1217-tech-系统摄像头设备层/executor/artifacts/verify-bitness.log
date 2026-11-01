@@ -1,0 +1,6 @@
+﻿=== Verify bitness ===
+Command: dumpbin /headers native/out/ArtemisCamera.dll | findstr machine && dumpbin /headers native/out/synthetic-producer.exe | findstr machine
+Timestamp: 2026-11-01T13:42:01.4537598+08:00
+            8664 machine (x64)
+            8664 machine (x64)
+Exit code: 0

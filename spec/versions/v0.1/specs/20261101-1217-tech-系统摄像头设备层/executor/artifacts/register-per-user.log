@@ -1,0 +1,15 @@
+﻿=== Per-user registration (no elevation) ===
+Command: powershell -File native/register.ps1 -Action register
+Timestamp: 2026-11-01T14:13:47.0781698+08:00
+NOTE: running unelevated; registering per-user under HKCU\Software\Classes
+REGISTER OK: Artemis Camera
+Exit code: 0
+device: Artemis Camera
+  devicePath: @device:sw:{860BB310-5D01-11D0-BD3B-00A0C911CE86}\{7E1F3A10-2C4B-4D8E-9A55-3F0C1B7D9E21}
+  displayName: @device:sw:{860BB310-5D01-11D0-BD3B-00A0C911CE86}\{7E1F3A10-2C4B-4D8E-9A55-3F0C1B7D9E21}
+  pin 0 direction=output
+device: OBS Virtual Camera
+  devicePath: <none>
+  displayName: @device:sw:{860BB310-5D01-11D0-BD3B-00A0C911CE86}\{A3FCE0F5-3493-419F-958A-ABA1250EC20B}
+  pin 0 direction=output
+total devices: 2
