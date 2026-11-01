@@ -5,7 +5,7 @@ team_name: spec-20261101-1217-系统摄像头设备层
 spec_dir: spec/versions/v0.1/specs/20261101-1217-tech-系统摄像头设备层
 task_description: 在 Windows 上提供被 OBS 当作真实摄像头的 DirectShow 设备 Artemis Camera，先由共享内存驱动输出合成画面，不接手机
 status: running
-phase: implementation
+phase: testing
 runtime: generic
 mode: gated
 execution: serial
@@ -36,7 +36,7 @@ updated_at: 2026-11-01T12:17:00+08:00
 | T-002 | spec-writer | 编写实现方案 | done | writer/plan.html | 2026-11-01T13:35:00+08:00 | spec-writer |
 | T-003 | spec-tester | 编写测试计划 | done | tester/test-plan.html | 2026-11-01T13:35:00+08:00 | spec-tester |
 | T-004 | spec-executor | 实现过滤器与共享内存帧源 | done | executor/summary.html | 2026-11-01T14:15:00+08:00 | spec-executor |
-| T-005 | spec-tester | 独立测试（OBS 枚举与录制） | pending | tester/test-report.html | | spec-tester |
+| T-005 | spec-tester | 独立测试（OBS 枚举与录制） | done | tester/test-report.html | 2026-11-01T16:20:00+08:00 | spec-tester |
 | T-006 | spec-ender | 收尾归档与 PR | pending | ender/end-report.html | | spec-ender |
 
 ## 问题闭环记录
@@ -84,8 +84,8 @@ updated_at: 2026-11-01T12:17:00+08:00
 |------|----------|------|----------|----------|------|
 | gate-1 | 需求对齐 | pass | user | 2026-11-01T12:17:00+08:00 | 用户选择「确认，按此执行」；范围含共享内存与合成 producer |
 | gate-2 | 方案与测试计划 | pass | user | 2026-11-01T13:38:00+08:00 | 用户选择「通过，按此实现」；两阶段交付、RGB32/720p30、不用 BaseClasses |
-| gate-3 | 实现确认 | pending | user | | 待审阅 executor/summary.html：OBS 已能看到画面并录制回放 |
-| gate-4 | 测试报告 | pending | user | | |
+| gate-3 | 实现确认 | pass | user | 2026-11-01T16:06:00+08:00 | 用户回复「可以，进行测试吧」 |
+| gate-4 | 测试报告 | pending | user | | 待审阅 tester/test-report.html：10 项用例全通过 |
 | gate-5 | 归档 | pending | user | | |
 
 ## 角色交接
@@ -108,4 +108,4 @@ updated_at: 2026-11-01T12:17:00+08:00
 
 ## 下一步动作
 
-- 阶段三实现完成：OBS 可选到设备并显示画面，录制回放有画面。等待用户放行 gate-3 后进入阶段四独立测试。
+- 阶段四完成：10 项用例全部通过（含反注册/重注册）。等待用户放行 gate-4 后进入收尾归档。

@@ -5,6 +5,7 @@ window.RK_SPEC_TREE = {
     { role: "explorer", path: "explorer/exploration-report.html", title: "探索报告", type: "exploration-report" },
     { role: "writer", path: "writer/plan.html", title: "实现计划", type: "plan" },
     { role: "tester", path: "tester/test-plan.html", title: "测试计划", type: "test-plan" },
-    { role: "executor", path: "executor/summary.html", title: "实现总结", type: "summary" }
+    { role: "executor", path: "executor/summary.html", title: "实现总结", type: "summary" },
+    { role: "tester", path: "tester/test-report.html", title: "测试报告", type: "test-report" }
   ]
 };
