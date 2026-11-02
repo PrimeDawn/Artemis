@@ -11,7 +11,7 @@
 <meta name="rk:mode"        content="gated">
 <meta name="rk:created"     content="2026-11-02">
 <meta name="rk:updated"     content="2026-11-02">
-<meta name="rk:revision"    content="5">
+<meta name="rk:revision"    content="6">
 <meta name="rk:git-branch"  content="tech/spec-20261102-1117-audio-device">
 <meta name="rk:base-branch" content="dev">
 <meta name="rk:pr-url"      content="">
@@ -37,7 +37,7 @@
     <span><b>分支</b> <code>tech/spec-20261102-1117-audio-device</code> ← <code>dev</code></span>
     <span><b>PR</b> —</span>
     <span><b>创建</b> 2026-11-02</span>
-    <span><b>修订</b> r5（2026-11-02）</span>
+    <span><b>修订</b> r6（2026-11-02）</span>
   </div>
 </header>
 
@@ -56,7 +56,7 @@
     <tr><td>r1</td><td>2026-11-02</td><td>spec-writer</td><td>初版</td><td>—</td></tr>
     <tr><td>r2</td><td>2026-11-02</td><td>spec-writer</td><td>§6 改为自带 PortCls/WaveRT 驱动</td><td>按 D-006：方案必须对用户环境中立</td></tr>
     <tr><td>r3</td><td>2026-11-02</td><td>spec-writer</td><td>传输改为独立 <code>/audio</code> 通道并删除 bit60/协议版本改造；编码改为 Opus 优先；新增 regulator；验收项重排</td><td>按 D-007／D-008：沿用 scrcpy 的音频实现，不做同类实现都没有的耦合</td></tr>
-    <tr><td>r4</td><td>2026-11-02</td><td>spec-writer</td><td>签名并入本 Spec 交付范围与验收：AC-5 改为签名安装包 + 干净 Win11 虚拟机验证；§8 增加「不以测试签名替代交付」；§9 增加无证书时的处置；§10 增加签名与验证步骤</td><td>按 D-010：签名是功能能否交付本身，不得外挂为发布门禁</td></tr><tr><td>r5</td><td>2026-11-02</td><td>spec-writer</td><td>按 D-012 收缩范围：删除自研驱动与签名，§6 改为「探测用户自备虚拟声卡并输出」，AC-5 改为跳板输出验收，§8/§9/§10 同步</td><td>用户决定本版不自研驱动、不签名；只保证装了声卡时有声音</td></tr>
+    <tr><td>r4</td><td>2026-11-02</td><td>spec-writer</td><td>签名并入本 Spec 交付范围与验收：AC-5 改为签名安装包 + 干净 Win11 虚拟机验证；§8 增加「不以测试签名替代交付」；§9 增加无证书时的处置；§10 增加签名与验证步骤</td><td>按 D-010：签名是功能能否交付本身，不得外挂为发布门禁</td></tr><tr><td>r5</td><td>2026-11-02</td><td>spec-writer</td><td>按 D-012 收缩范围：删除自研驱动与签名，§6 改为「探测用户自备虚拟声卡并输出」，AC-5 改为跳板输出验收，§8/§9/§10 同步</td><td>用户决定本版不自研驱动、不签名；只保证装了声卡时有声音</td></tr><tr><td>r6</td><td>2026-11-02</td><td>spec-writer</td><td>只支持 VB-CABLE；AC-5 改为实现层验收，真实连通性记未实测并排入 v0.1.1（VoiceMeeter 排 v0.1.2）</td><td>按 D-013：当前无任何环境装有虚拟声卡</td></tr>
   </tbody>
 </table>
 
@@ -212,8 +212,8 @@
 <table>
   <thead><tr><th>项</th><th>内容</th></tr></thead>
   <tbody>
-    <tr><td>探测</td><td>枚举 WASAPI 渲染端点；对每个候选寻找同一音频适配器下的采集端点（cable 类驱动的结构特征）；<code>CABLE</code> / <code>VoiceMeeter</code> / <code>Line 1</code> 等名称匹配只作兜底，避免写死厂商。</td></tr>
-    <tr><td>选择</td><td>固定优先级：CABLE &gt; VoiceMeeter &gt; 其他成对端点；命中即用，不给用户选择框，界面只显示当前命中的设备名。</td></tr>
+    <tr><td>探测</td><td>本 Spec 只认 VB-CABLE：枚举 WASAPI 渲染端点，按 <code>CABLE Input</code> 名称匹配并核对同名采集端点 <code>CABLE Output</code>；匹配逻辑集中在一个常量表里，加新声卡只改表。</td></tr>
+    <tr><td>选择</td><td>命中即用，不给用户选择框，界面只显示当前命中的设备名；未命中则音频关闭。</td></tr>
     <tr><td>未命中</td><td>音频关闭，界面显示原因与安装指引；视频完全不受影响。</td></tr>
     <tr><td>运行中变化</td><td>监听设备变化：跳板消失则关闭音频并显示原因；出现新的成对端点时可自动切换。</td></tr>
     <tr><td>不打包</td><td>不随包分发、不修改任何第三方虚拟声卡（再分发需授权）；只检测与使用。</td></tr>
@@ -229,7 +229,7 @@
     <tr><td>AC-2</td><td>编码</td><td>手机端默认输出 Opus，缺少该编码器时回退 AAC-LC；配置包在起流与重连后各发送一次。</td></tr>
     <tr><td>AC-3</td><td>手机链路</td><td>采集与编码启动后，PC 端解出样本；断开重连后音频恢复，不需要重启 decode-host。</td></tr>
     <tr><td>AC-4</td><td>无设备验收</td><td><code>--audio-wav</code> 产物可播放，时长与样本数自洽（误差 ≤ 100 ms），内容可辨认。</td></tr>
-    <tr><td>AC-5</td><td>跳板输出</td><td>在装有受支持虚拟声卡的 Windows 上：启动后自动命中该跳板并输出音频，其采集端能收到手机麦克风声音（OBS 选中该采集端有电平、录制回看有声音）；未装时音频不可用并提示原因，视频正常。</td></tr>
+    <tr><td>AC-5</td><td>跳板输出（实现层）</td><td>代码可构建；端点选择逻辑有单测覆盖（命中 CABLE、未命中、运行中消失）；未装声卡时明确提示且视频正常。真实 CABLE 连通性本轮<b>记未实测</b>，由 v0.1.1 补丁验证。</td></tr>
     <tr><td>AC-6</td><td>不退化</td><td>既有 Node 与 JVM 测试通过；OBS 仍能选 <code>Artemis Camera</code> 看到画面；APK 可构建。</td></tr>
   </tbody>
 </table>

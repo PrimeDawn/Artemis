@@ -11,7 +11,7 @@
 <meta name="rk:mode"        content="gated">
 <meta name="rk:created"     content="2026-11-02">
 <meta name="rk:updated"     content="2026-11-02">
-<meta name="rk:revision"    content="5">
+<meta name="rk:revision"    content="6">
 <meta name="rk:git-branch"  content="tech/spec-20261102-1117-audio-device">
 <meta name="rk:base-branch" content="dev">
 <meta name="rk:pr-url"      content="">
@@ -35,7 +35,7 @@
     <span><b>分支</b> <code>tech/spec-20261102-1117-audio-device</code> ← <code>dev</code></span>
     <span><b>PR</b> —</span>
     <span><b>创建</b> 2026-11-02</span>
-    <span><b>修订</b> r5（2026-11-02）</span>
+    <span><b>修订</b> r6（2026-11-02）</span>
   </div>
 </header>
 
@@ -54,7 +54,7 @@
     <tr><td>r1</td><td>2026-11-02</td><td>spec-explorer</td><td>初版</td><td>—</td></tr>
     <tr><td>r2</td><td>2026-11-02</td><td>spec-explorer</td><td>设备选型改为自带内核驱动，删除以开发机环境为据的第三方声卡路线</td><td>按 D-006：方案必须对用户环境中立</td></tr>
     <tr><td>r3</td><td>2026-11-02</td><td>spec-explorer</td><td>全文改写：以 scrcpy 音频链路为参照；补充「手机当摄像头」同类产品的三条设备路线；删除 bit60 帧头改造方案；编码改为 Opus 优先；增加 regulator 与独立音频通道结论</td><td>按 D-007／D-008：前一版参照系与检索方式错误，且把音频耦合进视频流不符合同类实现</td></tr>
-    <tr><td>r4</td><td>2026-11-02</td><td>spec-explorer</td><td>AR-07 改为「能否即用取决于签名流水线」，并归入本 Spec 交付范围</td><td>按 D-010：签名不是外挂的发布门禁</td></tr><tr><td>r5</td><td>2026-11-02</td><td>spec-explorer</td><td>§3 改为「不自研驱动，输出到用户自备虚拟声卡」并补三条路线的取舍</td><td>按 D-012 收缩版本范围</td></tr>
+    <tr><td>r4</td><td>2026-11-02</td><td>spec-explorer</td><td>AR-07 改为「能否即用取决于签名流水线」，并归入本 Spec 交付范围</td><td>按 D-010：签名不是外挂的发布门禁</td></tr><tr><td>r5</td><td>2026-11-02</td><td>spec-explorer</td><td>§3 改为「不自研驱动，输出到用户自备虚拟声卡」并补三条路线的取舍</td><td>按 D-012 收缩版本范围</td></tr><tr><td>r6</td><td>2026-11-02</td><td>spec-explorer</td><td>§3 收敛为只支持 VB-CABLE；连通性验证推迟到 v0.1.1 / v0.1.2</td><td>按 D-013：无可用虚拟声卡环境</td></tr>
   </tbody>
 </table>
 
@@ -158,7 +158,7 @@
 <h2>3. 最后一跳：不自研驱动，改为输出到用户自备虚拟声卡</h2>
 <p>系统录音端点只能由内核音频驱动创建，而 Windows 只加载微软签名的驱动；在开源、零预算的约束下拿不到签名（D-012）。因此本版不追求「系统里多一个麦克风」，改为：</p>
 <ul>
-  <li><b>探测</b>用户机器上是否装了成对的虚拟声卡端点（CABLE、VoiceMeeter 等），命中则把音频输出到它的渲染端；</li>
+  <li><b>探测</b>用户机器上是否装了 <code>VB-CABLE</code>（<code>CABLE Input</code> ↔ <code>CABLE Output</code>），命中则把音频输出到它的渲染端；VoiceMeeter 留到 v0.1.2；</li>
   <li>用户在 OBS 等软件里选对应采集端，即可收到手机麦克风的声音；</li>
   <li>没有虚拟声卡时：视频照常，音频不可用并明确提示，由用户自行决定是否安装。</li>
 </ul>
@@ -175,7 +175,7 @@
 
 <div class="rk-cal key">
   <div class="t">产品口径（D-012）</div>
-  <p>装完 Artemis 即有视频；要有声音，用户需自备一个免费虚拟声卡（CABLE 或 VoiceMeeter），软件自动识别并输出。除 OBS 类软件外的兼容性不在本项目范围。</p>
+  <p>装完 Artemis 即有视频；要有声音，用户需自备 VB-CABLE，软件自动识别并输出。两个声卡的真实连通性验证推迟到 v0.1.1（CABLE）与 v0.1.2（VoiceMeeter）。除 OBS 类软件外的兼容性不在本项目范围。</p>
 </div><h2>4. 风险清单</h2>
 <table>
   <thead><tr><th>编号</th><th>风险</th><th>影响</th><th>应对</th></tr></thead>

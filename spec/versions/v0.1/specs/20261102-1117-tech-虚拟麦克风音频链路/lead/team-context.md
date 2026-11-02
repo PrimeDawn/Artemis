@@ -72,6 +72,8 @@ AWR 运行态：session `01M6D4KYQ95BYVQXR8FRXQ2JYK`、claim `01M6D4KYQBKA79MX0S
 | D-009 | spec-writing | TeamLead | 系统麦克风的交付来源 | A 依赖用户已装的第三方虚拟声卡（D-001）/ B 产品自带 PortCls/WaveRT 驱动并随包分发 | B | Windows 无用户态创建录音端点的 API；同类产品（DroidCam/Iriun/Camo）均另装音频驱动；只有自带驱动才能保证任意机器装完即有 `Artemis Microphone` | user（授权 TeamLead 调研自决） | 2026-11-02T11:33:00+08:00 | 用户原话「这不是独立的虚拟麦克风…你要找的项目是 github 上的虚拟摄像头项目」；`explorer/exploration-report.html` §3 |
 | D-010 | spec-writing | TeamLead | 驱动签名归属 | A 作为发布门禁外挂，本 Spec 只交付测试签名可用的驱动 / B 签名并入本 Spec 交付范围与验收 | B | 签名决定用户装完能不能用，外挂等于把交付缺口留给下游；没有正式签名时 AC-5 不得通过，Spec 不得收尾 | user | 2026-11-02T11:55:00+08:00 | 用户原话「照你这么说用户只安装了软件用不了？这个还不在本spec，那你打算推脱给谁做？」；`writer/plan.html` §6、§7 AC-5、§8 |
 | D-011 | spec-writing | TeamLead | 音频最终交付形态 | A 自研驱动 + 签名 / B 输出到用户自备虚拟声卡 / C 只做应用内音频 | B | 版本账本 D-012 与用户本轮决定：开源零预算拿不到微软签名；改为探测并输出到用户已装的虚拟声卡，未装则无音频。范围收缩后本 Spec 无内核代码、无签名 | user | 2026-11-02T13:50:00+08:00 | 用户原话「基础能提供视频传输，但如果用户装了虚拟声卡，就能传输声音，否则不能…他要是没装就听不到，那不管我们的事」；`spec/versions/v0.1/version-context.md` D-012 |
+| D-012 | spec-writing | TeamLead | 本 Spec 支持几种虚拟声卡 | A 同时支持 VB-CABLE 与 VoiceMeeter / B 只支持 VB-CABLE | B：本 Spec 只做 VB-CABLE（`CABLE Input` ↔ `CABLE Output`），VoiceMeeter 整体推到 v0.1.2 | 用户要求只支持一个；单一端点配对最简单、没有混音台路由问题，先把一条打通 | user | 2026-11-02T14:10:00+08:00 | 用户原话「你只支持一个就行」 |
+| D-013 | spec-writing | TeamLead | 连通性验证放在哪 | A 本 Spec 内验证 / B 推迟到 v0.1.1（VB-CABLE）与 v0.1.2（VoiceMeeter）补丁验证 | B | 当前没有任何机器装有虚拟声卡，无法实测；本 Spec 只保证代码实现完整、可构建、端点选择逻辑有单测，报告如实记未实测 | user | 2026-11-02T14:10:00+08:00 | 用户原话「本机也好哪里也好都没有安装虚拟声卡可以测试，这部分实现好能跑通就行，两个虚拟声卡软件的连通性测试留到发版后的补丁也就是0.1.1和0.1.2」 |
 
 ## 角色运行句柄
 
@@ -90,9 +92,9 @@ AWR 运行态：session `01M6D4KYQ95BYVQXR8FRXQ2JYK`、claim `01M6D4KYQBKA79MX0S
 | 产物 | 负责角色 | 状态 | 已确认 | 更新时间 |
 |------|----------|------|--------|----------|
 | rk-manifest.js | TeamLead | done | yes | 2026-11-02T11:56:00+08:00 |
-| explorer/exploration-report.html | spec-explorer | done (r5) | no | 2026-11-02T14:05:00+08:00 |
-| writer/plan.html | spec-writer | done (r5) | no | 2026-11-02T14:05:00+08:00 |
-| tester/test-plan.html | spec-tester | done (r4) | no | 2026-11-02T14:05:00+08:00 |
+| explorer/exploration-report.html | spec-explorer | done (r6) | no | 2026-11-02T14:12:00+08:00 |
+| writer/plan.html | spec-writer | done (r6) | no | 2026-11-02T14:12:00+08:00 |
+| tester/test-plan.html | spec-tester | done (r5) | no | 2026-11-02T14:12:00+08:00 |
 | executor/summary.html | spec-executor | pending | no | |
 | tester/test-report.html | spec-tester | pending | no | |
 | ender/end-report.html | spec-ender | pending | no | |
@@ -131,7 +133,7 @@ AWR 运行态：session `01M6D4KYQ95BYVQXR8FRXQ2JYK`、claim `01M6D4KYQBKA79MX0S
 
 ## 下一步动作
 
-- 范围已按 D-011 收缩：不自研内核驱动、不涉及签名；三份产物已同步到 r5/r4。
+- 范围已按 D-011/D-012/D-013 收缩：不自研内核驱动、不涉及签名、只支持 VB-CABLE；三份产物同步到 r6/r6/r5。
 - 仍停在 **gate-2**：`writer/plan.html`（r5）+ `tester/test-plan.html`（r4）待确认。
 - 确认后按方案 §10 执行：通道层 → 手机端 → PC 端解码/WAV → 端点探测与路由 → 接线与回归。
-- 验证只在装有受支持虚拟声卡的机器上进行；不安装虚拟声卡时不测音频，如实记「音频不可用」。
+- 本轮不做连通性实测（无可用环境）：只做到可构建 + 端点选择单测 + WAV 链路跑通；VB-CABLE 实连通留 v0.1.1，VoiceMeeter 留 v0.1.2。

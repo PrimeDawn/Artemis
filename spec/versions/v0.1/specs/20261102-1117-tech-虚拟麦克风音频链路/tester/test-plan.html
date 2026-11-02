@@ -11,7 +11,7 @@
 <meta name="rk:mode"        content="gated">
 <meta name="rk:created"     content="2026-11-02">
 <meta name="rk:updated"     content="2026-11-02">
-<meta name="rk:revision"    content="4">
+<meta name="rk:revision"    content="5">
 <meta name="rk:git-branch"  content="tech/spec-20261102-1117-audio-device">
 <meta name="rk:base-branch" content="dev">
 <meta name="rk:pr-url"      content="">
@@ -37,7 +37,7 @@
     <span><b>分支</b> <code>tech/spec-20261102-1117-audio-device</code> ← <code>dev</code></span>
     <span><b>PR</b> —</span>
     <span><b>创建</b> 2026-11-02</span>
-    <span><b>修订</b> r4（2026-11-02）</span>
+    <span><b>修订</b> r5（2026-11-02）</span>
   </div>
 </header>
 
@@ -56,7 +56,7 @@
   <tbody>
     <tr><td>r1</td><td>2026-11-02</td><td>spec-tester</td><td>初版</td><td>—</td></tr>
     <tr><td>r2</td><td>2026-11-02</td><td>spec-tester</td><td>设备用例改为驱动路线</td><td>按 D-006：方案对用户环境中立</td></tr>
-    <tr><td>r3</td><td>2026-11-02</td><td>spec-tester</td><td>删除协议版本用例，改为 <code>/audio</code> 通道绑定校验；新增 Opus、AAC 回退、regulator 用例；约束补充「可控时钟」</td><td>按 D-007／D-008：音频走独立通道、帧头不变、Opus 优先</td></tr><tr><td>r4</td><td>2026-11-02</td><td>spec-tester</td><td>TC-10 从「安装音频驱动」改为「自动命中用户自备虚拟声卡」；补未装声卡时的判定</td><td>按 D-012：本版不自研驱动、不签名</td></tr>
+    <tr><td>r3</td><td>2026-11-02</td><td>spec-tester</td><td>删除协议版本用例，改为 <code>/audio</code> 通道绑定校验；新增 Opus、AAC 回退、regulator 用例；约束补充「可控时钟」</td><td>按 D-007／D-008：音频走独立通道、帧头不变、Opus 优先</td></tr><tr><td>r4</td><td>2026-11-02</td><td>spec-tester</td><td>TC-10 从「安装音频驱动」改为「自动命中用户自备虚拟声卡」；补未装声卡时的判定</td><td>按 D-012：本版不自研驱动、不签名</td></tr><tr><td>r5</td><td>2026-11-02</td><td>spec-tester</td><td>TC-10 改为「VB-CABLE 连通性（延后）」：本轮不执行，由 v0.1.1 补丁验证；VoiceMeeter 由 v0.1.2 验证</td><td>按 D-013：当前无任何环境装有虚拟声卡</td></tr>
   </tbody>
 </table>
 
@@ -135,9 +135,9 @@
       <td><code>tc09-*.log</code></td>
     </tr>
     <tr>
-      <td>TC-10</td><td>设备</td><td>系统麦克风可见</td>
-      <td>在装有受支持虚拟声卡的机器上启动 decode-host，确认自动命中该跳板；OBS「音频输入采集」选对应采集端</td>
-      <td>OBS 混音器有电平；录制 10 秒回看有声音；未装声卡时明确提示音频不可用且视频正常</td>
+      <td>TC-10</td><td>设备</td><td>VB-CABLE 连通性（延后）</td>
+      <td>本 Spec 不执行（当前无任何环境装有虚拟声卡）；由 v0.1.1 补丁在装有 VB-CABLE 的机器上执行</td>
+      <td>延后：OBS「音频输入采集」选 <code>CABLE Output</code> 有电平、录制回看有声音。本轮只验证未装声卡时的提示与视频不受影响</td>
       <td><code>tc10-*.log</code></td>
     </tr>
     <tr>
@@ -159,7 +159,7 @@
 <ul>
   <li>不把真实时长当测试步骤：时间相关问题用可控时钟与样本数核对，regulator 与重连一律短样本。</li>
   <li>每轮聚焦受影响的用例，不因改一行就跑全部 12 项；全量只在提交前跑一次。</li>
-  <li>TC-10 依赖目标机器已装受支持虚拟声卡；不具备时记「未实测」并写明原因，不记为通过。</li>
+  <li>TC-10 本轮不执行：无任何环境装有虚拟声卡，连通性由 v0.1.1（VB-CABLE）与 v0.1.2（VoiceMeeter）补丁验证；本轮报告记「未实测」并写明原因，不记为通过。</li>
   <li>证据一律由测试运行自动产出并写入 <code>tester/artifacts/test-logs/&lt;run-id&gt;/</code>，不手写、不回填。</li>
 </ul>
 

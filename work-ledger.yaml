@@ -157,10 +157,10 @@ work_items:
     depends_on:
       - SPEC-device-layer
     acceptance:
-      - 手机麦克风音频经独立通道传到 PC，并输出到软件探测到的用户自备虚拟声卡渲染端；其采集端可收到该声音。
-      - 未安装受支持虚拟声卡时视频照常、音频不可用并明确提示原因；不自研内核驱动、不涉及签名。
-      - 其他软件兼容性不在范围内。
-    next_action: 按 writer/plan.html 实现独立 /audio 通道、手机端 Opus/AAC 采集编码、PC 端解码与端点探测输出。
+      - 手机麦克风音频经独立通道传到 PC，并输出到探测到的 VB-CABLE 渲染端（CABLE Input）；VoiceMeeter 不在本 Spec 范围。
+      - 未安装虚拟声卡时视频照常、音频不可用并明确提示原因；不自研内核驱动、不涉及签名。
+      - 无任何环境装有虚拟声卡，VB-CABLE 的端到端连通性记未实测，由 v0.1.1 验证；VoiceMeeter 由 v0.1.2 验证。
+    next_action: 按 writer/plan.html 实现独立 /audio 通道、手机端 Opus/AAC 采集编码、PC 端解码与 VB-CABLE 端点输出；连通性实测排入 v0.1.1。
     summary: 由原 SPEC-media-obs 的音频目标拆分而来；2026-11-02 按 D-012 收缩范围，放弃自研驱动与签名。
     tags: [v0.1, tech, audio]
     paths:
