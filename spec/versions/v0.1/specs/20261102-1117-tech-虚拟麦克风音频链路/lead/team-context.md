@@ -11,7 +11,7 @@ mode: gated
 execution: serial
 git_branch: tech/spec-20261102-1117-audio-device
 base_branch: dev
-pr_url:
+pr_url: https://github.com/PrimeDawn/Artemis/pull/7
 created_at: 2026-11-02T11:17:00+08:00
 updated_at: 2026-11-02T11:22:00+08:00
 ---
