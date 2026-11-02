@@ -195,7 +195,7 @@
 <ul>
   <li>音频通道与视频通道共用 <code>MediaConnection</code>/<code>media-relay</code> 的实现，只区分路径与 sink，不复制一套重连逻辑。</li>
   <li>帧头解析器不加分支：音频流的每一帧都是音频，解析器保持现有语义。</li>
-  <li>sink 抽象三实现：<code>WavFileSink</code>（可判定证据）、<code>WasapiSink</code>（默认设备）、<code>VirtualMicSink</code>（写 <code>Artemis Microphone Feed</code>）。</li>
+  <li>sink 抽象三实现：<code>WavFileSink</code>（可判定证据）、<code>WasapiSink</code>（默认设备或指定端点，按探测结果挑虚拟声卡渲染端）。</li>
   <li>regulator 的目标值必须可注入，便于用假时钟验证，不靠真实等待。</li>
 </ul>
 <h3>给 spec-tester</h3>

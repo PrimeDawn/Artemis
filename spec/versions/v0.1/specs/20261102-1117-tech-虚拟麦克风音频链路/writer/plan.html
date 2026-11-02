@@ -85,9 +85,9 @@
                                             │   ├ WasapiSink（默认设备）  │
                                             │   └ VirtualMicSink         │
                                             │        ↓                   │
-                                            │   Artemis Microphone Feed  │
-                                            │        ↓（驱动内部环回）    │
-                                            │   Artemis Microphone       │
+                                            │   虚拟声卡渲染端（CABLE 等）│
+                                            │        ↓（声卡内部环回）    │
+                                            │   其对应采集端（OBS 选它） │
                                             └────────────────────────────┘</code></pre>
 
 <h2>3. 通道与帧格式</h2>
