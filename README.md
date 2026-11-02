@@ -4,34 +4,36 @@
 
 Artemis 计划通过原生安卓 App 采集视频与麦克风音频，在局域网内把画面与声音送到 Windows，并呈现为系统摄像头 `Artemis Camera` 与系统麦克风 `Artemis Microphone`。电脑侧提供本地配对与控制页面；OBS 只作为验收代表，不再是媒体接收端，音视频不由 Node.js 服务转码。
 
-当前按 [v0.1 技术预研规划](spec/versions/v0.1/plan.html)推进。Spec2的自动发现、电脑单击选手机、首次允许后持久信任、无固定连接期限、自动恢复及授权信令已实现。真实S24已完成首次连接与控制流程，前台常亮、切App暂停/返回恢复及省电锁屏→正常解锁连续恢复均有通过记录。最新连续流程全程同一服务，锁屏2649ms清除旧会话、解锁建立新会话。当前已原位归档，PR #3（https://github.com/PrimeDawn/Artemis/pull/3）待审阅、未合并；手机真实换IP仍未测，实际断公网按用户要求不测，音视频采集、媒体WebRTC及OBS播放尚未实现。 最新使用方式见[运行说明](docs/pairing-local-run.md)，验证范围见[现状核对报告](spec/versions/v0.1/specs/20261029-0934-tech-离线配对与信令信任/reviewer/review.html)。
+当前按 [v0.1 技术预研规划](spec/versions/v0.1/plan.html)推进。工具链、配对/信令、应用层改造、系统摄像头设备层、手机画面链路已交付并合入 dev；真机 S24 的相机画面已能以 720p30 出现在 OBS 的 `Artemis Camera`。音频采集、`Artemis Microphone` 与真机验证基线尚未完成，端到端延迟未实测。手机真实换 IP 未测，实际断公网按用户要求不测。使用方式见[运行说明](docs/pairing-local-run.md)，验证范围以各 Spec 测试报告为准。
 
 ## 计划技术与目录
 
 | 目录 | 职责 | 计划技术 |
 | --- | --- | --- |
-| `android/` | 安卓采集与推流 App | Kotlin、Jetpack Compose、原生 WebRTC SDK |
-| `receiver/` | 电脑本地服务与控制页（配对、信任、连接状态） | Node.js、TypeScript、WebSocket |
-| `protocol/` | 配对、状态与错误码约定 | 由离线配对与信令 Spec 确定 |
+| `android/` | 安卓采集 App | Kotlin、Jetpack Compose、Camera2、MediaCodec（H.264） |
+| `receiver/` | 电脑本地服务与控制页（配对、信任、连接状态） | Node.js、TypeScript、WebSocket；媒体只转发不转码 |
+| `native/` | Windows 系统摄像头过滤器与 FFmpeg 解码进程 | C++、DirectShow、FFmpeg |
+| `protocol/` | 配对、状态、错误码与媒体帧头约定 | 见 `pairing-v2.md` |
 | `docs/` | 使用指南与维护文档 | Markdown |
 | `spec/` | 版本计划、Spec、测试证据与项目记忆 | R&K Flow |
 
-`android/` 与 `receiver/` 已有可构建工程；协议见 [pairing-v2.md](protocol/pairing-v2.md)。固定工具链见 [toolchain-lock.json](docs/toolchain-lock.json)，来源与许可证见 [依赖来源](docs/dependency-provenance.md)。
+`android/` 与 `receiver/` 已有可构建工程；协议见 [pairing-v2.md](protocol/pairing-v2.md)（含媒体通道）。固定工具链见 [toolchain-lock.json](docs/toolchain-lock.json)，来源与许可证见 [依赖来源](docs/dependency-provenance.md)。
 
 ## 构建与运行
 
-Windows 准备 JDK 17、Node 24、Android API 36 和 Build Tools 36.0.0，具体安装、许可和镜像切换见 [工具链复现指南](docs/toolchain.md)。
+Windows 准备 JDK 17、Node 24、Android API 36 和 Build Tools 36.0.0；原生端另需 VS Build Tools（MSVC）与 FFmpeg 开发库。具体安装、许可和镜像切换见 [工具链复现指南](docs/toolchain.md)。
 
 ```powershell
-# JAVA_HOME 与 ANDROID_HOME 指向本机 JDK 17 和 SDK；Android 用户目录、签名、Gradle 和临时目录也须指向 E 盘。
-# 当前机器可先执行：. E:\Dev\Artemis\activate.ps1
+# JAVA_HOME / ANDROID_HOME 按本机实际路径设置；本开发机环境在 C:\DEV\ArtemisEnv。
 .\android\gradlew.bat -p android --no-daemon clean :app:assembleDebug
 npm --prefix receiver ci --ignore-scripts
 npm --prefix receiver test
-npm --prefix receiver start
+.\native\build.ps1                 # 需 VS Build Tools 与 FFmpeg 开发库
+.\native\register.ps1 register     # 逐用户注册 Artemis Camera，无需管理员
+Start-Artemis.cmd                  # 拉起解码进程 + 接收服务 + 打开控制页
 ```
 
-上面的 start 仅启动原 loopback 健康服务。新入口使用 `npm --prefix receiver run pairing`，先按 [本地连接说明](docs/pairing-local-run.md)配置实际LAN地址、E盘私有数据目录及现有OpenSSL；它提供本机控制页与独立LAN TLS/WSS入口，Ctrl+C关闭。APK为 `android/app/build/outputs/apk/debug/app-debug.apk`，真机和正式集成以Spec测试报告为准。
+`Start-Artemis.cmd` 是当前唯一同时启动解码进程与接收服务的入口；单独执行 `npm --prefix receiver run pairing` 只提供配对与控制，`/media` 没有本机解码进程可转发，OBS 不会出现手机画面。手工启动接收服务时，按 [本地连接说明](docs/pairing-local-run.md)配置实际 LAN 地址、私有数据目录与 OpenSSL。APK 为 `android/app/build/outputs/apk/debug/app-debug.apk`；真机与集成结果以 Spec 测试报告为准。
 
 ## 研发工作流
 

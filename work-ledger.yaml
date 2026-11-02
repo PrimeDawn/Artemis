@@ -29,8 +29,8 @@ work_items:
       - 记录可核验的WebRTC SDK来源、版本、许可证、ABI和Android版本兼容结论。
       - 按文档可重复构建最小APK并启动PC实验服务，保留命令、环境和结果。
       - 核验Android原生库页面大小要求，明确未完成的真机验证和阻断。
-    next_action: "审阅PR #1并由用户决定合入dev；后续按spec-start启动离线配对与信令Spec。"
-    summary: "首个SDK工具链Spec已交付并原位归档：19项验收覆盖，迁移后16必测新鲜通过；真实实现提交与三环境同APK证据已核对，经验和项目偏好已维护，PR #1已创建。"
+    next_action: "已原位归档并合入 dev（PR #1）；后续Spec以本Spec的工具链基线为前置。"
+    summary: "首个SDK工具链Spec已交付并原位归档：19项验收覆盖，迁移后16必测新鲜通过；真实实现提交与三环境同APK证据已核对，经验和项目偏好已维护，PR #1已合并。"
     tags: [v0.1, tech, m0]
     paths:
       - spec/versions/v0.1/specs/20261028-1059-tech-SDK与工具链可行性/lead/team-context.md
@@ -65,8 +65,8 @@ work_items:
       - 自动发现已打开App的手机并由电脑单击选择，首次手机确认一次、后续重开或服务重启免配对；持久记住身份。
       - 活动连接与设备信任不设固定到期或空闲期限，故障自动恢复已选设备；主动断开或取消信任后停止重连。
       - App仅在前台且未锁屏时使用并请求保持常亮；切其他App或锁屏暂停连接与重试，返回App自动恢复原被选且受信的电脑；主动断开或取消信任仍保持停止。
-    next_action: "已原位归档并创建PR #3至dev，等待审阅/用户合并；后续Spec保持原计划。"
-    summary: "自动发现、持久信任、授权信令和前台连接恢复已交付；Node43/JVM18/集成44通过，S24同服务连续锁屏解锁通过。AWR验收completed，PR https://github.com/PrimeDawn/Artemis/pull/3 未合并。真实手机换IP未测，实际断公网排除，媒体属于后续Spec。"
+    next_action: "已原位归档并合入 dev（PR #3）；后续Spec以本Spec的配对/信任基线为前置。"
+    summary: "自动发现、持久信任、授权信令和前台连接恢复已交付并合入 dev；Node43/JVM18/集成44通过，S24同服务连续锁屏解锁通过。真实手机换IP未测，实际断公网排除，媒体属于后续Spec。"
     tags: [v0.1, tech, m0]
     paths:
       - spec/versions/v0.1/specs/20261029-0934-tech-离线配对与信令信任/explorer/exploration-report.html
@@ -119,8 +119,8 @@ work_items:
     acceptance:
       - 64 位 DirectShow 源过滤器从共享内存取帧，输出合成画面。
       - OBS 能枚举 Artemis Camera 并录制 30 秒回看有画面。
-    next_action: 已完成并原位归档；phone-media 可直接复用共享内存协议与注册方式。
-    summary: 方向变更后的设备层地基，尚未启动。
+    next_action: 已完成并原位归档；phone-media 已复用共享内存协议与注册方式。
+    summary: "Windows 系统摄像头设备层已交付并合入 dev：64 位 DirectShow 过滤器 Artemis Camera 从共享内存取帧，OBS 枚举、预览、41 秒录制回看与反注册恢复均通过。仅验证 720p30 与本开发机。"
     tags: [v0.1, tech, device]
     paths:
       - spec/versions/v0.1/version-context.md
@@ -139,8 +139,8 @@ work_items:
     acceptance:
       - 手机 Camera2 + MediaCodec 编码 H.264，经已配对鉴权的 TCP 传输。
       - Windows 客户端 FFmpeg 解码并写入共享内存，OBS 看到手机实时画面。
-    next_action: 设备层完成后，通过 spec-start 建立媒体链路 Spec。
-    summary: 由原 SPEC-media-obs 的视频目标拆分而来，尚未启动。
+    next_action: 已完成并原位归档；后续音频设备 Spec 复用本 Spec 的媒体通道与配对基线。
+    summary: "手机画面链路已交付并合入 dev：真机 S24 Camera2 + MediaCodec H.264 720p30 经 TLS 媒体通道到 Windows，FFmpeg 解码写共享内存，OBS 实时可见约 30fps；断流保留末帧，解码进程重启约 6 秒恢复。端到端延迟未实测，仅覆盖 720p30。"
     tags: [v0.1, tech, media]
     paths:
       - spec/versions/v0.1/version-context.md
@@ -159,7 +159,7 @@ work_items:
     acceptance:
       - 系统音频输入设备 Artemis Microphone 可被 OBS 枚举并录出声音。
       - 驱动签名作为独立发布门禁，不计入功能验收。
-    next_action: 设备层完成后，通过 spec-start 建立音频设备 Spec。
+    next_action: 手机画面链路完成后，通过 spec-start 建立音频设备 Spec（虚拟麦克风）。
     summary: 由原 SPEC-media-obs 的音频目标拆分而来，尚未启动。
     tags: [v0.1, tech, audio]
     paths:
@@ -200,7 +200,7 @@ work_items:
       - 单轮总测试预算300秒内实测短时推流及必要的重复启停；长期稳定性以代码/状态机与必要加速边界审查，保留实际结果和未覆盖项，不强制等待10分钟。
       - 实测延迟与音画偏差并对照300ms和150ms产品目标，超标项明确处置，不记为达标。
       - 提供可复现实验APK、PC启动步骤、依赖许可证和研究结论；不替代全部一期验收。
-    next_action: 链路Spec完成后，通过spec-start制定真机验证和实验原型交付方案；启动时复核docs/validation-followups.md中的延期设备项，具备对应环境时补测。
+    next_action: 音频设备 Spec 完成后，通过spec-start制定真机验证和实验原型交付方案；启动时复核docs/validation-followups.md中的延期设备项，具备对应环境时补测。
     summary: v0.1技术预研规划项，尚未启动Spec或业务实现。
     tags: [v0.1, tech, m0]
     paths:
@@ -212,8 +212,8 @@ milestones:
   - id: VERSION-v0.1
     title: v0.1 最小音视频链路技术预研
     status: in_progress
-    summary: 首个SDK与工具链Spec已交付归档并合并dev；第二个配对与信令Spec实现交付、等待gate-3及独立测试，其余2项未启动，以v0.1文档为版本状态权威来源。
+    summary: "v0.1 技术预研执行中：SDK与工具链、离线配对与信令、应用层无感改造、系统摄像头设备层、手机画面链路 5 个 Spec 已交付并合入 dev；音频设备与真机验证基线 2 项未启动。核心验收（OBS 同时枚举 Artemis Camera 与 Artemis Microphone）尚未达成，以v0.1文档为版本状态权威来源。"
     scope: SDK与工具链、离线配对信令、手机到OBS链路、真机验证和实验原型复现交付。
     acceptance:
-      - 四个入版技术Spec均完成并保留真实验证证据。
+      - 全部 7 个入版技术Spec均完成并保留真实验证证据。
       - 实验原型可复现，关键路线与性能差距有明确处置结论。

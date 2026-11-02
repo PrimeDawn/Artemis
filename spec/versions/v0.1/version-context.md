@@ -2,7 +2,7 @@
 version: v0.1
 status: 执行中
 created: 2026-10-28
-updated: 2026-11-01
+updated: 2026-11-02
 target_freeze_date: 待定
 target_release_date: 待定
 owner: TeamLead
@@ -13,16 +13,19 @@ scope_confirmation: 用户已于2026-10-28确认v0.1规划
 
 # Version 运行账本：v0.1
 
-## 当前状态快照（2026-11-01，优先于下方历史流水）
+## 当前状态快照（2026-11-02，优先于下方历史流水）
 
 **方向变更**：产品形态从「手机 → WebRTC → OBS 浏览器源」改为「手机 = Windows 11 系统摄像头与麦克风」。
 旧接收页、接收票据与 OBS 浏览器源路线作废；配对、信任、发现、信令与前台生命周期行为继续保留。
 
-已交付并须保持不退化：配对/信任/信令（Node 43 项、JVM 18 项通过），APK 可构建。
-新增缺口：设备层（DirectShow 过滤器 + 虚拟音频驱动）与手机媒体采集为零。
-传输选型已定 **H.264 over TCP**（参照 scrcpy 的包格式与 MediaCodec 编码路径）。
+已交付并合入 dev：SDK 与工具链、离线配对与信令（PR #3）、应用层无感改造（PR #4）、系统摄像头设备层（PR #5）、手机画面链路（PR #6）。
+已交付并须保持不退化：配对/信任/信令（当前 Node 52 项、JVM 18 项通过），APK 可构建；OBS 可枚举 `Artemis Camera` 并显示真机 720p30 画面（约 30fps）。
+仍缺：虚拟麦克风（`Artemis Microphone`）与内核音频驱动、手机音频采集、真机验证基线与复现交付。
+已知边界：仅 720p30；端到端延迟未实测；真实手机换 IP 未测；实际断公网按 D-006 未测；Windows 端仍是脚本启动，未打包。
 
-Spec 序列已重排：应用层无感改造 → 设备层 → 手机画面进 OBS → 音频 → 真机验证。
+传输选型已定 **H.264 over TCP**（参照 scrcpy 的包格式与 MediaCodec 编码路径），设备层经共享内存解耦。
+
+Spec 序列：应用层无感改造 → 设备层 → 手机画面进 OBS → 音频 → 真机验证；前 3 项已完成。
 原 `SPEC-media-obs` 作废，由 `SPEC-phone-media`（视频）与 `SPEC-audio-device`（音频）替代。
 
 ### 历史快照（2026-10-31）
@@ -40,7 +43,7 @@ Spec2的自动发现、电脑单击选手机、首次允许后持久信任、无
 为验证所需建立的最小安卓端、Windows 原生接收客户端与虚拟设备属于研究原型；
 完整产品基础工程、成熟交互和面向普通用户的分发仍属于后续版本。
 
-当前已交付最小工具链工程与配对/信令信任工程；音视频采集、媒体传输与系统设备尚未实现。
+当前已交付工具链、配对/信令、应用层改造、系统摄像头设备层与手机画面链路；音频采集、媒体音频与虚拟音频设备尚未实现，真机验证基线未启动。
 
 来源：[产品规划](../../../产品规划.md) 的第 3、4、7、8 节；[版本规划报告](plan.html)；[方向调整决策](#7-决策记录) D-007 至 D-011。
 
@@ -52,10 +55,10 @@ Spec2的自动发现、电脑单击选手机、首次允许后持久信任、无
 | 规划标识 | 属性 | 标题 / 目标 | 负责人 | 状态 | 依赖前置 |
 |---|---|---|---|---|---|
 | SPEC-sdk-toolchain | tech | [SDK 与工具链可行性](specs/20261028-1059-tech-SDK与工具链可行性/lead/team-context.md) | TeamLead（按角色协议串行执行） | done·已原位归档 | 无 |
-| SPEC-offline-pairing | tech | [离线配对与信令信任](specs/20261029-0934-tech-离线配对与信令信任/lead/team-context.md) | TeamLead（串行角色协议） | done（已归档，PR #3待合并） | SPEC-sdk-toolchain |
+| SPEC-offline-pairing | tech | [离线配对与信令信任](specs/20261029-0934-tech-离线配对与信令信任/lead/team-context.md) | TeamLead（串行角色协议） | done·已原位归档，PR #3 已合并 | SPEC-sdk-toolchain |
 | SPEC-app-refactor | tech | [应用层无感改造](specs/20261101-1013-tech-应用层无感改造/lead/team-context.md)：删除旧接收页与票据、文档改口径，配对/信任/信令行为不退化 | TeamLead（serial） | done·已原位归档 | SPEC-sdk-toolchain、SPEC-offline-pairing |
 | SPEC-device-layer | tech | [系统摄像头设备层](specs/20261101-1217-tech-系统摄像头设备层/lead/team-context.md)：DirectShow 过滤器 + 共享内存 IPC，先输出合成画面 | TeamLead（serial） | done·已原位归档 | SPEC-app-refactor |
-| SPEC-phone-media | tech | [手机画面链路](specs/20261101-1857-tech-手机画面链路/lead/team-context.md)：Camera2 + MediaCodec + H.264 over TCP + FFmpeg 解码 | TeamLead（serial） | done·已原位归档 | SPEC-device-layer | SPEC-device-layer |
+| SPEC-phone-media | tech | [手机画面链路](specs/20261101-1857-tech-手机画面链路/lead/team-context.md)：Camera2 + MediaCodec + H.264 over TCP + FFmpeg 解码 | TeamLead（serial） | done·已原位归档 | SPEC-device-layer |
 | SPEC-audio-device | tech | 虚拟麦克风：内核音频驱动与系统输入设备 | 待 spec-start 分配 | 未启动 | SPEC-device-layer |
 | SPEC-validation-baseline | tech | 真机实测、风险结论和实验原型复现交付（按系统设备口径重订） | 待 spec-start 分配 | 未启动 | SPEC-phone-media、SPEC-audio-device |
 | ~~SPEC-media-obs~~ | tech | ~~手机到 OBS 的最小音视频链路~~ | — | **作废**（被 SPEC-phone-media 与 SPEC-audio-device 替代） | — |
@@ -121,21 +124,21 @@ Spec2的自动发现、电脑单击选手机、首次允许后持久信任、无
 
 | 编号 | 风险 / 外部依赖 | 当前状态 | 应对与阻断条件 |
 |---|---|---|---|
-| R-01 | WebRTC SDK 来源、许可证及二进制兼容性 | 已选定并验证；但 2026-11-01 起媒体传输改为 H.264 over TCP，WebRTC 不再作为媒体通道，仅配对/信令沿用 | 不因路线变更丢弃已验证依赖知识；媒体层不引入未验证的第三方封装 |
-| R-02 | S24、Windows 与 OBS 的实际可用性及版本 | 待验证环境盘点 | 缺设备可继续文档和构建检查，不能完成真机验收 |
-| R-03 | OBS 对 DirectShow 虚拟设备的枚举与稳定性 | 未验证 | 固定 OBS 版本，录制回看确认画面；记录设备枚举失败的具体表现 |
-| R-04 | 局域网候选直连、隔离与防火墙 | 未验证；实际断公网测试暂缓 | 保持公网连接验证局域网链路并检查公网依赖；不静默引入公网中继，不把配置检查当作离线实测 |
+| R-01 | WebRTC SDK 来源、许可证及二进制兼容性 | 已选定并验证；媒体传输改为 H.264 over TCP，WebRTC 不再作为媒体通道，仅保留构建依赖与 smoke test，待清理 | 不因路线变更丢弃已验证依赖知识；媒体层不引入未验证的第三方封装 |
+| R-02 | S24、Windows 与 OBS 的实际可用性及版本 | 已实测：S24 SM-S9210 / Windows 11 / OBS 33.0.1；其他机型、其他应用与换机未测 | 缺设备可继续文档和构建检查，不能完成真机验收 |
+| R-03 | OBS 对 DirectShow 虚拟设备的枚举与稳定性 | 已验证：枚举、预览、41 秒录制回看、反注册恢复通过；仅覆盖 720p30 单分辨率 | 固定 OBS 版本，录制回看确认画面；记录设备枚举失败的具体表现 |
+| R-04 | 局域网候选直连、隔离与防火墙 | 局域网配对与媒体已实测；真实手机换 IP 未测，实际断公网按 D-006 未测 | 保持公网连接验证局域网链路并检查公网依赖；不静默引入公网中继，不把配置检查当作离线实测 |
 | R-05 | 本地 TLS 信任与离线配对的使用成本 | 已实现并验证 | 沿用现有信任边界与操作步骤，媒体通道复用同一配对结果 |
-| R-06 | 原型性能与正式产品指标存在差距 | 未验证 | 记录实际数值和根因；未达标项列后续工作或显式调整范围 |
+| R-06 | 原型性能与正式产品指标存在差距 | 部分：手机画面约 30fps；端到端延迟与音画同步未实测 | 记录实际数值和根因；未达标项列后续工作或显式调整范围 |
 | R-07 | 虚拟麦克风内核驱动的可用性与签名 | 未开始 | spike 可先用已签名第三方驱动验证路径；自研驱动必须以可签名可安装为前提，否则退回方案比较 |
-| R-08 | DirectShow 过滤器与 FFmpeg 解码的构建复杂度 | 未验证 | 先做合成画面 spike；解码链路失败时记录证据并比较替代接收栈，不静默扩大依赖 |
+| R-08 | DirectShow 过滤器与 FFmpeg 解码的构建复杂度 | 已验证：过滤器与 FFmpeg 解码链路已构建并端到端通过 | 先做合成画面 spike；解码链路失败时记录证据并比较替代接收栈，不静默扩大依赖 |
 
-排期按 应用层改造 → 设备层 → 手机画面 / 音频 → 真机验证推进。冻结与发布日期在设备层 spike 结果确认后再定，不根据当前规划推测工期。
+排期按 应用层改造 → 设备层 → 手机画面 / 音频 → 真机验证推进。设备层与手机画面已完成；冻结与发布日期在音频与真机验证结果确认后再定，不根据当前规划推测工期。
 
 ## 5. 版本验收与发布边界
 
 1. 本版新增 5 个 Spec（应用层改造、设备层、手机画面、音频、真机验证）全部完工，分别保留已确认计划、实现记录与真实验证证据；待解决的问题明确登记。
-2. 已交付的配对/信任/信令行为不得退化：应用层改造后 Node 43 项、JVM 18 项测试仍须通过，APK 仍可构建。
+2. 已交付的配对/信任/信令行为不得退化：当前 Node 52 项、JVM 18 项测试仍须通过，APK 仍可构建。
 3. 核心验收：OBS 能同时枚举 `Artemis Camera` 与 `Artemis Microphone` 并录出音画；保留离线功能并检查无公网依赖。按 D-006，实际断公网运行不纳入本轮必测门禁，报告明确“未实测”。
 4. 延迟、同步等数据如未达到产品目标，保留差距、处理方案并取得用户明确处置结论，不能宣称已达标。
 5. 设备层或媒体链路的关键可行性验证失败时，暂停、记录失败证据并重订路线，不静默降级为浏览器源方案。
@@ -175,12 +178,11 @@ Spec2的自动发现、电脑单击选手机、首次允许后持久信任、无
 
 - 版本目标键：goal#artemis-v0.1（GOALS.md）。
 - 版本工作组：milestone VERSION-v0.1；工作项使用同名稳定 Spec 标识及 milestone 关系，依赖保存在 work-ledger.yaml。
-- AWR 为上述权威文本建立投影；SPEC-sdk-toolchain 已 completed，配对与信令项为 in_progress（PR #3 待合并），
-  新增的 4 项（应用层改造、设备层、手机画面、音频）为 planned，`SPEC-validation-baseline` 按新口径重订后同样待启动；
-  `SPEC-media-obs` 标记作废；ready 不替代 R&K 门禁。
+- AWR 为上述权威文本建立投影：SPEC-sdk-toolchain、SPEC-offline-pairing、SPEC-app-refactor、SPEC-device-layer、SPEC-phone-media 为 completed；
+  SPEC-audio-device 与 SPEC-validation-baseline 为 planned；`SPEC-media-obs` 为 cancelled；ready 不替代 R&K 门禁。
 - ARTEMIS-INTAKE-001已完成规划接入；首个Spec的工作分支、运行路径和句柄保存在对应lead/team-context.md。
-- 下一步：按 D-010 通过 spec-start 建立 `SPEC-app-refactor`（应用层无感改造），验收以配对/信任/信令不退化为前提；
-  `work-ledger.yaml` 与 `GOALS.md` 的同步在 `SPEC-app-refactor` 内完成。
+- 下一步：通过 spec-start 建立 `SPEC-audio-device`（虚拟麦克风），完成后启动 `SPEC-validation-baseline`（真机验证与复现交付）；
+  `work-ledger.yaml` 与 `GOALS.md` 的状态同步随文档修订维护。
 
 ## 9. 文档关联
 
@@ -188,7 +190,9 @@ Spec2的自动发现、电脑单击选手机、首次允许后持久信任、无
 
 - 本账本引用并被引用：[版本规划报告](plan.html)。
 - 依据：[产品规划](../../../产品规划.md)、[项目目标](../../../GOALS.md)、[工作台账](../../../work-ledger.yaml)。
-- 首个Spec：[探索报告](specs/20261028-1059-tech-SDK与工具链可行性/explorer/exploration-report.html)、[实现计划](specs/20261028-1059-tech-SDK与工具链可行性/writer/plan.html)、[测试计划](specs/20261028-1059-tech-SDK与工具链可行性/tester/test-plan.html)；其余Spec、发布与复盘报告尚未创建。
+- 首个Spec：[探索报告](specs/20261028-1059-tech-SDK与工具链可行性/explorer/exploration-report.html)、[实现计划](specs/20261028-1059-tech-SDK与工具链可行性/writer/plan.html)、[测试计划](specs/20261028-1059-tech-SDK与工具链可行性/tester/test-plan.html)。
+
+- 后续已完成 Spec：[应用层无感改造](specs/20261101-1013-tech-应用层无感改造/ender/end-report.html)、[系统摄像头设备层](specs/20261101-1217-tech-系统摄像头设备层/ender/end-report.html)、[手机画面链路](specs/20261101-1857-tech-手机画面链路/ender/end-report.html)；发布与复盘报告尚未创建。
 
 - 实施阶段新增：[实现总结](specs/20261028-1059-tech-SDK与工具链可行性/executor/summary.html)，两次APK构建及29项聚焦测试通过，独立测试报告已形成并确认。
 
