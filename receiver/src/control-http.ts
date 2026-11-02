@@ -21,7 +21,7 @@ export function createControlHandler(context:ControlContext):(req:IncomingMessag
    }
    const match=/(?:^|;\s*)artemis_control=([A-Za-z0-9_-]{43})(?:;|$)/u.exec(req.headers.cookie??'');const csrf=match?sessions.get(match[1]):undefined;
    if(!csrf)throw new PairingError('E_AUTH',401);
-   if(path==='/api/state'&&req.method==='GET'){json(res,200,{state:context.manager.state(),csrf});return;}
+   if(path==='/api/state'&&req.method==='GET'){let audio:unknown=null;try{audio=JSON.parse(await readFile(process.env.ARTEMIS_AUDIO_STATUS_PATH??`${context.config.dataDir}/audio-status.json`,'utf8'));}catch{audio=null;}json(res,200,{state:context.manager.state(),csrf,audio});return;}
    if(!['POST','DELETE'].includes(req.method??''))throw new PairingError('E_NOT_FOUND',404);
    if(req.headers.origin!==origin)throw new PairingError('E_ORIGIN',403);
    const supplied=req.headers['x-artemis-csrf'];if(typeof supplied!=='string'||supplied.length!==csrf.length||!timingSafeEqual(Buffer.from(supplied),Buffer.from(csrf)))throw new PairingError('E_CSRF',403);

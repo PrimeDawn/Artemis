@@ -3,6 +3,7 @@ package io.github.primedawn.artemis.media
 import android.content.Context
 import android.os.Handler
 import android.os.Looper
+import io.github.primedawn.artemis.audio.AudioStream
 import io.github.primedawn.artemis.camera.CameraCaptureService
 import io.github.primedawn.artemis.camera.VideoEncoder
 import io.github.primedawn.artemis.pairing.pinnedClientFor
@@ -18,6 +19,7 @@ class MediaSessionCoordinator(private val context: Context) {
     private var encoder: VideoEncoder? = null
     private var camera: CameraCaptureService? = null
     private var media: MediaConnection? = null
+    private var audio: AudioStream? = null
     private val main = Handler(Looper.getMainLooper())
 
     private var active = false
@@ -62,6 +64,13 @@ class MediaSessionCoordinator(private val context: Context) {
         videoEncoder.start()
         android.util.Log.i("ArtemisMedia", "encoder started, surface=${videoEncoder.inputSurface}")
         openMedia()
+
+        // writer/plan.html §4.1、§4.2：音频挂进同一生命周期，失败只降级音频。
+        val audioStream = AudioStream(context)
+        audioStream.onState = { code -> main.post { onState?.invoke(code) } }
+        audioStream.onError = { code -> main.post { onState?.invoke(code) } }
+        audioStream.start(host, port, pcId, deviceId, sessionId, spki)
+        audio = audioStream
 
         capture.onStarted = { main.post { onState?.invoke("E_MEDIA_STREAMING") } }
         capture.onError = { code -> main.post { onState?.invoke(code) } }
@@ -116,6 +125,8 @@ class MediaSessionCoordinator(private val context: Context) {
         main.removeCallbacksAndMessages(null)
         camera?.stop()
         camera = null
+        audio?.stop()
+        audio = null
         encoder?.stop()
         encoder = null
         media?.close()

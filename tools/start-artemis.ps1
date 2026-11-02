@@ -1,4 +1,4 @@
-﻿# 一键启动：解码进程 + 接收服务 + 打开控制页；关闭窗口或按 Ctrl+C 时全部停止。
+# 一键启动：解码进程 + 接收服务 + 打开控制页；关闭窗口或按 Ctrl+C 时全部停止。
 # 供本机试用，不是最终产品形态（最终形态是托盘常驻程序，留给打包阶段）。
 
 $ErrorActionPreference = 'Stop'
@@ -41,6 +41,8 @@ $env:ARTEMIS_DATA_DIR = $dataDir
 $env:ARTEMIS_OPENSSL_PATH = $openssl
 $env:ARTEMIS_CONTROL_PORT = "$controlPort"
 $env:ARTEMIS_TLS_PORT = "$tlsPort"
+$audioStatusPath = Join-Path $dataDir 'audio-status.json'
+$env:ARTEMIS_AUDIO_STATUS_PATH = $audioStatusPath
 
 Write-Host "Artemis 启动中" -ForegroundColor Cyan
 Write-Host "  局域网地址：$lanIp" -ForegroundColor DarkGray
@@ -54,7 +56,7 @@ $receiverLog = Join-Path $logDir 'receiver.log'
 $children = @()
 
 try {
-    $decodeProc = Start-Process -FilePath $decodeHost -ArgumentList @('--port', "$mediaPort") `
+    $decodeProc = Start-Process -FilePath $decodeHost -ArgumentList @('--port', "$mediaPort", '--audio-status', $audioStatusPath) `
         -WorkingDirectory (Split-Path $decodeHost) -PassThru -WindowStyle Hidden `
         -RedirectStandardOutput $decodeLog -RedirectStandardError "$decodeLog.err"
     $children += $decodeProc

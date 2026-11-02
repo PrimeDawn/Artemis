@@ -4,8 +4,8 @@ schema_version: 1
 team_name: spec-20261102-1117-虚拟麦克风音频链路
 spec_dir: spec/versions/v0.1/specs/20261102-1117-tech-虚拟麦克风音频链路
 task_description: 手机麦克风音频采集与编码，经已配对鉴权的独立音频通道到 PC，解码后输出到用户自备的第三方虚拟声卡；未装声卡则只传视频
-status: running
-phase: spec-writing
+status: archived
+phase: archived
 runtime: generic
 mode: gated
 execution: serial
@@ -42,9 +42,10 @@ AWR 运行态：session `01M6D4KYQ95BYVQXR8FRXQ2JYK`、claim `01M6D4KYQBKA79MX0S
 | T-001 | spec-explorer | 探索音频采集/编码/传输与虚拟麦克风可行路径 | done | explorer/exploration-report.html | 2026-11-02T11:40:00+08:00 | spec-explorer |
 | T-002 | spec-writer | 编写实现方案 | done | writer/plan.html | 2026-11-02T11:50:00+08:00 | spec-writer |
 | T-003 | spec-tester | 编写测试计划 | done | tester/test-plan.html | 2026-11-02T11:55:00+08:00 | spec-tester |
-| T-004 | spec-executor | 实现手机音频采集传输与 PC 端音频汇 | pending | executor/summary.html | | spec-executor |
-| T-005 | spec-tester | 独立测试与结论 | pending | tester/test-report.html | | spec-tester |
-| T-006 | spec-ender | 收尾归档与 PR | pending | ender/end-report.html | | spec-ender |
+| T-004 | spec-executor | 实现音频通道、手机采集编码、PC 解码与端点路由 | done | executor/summary.html | 2026-11-02T14:40:00+08:00 | spec-executor |
+| T-005 | spec-tester | 独立测试与结论 | done | tester/test-report.html | 2026-11-02T21:55:00+08:00 | spec-tester |
+| T-006 | spec-debugger | 修复真机音频链路六项缺陷 | done | debugger/debug-001.html、debugger/debug-001-fix.html | 2026-11-02T22:35:00+08:00 | spec-debugger |
+| T-006 | spec-ender | 收尾归档与 PR | done | ender/end-report.html | 2026-11-02T23:15:00+08:00 | spec-ender |
 
 ## 问题闭环记录
 
@@ -54,6 +55,19 @@ AWR 运行态：session `01M6D4KYQ95BYVQXR8FRXQ2JYK`、claim `01M6D4KYQBKA79MX0S
 |--------|------|--------|----------|------|----------|----------|------|--------|
 | I-001 | env | TeamLead | TeamLead | 自研内核音频驱动在本机不可行：Secure Boot 已启用（`HKLM\SYSTEM\CurrentControlSet\Control\SecureBoot\State` UEFISecureBootEnabled=1）、WDK 内核头未安装（`Windows Kits\10\Include\10.0.26100.0\km` 不存在）、当前令牌非提权管理员、`sudo` 在本机被禁用 | 本轮改用已签名第三方虚拟声卡做 spike 验证音频路径；自研驱动登记为独立发布门禁，不并入功能验收 | 本文件 D-001 | closed | TeamLead |
 | I-002 | dependency | TeamLead | spec-executor | 本机未安装可写入的虚拟音频设备；已装的「UU远程虚拟音频设备」为厂商自用端点，第三方不能写入 | 方案中引入音频汇抽象，驱动缺失时音频链路仍以 WASAPI 直接渲染完成验收 | writer/plan.html | open | TeamLead |
+| I-003 | env | spec-executor | spec-executor | Gradle 首次解析需要下载发行版，且依赖分散在两个 `GRADLE_USER_HOME`（默认目录缺 AGP，`C:\DEV\ArtemisEnv\gradle` 缺 WebRTC 元数据）；`--offline` 两种组合都失败 | 设置 `ANDROID_HOME=C:\DEV\ArtemisEnv\Android\Sdk`、`GRADLE_USER_HOME=C:\DEV\ArtemisEnv\gradle` 并联网解析一次后跑通 | executor/artifacts/red-audio-codec-choice.log | closed | spec-executor |
+| I-004 | env | spec-executor | spec-executor | `npm test` 全量在本环境不退出（media-relay 的保活定时器让 `node --test` 进程挂住），两次运行均超时 | 根因是测试进程遗留定时器；加 `--test-force-exit` 后 14/14 通过并正常退出（green-node-channel.log），全量运行需带该参数 | executor/artifacts/green-node-channel.log | closed | spec-executor |
+| I-005 | process | spec-executor | spec-executor | C++ 的 regulator/端点/WAV 先写实现后补测试，未产出断言级 RED（违反「先红后绿」） | 在 executor/summary.html 如实记录；Opus 与 ASC 两次真实失败证明断言在执行，非恒真测试 | executor/summary.html §2 | open | spec-executor |
+| I-006 | bug | spec-tester | spec-debugger | 麦克风权限未在运行时申请，AudioRecord -20 | 相机授权后继续申请麦克风，被拒只降级音频 | debugger/debug-001-fix.html | verified | spec-debugger |
+| I-007 | bug | spec-tester | spec-debugger | 音频通道断线后不重连 | 与视频一致的递增间隔重连并补发配置包 | debugger/debug-001-fix.html | verified | spec-debugger |
+| I-008 | bug | spec-tester | spec-debugger | Opus 编码器无 csd-0 导致 drainOutput 死循环 | 补标准 OpusHead，输入按容量分块 | debugger/debug-001-fix.html | verified | spec-debugger |
+| I-009 | bug | spec-tester | spec-debugger | 三星 AOPUSHDR 头被误判为 AAC | 识别并归一化为标准 OpusHead | debugger/debug-001-fix.html | verified | spec-debugger |
+| I-010 | bug | spec-tester | spec-debugger | 重连后 WAV 被截断、sink 被提前关闭 | 进程级单 sink + 每 100 次写入回填头部 | debugger/debug-001-fix.html | verified | spec-debugger |
+| I-011 | bug | spec-tester | spec-debugger | 半开连接堵住音频 accept | 音频 5 秒、视频 10 秒读超时 | debugger/debug-001-fix.html | verified | spec-debugger |
+| I-012 | bug | user | spec-executor | 方案 §6 要求「未命中虚拟声卡时界面显示原因与安装指引」，实现只在 decode-host 控制台打印，用户看不到 | decode-host 写 audio-status.json，控制页经 /api/state 显示状态与指引（sink=none/cable/wav） | tester/artifacts/test-logs/20261102-2135/tc13-audio-status-ui.log | closed | spec-executor |
+| I-013 | bug | user | spec-executor | 方案 §6 要求运行中监听设备变化（断开暂停、重新出现自动接上），实现只在启动时探测一次 | 新增 watcher 线程（3 s 枚举），sink 由全局互斥量保护；断开写 none 状态，出现写 cable 状态 | tester/artifacts/test-logs/20261102-2135/tc14-hotplug-and-permission.log | closed（热插拔切换未实测） | spec-executor |
+| I-014 | bug | user | spec-executor | 方案 §4.2 要求权限被拒显示可读原因与重新授权入口；控制页与手机页还有「尚未接入音视频/摄像头麦克风」的过时文案 | 手机页新增麦克风未授权提示与「重新授权麦克风」按钮；两处文案改为当前事实 | android/.../ConnectionScreen.kt、receiver/public/control.html | closed | spec-executor |
+| I-015 | process | user | spec-tester | 测试方案只按功能点列用例，未覆盖方案 §4.2（权限提示）与 §6（运行中设备变化）两条验收项；tester 只核对用例是否通过，没核对"每条验收项是否都有用例"，导致"全绿"是在不完整计划上得出的 | test-plan r6 补 TC-13/TC-14 与覆盖矩阵；同日把教训写进 `.agents/rules/spec-workflow.md`（测试计划必须带覆盖矩阵、先覆盖后结论、环境类未实测需二次确认）与 `spec/context/experience/exp-007-测试方案必须带条款覆盖矩阵.md` | tester/test-plan.html §2.1、.agents/rules/spec-workflow.md、spec/context/experience/exp-007 | closed | spec-tester |
 
 ## 决策记录
 
@@ -74,6 +88,12 @@ AWR 运行态：session `01M6D4KYQ95BYVQXR8FRXQ2JYK`、claim `01M6D4KYQBKA79MX0S
 | D-011 | spec-writing | TeamLead | 音频最终交付形态 | A 自研驱动 + 签名 / B 输出到用户自备虚拟声卡 / C 只做应用内音频 | B | 版本账本 D-012 与用户本轮决定：开源零预算拿不到微软签名；改为探测并输出到用户已装的虚拟声卡，未装则无音频。范围收缩后本 Spec 无内核代码、无签名 | user | 2026-11-02T13:50:00+08:00 | 用户原话「基础能提供视频传输，但如果用户装了虚拟声卡，就能传输声音，否则不能…他要是没装就听不到，那不管我们的事」；`spec/versions/v0.1/version-context.md` D-012 |
 | D-012 | spec-writing | TeamLead | 本 Spec 支持几种虚拟声卡 | A 同时支持 VB-CABLE 与 VoiceMeeter / B 只支持 VB-CABLE | B：本 Spec 只做 VB-CABLE（`CABLE Input` ↔ `CABLE Output`），VoiceMeeter 整体推到 v0.1.2 | 用户要求只支持一个；单一端点配对最简单、没有混音台路由问题，先把一条打通 | user | 2026-11-02T14:10:00+08:00 | 用户原话「你只支持一个就行」 |
 | D-013 | spec-writing | TeamLead | 连通性验证放在哪 | A 本 Spec 内验证 / B 推迟到 v0.1.1（VB-CABLE）与 v0.1.2（VoiceMeeter）补丁验证 | B | 当前没有任何机器装有虚拟声卡，无法实测；本 Spec 只保证代码实现完整、可构建、端点选择逻辑有单测，报告如实记未实测 | user | 2026-11-02T14:10:00+08:00 | 用户原话「本机也好哪里也好都没有安装虚拟声卡可以测试，这部分实现好能跑通就行，两个虚拟声卡软件的连通性测试留到发版后的补丁也就是0.1.1和0.1.2」 |
+| D-014 | implementation | spec-executor | 音频上游端口如何确定 | A 新增配置字段 / B 沿用 mediaPort+1 | B：音频端口 = 媒体端口 + 1（默认 3451） | 避免改动 PairingConfig 与协议类型；两端同仓发布，端口约定写在 `pairing-server.ts` 注释里 | spec-executor | 2026-11-02T14:35:00+08:00 | `receiver/src/pairing-server.ts` 的 audioPort 行 |
+| D-015 | implementation | spec-executor | C-AAC 配置包如何传给解码器 | A 忽略配置包只解 ADTS / B 把配置包当作 extradata | B：配置包作为 extradata 交给 FFmpeg；不足 2 字节视为无效按无 extradata 打开 | 手机端 MediaCodec 的 csd-0 就是 ASC/OpusHead，忽略会导致 Opus 无法建立声道映射 | spec-executor | 2026-11-02T14:36:00+08:00 | `native/decode-host/AudioDecoder.cpp` open()；冒烟日志 `green-smoke-audio-channel.log` |
+| D-016 | testing | spec-debugger | regulator 在 WAV 路径是否生效 | A 所有 sink 都调 regulator / B 仅设备 sink 调用 | B：WAV 同步落盘没有队列水位，单块时长会被误当水位 | 避免目标缓冲被误压到下限，且不改变设备路径行为 | spec-debugger | 2026-11-02T22:30:00+08:00 | `native/decode-host/main.cpp` action 分支；`debugger/debug-001-fix.html` |
+| D-017 | testing | spec-debugger | 断线重连时音频文件如何续写 | A 每条连接新开文件 / B 进程级单 sink + 周期回填头部 | B | A 会截断证据且丢失跨重连的连续性 | spec-debugger | 2026-11-02T22:30:00+08:00 | `WavFileSink.h` refresh；`audio-tc08-final.wav` 时长 61.99 s |
+| D-018 | testing | spec-debugger | 半开连接如何让出 accept | A 依靠 TCP 超时 / B 连接级读超时 | B：音频 5 秒、视频 10 秒 | A 会让新连接长时间排队，表现为\"手机在发、PC 不收\" | spec-debugger | 2026-11-02T22:30:00+08:00 | `main.cpp` setRecvTimeout；`decode-host-tc08.out` 重连序列 |
+| D-019 | ending | spec-ender | 收尾时如何处理测试证据与截图 | A 随仓库保留 / B 全部清理，报告保留命令与结论 | B | 用户明确要求清理中间产物与截图；证据文件约 17 MB，结论已在报告中留痕 | user | 2026-11-02T23:15:00+08:00 | 用户原话「测试的做这些证据把中间物都清掉，截图全部清掉」 |
 
 ## 角色运行句柄
 
@@ -95,9 +115,11 @@ AWR 运行态：session `01M6D4KYQ95BYVQXR8FRXQ2JYK`、claim `01M6D4KYQBKA79MX0S
 | explorer/exploration-report.html | spec-explorer | done (r6) | no | 2026-11-02T14:12:00+08:00 |
 | writer/plan.html | spec-writer | done (r6) | no | 2026-11-02T14:12:00+08:00 |
 | tester/test-plan.html | spec-tester | done (r5) | no | 2026-11-02T14:12:00+08:00 |
-| executor/summary.html | spec-executor | pending | no | |
-| tester/test-report.html | spec-tester | pending | no | |
-| ender/end-report.html | spec-ender | pending | no | |
+| executor/summary.html | spec-executor | done (r1) | yes | 2026-11-02T14:40:00+08:00 |
+| tester/test-report.html | spec-tester | done (r2) | yes | 2026-11-02T22:36:00+08:00 |
+| debugger/debug-001.html | spec-debugger | done (r1) | yes | 2026-11-02T22:36:00+08:00 |
+| debugger/debug-001-fix.html | spec-debugger | done (r1) | yes | 2026-11-02T22:36:00+08:00 |
+| ender/end-report.html | spec-ender | done (r1) | yes | 2026-11-02T23:15:00+08:00 |
 
 ## 门禁决策
 
@@ -106,8 +128,8 @@ AWR 运行态：session `01M6D4KYQ95BYVQXR8FRXQ2JYK`、claim `01M6D4KYQBKA79MX0S
 | gate-1 | 需求对齐 | pass | user | 2026-11-02T11:20:00+08:00 | 用户本轮确认范围（全链路）与运行模式（gated+serial）；设备路线按用户授权由 TeamLead 调研自决，证据见 D-001 |
 | gate-2 | writer/plan.html + tester/test-plan.html | pending | user | | |
 | gate-3 | executor/summary.html | pending | user | | |
-| gate-4 | tester/test-report.html | pending | user | | |
-| gate-5 | ender/end-report.html（归档+PR） | pending | user | | |
+| gate-4 | tester/test-report.html | pending | user | | r4：12 项通过 / 0 失败 / TC-10 未实测 / TC-11、TC-14 部分通过；缺陷 I-006～I-014 已闭环 |
+| gate-5 | ender/end-report.html（归档+PR） | pass | user | 2026-11-02T23:15:00+08:00 | 用户指令「执行收尾，整理工作区，测试证据中间物清掉、截图清掉」 |
 
 ## 角色交接
 
@@ -134,6 +156,6 @@ AWR 运行态：session `01M6D4KYQ95BYVQXR8FRXQ2JYK`、claim `01M6D4KYQBKA79MX0S
 ## 下一步动作
 
 - 范围已按 D-011/D-012/D-013 收缩：不自研内核驱动、不涉及签名、只支持 VB-CABLE；三份产物同步到 r6/r6/r5。
-- 仍停在 **gate-2**：`writer/plan.html`（r5）+ `tester/test-plan.html`（r4）待确认。
-- 确认后按方案 §10 执行：通道层 → 手机端 → PC 端解码/WAV → 端点探测与路由 → 接线与回归。
+- 已将实现交到 **gate-3**：`executor/summary.html`（r1）待确认；确认后启动 spec-tester。
+- 实现已完成 §10-1～§10-4；TC-10 的 CABLE 连通性按 D-013 记未实测。
 - 本轮不做连通性实测（无可用环境）：只做到可构建 + 端点选择单测 + WAV 链路跑通；VB-CABLE 实连通留 v0.1.1，VoiceMeeter 留 v0.1.2。

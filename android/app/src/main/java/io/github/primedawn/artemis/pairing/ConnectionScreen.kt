@@ -8,7 +8,7 @@ import androidx.compose.material3.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 
-@Composable fun ConnectionScreen(state:ConnectionUiState,onApprove:(String,Boolean)->Unit,onDisconnect:()->Unit,onForget:()->Unit) {
+@Composable fun ConnectionScreen(state:ConnectionUiState,onApprove:(String,Boolean)->Unit,onDisconnect:()->Unit,onForget:()->Unit,audioNote:String?=null,onRequestMic:(()->Unit)?=null) {
     val title=when(state.status){
         ConnectionStatus.PAUSED->"连接已暂停，回到 App 后恢复"
         ConnectionStatus.DISCOVERING->"正在发现局域网电脑"
@@ -31,12 +31,15 @@ import androidx.compose.ui.unit.dp
                 state.pcLabel?.let { Text("电脑：$it",style=MaterialTheme.typography.bodyLarge) }
                 Text(if(state.status==ConnectionStatus.CONNECTED)"连接没有固定使用时限，短暂掉线后会自动恢复。" else "请保持手机 App 打开，并让手机和电脑处于可互访的局域网。")
                 state.errorCode?.let { code->Text(when(code){"E_NETWORK"->"电脑暂时不可达，等待网络恢复。";"E_DISCOVERY"->"暂未发现电脑，请检查局域网连接。";"E_TLS_IDENTITY","E_IDENTITY_CHANGED"->"无法确认电脑身份，请检查电脑是否重置过设备身份。";"E_STORAGE"->"无法安全保存设备信任，请检查应用存储。";"E_BUSY"->"手机已经连接到另一台电脑。";"E_NOT_TRUSTED"->"设备信任已取消，再次连接时需要允许。";else->"连接暂未完成，请检查电脑服务状态。"},color=MaterialTheme.colorScheme.error) }
+                // writer/plan.html §4.2：麦克风被拒只降级音频，并把可读原因显示给用户。
+                audioNote?.let { Text(it,color=MaterialTheme.colorScheme.error) }
             }
         }
         Button(onClick=onDisconnect,enabled=state.status in setOf(ConnectionStatus.CONNECTED,ConnectionStatus.RECONNECTING,ConnectionStatus.CONNECTING,ConnectionStatus.AWAITING_APPROVAL),modifier=Modifier.fillMaxWidth()){Text("断开连接")}
         OutlinedButton(onClick=onForget,enabled=state.pcLabel!=null,modifier=Modifier.fillMaxWidth()){Text("取消对这台电脑的信任")}
         Text("使用时请保持 App 在前台，屏幕会保持常亮。切换应用或锁屏会暂停，返回后自动恢复；主动断开后保持停止。",style=MaterialTheme.typography.bodySmall)
-        Text("当前验证版本只建立连接与信令，尚未启用摄像头和麦克风。",style=MaterialTheme.typography.bodySmall)
+        Text("已接入摄像头与麦克风：麦克风被拒时只传视频；两者都需要授予权限。",style=MaterialTheme.typography.bodySmall)
+        if(audioNote!=null&&onRequestMic!=null){ OutlinedButton(onClick=onRequestMic,modifier=Modifier.fillMaxWidth()){Text("重新授权麦克风")} }
     }
     if(state.status==ConnectionStatus.AWAITING_APPROVAL&&state.approvalRequestId!=null){
         val request=state.approvalRequestId

@@ -36,6 +36,9 @@ import android.content.pm.PackageManager
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.setValue
 import androidx.compose.runtime.remember
 
 // Spec2 writer/plan.html r2 §3.5: UI observes the Application-owned controller.
@@ -44,12 +47,24 @@ class MainActivity : ComponentActivity() {
     private val media by lazy { MediaSessionCoordinator(this) }
     private var pendingMedia: (() -> Unit)? = null
     private val cameraPermission = registerForActivityResult(ActivityResultContracts.RequestPermission()) { granted ->
-        if (granted) pendingMedia?.invoke()
-        pendingMedia = null
+        if (granted) requestMicThen { pendingMedia?.invoke(); pendingMedia = null }
+        else pendingMedia = null
+    }
+    // writer/plan.html §4.2：麦克风与相机一起请求；被拒只降级音频，不中断视频，并把原因显示出来。
+    private var pendingAfterMic: (() -> Unit)? = null
+    private var audioNote by mutableStateOf<String?>(null)
+    private val micPermission = registerForActivityResult(ActivityResultContracts.RequestPermission()) { granted ->
+        audioNote = if (granted) null else "麦克风未授权：当前只传视频。授予麦克风权限后可传声音。"
+        pendingAfterMic?.invoke()
+        pendingAfterMic = null
+    }
+    private fun requestMicThen(action: () -> Unit) {
+        val granted = ContextCompat.checkSelfPermission(this, Manifest.permission.RECORD_AUDIO) == PackageManager.PERMISSION_GRANTED
+        if (granted) { audioNote = null; action() } else { pendingAfterMic = action; micPermission.launch(Manifest.permission.RECORD_AUDIO) }
     }
     private fun ensureCameraThen(action: () -> Unit) {
         val granted = ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED
-        if (granted) action() else { pendingMedia = action; cameraPermission.launch(Manifest.permission.CAMERA) }
+        if (granted) requestMicThen(action) else { pendingMedia = action; cameraPermission.launch(Manifest.permission.CAMERA) }
     }
     private val screenEvents = object : BroadcastReceiver() {
         override fun onReceive(context: Context, intent: Intent) {
@@ -91,7 +106,7 @@ class MainActivity : ComponentActivity() {
                             media.stop()
                         }
                     }
-                    ConnectionScreen(state,app::approve,app::disconnect,app::forgetCurrent)
+                    ConnectionScreen(state,app::approve,app::disconnect,app::forgetCurrent,audioNote,{ requestMicThen { } })
                 }
             }
         }
