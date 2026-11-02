@@ -189,7 +189,7 @@ Spec2的自动发现、电脑单击选手机、首次允许后持久信任、无
 - AWR 为上述权威文本建立投影：SPEC-sdk-toolchain、SPEC-offline-pairing、SPEC-app-refactor、SPEC-device-layer、SPEC-phone-media 为 completed；
   SPEC-audio-device 为 in_progress；SPEC-validation-baseline 为 planned；`SPEC-media-obs` 为 cancelled；ready 不替代 R&K 门禁。
 - ARTEMIS-INTAKE-001已完成规划接入；首个Spec的工作分支、运行路径和句柄保存在对应lead/team-context.md。
-- 下一步：通过 spec-start 建立 `SPEC-audio-device`（虚拟麦克风），完成后启动 `SPEC-validation-baseline`（真机验证与复现交付）；
+- 下一步：`SPEC-audio-device` 已启动并按 D-012/D-013 收缩为「只支持 VB-CABLE、本轮只做实现与单测」；完成后启动 `SPEC-validation-baseline`（真机验证与复现交付）。虚拟声卡连通性验证排入补丁：v0.1.1 验 VB-CABLE、v0.1.2 验 VoiceMeeter；
   `work-ledger.yaml` 与 `GOALS.md` 的状态同步随文档修订维护。
 
 ## 9. 文档关联
