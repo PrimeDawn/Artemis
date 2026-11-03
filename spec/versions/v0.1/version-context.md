@@ -2,7 +2,7 @@
 version: v0.1
 status: 执行中
 created: 2026-10-28
-updated: 2026-11-02
+updated: 2026-11-03
 target_freeze_date: 待定
 target_release_date: 待定
 owner: TeamLead
@@ -43,7 +43,7 @@ Spec2的自动发现、电脑单击选手机、首次允许后持久信任、无
 为验证所需建立的最小安卓端、Windows 原生接收客户端与虚拟设备属于研究原型；
 完整产品基础工程、成熟交互和面向普通用户的分发仍属于后续版本。
 
-当前已交付工具链、配对/信令、应用层改造、系统摄像头设备层与手机画面链路；音频采集、媒体音频与虚拟音频设备尚未实现，真机验证基线未启动。
+当前已交付工具链、配对/信令、应用层改造、系统摄像头设备层、手机画面链路与音频链路（PR #7）；虚拟声卡真实出声排 v0.1.1、VoiceMeeter 排 v0.1.2；真机验证基线与发布交付化尚未启动。
 
 来源：[产品规划](../../../产品规划.md) 的第 3、4、7、8 节；[版本规划报告](plan.html)；[方向调整决策](#7-决策记录) D-007 至 D-011。
 
@@ -61,6 +61,7 @@ Spec2的自动发现、电脑单击选手机、首次允许后持久信任、无
 | SPEC-phone-media | tech | [手机画面链路](specs/20261101-1857-tech-手机画面链路/lead/team-context.md)：Camera2 + MediaCodec + H.264 over TCP + FFmpeg 解码 | TeamLead（serial） | done·已原位归档 | SPEC-device-layer |
 | SPEC-audio-device | tech | [虚拟麦克风音频链路](specs/20261102-1117-tech-虚拟麦克风音频链路/lead/team-context.md)：手机麦克风采集编码 + PC 端检测并输出到用户自备的第三方虚拟声卡；不自研内核驱动 | TeamLead（serial，2026-11-02 启动） | done·已原位归档 | SPEC-device-layer |
 | SPEC-validation-baseline | tech | 真机实测、风险结论和实验原型复现交付（按「视频必达 + 音频依赖用户自备虚拟声卡」口径重订） | 待 spec-start 分配 | 未启动 | SPEC-phone-media、SPEC-audio-device |
+| SPEC-release-package | tech | 发布交付化：Windows 安装包 + 安卓 APK 两个安装包、重写 README、把开发流程移出发布仓库 | 待 spec-start 分配 | 未启动 | SPEC-validation-baseline |
 | ~~SPEC-media-obs~~ | tech | ~~手机到 OBS 的最小音视频链路~~ | — | **作废**（被 SPEC-phone-media 与 SPEC-audio-device 替代） | — |
 
 - feat：暂不安排独立产品功能 Spec，避免把技术预研扩大为完整一期功能开发。
@@ -120,6 +121,13 @@ Spec2的自动发现、电脑单击选手机、首次允许后持久信任、无
 - 通过可复现方法测量延迟和音画偏差，对照产品目标 300 ms / 150 ms 报告实际结果。
 - 输出原型 APK、Windows 客户端与虚拟声卡安装步骤、依赖许可证与研究结论；指标超标或设备缺失不得记为达标。
 
+### SPEC-release-package
+- 交付两个安装包：**Windows 安装包**（接收服务、解码进程、DirectShow 过滤器、音频输出与启动入口，用户无需开发环境）与**安卓 APK**（release 构建；签名形态在 Spec 内确认）。
+- **重写 README** 面向使用者：安装、首次配对、在 OBS 里选 `Artemis Camera`、音频依赖 VB-CABLE 的说明与排障；开发流程、角色、Spec 方法不再出现在 README 主路径。
+- **把开发流程移出发布仓库**：`.agents/`、`.codex/`、`spec/` 与开发向 `docs/` 的处置方式在 Spec 内确定（迁到独立仓库或仓库外本地目录），发布仓库只保留产品代码、构建脚本、用户文档与许可证。
+- 验收：在一台没有开发环境的 Windows 上，只按 README 安装两个包即可完成一次连接与 OBS 采集；安装包内含运行所需依赖；README 不出现内部流程内容。
+- 不包含：代码签名证书采购、应用商店发布、自动更新。
+
 以上为 v0.1 技术预研证据门槛，不替代一期验收。
 
 ## 4. 依赖与风险记录
@@ -139,7 +147,7 @@ Spec2的自动发现、电脑单击选手机、首次允许后持久信任、无
 
 ## 5. 版本验收与发布边界
 
-1. 本版新增 5 个 Spec（应用层改造、设备层、手机画面、音频、真机验证）全部完工，分别保留已确认计划、实现记录与真实验证证据；待解决的问题明确登记。
+1. 本版新增 6 个 Spec（应用层改造、设备层、手机画面、音频、真机验证、发布交付化）全部完工，分别保留已确认计划、实现记录与真实验证证据；待解决的问题明确登记。
 2. 已交付的配对/信任/信令行为不得退化：当前 Node 52 项、JVM 18 项测试仍须通过，APK 仍可构建。
 3. 核心验收：OBS 能枚举 `Artemis Camera` 并录出画面；装有受支持虚拟声卡时，音频输出到该跳板且其采集端能收到手机麦克风声音，未装则如实记「音频不可用」并说明原因。保留离线功能并检查无公网依赖。按 D-006，实际断公网运行不纳入本轮必测门禁，报告明确“未实测”。
 4. 延迟、同步等数据如未达到产品目标，保留差距、处理方案并取得用户明确处置结论，不能宣称已达标。
@@ -163,6 +171,7 @@ Spec2的自动发现、电脑单击选手机、首次允许后持久信任、无
 | 2026-11-02 | 启动 Spec | SPEC-audio-device | 通过 spec-start 启动音频 Spec，登记为执行中；交付范围经用户确认为全链路（手机麦克风 → PC → 系统麦克风 → OBS），Gated + serial | user |
 | 2026-11-02 | 调整实现路线 | SPEC-audio-device | ①虚拟麦克风改由产品自带 PortCls/WaveRT 驱动提供，随安装包分发，不依赖用户机器上既有的第三方虚拟声卡；②音频走独立 `/audio` 通道、复用现有 12 字节帧头，取消把音频耦合进视频流的改造；③编码 Opus 优先、AAC 回退。依据：方案须对任意用户环境中立（用户明确），且同类实现（scrcpy、手机当摄像头类产品）均如此 | user |
 | 2026-11-02 | 范围收缩 | SPEC-audio-device、SPEC-validation-baseline 及版本验收 | 放弃自研内核驱动与签名：本版不自研虚拟麦克风，音频改为「检测到用户自备第三方虚拟声卡则输出到它，否则无音频」；其他软件兼容性移出范围。依据：开源、零预算且要求一次安装即用的约束下，系统麦克风设备必须微软签名驱动，无法满足（D-012） | user |
+| 2026-11-03 | 新增 Spec | SPEC-release-package | 用户要求在验证基线之后追加发布交付化 Spec：Windows 安装包 + 安卓 APK 两个安装包、重写 README、把开发流程移出发布仓库；排在 `SPEC-validation-baseline` 之后 | user |
 
 ## 7. 决策记录
 
@@ -181,6 +190,7 @@ Spec2的自动发现、电脑单击选手机、首次允许后持久信任、无
 | D-011 | `SPEC-media-obs` 保留、改标或作废 | 作废，拆分为 `SPEC-phone-media`（视频）与 `SPEC-audio-device`（音频） | 旧 Spec 以浏览器接收页为前提，与新方向冲突；未启动且无已合并代码，不涉及撤销提交或功能开关 | user（同意拆分方向） |
 | D-012 | 音频交付形态：自研签名驱动 / 用户自备虚拟声卡 / 只做应用内音频 | 用户自备虚拟声卡：检测到成对端点则输出到它，未装则无音频；本版不自研驱动、不涉及签名 | 开源、零预算、一次安装即用的三条约束下，系统麦克风设备必须由微软签名的内核驱动提供，无免费路径；同类开源项目（Scream、Virtual-Display-Driver）均要求用户关 Secure Boot，商业产品（DroidCam/Iriun/Camo/VB-CABLE）均购买证书。用户据此明确：只保证「装了虚拟声卡就能听到手机麦克风」，其他软件兼容性移出范围 | user |
 | D-013 | 本 Spec 支持几种虚拟声卡、连通性何时验证 | 只支持 VB-CABLE；VoiceMeeter 与两者的真实连通性分别留到 v0.1.1、v0.1.2 补丁验证 | 当前没有任何机器装有虚拟声卡，无法实测；先保证代码实现完整、可构建、端点选择逻辑有单测，VB-CABLE 实连通留补丁 | user | 2026-11-02 | 用户原话「只支持一个就行…本机也好哪里也好都没有安装虚拟声卡可以测试，这部分实现好能跑通就行，两个虚拟声卡软件的连通性测试留到发版后的补丁也就是0.1.1和0.1.2」 |
+| D-014 | 发布形态与仓库边界 | 新增 `SPEC-release-package`：交付 Windows 安装包与安卓 APK 两个安装包；README 面向使用者重写；开发流程资产（`.agents/`、`.codex/`、`spec/` 与开发向 `docs/`）移出发布仓库 | 用户要求把发布所需的两套安装包与面向用户的 README 纳入计划，并让发布仓库只保留产品代码与用户文档 | user | 2026-11-03 | 用户原话「在当前版本规划中新增一个spec，在最后这个验证基线后面，主要做release用的两个安装包、并重写readme等，还要将开发流程移出仓库」 |
 
 
 ## 8. AWR 映射与接续
@@ -188,9 +198,9 @@ Spec2的自动发现、电脑单击选手机、首次允许后持久信任、无
 - 版本目标键：goal#artemis-v0.1（GOALS.md）。
 - 版本工作组：milestone VERSION-v0.1；工作项使用同名稳定 Spec 标识及 milestone 关系，依赖保存在 work-ledger.yaml。
 - AWR 为上述权威文本建立投影：SPEC-sdk-toolchain、SPEC-offline-pairing、SPEC-app-refactor、SPEC-device-layer、SPEC-phone-media 为 completed；
-  SPEC-audio-device 为 in_progress；SPEC-validation-baseline 为 planned；`SPEC-media-obs` 为 cancelled；ready 不替代 R&K 门禁。
+  SPEC-audio-device 为 completed；SPEC-validation-baseline 与 SPEC-release-package 为 planned；`SPEC-media-obs` 为 cancelled；ready 不替代 R&K 门禁。
 - ARTEMIS-INTAKE-001已完成规划接入；首个Spec的工作分支、运行路径和句柄保存在对应lead/team-context.md。
-- 下一步：`SPEC-audio-device` 已启动并按 D-012/D-013 收缩为「只支持 VB-CABLE、本轮只做实现与单测」；完成后启动 `SPEC-validation-baseline`（真机验证与复现交付）。虚拟声卡连通性验证排入补丁：v0.1.1 验 VB-CABLE、v0.1.2 验 VoiceMeeter；
+- 下一步：`SPEC-audio-device` 已完成并归档；接 `SPEC-validation-baseline`（真机验证与复现交付），其后再接新增的 `SPEC-release-package`（两个安装包、重写 README、开发流程移出仓库，D-014）。虚拟声卡连通性验证排入补丁：v0.1.1 验 VB-CABLE、v0.1.2 验 VoiceMeeter；
   `work-ledger.yaml` 与 `GOALS.md` 的状态同步随文档修订维护。
 
 ## 9. 文档关联

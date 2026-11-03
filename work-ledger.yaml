@@ -207,6 +207,29 @@ work_items:
     paths:
       - spec/versions/v0.1/version-context.md
       - spec/versions/v0.1/plan.html
+
+  - id: SPEC-release-package
+    kind: tech
+    title: 发布交付化（两个安装包、README、开发流程移出仓库）
+    status: planned
+    goal: "goal#artemis-v0.1"
+    milestone: VERSION-v0.1
+    priority: P0
+    required: true
+    depends_on:
+      - SPEC-validation-baseline
+    acceptance:
+      - 交付 Windows 安装包（接收服务、解码进程、DirectShow 过滤器、音频输出与启动入口）与安卓 APK 两个安装包，均含运行所需依赖。
+      - 在没有开发环境的 Windows 上，仅按 README 安装两个包即可完成一次连接与 OBS 采集。
+      - README 面向使用者重写：安装、首次配对、OBS 选设备、音频依赖 VB-CABLE 与排障；不出现内部流程内容。
+      - 开发流程资产（.agents/、.codex/、spec/ 与开发向 docs/）移出发布仓库，仓库只留产品代码、构建脚本、用户文档与许可证。
+      - 不包含代码签名证书采购、商店发布与自动更新。
+    next_action: 真机验证基线完成后，通过 spec-start 制定发布打包方案；启动时确认两个安装包的具体形态与开发流程资产的去处。
+    summary: 2026-11-03 按用户要求新增，位于 SPEC-validation-baseline 之后（D-014）。
+    tags: [v0.1, tech, release]
+    paths:
+      - spec/versions/v0.1/version-context.md
+      - spec/versions/v0.1/plan.html
       - docs/validation-followups.md
 
 milestones:
