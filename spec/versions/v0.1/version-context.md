@@ -60,7 +60,7 @@ Spec2的自动发现、电脑单击选手机、首次允许后持久信任、无
 | SPEC-device-layer | tech | [系统摄像头设备层](specs/20261101-1217-tech-系统摄像头设备层/lead/team-context.md)：DirectShow 过滤器 + 共享内存 IPC，先输出合成画面 | TeamLead（serial） | done·已原位归档 | SPEC-app-refactor |
 | SPEC-phone-media | tech | [手机画面链路](specs/20261101-1857-tech-手机画面链路/lead/team-context.md)：Camera2 + MediaCodec + H.264 over TCP + FFmpeg 解码 | TeamLead（serial） | done·已原位归档 | SPEC-device-layer |
 | SPEC-audio-device | tech | [虚拟麦克风音频链路](specs/20261102-1117-tech-虚拟麦克风音频链路/lead/team-context.md)：手机麦克风采集编码 + PC 端检测并输出到用户自备的第三方虚拟声卡；不自研内核驱动 | TeamLead（serial，2026-11-02 启动） | done·已原位归档 | SPEC-device-layer |
-| SPEC-validation-baseline | tech | 真机实测、风险结论和实验原型复现交付（按「视频必达 + 音频依赖用户自备虚拟声卡」口径重订） | 待 spec-start 分配 | 未启动 | SPEC-phone-media、SPEC-audio-device |
+| SPEC-validation-baseline | tech | [真机验证基线](specs/20261103-1055-tech-真机验证基线/lead/team-context.md)：从零安装、按文档复测、延迟与音画偏差测量、研究结论与复现交付 | TeamLead（serial，2026-11-03 启动） | 执行中 | SPEC-phone-media、SPEC-audio-device |
 | SPEC-release-package | tech | 发布交付化：Windows 安装包 + 安卓 APK 两个安装包、重写 README、把开发流程移出发布仓库 | 待 spec-start 分配 | 未启动 | SPEC-validation-baseline |
 | ~~SPEC-media-obs~~ | tech | ~~手机到 OBS 的最小音视频链路~~ | — | **作废**（被 SPEC-phone-media 与 SPEC-audio-device 替代） | — |
 
