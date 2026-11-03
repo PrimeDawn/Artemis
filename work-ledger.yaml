@@ -149,7 +149,7 @@ work_items:
   - id: SPEC-audio-device
     kind: tech
     title: 音频输出（用户自备虚拟声卡）
-    status: in_progress
+    status: completed
     goal: "goal#artemis-v0.1"
     milestone: VERSION-v0.1
     priority: P1
