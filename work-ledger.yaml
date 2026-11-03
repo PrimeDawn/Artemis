@@ -148,8 +148,8 @@ work_items:
     verification: {evidence_level: locally_verified}
   - id: SPEC-audio-device
     kind: tech
-    title: 虚拟麦克风（内核音频驱动）
-    status: planned
+    title: 音频输出（用户自备虚拟声卡）
+    status: in_progress
     goal: "goal#artemis-v0.1"
     milestone: VERSION-v0.1
     priority: P1
@@ -157,10 +157,11 @@ work_items:
     depends_on:
       - SPEC-device-layer
     acceptance:
-      - 系统音频输入设备 Artemis Microphone 可被 OBS 枚举并录出声音。
-      - 驱动签名作为独立发布门禁，不计入功能验收。
-    next_action: 手机画面链路完成后，通过 spec-start 建立音频设备 Spec（虚拟麦克风）。
-    summary: 由原 SPEC-media-obs 的音频目标拆分而来，尚未启动。
+      - 手机麦克风音频经独立通道传到 PC，并输出到探测到的 VB-CABLE 渲染端（CABLE Input）；VoiceMeeter 不在本 Spec 范围。
+      - 未安装虚拟声卡时视频照常、音频不可用并明确提示原因；不自研内核驱动、不涉及签名。
+      - 无任何环境装有虚拟声卡，VB-CABLE 的端到端连通性记未实测，由 v0.1.1 验证；VoiceMeeter 由 v0.1.2 验证。
+    next_action: 按 writer/plan.html 实现独立 /audio 通道、手机端 Opus/AAC 采集编码、PC 端解码与 VB-CABLE 端点输出；连通性实测排入 v0.1.1。
+    summary: 由原 SPEC-media-obs 的音频目标拆分而来；2026-11-02 按 D-012 收缩范围，放弃自研驱动与签名。
     tags: [v0.1, tech, audio]
     paths:
       - spec/versions/v0.1/version-context.md
@@ -196,7 +197,7 @@ work_items:
       - SPEC-phone-media
       - SPEC-audio-device
     acceptance:
-      - 固定并记录设备和软件环境，保持公网连接完成局域网配对至 OBS 枚举 Artemis Camera / Artemis Microphone 并录出音画的端到端复测；保留离线功能，实际断公网运行记未实测，不作为本轮验收阻断。
+      - 固定并记录设备和软件环境，保持公网连接完成局域网配对至 OBS 枚举 Artemis Camera 并录出画面的端到端复测；音频只在装有受支持虚拟声卡时验证其采集端可收到手机声音，未装则记音频不可用；保留离线功能，实际断公网运行记未实测，不作为本轮验收阻断。
       - 单轮总测试预算300秒内实测短时推流及必要的重复启停；长期稳定性以代码/状态机与必要加速边界审查，保留实际结果和未覆盖项，不强制等待10分钟。
       - 实测延迟与音画偏差并对照300ms和150ms产品目标，超标项明确处置，不记为达标。
       - 提供可复现实验APK、PC启动步骤、依赖许可证和研究结论；不替代全部一期验收。
