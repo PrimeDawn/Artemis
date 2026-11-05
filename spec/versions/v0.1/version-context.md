@@ -20,7 +20,7 @@ scope_confirmation: 用户已于2026-10-28确认v0.1规划
 
 已交付并合入 dev：SDK 与工具链、离线配对与信令（PR #3）、应用层无感改造（PR #4）、系统摄像头设备层（PR #5）、手机画面链路（PR #6）。
 已交付并须保持不退化：配对/信任/信令（当前 Node 52 项、JVM 18 项通过），APK 可构建；OBS 可枚举 `Artemis Camera` 并显示真机 720p30 画面（约 30fps）。
-已交付：音频链路（VB-CABLE 真机验证排 v0.1.1，VoiceMeeter 排 v0.1.2）。仍缺：真机验证基线。按 D-012，本版不自研虚拟麦克风驱动、不涉及签名：装有受支持虚拟声卡时才有声音，未装则只传视频。
+已交付：音频链路（VB-CABLE 真机验证排 v0.1.1，VoiceMeeter 排 v0.1.2）与真机验证基线（延迟与音画偏差记遗留，方法已备）。仍缺：发布交付化（两个安装包、README、开发流程移出仓库）。按 D-012，本版不自研虚拟麦克风驱动、不涉及签名：装有受支持虚拟声卡时才有声音，未装则只传视频。
 已知边界：仅 720p30；端到端延迟未实测；真实手机换 IP 未测；实际断公网按 D-006 未测；Windows 端仍是脚本启动，未打包。
 
 传输选型已定 **H.264 over TCP**（参照 scrcpy 的包格式与 MediaCodec 编码路径），设备层经共享内存解耦。
@@ -60,7 +60,7 @@ Spec2的自动发现、电脑单击选手机、首次允许后持久信任、无
 | SPEC-device-layer | tech | [系统摄像头设备层](specs/20261101-1217-tech-系统摄像头设备层/lead/team-context.md)：DirectShow 过滤器 + 共享内存 IPC，先输出合成画面 | TeamLead（serial） | done·已原位归档 | SPEC-app-refactor |
 | SPEC-phone-media | tech | [手机画面链路](specs/20261101-1857-tech-手机画面链路/lead/team-context.md)：Camera2 + MediaCodec + H.264 over TCP + FFmpeg 解码 | TeamLead（serial） | done·已原位归档 | SPEC-device-layer |
 | SPEC-audio-device | tech | [虚拟麦克风音频链路](specs/20261102-1117-tech-虚拟麦克风音频链路/lead/team-context.md)：手机麦克风采集编码 + PC 端检测并输出到用户自备的第三方虚拟声卡；不自研内核驱动 | TeamLead（serial，2026-11-02 启动） | done·已原位归档 | SPEC-device-layer |
-| SPEC-validation-baseline | tech | 真机实测、风险结论和实验原型复现交付（按「视频必达 + 音频依赖用户自备虚拟声卡」口径重订） | 待 spec-start 分配 | 未启动 | SPEC-phone-media、SPEC-audio-device |
+| SPEC-validation-baseline | tech | [真机验证基线](specs/20261103-1055-tech-真机验证基线/lead/team-context.md)：从零安装、按文档复测、延迟与音画偏差测量、研究结论与复现交付 | TeamLead（serial，2026-11-03 启动） | done·已原位归档 | SPEC-phone-media、SPEC-audio-device |
 | SPEC-release-package | tech | 发布交付化：Windows 安装包 + 安卓 APK 两个安装包、重写 README、把开发流程移出发布仓库 | 待 spec-start 分配 | 未启动 | SPEC-validation-baseline |
 | ~~SPEC-media-obs~~ | tech | ~~手机到 OBS 的最小音视频链路~~ | — | **作废**（被 SPEC-phone-media 与 SPEC-audio-device 替代） | — |
 
@@ -167,6 +167,7 @@ Spec2的自动发现、电脑单击选手机、首次允许后持久信任、无
 | 2026-11-01 | 作废并拆分 | SPEC-media-obs → SPEC-phone-media、SPEC-audio-device | 旧「手机到 OBS 的最小音视频链路」以浏览器接收页为前提，与新方向冲突；视频目标转入 SPEC-phone-media，音频目标转入 SPEC-audio-device。该 Spec 未启动、无已合并代码，无需撤销提交或加功能开关 | user |
 | 2026-11-01 | 新增前置 | SPEC-app-refactor、SPEC-device-layer | 用户要求第一个 Spec 先做「应用层无感改造」，保证配对/信任/信令不退化；设备层作为媒体之前的地基先做合成画面 spike | user |
 | 2026-11-01 | 调整验收 | SPEC-validation-baseline | 验收标准从「OBS 浏览器源接收」改为「OBS 枚举 Artemis Camera / Artemis Microphone 并录出音画」；沿用 D-006 的断公网不实测约束 | user |
+| 2026-11-06 | 收尾归档 | SPEC-validation-baseline | 从零安装与 30 秒录制回看通过（720p30）；修复 5 个缺陷；延迟与音画偏差按用户决定记遗留，备选测量方法已写入测试报告 | user |
 | 2026-11-02 | 收尾归档 | SPEC-audio-device | 按用户指令执行收尾：原位归档、清理测试证据与历史截图；真实 VB-CABLE 出声留 v0.1.1、VoiceMeeter 留 v0.1.2 | user |
 | 2026-11-02 | 启动 Spec | SPEC-audio-device | 通过 spec-start 启动音频 Spec，登记为执行中；交付范围经用户确认为全链路（手机麦克风 → PC → 系统麦克风 → OBS），Gated + serial | user |
 | 2026-11-02 | 调整实现路线 | SPEC-audio-device | ①虚拟麦克风改由产品自带 PortCls/WaveRT 驱动提供，随安装包分发，不依赖用户机器上既有的第三方虚拟声卡；②音频走独立 `/audio` 通道、复用现有 12 字节帧头，取消把音频耦合进视频流的改造；③编码 Opus 优先、AAC 回退。依据：方案须对任意用户环境中立（用户明确），且同类实现（scrcpy、手机当摄像头类产品）均如此 | user |
@@ -198,9 +199,9 @@ Spec2的自动发现、电脑单击选手机、首次允许后持久信任、无
 - 版本目标键：goal#artemis-v0.1（GOALS.md）。
 - 版本工作组：milestone VERSION-v0.1；工作项使用同名稳定 Spec 标识及 milestone 关系，依赖保存在 work-ledger.yaml。
 - AWR 为上述权威文本建立投影：SPEC-sdk-toolchain、SPEC-offline-pairing、SPEC-app-refactor、SPEC-device-layer、SPEC-phone-media 为 completed；
-  SPEC-audio-device 为 completed；SPEC-validation-baseline 与 SPEC-release-package 为 planned；`SPEC-media-obs` 为 cancelled；ready 不替代 R&K 门禁。
+  SPEC-audio-device 与 SPEC-validation-baseline 为 completed；SPEC-release-package 为 planned；`SPEC-media-obs` 为 cancelled；ready 不替代 R&K 门禁。
 - ARTEMIS-INTAKE-001已完成规划接入；首个Spec的工作分支、运行路径和句柄保存在对应lead/team-context.md。
-- 下一步：`SPEC-audio-device` 已完成并归档；接 `SPEC-validation-baseline`（真机验证与复现交付），其后再接新增的 `SPEC-release-package`（两个安装包、重写 README、开发流程移出仓库，D-014）。虚拟声卡连通性验证排入补丁：v0.1.1 验 VB-CABLE、v0.1.2 验 VoiceMeeter；
+- 下一步：`SPEC-validation-baseline` 已完成并归档；接 `SPEC-release-package`（两个安装包、重写 README、开发流程移出仓库，D-014）。虚拟声卡连通性验证排入补丁：v0.1.1 验 VB-CABLE、v0.1.2 验 VoiceMeeter；
   `work-ledger.yaml` 与 `GOALS.md` 的状态同步随文档修订维护。
 
 ## 9. 文档关联

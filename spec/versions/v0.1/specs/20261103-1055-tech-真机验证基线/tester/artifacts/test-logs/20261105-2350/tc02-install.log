@@ -1,0 +1,22 @@
+﻿=== TC-02 从零安装与配对 ===
+Command: adb install app-debug.apk (sha256 683D0AEC...)
+Timestamp: 2026-11-05T23:53:31.9654370+08:00
+DataDir: C:\Users\35692\AppData\Local\Temp\artemis-fromzero-e7971376
+Performing Streamed Install
+Success
+install exit=0
+
+--- 进程原始输出 ---
+Artemis �����
+  ����Ŀ¼��C:\Users\35692\AppData\Local\Temp\artemis-fromzero-e7971376
+  OpenSSL��C:\Program Files\Git\usr\bin\openssl.exe
+  ��������ַ��192.168.1.5
+  ����ҳ��http://127.0.0.1:3010/control
+  ��־Ŀ¼��C:\Users\35692\AppData\Local\Temp\artemis-fromzero-e7971376\logs
+  [1/2] ������������
+  [2/2] ���շ��������
+
+��ȫ��������
+��һ�����ڿ���ҳ��ѡ���ֻ����ֻ��ϵ㡺�������ס����OBS ��ѡ Artemis Camera��
+�رձ����ڻ� Ctrl+C ֹͣȫ������
+Exit code: 0

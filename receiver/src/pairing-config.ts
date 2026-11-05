@@ -20,5 +20,7 @@ export function parsePairingConfig(env: NodeJS.ProcessEnv, interfaces: NodeJS.Di
   }
   const controlPort=port(env.ARTEMIS_CONTROL_PORT,3000),tlsPort=port(env.ARTEMIS_TLS_PORT,3443);
   if (controlPort === tlsPort) fail();
-  return { controlHost:'127.0.0.1',controlPort,lanHost,tlsPort,dataDir,opensslPath };
+  // 解码进程的视频端口必须与这里的 mediaPort 一致，否则 /media 会连到没人监听的口。
+  const mediaPort=port(env.ARTEMIS_MEDIA_PORT,3450);
+  return { controlHost:'127.0.0.1',controlPort,lanHost,tlsPort,dataDir,opensslPath,mediaPort };
 }

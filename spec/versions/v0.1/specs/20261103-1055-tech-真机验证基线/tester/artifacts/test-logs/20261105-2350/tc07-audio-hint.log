@@ -1,0 +1,11 @@
+﻿=== TC-07 未装虚拟声卡时的音频提示与视频不受影响 ===
+Command: GET /api/state（控制页数据源）+ OBS 源截图
+Timestamp: 2026-11-06T00:10:41.5370584+08:00
+
+sessionId=5e949bb0-4278-409b-90d0-37ae4c99f896
+audio={"sink":"none","device":"","message":"未找到虚拟声卡（VB-CABLE），音频不可用；安装后重启 Artemis 即可"}
+magic=0x41435456 version=1 size=1280x720 stride=5120 format=1 writeIndex=20128 frameIndex=10063 tsUs=1927913246
+sampled_pixels=10240 mean_luma=128.02
+VERDICT=HAS_CONTENT
+结论：音频状态为 none 并给出安装指引；同一时刻视频帧持续写入共享内存且有画面内容
+Exit code: 0
