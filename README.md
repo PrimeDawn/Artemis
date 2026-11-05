@@ -24,7 +24,7 @@ Artemis 计划通过原生安卓 App 采集视频与麦克风音频，在局域�
 Windows 准备 JDK 17、Node 24、Android API 36 和 Build Tools 36.0.0；原生端另需 VS Build Tools（MSVC）与 FFmpeg 开发库。具体安装、许可和镜像切换见 [工具链复现指南](docs/toolchain.md)。
 
 ```powershell
-# JAVA_HOME / ANDROID_HOME 按本机实际路径设置；本开发机环境在 C:\DEV\ArtemisEnv。
+# JAVA_HOME / ANDROID_HOME 按本机实际路径设置（构建工具链不随仓库携带）。
 .\android\gradlew.bat -p android --no-daemon clean :app:assembleDebug
 npm --prefix receiver ci --ignore-scripts
 npm --prefix receiver test

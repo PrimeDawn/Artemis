@@ -36,3 +36,13 @@ Node传递版本/integrity在receiver/package-lock.json；Android固定版本在
 原候选5.5.1的Android AAR要求SDK37；官方5.4.0要求SDK36，SHA256为 `0e9cbf6c7c373a5f0b0cde7f773185eb69b485faa19f76bcfab3310badbda901`。用户已批准r3固定5.4.0，保留SDK36/AGP8.13.2，不安装SDK37。5.5.1公共CA撤销列表更新见[维护方变更记录](https://github.com/lysine-dev/okhttp/blob/main/CHANGELOG.md)；本项目手机入口只接受绑定的自签名SPKI并保留默认主机名校验，不以公共CA授权本地设备，不宣称通用互联网客户端安全等价。
 
 未安装qrcode，扫码/连接串已移出正常路径。独立tester已将 playwright-core 1.64.1（Apache-2.0）安装到项目忽略的 E 盘测试工具目录，复用已安装 Chrome 156.0.8078.73，没有下载浏览器。它不进入接收端运行包或 APK；正式接收端依赖仍以 package-lock.json 为准。
+
+## 媒体与音频依赖
+
+| 组件 | 版本 / 许可 | 用途与来源 |
+|---|---|---|
+| FFmpeg 运行库（avcodec / avutil / swscale / swresample） | `N-128227-g4811625b5f-20261031`，GPL 共享构建（`win64-gpl-shared`） | 解码进程用 H.264 与 Opus/AAC 解码、色彩转换与重采样；随 `native/build.ps1` 从本机固定的 FFmpeg 目录复制到 `native/out`。因是 GPL 共享构建，分发安装包时必须同时提供其源码获取方式与许可文本 |
+| Android 平台 Opus 编码器 | 系统 `c2.android.opus.encoder`，随 Android 平台 | 手机端音频编码，不引入第三方 Opus 库 |
+| Android 平台 MediaCodec H.264 编码器 | 随 Android 平台 | 手机端视频编码 |
+
+FFmpeg 只在 Windows 侧的解码进程中使用；手机端不链接 FFmpeg。安装包分发前需按 GPL 要求随包提供 FFmpeg 许可与对应源码的获取说明，这一项在 `SPEC-release-package` 打包时落实。

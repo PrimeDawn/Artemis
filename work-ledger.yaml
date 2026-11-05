@@ -188,7 +188,7 @@ work_items:
   - id: SPEC-validation-baseline
     kind: tech
     title: 真机验证基线与复现交付
-    status: planned
+    status: completed
     goal: "goal#artemis-v0.1"
     milestone: VERSION-v0.1
     priority: P1

@@ -1,0 +1,65 @@
+﻿=== TC-03 OBS 采集与 30 秒录制回看 ===
+Command: node obs-record.js 4455 <pwd> 30 "Artemis Camera"
+Timestamp: 2026-11-05T23:59:45.9033760+08:00
+2026-11-05T15:59:46.052Z identified
+2026-11-05T15:59:46.603Z obs 33.0.1 websocket 5.7.6
+2026-11-05T15:59:46.603Z scene 场景
+2026-11-05T15:59:46.604Z source created with device Artemis Camera
+2026-11-05T15:59:49.614Z canvas 1920x1080 @ 30/1
+2026-11-05T15:59:49.615Z recording started
+2026-11-05T16:00:19.629Z record status {"active":true,"timecode":"00:00:28.766","bytes":22075215}
+2026-11-05T16:00:19.630Z recording stopped, saved to C:/Users/35692/Videos/2026-11-05 23-59-49.mp4
+OUTPUT_PATH=C:/Users/35692/Videos/2026-11-05 23-59-49.mp4
+Exit code: 0
+codec_name=h264
+width=1280
+height=720
+r_frame_rate=30/1
+avg_frame_rate=30/1
+codec_name=aac
+r_frame_rate=0/0
+avg_frame_rate=0/0
+duration=30.033333
+size=23084266
+bit_rate=6148972
+sha256=DFB97D1BDD7A601B947B7C747CC2F36DC6D925DA2A17F31C7E5A5F214DB510E1
+ 
+=== TC-03 重录（手机真实画面） ===
+Timestamp: 2026-11-06T00:09:13.4410361+08:00
+2026-11-05T16:09:13.561Z identified
+2026-11-05T16:09:13.563Z obs 33.0.1 websocket 5.7.6
+2026-11-05T16:09:13.563Z scene 场景
+2026-11-05T16:09:13.565Z source created with device Artemis Camera:@device#3Asw#3A{860BB310-5D01-11D0-BD3B-00A0C911CE86}\{7E1F3A10-2C4B-4D8E-9A55-3F0C1B7D9E21}
+2026-11-05T16:09:16.572Z canvas 1920x1080 @ 30/1
+2026-11-05T16:09:16.573Z recording started
+2026-11-05T16:09:46.590Z record status {"active":true,"timecode":"00:00:28.766","bytes":22071845}
+2026-11-05T16:09:46.590Z recording stopped, saved to C:/Users/35692/Videos/2026-11-06 00-09-16.mp4
+OUTPUT_PATH=C:/Users/35692/Videos/2026-11-06 00-09-16.mp4
+codec_name=h264
+width=1280
+height=720
+avg_frame_rate=30/1
+codec_name=aac
+avg_frame_rate=0/0
+duration=30.000000
+size=23055879
+sha256=12D880B330E50FCD533E2B072D0CC463F2F5E2C22D131556B72A126D3A47995C
+t=2s -> size=1280x720 mean=64.78 stddev=78.84 extrema=(0, 255)
+t=10s -> size=1280x720 mean=59.28 stddev=74.46 extrema=(0, 255)
+t=20s -> size=1280x720 mean=60.53 stddev=78.42 extrema=(0, 255)
+t=28s -> size=1280x720 mean=57.79 stddev=77.90 extrema=(0, 255)
+
+--- 进程原始输出 ---
+Artemis �����
+  ����Ŀ¼��C:\Users\35692\AppData\Local\Temp\artemis-fromzero-e7971376
+  OpenSSL��C:\Program Files\Git\usr\bin\openssl.exe
+  ��������ַ��192.168.1.5
+  ����ҳ��http://127.0.0.1:3010/control
+  ��־Ŀ¼��C:\Users\35692\AppData\Local\Temp\artemis-fromzero-e7971376\logs
+  [1/2] ������������
+  [2/2] ���շ��������
+
+��ȫ��������
+��һ�����ڿ���ҳ��ѡ���ֻ����ֻ��ϵ㡺�������ס����OBS ��ѡ Artemis Camera��
+�رձ����ڻ� Ctrl+C ֹͣȫ������
+Exit code: 0

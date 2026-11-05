@@ -1,0 +1,8 @@
+﻿=== TC-04 分辨率与帧率 ===
+Command: adb logcat -s ArtemisMedia（frames sent 计数器，10 秒窗口）
+Timestamp: 2026-11-06T00:10:12.9655629+08:00
+
+frames 2370 -> 2640 over 9s = 30 fps
+编码配置：1280x720 / 30fps 目标 / 4 Mbps / 10 秒 I 帧
+实测：30 fps（10 秒窗口，10 条采样）
+Exit code: 0

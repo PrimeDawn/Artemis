@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>测试报告 - 真机验证基线（SPEC-validation-baseline）</title>
+<meta name="rk:type"        content="test-report">
+<meta name="rk:version"     content="v0.1">
+<meta name="rk:category"    content="tech">
+<meta name="rk:spec-dir"    content="spec/versions/v0.1/specs/20261103-1055-tech-真机验证基线">
+<meta name="rk:role"        content="spec-tester">
+<meta name="rk:mode"        content="gated">
+<meta name="rk:created"     content="2026-11-06">
+<meta name="rk:updated"     content="2026-11-06">
+<meta name="rk:revision"    content="2">
+<meta name="rk:git-branch"  content="tech/spec-20261103-1055-validation-baseline">
+<meta name="rk:base-branch" content="dev">
+<meta name="rk:pr-url"      content="">
+<meta name="rk:tags"        content="spec,test-report,validation">
+<link rel="rk-plan" href="../writer/plan.html">
+<link rel="rk-test-plan" href="test-plan.html">
+<link rel="rk-summary" href="../executor/summary.html">
+<link rel="rk-ledger" href="../lead/team-context.md">
+<link rel="stylesheet" href="../../../../../../html-report/assets/rk-report.css">
+<script defer src="../rk-manifest.js"></script>
+<script defer src="../../../../../../html-report/assets/rk-report.js"></script>
+</head>
+<body>
+
+<nav class="rk-nav"></nav>
+
+<header class="rk-head">
+  <h1>测试报告：从零复现的验证基线</h1>
+  <div class="rk-meta">
+    <span><b>类型</b> test-report</span>
+    <span><b>Spec</b> <code>spec/versions/v0.1/specs/20261103-1055-tech-真机验证基线</code></span>
+    <span><b>角色</b> spec-tester</span>
+    <span><b>模式</b> gated</span>
+    <span><b>分支</b> <code>tech/spec-20261103-1055-validation-baseline</code> ← <code>dev</code></span>
+    <span><b>PR</b> —</span>
+    <span><b>创建</b> 2026-11-06</span>
+    <span><b>修订</b> r2（2026-11-06）</span>
+  </div>
+</header>
+
+<nav class="rk-revbar"></nav>
+
+<section class="rk-verdict is-pass">
+  <div class="rk-verdict-label">测试结论</div>
+  <p>10 条用例：<b>8 通过、0 失败、2 未实测</b>（延迟本轮按用户决定先记录、以后再测）。从零安装、重新配对、视频链路与 30 秒录制回看全部成立；帧率实测 30 fps，画面非纯黑。
+  未实测的两项是端到端延迟与音画偏差——前者缺同框拍摄装置，后者按 D-013 依赖虚拟声卡，均如实记录、未填数值。</p>
+</section>
+
+<div class="rk-kpis">
+  <div class="rk-kpi is-pass"><div class="v">8</div><div class="k">通过</div></div>
+  <div class="rk-kpi"><div class="v">0</div><div class="k">失败</div></div>
+  <div class="rk-kpi is-fail"><div class="v">2</div><div class="k">未实测</div></div>
+</div>
+
+<h2>修订历史</h2>
+<table class="rk-revs">
+  <thead><tr><th>修订</th><th>日期</th><th>修改人</th><th>改了什么</th><th>原因</th></tr></thead>
+  <tbody>
+    <tr><td>r1</td><td>2026-11-06</td><td>spec-tester</td><td>初版</td><td>—</td></tr>
+    <tr><td>r2</td><td>2026-11-06</td><td>spec-tester</td><td>TC-06 由「缺装置」改为「用户决定先记录、以后再测」，并写入 B/C/A 三种测量方法备查</td><td>用户 2026-11-06：先记着，不做</td></tr>
+  </tbody>
+</table>
+
+<h2>1. 覆盖核对（先看覆盖，再看通过）</h2>
+<table>
+  <thead><tr><th>方案验收项</th><th>用例</th><th>结果</th></tr></thead>
+  <tbody>
+    <tr><td>AC-1 无机器绑定、可冷启动</td><td>TC-01</td><td>通过</td></tr>
+    <tr><td>AC-2 从零配对</td><td>TC-02</td><td>通过</td></tr>
+    <tr><td>AC-3 OBS 采集与 30 秒回看</td><td>TC-03、TC-04</td><td>通过</td></tr>
+    <tr><td>AC-4 延迟读数与粒度</td><td>TC-06</td><td><b>未实测</b>（缺同框装置）</td></tr>
+    <tr><td>AC-5 音频提示 + 音画偏差标注</td><td>TC-07、TC-08</td><td>提示通过；偏差未实测（D-013）</td></tr>
+    <tr><td>AC-6 许可证与回归</td><td>TC-09、TC-10</td><td>通过</td></tr>
+    <tr><td>连接耗时（报告要求）</td><td>TC-05</td><td>通过</td></tr>
+  </tbody>
+</table>
+
+<h2>2. 逐项结果</h2>
+<table>
+  <thead><tr><th>用例</th><th>结果</th><th>关键读数</th><th>证据</th></tr></thead>
+  <tbody>
+    <tr>
+      <td>TC-01</td><td><b>通过</b></td>
+      <td>用全新临时数据目录冷启动成功；数据目录内生成 identity/certificate/audio-status；<code>tools/</code>、<code>docs/</code>、<code>README.md</code> 静态扫描本机绝对路径结果为「none」</td>
+      <td><code>test-logs/20261105-2350/tc01-cold-start.log</code></td>
+    </tr>
+    <tr>
+      <td>TC-02</td><td><b>通过</b></td>
+      <td>卸载重装 + 全新数据目录后，发现设备显示 <code>trusted=False</code>；人工点「允许并记住」1 次后建立会话 <code>91262859-…</code>，状态转 <code>CONNECTED</code></td>
+      <td><code>tc02-install.log</code>、<code>tc02-service.out</code>、<code>ui-before-approve.xml</code></td>
+    </tr>
+    <tr>
+      <td>TC-03</td><td><b>通过</b></td>
+      <td>录制文件 30.033 秒、1280×720、30 fps、23,084,266 字节；抽 4 帧（2/10/20/28 秒）亮度均值 57.8–64.8、标准差 74–79、动态范围 0–255，非纯黑</td>
+      <td><code>tc03-obs-record.log</code></td>
+    </tr>
+    <tr>
+      <td>TC-04</td><td><b>通过</b></td>
+      <td>手机端 <code>frames sent</code> 计数器 9 秒推进 270 帧 → <b>30 fps</b>；编码配置 1280×720 / 4 Mbps / 10 秒 I 帧</td>
+      <td><code>tc04-fps.log</code></td>
+    </tr>
+    <tr>
+      <td>TC-05</td><td><b>通过</b></td>
+      <td>首次配对：电脑选中到手机确认等待约 12.2 秒（人工），确认后握手到 <code>CONNECTED</code> 约 0.12 秒；已信任设备冷启动约 1.04 秒恢复</td>
+      <td><code>tc05-connect-time.log</code></td>
+    </tr>
+    <tr>
+      <td>TC-06</td><td>未实测</td>
+      <td>本轮未测，用户 2026-11-06 决定先记录、以后再测。备选方法已定（见下）：B 时间码回环（无需第二台相机）、C 双端时间戳估算（仅覆盖编码→PC 收到）。间接观察：共享内存帧序号 2 秒内 10706→10769（约 31 帧/秒），无停滞，但不作为延迟结论</td>
+      <td><code>tc06-tc08-latency-and-sync.log</code></td>
+    </tr>
+    <tr>
+      <td>TC-07</td><td><b>通过</b></td>
+      <td>未装虚拟声卡时 <code>/api/state</code> 返回 <code>{"sink":"none","message":"未找到虚拟声卡（VB-CABLE）…安装后重启"}</code>；同一时刻视频帧持续写入且有画面内容</td>
+      <td><code>tc07-audio-hint.log</code></td>
+    </tr>
+    <tr>
+      <td>TC-08</td><td>未实测</td>
+      <td>端到端音画偏差需 OBS 同时拿到音视频，依赖虚拟声卡，按 D-013 留 v0.1.1；仅核对设计（音视频 PTS 同源），未填数值</td>
+      <td>同上</td>
+    </tr>
+    <tr>
+      <td>TC-09</td><td><b>通过</b></td>
+      <td>实际依赖与清单一致：ws 8.22.0、bonjour-service 1.4.4、OkHttp 5.4.0、JUnit 4.13.2、org.json 20250517、WebRTC 150.7871.01；本轮补入 FFmpeg <code>N-128227-g4811625b5f-20261031</code>（GPL shared）与平台 Opus/H.264 编码器</td>
+      <td><code>tc09-licenses.log</code></td>
+    </tr>
+    <tr>
+      <td>TC-10</td><td><b>通过</b></td>
+      <td>Node 51 + 3 + 7 = <b>61 项通过</b>、0 失败；JVM 单测通过；APK 构建通过</td>
+      <td><code>tc10-regression.log</code></td>
+    </tr>
+  </tbody>
+</table>
+
+<h2>3. 执行中发现的缺陷</h2>
+<div class="rk-cal warn">
+  <div class="t">5 个缺陷在执行期暴露并修复</div>
+  <p>其中 <b>I-002 媒体端口未透传</b> 是真缺陷：<code>-MediaPort</code> 只传给了解码进程，接收服务的 <code>mediaPort</code> 从未从环境变量解析，导致视频永远连到默认 3450 而 PC 上没有监听——表现为「手机在发帧、PC 收不到画面」。已按 TDD 先加失败用例再修。其余四个分别见 <a href="../executor/summary.html">实现总结 §2</a>。</p>
+</div>
+
+<div class="rk-cal key">
+  <div class="t">延迟测量方法（待执行）</div>
+  <p><b>方法 B 时间码回环</b>：PC 全屏显示机器可读时间码（48 个黑白方块编码当前毫秒），手机摄像头拍屏后走完整链路回到 PC，读回该帧并解码方块，与墙钟相减即为「PC 显示→采集→编码→网络→解码→呈现」一圈的延迟，精度约 10 ms。需要把手机对着显示器、配对时点一次授权，其余可自动化。</p>
+  <p><b>方法 C 双端时间戳</b>：用手机编码 PTS 与 PC 收帧墙钟做最小延迟估计，得出「编码输出→PC 收到」一段，不含采集与呈现，只能作下界与交叉对照。</p>
+  <p><b>方法 A 同框拍摄</b>：外部相机同帧读手机计时器与 OBS 预览，原方案口径，需第二台拍摄设备。</p>
+</div>
+<h2>4. 偏差说明</h2>
+<table>
+  <thead><tr><th>项</th><th>偏差</th><th>影响</th></tr></thead>
+  <tbody>
+    <tr><td>权限授予</td><td>用 <code>adb shell pm grant</code> 而非点系统弹窗</td><td>不改变功能结论；真实用户路径的弹窗文案未在本轮目视确认</td></tr>
+    <tr><td>OBS 操作</td><td>经 obs-websocket 建源与录制</td><td>与手工点选等价，设备标识取自 OBS 已保存的正确值</td></tr>
+    <tr><td>首次录制全黑</td><td>错误设备标识 + 环境无光</td><td>改用完整标识并在有光条件下重录，最终结果有效；首次黑帧过程已记录</td></tr>
+    <tr><td>证据形式</td><td>只保留文本日志，抽帧 PNG 未入库</td><td>亮度读数写在日志里，可复核；不占用仓库体积</td></tr>
+  </tbody>
+</table>
+
+<h2>5. 结论</h2>
+<ul>
+  <li>「新用户按文档装一遍就能用」在视频链路上成立：从零安装、一次人工确认、30 秒录制回看有画面、30 fps。</li>
+  <li>端到端延迟与音画偏差仍未实测，v0.1 不能宣称达到 300 ms / 150 ms 目标。</li>
+  <li>音频在未装虚拟声卡时按设计降级并提示，符合 D-012/D-013。</li>
+</ul>
+
+<h2>关联产物</h2>
+<h3>本报告引用</h3>
+<ul class="rk-links">
+  <li><a href="../writer/plan.html" data-rk-link="plan">实现方案</a></li>
+  <li><a href="test-plan.html" data-rk-link="test-plan">测试计划</a></li>
+  <li><a href="../executor/summary.html" data-rk-link="summary">实现总结</a></li>
+  <li><a href="../lead/team-context.md" data-rk-link="ledger">运行账本</a></li>
+</ul>
+<h3>引用本报告</h3>
+<ul class="rk-backlinks">
+  <li><a href="../executor/summary.html" data-rk-backlink="summary">实现总结</a></li>
+  <li><a href="../lead/team-context.md" data-rk-backlink="ledger">运行账本（产物注册表）</a></li>
+</ul>
+
+</body>
+</html>
