@@ -1,9 +1,0 @@
-=== cli-invalid-port Run ===
-Command: powershell -NoProfile -Command "$env:PORT=\"invalid\"; node receiver/dist/src/cli.js; exit $LASTEXITCODE"
-Timestamp: 2026-10-28T06:13:52.499045+00:00
-
---- stderr ---
-{"event":"receiver_error","code":"RangeError","message":"PORT must be a decimal integer from 0 to 65535"}
-
-Exit code: 1
-Finished: 2026-10-28T06:13:52.776124+00:00

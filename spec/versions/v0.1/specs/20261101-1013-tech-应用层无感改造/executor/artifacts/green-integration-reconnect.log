@@ -1,5 +1,0 @@
-﻿=== Integration Smoke Run (reconnect group) ===
-Command: node tests/pairing-integration.mjs --group reconnect --report-dir .cache/app-refactor-reconnect
-Timestamp: 2026-11-01T10:39:08.2217400+08:00
-{"scope":"independent reconnect","passed":true,"cases":6,"error":null}
-Exit code: 0

@@ -1,9 +1,0 @@
-=== receiver-independent Run ===
-Command: node tests/receiver-smoke.mjs --report-dir spec/versions/v0.1/specs/20261028-1059-tech-SDK与工具链可行性/tester/artifacts/test-logs/20261028-203139-closeout/receiver
-Timestamp: 2026-10-28T12:34:39.997612+00:00
-{"passed":true,"cases":[{"id":"TC-11","status":"pass"},{"id":"TC-12","status":"pass"},{"id":"TC-13","status":"pass"},{"id":"TC-14","status":"pass"},{"id":"TC-15","status":"pass"},{"id":"TC-16","status":"pass"}],"processesRemaining":0}
-
---- stderr ---
-
-Exit code: 0
-Finished: 2026-10-28T12:34:41.515013+00:00

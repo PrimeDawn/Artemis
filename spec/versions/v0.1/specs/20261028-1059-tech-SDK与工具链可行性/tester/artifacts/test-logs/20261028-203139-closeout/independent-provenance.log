@@ -1,9 +1,0 @@
-=== independent-provenance Run ===
-Command: E:\Dev\miniconda\python.exe tests/toolchain-provenance.py --report-dir spec/versions/v0.1/specs/20261028-1059-tech-SDK与工具链可行性/tester/artifacts/test-logs/20261028-203139-closeout/provenance --sdk-root E:\Dev\Artemis\Android\Sdk
-Timestamp: 2026-10-28T12:35:43.123774+00:00
-{"passed": true, "checks": [{"id": "TC-02", "status": "pass", "detail": {"wrapperSha256": "81a82aaea5abcc8ff68b3dfcb58b3c3c429378efd98e7433460610fecd7ae45f", "distributionSha256": "20f1b1176237254a6fc204d8434196fa11a4cfb387567519c61556e8710aed78", "sdkCliArchiveSha1": "54a582f3bf73e04253602f2d1c80bd5868aac115"}}, {"id": "TC-03", "status": "pass", "detail": {"coordinate": "io.github.webrtc-sdk:android:150.7871.01", "aarSha256": "0a1627b1a48c2bc17d9a40d62fc47bd45166f44a311e95917f147c402de379b0", "abis": ["arm64-v8a", "armeabi-v7a", "x86", "x86_64"], "javaClasses": ["org/webrtc/PeerConnectionFactory.class", "org/webrtc/Camera2Enumerator.class", "org/webrtc/audio/JavaAudioDeviceModule.class"], "manifestMinSdk": "21"}}, {"id": "TC-04", "status": "pass", "detail": {"pomLicenseNames": ["The 3-Clause BSD License"], "publisherLicenseSha256": "e6b282fe6c0fb353928923470457f31b44cbab203effd60c0cde4a5bb96c8aec", "fullNoticesSha256": "d1f9382c6878ac024155fd6d44a5977329108bb8b0a01cea40e4a2f1d7de252e", "fullNoticesBytes": 788358, "completeSourceBytesPreserved": true}}]}
-
---- stderr ---
-
-Exit code: 0
-Finished: 2026-10-28T12:35:43.674597+00:00

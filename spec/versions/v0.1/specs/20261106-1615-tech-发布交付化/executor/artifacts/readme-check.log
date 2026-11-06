@@ -1,7 +1,0 @@
-﻿=== README 口径检查 ===
-Command: Select-String -Path README.md -Pattern '<internal terms>' ; -Pattern 'CABLE Output|VB-CABLE' ; -Pattern 'Artemis Microphone'
-Timestamp: 2026-11-06T17:31:51+08:00
-internal-term matches: 0
-cable matches: 3
-microphone-device matches: 0
-Exit code: 0

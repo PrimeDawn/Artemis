@@ -1,12 +1,0 @@
-=== emulator-environment-install Run ===
-Command: python .cache/install-emulator-env.py
-Timestamp: 2026-10-28T10:41:04.019306+00:00
-
-
-{"sdkmanagerExitCode": 0, "installed": {"emulator/emulator.exe": true, "system-images/android-29/default/x86_64/package.xml": true, "system-images/android-36/google_apis_ps16k/x86_64/package.xml": true}, "licenseHandling": "Existing accepted licenses only; no yes/accept input supplied."}
-
---- stderr ---
-
-
-Exit code: 0
-Finished: 2026-10-28T10:47:53.937424+00:00

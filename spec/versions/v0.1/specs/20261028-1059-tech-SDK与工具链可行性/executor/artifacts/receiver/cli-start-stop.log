@@ -1,5 +1,0 @@
-=== CLI local self-check Run ===
-Command: PORT=0 node receiver/dist/src/cli.js
-Timestamp: 2026-10-28T06:13:28.0127179+00:00
-{"event":"receiver_started","host":"127.0.0.1","port":65044}
-Exit code: -1

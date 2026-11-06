@@ -1,9 +1,0 @@
-=== usb-runtime-attempt-1 Run ===
-Command: python tests/android-runtime-smoke.py --sdk-root %USERPROFILE%\AppData\Local\Android\Sdk --report-dir spec/versions/v0.1/specs/20261028-1059-tech-SDK与工具链可行性/tester/artifacts/test-logs/20261028-175651-usb/runtime-attempt-1 --wait-seconds 30
-Timestamp: 2026-10-28T10:00:37.434510+00:00
-{"verifiedAt": "2026-10-28T10:01:07.930282+00:00", "status": "not-run", "reason": "No single authorized USB device is available", "cases": [{"id": "TC-D1", "status": "not-run", "reason": "USB debug connection not ready"}, {"id": "TC-D2", "status": "not-run", "reason": "USB debug connection not ready"}, {"id": "TC-D3", "status": "not-run", "reason": "USB debug connection not ready"}]}
-
---- stderr ---
-
-Exit code: 2
-Finished: 2026-10-28T10:01:07.937598+00:00

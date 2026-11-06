@@ -1,5 +1,0 @@
-﻿=== Control page browser E2E (installed Edge) ===
-Command: node tests/pairing-web-e2e.mjs --report-dir .cache/tester-web-e2e
-Timestamp: 2026-11-01T11:31:49.2972051+08:00
-{"scope":"real installed Chromium browser E2E","passed":true,"cases":4,"error":null}
-Exit code: 0

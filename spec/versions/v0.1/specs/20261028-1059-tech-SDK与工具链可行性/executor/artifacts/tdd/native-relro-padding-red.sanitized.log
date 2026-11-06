@@ -1,31 +1,0 @@
-=== native-relro-padding-red Run ===
-Command: python scripts/tests/test_verify_native_libs.py
-Timestamp: 2026-10-28T06:10:21.763870+00:00
-
---- stderr ---
-test_16kb_load_passes (__main__.NativeChecks.test_16kb_load_passes) ... ok
-test_4kb_load_fails (__main__.NativeChecks.test_4kb_load_fails) ... ok
-test_corrupt_elf_fails (__main__.NativeChecks.test_corrupt_elf_fails) ... ok
-test_isolated_relro_load_is_valid_even_with_nonzero_end_modulo (__main__.NativeChecks.test_isolated_relro_load_is_valid_even_with_nonzero_end_modulo) ... ok
-test_missing_64bit_abi_fails (__main__.NativeChecks.test_missing_64bit_abi_fails) ... ok
-test_missing_archive_input_fails (__main__.NativeChecks.test_missing_archive_input_fails) ... ok
-test_relro_padding_after_a_dedicated_load_is_safe (__main__.NativeChecks.test_relro_padding_after_a_dedicated_load_is_safe) ... FAIL
-test_relro_padding_must_not_protect_another_writable_load (__main__.NativeChecks.test_relro_padding_must_not_protect_another_writable_load) ... ok
-test_shared_relro_end_must_be_16kb_aligned (__main__.NativeChecks.test_shared_relro_end_must_be_16kb_aligned) ... ok
-
-======================================================================
-FAIL: test_relro_padding_after_a_dedicated_load_is_safe (__main__.NativeChecks.test_relro_padding_after_a_dedicated_load_is_safe)
-----------------------------------------------------------------------
-Traceback (most recent call last):
-  File "%PROJECT_ROOT%\scripts\tests\test_verify_native_libs.py", line 80, in test_relro_padding_after_a_dedicated_load_is_safe
-    self.assertEqual(code, 0)
-    ~~~~~~~~~~~~~~~~^^^^^^^^^
-AssertionError: 1 != 0
-
-----------------------------------------------------------------------
-Ran 9 tests in 1.273s
-
-FAILED (failures=1)
-
-Exit code: 1
-Finished: 2026-10-28T06:10:23.185732+00:00

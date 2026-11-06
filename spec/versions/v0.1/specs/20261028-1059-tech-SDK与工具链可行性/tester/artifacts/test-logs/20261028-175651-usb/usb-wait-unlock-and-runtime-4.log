@@ -1,9 +1,0 @@
-=== usb-wait-unlock-and-runtime-4 Run ===
-Command: python .cache/wait-for-artemis-unlock.py
-Timestamp: 2026-10-28T10:10:57.890456+00:00
-USB phone remains locked; no unlock or keyguard-dismiss command was issued.
-
---- stderr ---
-
-Exit code: 2
-Finished: 2026-10-28T10:11:44.035802+00:00

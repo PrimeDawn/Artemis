@@ -1,7 +1,0 @@
-Command: E:\Dev\miniconda\python.exe tests/android-runtime-smoke.py --sdk-root E:\Dev\Artemis\Android\Sdk --report-dir %PROJECT_ROOT%\spec\versions\v0.1\specs\20261028-1059-tech-SDK与工具链可行性\tester\artifacts\test-logs\20261028-195438-relocation\api36-final\runtime --device-kind emulator --expected-api 36 --expected-page-size 16384
-Timestamp: 2026-10-28T12:12:13.111964+00:00
-{"startedAt": "2026-10-28T12:12:15.729655+00:00", "device": {"id": "emulator-device-1", "kind": "emulator", "manufacturer": "Google", "model": "sdk_gphone16k_x86_64", "android": "16", "api": "36", "abi": "x86_64", "pageSize": "16384"}, "cases": [], "scope": "The current built APK on one authorized device; no other system version is inferred.", "artifacts": [{"path": "android/app/build/outputs/apk/debug/app-debug.apk", "bytes": 74654500, "sha256": "c57bc1be8329a9fc50d1258b43a0cf78d0451be78be37c0388bf684a01f8816a"}, {"path": "android/app/build/outputs/apk/androidTest/debug/app-debug-androidTest.apk", "bytes": 813165, "sha256": "0a309ae74a4a68a8c31320e4d63f62164e735083b86c73ec98dd36cc945b5d65"}], "installation": "Both APKs installed in this run", "jniPassed": true, "status": "fail", "error": "AssertionError: Expected Artemis UI text absent: Artemis", "finishedAt": "2026-10-28T12:12:43.875652+00:00"}
-
-
-Exit code: 1
-Finished: 2026-10-28T12:12:43.887758+00:00

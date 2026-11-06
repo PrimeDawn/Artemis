@@ -1,9 +1,0 @@
-=== tester-apk-metadata-2 Run ===
-Command: python .cache/inspect-built-apk.py --aapt %USERPROFILE%/AppData/Local/Android/Sdk/build-tools/36.0.0/aapt.exe --report spec/versions/v0.1/specs/20261028-1059-tech-SDK与工具链可行性/tester/artifacts/test-logs/20261028-144342/build-2-apk.json
-Timestamp: 2026-10-28T06:56:47.220100+00:00
-{"verifiedAt": "2026-10-28T06:56:47.323001+00:00", "aaptExitCode": 0, "apkPath": "android/app/build/outputs/apk/debug/app-debug.apk", "bytes": 74654500, "sha256": "c57bc1be8329a9fc50d1258b43a0cf78d0451be78be37c0388bf684a01f8816a", "metadata": {"package": "io.github.primedawn.artemis", "minSdk": "29", "targetSdk": "36", "versionName": "0.1.0-dev", "permissions": ["io.github.primedawn.artemis.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION"]}, "abis": ["arm64-v8a", "armeabi-v7a", "x86", "x86_64"], "passed": true}
-
---- stderr ---
-
-Exit code: 0
-Finished: 2026-10-28T06:56:47.380840+00:00

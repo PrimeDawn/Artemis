@@ -1,9 +1,0 @@
-=== emulator-package-observation-explicit-root Run ===
-Command: python .cache/emulator-package-observation.py --sdk-root %USERPROFILE%/AppData/Local/Android/Sdk
-Timestamp: 2026-10-28T10:50:28.429357+00:00
-{"verifiedAt": "2026-10-28T10:50:28.554740+00:00", "packages": [{"path": "emulator", "revision": {"major": 37, "minor": 2, "micro": 12}, "licenseRef": "android-sdk-license"}, {"path": "system-images;android-29;default;x86_64", "revision": {"major": 8}, "licenseRef": "android-sdk-license"}, {"path": "system-images;android-36;google_apis_ps16k;x86_64", "revision": {"major": 7}, "licenseRef": "android-sdk-license"}], "configuration": "AVDs are local project cache entries; no Windows feature change or reboot was performed."}
-
---- stderr ---
-
-Exit code: 0
-Finished: 2026-10-28T10:50:28.561353+00:00

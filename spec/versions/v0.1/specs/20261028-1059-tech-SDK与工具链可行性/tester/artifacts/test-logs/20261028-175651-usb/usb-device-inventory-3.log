@@ -1,9 +1,0 @@
-=== usb-device-inventory-3 Run ===
-Command: python tests/android-device-probe.py --sdk-root %USERPROFILE%\AppData\Local\Android\Sdk --report-dir spec/versions/v0.1/specs/20261028-1059-tech-SDK与工具链可行性/tester/artifacts/test-logs/20261028-175651-usb/device-3
-Timestamp: 2026-10-28T10:04:14.043706+00:00
-{"verifiedAt": "2026-10-28T10:04:14.524962+00:00", "adbExitCode": 0, "devices": [{"id": "device-1", "state": "device", "model": "SM-S9210", "api": "36", "abi": "arm64-v8a", "pageSize": "4096"}], "cases": [{"id": "TC-D1", "status": "available", "devices": ["device-1"], "reason": "Device available; runtime test still required"}, {"id": "TC-D2", "status": "not-run", "devices": [], "reason": "No authorized API29 device or emulator is connected"}, {"id": "TC-D3", "status": "not-run", "devices": [], "reason": "No authorized 16KB device or emulator is connected"}], "privacy": "Complete ADB serial identifiers were kept only in process memory and not persisted."}
-
---- stderr ---
-
-Exit code: 0
-Finished: 2026-10-28T10:04:14.531133+00:00

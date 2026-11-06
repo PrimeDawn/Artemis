@@ -1,83 +1,0 @@
-=== native-checker-red-assertions Run ===
-Command: python scripts/tests/test_verify_native_libs.py
-Timestamp: 2026-10-28T06:03:02.877361+00:00
-
---- stderr ---
-test_16kb_load_passes (__main__.NativeChecks.test_16kb_load_passes) ... FAIL
-test_4kb_load_fails (__main__.NativeChecks.test_4kb_load_fails) ... FAIL
-test_corrupt_elf_fails (__main__.NativeChecks.test_corrupt_elf_fails) ... FAIL
-test_isolated_relro_load_is_valid_even_with_nonzero_end_modulo (__main__.NativeChecks.test_isolated_relro_load_is_valid_even_with_nonzero_end_modulo) ... FAIL
-test_missing_64bit_abi_fails (__main__.NativeChecks.test_missing_64bit_abi_fails) ... FAIL
-test_missing_archive_input_fails (__main__.NativeChecks.test_missing_archive_input_fails) ... FAIL
-test_shared_relro_end_must_be_16kb_aligned (__main__.NativeChecks.test_shared_relro_end_must_be_16kb_aligned) ... FAIL
-
-======================================================================
-FAIL: test_16kb_load_passes (__main__.NativeChecks.test_16kb_load_passes)
-----------------------------------------------------------------------
-Traceback (most recent call last):
-  File "%PROJECT_ROOT%\scripts\tests\test_verify_native_libs.py", line 53, in test_16kb_load_passes
-    self.assertEqual(len(report['libraries']), 2)
-    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-AssertionError: 0 != 2
-
-======================================================================
-FAIL: test_4kb_load_fails (__main__.NativeChecks.test_4kb_load_fails)
-----------------------------------------------------------------------
-Traceback (most recent call last):
-  File "%PROJECT_ROOT%\scripts\tests\test_verify_native_libs.py", line 57, in test_4kb_load_fails
-    self.assertEqual(code, 1)
-    ~~~~~~~~~~~~~~~~^^^^^^^^^
-AssertionError: 0 != 1
-
-======================================================================
-FAIL: test_corrupt_elf_fails (__main__.NativeChecks.test_corrupt_elf_fails)
-----------------------------------------------------------------------
-Traceback (most recent call last):
-  File "%PROJECT_ROOT%\scripts\tests\test_verify_native_libs.py", line 72, in test_corrupt_elf_fails
-    self.assertEqual(self.run_case(corrupt=True)[0], 1)
-    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-AssertionError: 0 != 1
-
-======================================================================
-FAIL: test_isolated_relro_load_is_valid_even_with_nonzero_end_modulo (__main__.NativeChecks.test_isolated_relro_load_is_valid_even_with_nonzero_end_modulo)
-----------------------------------------------------------------------
-Traceback (most recent call last):
-  File "%PROJECT_ROOT%\scripts\tests\test_verify_native_libs.py", line 68, in test_isolated_relro_load_is_valid_even_with_nonzero_end_modulo
-    self.assertEqual(len(report['libraries']), 2)
-    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-AssertionError: 0 != 2
-
-======================================================================
-FAIL: test_missing_64bit_abi_fails (__main__.NativeChecks.test_missing_64bit_abi_fails)
-----------------------------------------------------------------------
-Traceback (most recent call last):
-  File "%PROJECT_ROOT%\scripts\tests\test_verify_native_libs.py", line 75, in test_missing_64bit_abi_fails
-    self.assertEqual(self.run_case(omit='x86_64')[0], 1)
-    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-AssertionError: 0 != 1
-
-======================================================================
-FAIL: test_missing_archive_input_fails (__main__.NativeChecks.test_missing_archive_input_fails)
-----------------------------------------------------------------------
-Traceback (most recent call last):
-  File "%PROJECT_ROOT%\scripts\tests\test_verify_native_libs.py", line 78, in test_missing_archive_input_fails
-    self.assertEqual(self.run_case(no_input=True)[0], 1)
-    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-AssertionError: 0 != 1
-
-======================================================================
-FAIL: test_shared_relro_end_must_be_16kb_aligned (__main__.NativeChecks.test_shared_relro_end_must_be_16kb_aligned)
-----------------------------------------------------------------------
-Traceback (most recent call last):
-  File "%PROJECT_ROOT%\scripts\tests\test_verify_native_libs.py", line 61, in test_shared_relro_end_must_be_16kb_aligned
-    self.assertEqual(self.run_case(relro='unsafe')[0], 1)
-    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-AssertionError: 0 != 1
-
-----------------------------------------------------------------------
-Ran 7 tests in 0.682s
-
-FAILED (failures=7)
-
-Exit code: 1
-Finished: 2026-10-28T06:03:03.703623+00:00

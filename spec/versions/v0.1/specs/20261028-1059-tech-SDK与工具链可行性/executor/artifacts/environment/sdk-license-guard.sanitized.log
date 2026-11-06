@@ -1,13 +1,0 @@
-=== sdk-license-guard Run ===
-Command: powershell -NoProfile -File scripts/bootstrap-android-sdk.ps1 -SdkRoot %USERPROFILE%/AppData/Local/Android/Sdk
-Timestamp: 2026-10-28T05:53:02.692265+00:00
-
---- stderr ---
-%PROJECT_ROOT%\scripts\bootstrap-android-sdk.ps1 : Android SDK licenses are not accepted. Review the official agr
-eement and run sdkmanager --licenses explicitly; this script does not accept it for you.
-    + CategoryInfo          : NotSpecified: (:) [Write-Error], WriteErrorException
-    + FullyQualifiedErrorId : Microsoft.PowerShell.Commands.WriteErrorException,bootstrap-android-sdk.ps1
- 
-
-Exit code: 2
-Finished: 2026-10-28T05:53:03.017796+00:00

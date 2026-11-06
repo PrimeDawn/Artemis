@@ -1,9 +1,0 @@
-=== adb-isolated-stop Run ===
-Command: E:\Dev\Artemis\Android\Sdk\platform-tools\adb.exe kill-server
-Timestamp: 2026-10-28T12:09:45.513877+00:00
-
---- stderr ---
-cannot connect to daemon at tcp:127.0.0.1:5038: cannot connect to 127.0.0.1:5038: 由于目标计算机积极拒绝，无法连接。 (10061)
-
-Exit code: 0
-Finished: 2026-10-28T12:09:47.582867+00:00

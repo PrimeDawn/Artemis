@@ -1,15 +1,0 @@
-=== emulator-acceleration-probe Run ===
-Command: python .cache/emulator-setup-task.py acceleration
-Timestamp: 2026-10-28T10:44:59.578033+00:00
-accel:
-0
-WHPX(10.0.26200) is installed and usable.
-accel
-
-
-{"task": "acceleration", "childExitCode": 0}
-
---- stderr ---
-
-Exit code: 0
-Finished: 2026-10-28T10:44:59.908141+00:00

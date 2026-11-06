@@ -1,8 +1,0 @@
-=== adb-isolated-stop-home-final Run ===
-Command: E:\Dev\Artemis\Android\Sdk\platform-tools\adb.exe kill-server
-Timestamp: 2026-10-28T12:15:23.550927+00:00
-
---- stderr ---
-
-Exit code: 0
-Finished: 2026-10-28T12:15:23.590026+00:00

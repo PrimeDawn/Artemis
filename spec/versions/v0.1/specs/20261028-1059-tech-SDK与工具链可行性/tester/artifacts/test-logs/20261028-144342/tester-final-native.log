@@ -1,9 +1,0 @@
-=== tester-final-native Run ===
-Command: python scripts/verify-native-libs.py --apk android/app/build/outputs/apk/debug/app-debug.apk --report spec/versions/v0.1/specs/20261028-1059-tech-SDK与工具链可行性/tester/artifacts/test-logs/20261028-144342/native-apk.json
-Timestamp: 2026-10-28T06:56:47.464807+00:00
-{"passed": true, "libraries": 8, "errors": []}
-
---- stderr ---
-
-Exit code: 0
-Finished: 2026-10-28T06:56:47.645825+00:00

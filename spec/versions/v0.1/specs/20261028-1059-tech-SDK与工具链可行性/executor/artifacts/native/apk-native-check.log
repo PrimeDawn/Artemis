@@ -1,9 +1,0 @@
-=== apk-native-check Run ===
-Command: python scripts/verify-native-libs.py --apk android/app/build/outputs/apk/debug/app-debug.apk --report spec/versions/v0.1/specs/20261028-1059-tech-SDK与工具链可行性/executor/artifacts/native/apk-check-build-1.json
-Timestamp: 2026-10-28T06:09:00.211431+00:00
-{"passed": false, "libraries": 8, "errors": []}
-
---- stderr ---
-
-Exit code: 1
-Finished: 2026-10-28T06:09:00.410562+00:00

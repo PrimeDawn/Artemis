@@ -1,8 +1,0 @@
-{
-  "createdAt": "2026-10-28T12:50:36.566306+00:00",
-  "original": "spec/versions/v0.1/specs/20261028-1059-tech-SDK与工具链可行性/tester/artifacts/test-logs/20261028-184012-emulator/emulator-package-observation.portable.log",
-  "originalSha256": "c07785b815fc72603d4ce0dc947a24188cdb9f6f4b5fc068fdd33f01a1c34403",
-  "portable": "spec/versions/v0.1/specs/20261028-1059-tech-SDK与工具链可行性/tester/artifacts/test-logs/20261028-184012-emulator/emulator-package-observation.portable-v2.log",
-  "portableSha256": "f3c8df1ea63612538eb3f7a19e05ef2c8f08bf2e20ffd6caca2d97f2f7030931",
-  "operation": "Second derivative replaces escaped user root strings only; original and historical map remain byte-identical locally."
-}

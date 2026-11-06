@@ -1,9 +1,0 @@
-=== aar-native-inspection Run ===
-Command: python scripts/verify-native-libs.py --aar %USERPROFILE%/.codex/visualizations/2026/10/28/01a18039-bc65-7d70-a62e-dd82e702130c/sdk-toolchain-cache/android-150.7871.01.aar --report spec/versions/v0.1/specs/20261028-1059-tech-SDK与工具链可行性/executor/artifacts/native/aar-check.json
-Timestamp: 2026-10-28T06:04:28.366551+00:00
-{"passed": true, "libraries": 4, "errors": []}
-
---- stderr ---
-
-Exit code: 0
-Finished: 2026-10-28T06:04:28.551931+00:00
