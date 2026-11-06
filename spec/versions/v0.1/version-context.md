@@ -1,10 +1,10 @@
 ---
 version: v0.1
-status: 验收中
+status: 已发布
 created: 2026-10-28
 updated: 2026-11-07
 target_freeze_date: 2026-11-07（冻结提交 99d87bb）
-target_release_date: 2026-11-07（候选 Tag v0.1.0）
+target_release_date: 2026-11-07（已发布 Tag v0.1.0）
 owner: TeamLead
 base_branch: dev
 planned_release: v0.1.0
@@ -152,7 +152,7 @@ Spec2的自动发现、电脑单击选手机、首次允许后持久信任、无
 3. 核心验收：OBS 能枚举 `Artemis Camera` 并录出画面；装有受支持虚拟声卡时，音频输出到该跳板且其采集端能收到手机麦克风声音，未装则如实记「音频不可用」并说明原因。保留离线功能并检查无公网依赖。按 D-006，实际断公网运行不纳入本轮必测门禁，报告明确“未实测”。
 4. 延迟、同步等数据如未达到产品目标，保留差距、处理方案并取得用户明确处置结论，不能宣称已达标。
 5. 设备层或媒体链路的关键可行性验证失败时，暂停、记录失败证据并重订路线，不静默降级为浏览器源方案。
-6. 达到本研究里程碑验收后，才由 version-release 进行集成验收和实验版发布；预期首个发布 Tag 为 v0.1.0，本次不打 Tag。
+6. 达到本研究里程碑验收后，才由 version-release 进行集成验收和实验版发布；预期首个发布 Tag 为 v0.1.0（已于 2026-11-07 发布，见文末「发布记录」）。
 7. 1.0.0 稳定发布、完整交互、多设备兼容和全部一期稳定性验收不在本版本内。
 
 ## 6. 范围变更记录
@@ -197,6 +197,17 @@ Spec2的自动发现、电脑单击选手机、首次允许后持久信任、无
 | D-015 | 开发流程资产如何移出发布仓库：A 拆开发仓+发布仓 / B main 改孤儿历史 / C 挪到仓库外本地目录 / D 发行时不带 spec 目录 | D：单仓库；`dev` 保留全部流程资产，发布线（导出树、`main` 与 GitHub Release 资产）只含产品代码、构建脚本、用户文档与许可证 | 用户否决拆仓与仓库外迁：发版时不把 `spec/`、`.agents/`、`.codex/` 带上发布线即可；不重写历史、不做双向同步。同轮确认安装器用 Inno Setup 6、本地脚本构建、本机卸载后全新安装验收、分发走 GitHub Releases 附件（用户原话「这个安装包不算大」「整这么麻烦干什么」） | user | 2026-11-06 |
 
 
+## 发布记录（2026-11-07）
+
+- 状态：**已发布**
+- 发布 Tag：`v0.1.0`（注释 Tag，打在主干合并提交 `7da2328` 上）
+- 主干合并：PR [#10](https://github.com/PrimeDawn/Artemis/pull/10)，`release/v0.1` → `main`，合并时间 2026-11-07T00:30:54+08:00
+- 提测冻结提交：`440569b`（`dev`）
+- 全量回归：`release/v0.1` @ `440569b`，receiver 67 pass / 0 fail、JVM BUILD SUCCESSFUL、native BUILD OK、发版构建 exit 0、APK 签名校验通过
+- 端到端冒烟：装包 → 配对（trusted=true）→ OBS 录制 12.00 秒 / 720p30 / YAVG 61.9 → 卸载 0 残留
+- 产物：`Artemis-Setup-0.1.0.exe`（63.4 MB，sha256 `7a5cb5ca…a0b135`）、`Artemis-0.1.0.apk`（67.5 MB，sha256 `dbfb8a4d…66a9747`）
+- 发版报告：[releases/v0.1.0/release-report.html](releases/v0.1.0/release-report.html)
+- 回流：`release/v0.1` 已快进合回 `dev`（`2264341`），提测期无 fix 分支
 ## 提测冻结（2026-11-07）
 
 - 冻结时间：2026-11-07T00:30+08:00（本地）
