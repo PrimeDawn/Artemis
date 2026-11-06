@@ -1,10 +1,10 @@
 ---
 version: v0.1
-status: 执行中
+status: 验收中
 created: 2026-10-28
 updated: 2026-11-07
-target_freeze_date: 待定
-target_release_date: 待定
+target_freeze_date: 2026-11-07（冻结提交 99d87bb）
+target_release_date: 2026-11-07（候选 Tag v0.1.0）
 owner: TeamLead
 base_branch: dev
 planned_release: v0.1.0
@@ -197,6 +197,13 @@ Spec2的自动发现、电脑单击选手机、首次允许后持久信任、无
 | D-015 | 开发流程资产如何移出发布仓库：A 拆开发仓+发布仓 / B main 改孤儿历史 / C 挪到仓库外本地目录 / D 发行时不带 spec 目录 | D：单仓库；`dev` 保留全部流程资产，发布线（导出树、`main` 与 GitHub Release 资产）只含产品代码、构建脚本、用户文档与许可证 | 用户否决拆仓与仓库外迁：发版时不把 `spec/`、`.agents/`、`.codex/` 带上发布线即可；不重写历史、不做双向同步。同轮确认安装器用 Inno Setup 6、本地脚本构建、本机卸载后全新安装验收、分发走 GitHub Releases 附件（用户原话「这个安装包不算大」「整这么麻烦干什么」） | user | 2026-11-06 |
 
 
+## 提测冻结（2026-11-07）
+
+- 冻结时间：2026-11-07T00:30+08:00（本地）
+- 冻结提交：`99d87bb`（`dev` 上 8 个 Spec 全部合入后的 HEAD）
+- 入版 Spec：SPEC-sdk-toolchain、SPEC-offline-pairing、SPEC-app-refactor、SPEC-device-layer、SPEC-phone-media、SPEC-audio-device、SPEC-validation-baseline、SPEC-release-package（均 `done·已原位归档`）
+- 提测分支：`release/v0.1`；期间只接受针对本版本的缺陷修复（`fix/*`）
+- 发布 Tag 候选：`v0.1.0`；主干为 `main`
 ## 8. AWR 映射与接续
 
 - 版本目标键：goal#artemis-v0.1（GOALS.md）。
