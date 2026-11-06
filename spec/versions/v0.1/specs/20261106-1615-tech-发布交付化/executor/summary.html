@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>实现总结 - 发布交付化（SPEC-release-package）</title>
+
+<meta name="rk:type"        content="summary">
+<meta name="rk:version"     content="v0.1">
+<meta name="rk:spec-dir"    content="spec/versions/v0.1/specs/20261106-1615-tech-发布交付化">
+<meta name="rk:role"        content="spec-executor">
+<meta name="rk:mode"        content="gated">
+<meta name="rk:title"       content="发布交付化-实现总结">
+<meta name="rk:category"    content="tech">
+<meta name="rk:status"      content="未确认">
+<meta name="rk:created"     content="2026-11-06">
+<meta name="rk:updated"     content="2026-11-06">
+<meta name="rk:revision"    content="3">
+<meta name="rk:git-branch"  content="tech/spec-20261106-1615-release-package">
+<meta name="rk:base-branch" content="dev">
+<meta name="rk:pr-url"      content="">
+<meta name="rk:tags"        content="spec,summary,release">
+<link rel="rk-plan"   href="../writer/plan.html">
+<link rel="rk-ledger" href="../lead/team-context.md">
+
+<link rel="stylesheet" href="../../../../../../html-report/assets/rk-report.css">
+<script defer src="../rk-manifest.js"></script>
+<script defer src="../../../../../../html-report/assets/rk-report.js"></script>
+</head>
+<body>
+
+<nav class="rk-nav"></nav>
+
+<header class="rk-head">
+  <h1>实现总结：发布交付化</h1>
+  <div class="rk-meta">
+    <span><b>类型</b> summary</span>
+    <span><b>版本</b> <code>v0.1</code></span>
+    <span><b>Spec</b> <code>spec/versions/v0.1/specs/20261106-1615-tech-发布交付化</code></span>
+    <span><b>角色</b> spec-executor</span>
+    <span><b>分类</b> tech</span>
+    <span><b>状态</b> 未确认</span>
+    <span><b>分支</b> <code>tech/spec-20261106-1615-release-package</code> ← <code>dev</code></span>
+    <span><b>PR</b> —</span>
+    <span><b>创建</b> 2026-11-06</span>
+    <span><b>修订</b> r3（2026-11-06）</span>
+  </div>
+</header>
+
+<nav class="rk-revbar"></nav>
+
+<section class="rk-verdict">
+  <div class="rk-verdict-label">实现结论</div>
+  <p>plan 的 7 个任务全部完成，并已在本机走通一次<b>安装 → 采集服务启动 → 卸载</b>：安装包 63.4 MB、APK 67.5 MB，二者都从一次 <code>scripts/build-release.ps1</code> 产出；证书签发不再调用任何外部程序，接收服务单元测试 66 项全通过。唯一没有在本机复现的是「OBS 实际采集画面」——需要手机接入，留给 spec-tester。</p>
+</section>
+
+<h2>修订历史</h2>
+<table class="rk-revs">
+  <thead><tr><th>修订</th><th>日期</th><th>修改人</th><th>改了什么</th><th>原因</th></tr></thead>
+  <tbody>
+    <tr><td>r1</td><td>2026-11-06</td><td>spec-executor</td><td>初版</td><td>—</td></tr>
+    <tr><td>r2</td><td>2026-11-06</td><td>spec-executor</td><td>补记测试阶段回修的两处缺陷：卸载顺序（I-011）与端口占用提示（I-012）</td><td>tester 在阶段四发现，按 I-011/I-012 修复并复测</td></tr>
+    <tr><td>r3</td><td>2026-11-06</td><td>spec-executor</td><td>按 D-014 增加应用/托盘/安装器/APK 图标；补记控制页崩溃修复（I-013）与托盘日志重定向（I-014）</td><td>用户要求补图标；I-013/I-014 为测试期间发现并修复</td></tr>
+  </tbody>
+</table>
+
+<h2>1. 完成的功能</h2>
+<table>
+  <thead><tr><th>功能</th><th>plan 章节</th><th>实现位置</th><th>状态</th></tr></thead>
+  <tbody>
+    <tr><td>纯 JS 签发自签证书（无 openssl）</td><td>§3.2</td><td><span class="rk-ref">receiver/src/cert.ts:1</span></td><td>已完成</td></tr>
+    <tr><td>身份流程改用它，删除 <code>opensslPath</code></td><td>§3.2.3</td><td><span class="rk-ref">receiver/src/identity.ts:22</span></td><td>已完成</td></tr>
+    <tr><td>启动脚本不再探测 openssl，改用随包 Node</td><td>§3.5 任务 2</td><td><span class="rk-ref">tools/start-artemis.ps1:37</span></td><td>已完成</td></tr>
+    <tr><td>托盘进程管家 <code>Artemis.exe</code></td><td>§3.3</td><td><span class="rk-ref">native/tray/main.cpp:1</span></td><td>已完成</td></tr>
+    <tr><td>逐用户安装包（注册/反注册过滤器）</td><td>§3.4</td><td><span class="rk-ref">installer/artemis.iss:1</span></td><td>已完成</td></tr>
+    <tr><td>一键构建（receiver → native → APK → stage → 安装包）</td><td>§3.5</td><td><span class="rk-ref">scripts/build-release.ps1:1</span></td><td>已完成</td></tr>
+    <tr><td>发布线导出与泄漏自检</td><td>§3.5</td><td><span class="rk-ref">scripts/export-release.ps1:1</span></td><td>已完成</td></tr>
+    <tr><td>APK release 签名与版本号 0.1.0</td><td>§3.6</td><td><span class="rk-ref">android/app/build.gradle.kts:42</span></td><td>已完成</td></tr>
+    <tr><td>图标：exe/托盘/安装器/APK（D-014）</td><td>§3.1</td><td><span class="rk-ref">native/tray/Artemis.rc:1</span></td><td>已完成</td></tr>
+    <tr><td>README 重写 + 两份用户文档 + MIT LICENSE</td><td>§3.7</td><td><span class="rk-ref">README.md:1</span></td><td>已完成</td></tr>
+  </tbody>
+</table>
+
+<h2>2. 变更的文件</h2>
+<table>
+  <thead><tr><th>文件</th><th>变更类型</th><th>说明</th></tr></thead>
+  <tbody>
+    <tr><td><code>receiver/src/cert.ts</code></td><td>新增</td><td>用 <code>@peculiar/x509</code> 在进程内签发带 IP SAN 的 P-256 自签证书</td></tr>
+    <tr><td><code>receiver/test/cert.test.ts</code></td><td>新增</td><td>5 项：签发可验证、SAN 命中/不命中、30 天有效期、同钥重签改序列号、非法 IP 与非 P-256 密钥拒绝</td></tr>
+    <tr><td><code>receiver/src/identity.ts</code></td><td>修改</td><td><code>issue()</code> 改为调用 cert 模块；<code>loadOrCreateIdentity()</code> 去掉 openssl 访问检查</td></tr>
+    <tr><td><code>receiver/src/pairing-config.ts</code>、<code>receiver/src/protocol.ts</code></td><td>修改</td><td>删除 <code>opensslPath</code> 字段与解析</td></tr>
+    <tr><td><code>receiver/test/{identity,pairing-server,app-refactor,pairing-config,device-broker,control-http}.test.ts</code></td><td>修改</td><td>移除 openssl 夹具与「需要 vendor OpenSSL」的前置断言</td></tr>
+    <tr><td><code>receiver/src/media-relay.ts</code></td><td>修改</td><td>保活定时器加 <code>unref()</code>，否则 <code>npm test</code> 永不退出</td></tr>
+    <tr><td><code>receiver/package.json</code></td><td>修改</td><td>新增 <code>@peculiar/x509@3.1.0</code>、<code>reflect-metadata@0.2.2</code></td></tr>
+    <tr><td><code>tools/start-artemis.ps1</code></td><td>修改</td><td>删除 openssl 探测与 <code>-OpenSslPath</code>；新增 <code>-NodePath</code> 与 runtime 优先</td></tr>
+    <tr><td><code>native/tray/{main,TrayApp,ProcessManager,NetworkAddress}.cpp/.h</code>、<code>Artemis.manifest</code></td><td>新增</td><td>托盘、进程管家、网卡选择、单实例与 Job 回收</td></tr>
+    <tr><td><code>native/build.ps1</code></td><td>修改</td><td>增加 <code>Artemis.exe</code> 编译目标与产物校验</td></tr>
+    <tr><td><code>android/app/build.gradle.kts</code></td><td>修改</td><td>release signingConfig（读 <code>android/signing.properties</code>）、<code>versionName=0.1.0</code></td></tr>
+    <tr><td><code>installer/artemis.iss</code></td><td>新增</td><td>逐用户安装、注册/反注册过滤器、卸载前停进程</td></tr>
+    <tr><td><code>scripts/build-release.ps1</code>、<code>scripts/export-release.ps1</code></td><td>新增</td><td>一键构建；发布线导出与 <code>-Verify</code></td></tr>
+    <tr><td><code>LICENSE</code>、<code>licenses/THIRD-PARTY.md</code></td><td>新增</td><td>MIT 全文；随包组件清单与 FFmpeg GPL 义务</td></tr>
+    <tr><td><code>README.md</code></td><td>重写</td><td>使用者口径：安装、首次连接、OBS、音频、排障、卸载、限制</td></tr>
+    <tr><td><code>docs/user/{audio-vbcable,troubleshooting}.md</code></td><td>新增</td><td>VB-CABLE 对应关系；高频故障排查</td></tr>
+    <tr><td><code>docs/*.md</code>（6 份开发文档）</td><td>修改</td><td>加「开发文档，不随发布包分发」标注</td></tr>
+    <tr><td><code>.gitignore</code></td><td>修改</td><td>忽略 <code>android/signing.properties</code></td></tr>
+  </tbody>
+</table>
+
+<h2>3. 自检结果</h2>
+<div class="rk-kpis">
+  <div class="rk-kpi is-pass"><div class="v">7</div><div class="k">已实现任务</div></div>
+  <div class="rk-kpi is-pass"><div class="v">66</div><div class="k">接收服务单测通过</div></div>
+  <div class="rk-kpi"><div class="v">0</div><div class="k">未实现功能</div></div>
+</div>
+<table>
+  <thead><tr><th>检查</th><th>命令</th><th>结果</th><th>证据</th></tr></thead>
+  <tbody>
+    <tr><td>证书模块红灯</td><td><code>node --test dist/test/cert.test.js</code></td><td>3 fail / 2 pass，失败信息 <code>cert: not implemented</code></td><td><code>executor/artifacts/tdd-red-cert.log</code></td></tr>
+    <tr><td>证书模块绿灯</td><td>同上</td><td>5 pass / 0 fail</td><td><code>executor/artifacts/tdd-green-cert.log</code></td></tr>
+    <tr><td>接收服务全量单测</td><td><code>npm --prefix receiver test</code></td><td>66 pass / 0 fail（退出码 0）</td><td><code>executor/artifacts/tdd-green-receiver-suite.log</code></td></tr>
+    <tr><td>原生构建</td><td><code>.\native\build.ps1</code></td><td>退出码 0，产出 <code>ArtemisCamera.dll</code>/<code>artemis-decode-host.exe</code>/<code>Artemis.exe</code></td><td><code>executor/artifacts/build-native-tray.log</code></td></tr>
+    <tr><td>托盘自检</td><td><code>Artemis.exe --selftest</code></td><td>退出码 0，JSON 含 <code>lanIp=192.168.1.5</code>、<code>controlPort=3000</code></td><td>见「安装验证」日志首段</td></tr>
+    <tr><td>托盘拉起服务</td><td><code>Artemis.exe --console</code> + <code>/healthz</code></td><td>HTTP 200，<code>service=artemis-receiver</code>；强杀后无孤儿子进程</td><td><code>executor/artifacts/tray-console-start.log</code></td></tr>
+    <tr><td>APK 构建</td><td><code>gradlew :app:assembleRelease</code></td><td>BUILD SUCCESSFUL，产出已签名 <code>app-release.apk</code></td><td><code>executor/artifacts/apk-release-build.log</code></td></tr>
+    <tr><td>APK 签名</td><td><code>apksigner verify --print-certs</code></td><td>退出码 0，<code>CN=Artemis Release</code></td><td><code>executor/artifacts/apk-sign-verify.log</code></td></tr>
+    <tr><td>一键构建</td><td><code>.\scripts\build-release.ps1</code></td><td>退出码 0，<code>Artemis-Setup-0.1.0.exe</code> 63.4 MB、<code>Artemis-0.1.0.apk</code> 67.5 MB、<code>SHA256SUMS.txt</code></td><td><code>executor/artifacts/build-release.log</code></td></tr>
+    <tr><td>发布线导出</td><td><code>export-release.ps1 -Target …</code> / <code>-Verify</code></td><td>导出 235 文件；干净目录 verify=0；植入 <code>spec\probe.md</code> 后 verify=1 并指名违规路径</td><td><code>executor/artifacts/export-release.log</code></td></tr>
+    <tr><td>安装 / 卸载</td><td>安装包 <code>/VERYSILENT</code> → 校验 → <code>unins000.exe</code></td><td>安装退出码 0、文件与 CLSID 齐备、安装态 <code>--selftest</code> 指向 <code>app\receiver</code>、<code>--console</code> healthz 200；卸载后程序目录与 CLSID 消失、数据目录保留</td><td><code>executor/artifacts/install-verify.log</code></td></tr>
+    <tr><td>README 口径</td><td><code>Select-String README.md</code></td><td>内部词 0 处、VB-CABLE 3 处、无 <code>Artemis Microphone</code>、相对链接全部可达</td><td><code>executor/artifacts/readme-check.log</code></td></tr>
+  </tbody>
+</table>
+<p>以上均为本机实际运行输出；正式测试与结论由 spec-tester 独立执行，本表不代替测试报告。</p>
+
+<h2>4. 遇到的问题</h2>
+<div class="rk-cal risk" data-rev="2"><div class="t">风险：测试阶段回修的两个缺陷（I-011 / I-012）</div><p>①卸载器先删文件后杀进程，服务运行中卸载会残留 7 个被占用的可执行映像——改为 <code>[Code] CurUninstallStepChanged(usUninstall)</code> 先停进程、等待释放再反注册；②端口被占用时只留一句「service exited」，且 <code>fwprintf</code> 让中文变问号——改为启动前 Winsock 独占探测并按 UTF-8 输出。两处均已复测通过，细节见 <code>tester/test-report.html</code> §3。</p></div>
+<div class="rk-cal warn"><div class="t">注意：<code>npm test</code> 永不退出</div><p>接收服务全量测试会挂死。根因是 <code>media-relay.ts</code> 的保活 <code>setInterval</code> 没有 <code>unref()</code>：生产环境由服务器 socket 维持进程，但单测里没有其它句柄，进程就一直不结束。上一轮收尾是靠 <code>--test-force-exit</code> 绕过的，而该参数在 Windows 上会让 <code>server.test.js</code> 撞上 libuv 断言 <code>!(handle-&gt;flags &amp; UV_HANDLE_CLOSING)</code>。<b>解决方案</b>：给定时器加 <code>unref()</code>，恢复标准 <code>node --test</code>。</p></div>
+<div class="rk-cal warn"><div class="t">注意：托盘拉起子进程失败时留下孤儿</div><p>父进程被强杀后 <code>artemis-decode-host.exe</code> 仍在运行，会占住共享内存与音频设备。<b>解决方案</b>：两个子进程加入同一个 Job Object（<code>JOB_OBJECT_LIMIT_KILL_ON_JOB_CLOSE</code>），托盘退出即整体回收；实测强杀后残留为 0。</p></div>
+<div class="rk-cal warn"><div class="t">注意：网卡选择选中了代理虚拟网卡</div><p>首次 <code>--selftest</code> 返回 <code>198.18.0.1</code>（Clash/WARP 的保留网段），而接收服务只接受 RFC1918 地址，启动必然 <code>E_CONFIG</code>。<b>解决方案</b>：选择逻辑改为「默认路由所在网卡的私有地址 → 任意网卡私有地址 → 默认路由地址」三级回退。</p></div>
+<div class="rk-cal warn"><div class="t">注意：全新账户上数据目录建不出来</div><p><code>%LOCALAPPDATA%\Artemis</code> 这一层在干净账户上不存在，<code>CreateDirectoryW</code> 直接失败（父目录缺失）。<b>解决方案</b>：改用 <code>SHCreateDirectoryExW</code> 逐级创建。</p></div>
+<div class="rk-cal risk"><div class="t">风险：本机沙箱 ACL 让安装包「跑不起来」</div><p>在本会话创建的目录（如仓库内 <code>dist\</code>）会带一条 <code>Everyone:(CI)(DENY)(DC)</code> 的继承 ACE，Inno 的加载器在该目录下无法解包，报 <code>Setup was unable to create the directory …\is-XXXX.tmp</code> 并以退出码 1 结束——同一个 exe 复制到 <code>%TEMP%</code> 后运行正常。这是本机沙箱写出的 ACL 造成的，与安装包本身无关；用户从 Release 页面下载的文件不带该 ACL。安装验证因此改为从 <code>%TEMP%</code> 副本执行。</p></div>
+
+<h2>5. 与设计方案的偏差</h2>
+<div class="rk-cal key"><div class="t">关键决策：<code>licenses/FFmpeg-GPL.txt</code> 改为构建时生成</div><p>plan 的文件清单把它列为新建文件。实际做法是构建脚本从 FFmpeg 发行包的 <code>LICENSE.txt</code> 复制进安装包（仓库里只提交 <code>licenses/THIRD-PARTY.md</code>）。原因：许可证原文属于上游产物，手工复制进仓库既容易过期又多一份副本；由构建步骤取当前实际使用的 FFmpeg 构建的许可证，分发义务才真正对应得上。</p></div>
+<div class="rk-cal key"><div class="t">关键决策：stage 只装生产依赖</div><p>plan 未细化。首次构建把 <code>node_modules</code> 整体复制，安装包 66.4 MB 且带上了 typescript、@types 等构建期包。改为在 stage 内用 <code>npm ci --omit=dev</code> 单独落依赖后，安装包降到 63.4 MB。</p></div>
+<div class="rk-cal key"><div class="t">关键决策：<code>Artemis.exe</code> 用 GUI 子系统 + 按需附加控制台</div><p>托盘程序若是控制台子系统，双击时会闪一个黑框。改为 <code>/SUBSYSTEM:WINDOWS</code> + <code>wWinMain</code>；<code>--selftest</code>/<code>--console</code> 时若输出未被重定向再 <code>AttachConsole</code>，既保证双击无黑框，也保证自动化能拿到 stdout。</p></div>
+
+<h2>6. 后续建议</h2>
+<ul>
+  <li>「OBS 实际采集画面」与「卸载时服务正在运行」两条需要手机与真实采集场景，交 spec-tester 执行；本机只验证到注册表与服务启动。</li>
+  <li>release keystore 目前只在本机（<code>android/artemis-release.jks</code> + <code>android/signing.properties</code>，均已 gitignore）。后续要长期发版就必须备份它，否则无法覆盖升级已安装的 APK。</li>
+  <li><code>dist\</code> 因沙箱 ACL 无法直接运行安装包，建议在本会话外（资源管理器双击或普通终端）复验一次安装体验。</li>
+  <li>Smart App Control 会把未签名安装包拦下来，README 已写明处置方式；正式对外发布前如有预算，代码签名是唯一根本解。</li>
+</ul>
+
+<h2>关联产物</h2>
+<h3>本报告引用</h3>
+<ul class="rk-links">
+  <li><a href="../writer/plan.html" data-rk-link="plan">设计方案</a></li>
+  <li><a href="../explorer/exploration-report.html" data-rk-link="exploration">探索报告</a></li>
+  <li><a href="../lead/team-context.md" data-rk-link="ledger">运行账本</a></li>
+</ul>
+<h3>引用本报告</h3>
+<ul class="rk-backlinks">
+  <li><a href="../tester/test-plan.html" data-rk-backlink="test-plan">测试计划</a></li>
+  <li><a href="../tester/test-report.html" data-rk-backlink="test-report">测试报告</a>（待创建）</li>
+  <li><a href="../reviewer/review.html" data-rk-backlink="review">审查报告</a>（待创建）</li>
+</ul>
+
+</body>
+</html>

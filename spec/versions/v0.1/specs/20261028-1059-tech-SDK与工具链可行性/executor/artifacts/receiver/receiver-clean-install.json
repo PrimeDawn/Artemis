@@ -1,0 +1,14 @@
+{
+  "command": "powershell -NoProfile -Command \"npm.cmd --prefix receiver ci --ignore-scripts --no-audit --no-fund; exit $LASTEXITCODE\"",
+  "startedAt": "2026-10-28T06:11:27.963989+00:00",
+  "finishedAt": "2026-10-28T06:11:29.112455+00:00",
+  "exitCode": 0,
+  "expectedExitCode": 0,
+  "durationSeconds": 1.149,
+  "stdoutSha256": "fcda633df449c38729e1a2096adc0e78aa82ec5bedad68c429a92ed3e979b1e7",
+  "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "log": "receiver-clean-install.log",
+  "redactions": [
+    "personal user-root path"
+  ]
+}

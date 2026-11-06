@@ -2,7 +2,7 @@ work_items:
   - id: ARTEMIS-INTAKE-001
     kind: intake
     title: 完成工作流接入后规划 Artemis 首个技术预研版本
-    status: ready
+    status: completed
     goal: "goal#artemis-v1"
     priority: P0
     required: true
@@ -11,5 +11,233 @@ work_items:
       - 以产品规划.md确认一期目标、边界和验收目标，区分计划与实测结果。
       - 通过version-start规划首个版本，并将M0技术预研拆分为有明确验收标准的Spec。
       - 记录WebRTC SDK、OBS接收、局域网离线直连和配对信任方案的待验证项。
-    next_action: 由用户发起version-start，确定首个版本号、目标与技术预研范围，再通过spec-start启动具体任务。
-    summary: 当前只有产品规划和研发环境；尚无业务实现、音视频测试或产品验收证据。本条不自动启动开发。
+    next_action: 通过spec-start启动SPEC-sdk-toolchain，先完成需求对齐、探索及实现与测试计划确认。
+    summary: v0.1版本计划、4个Spec及依赖已建立，用户已确认本版规划；尚未启动业务Spec。
+    "evidence": ["spec/versions/v0.1/artifacts/plan-validation.json"]
+    "verification": {"evidence_level":"locally_verified"}
+
+  - id: SPEC-sdk-toolchain
+    kind: tech
+    title: SDK 与工具链可行性
+    status: completed
+    goal: "goal#artemis-v0.1"
+    milestone: VERSION-v0.1
+    priority: P0
+    required: true
+    depends_on: []
+    acceptance:
+      - 记录可核验的WebRTC SDK来源、版本、许可证、ABI和Android版本兼容结论。
+      - 按文档可重复构建最小APK并启动PC实验服务，保留命令、环境和结果。
+      - 核验Android原生库页面大小要求，明确未完成的真机验证和阻断。
+    next_action: "已原位归档并合入 dev（PR #1）；后续Spec以本Spec的工具链基线为前置。"
+    summary: "首个SDK工具链Spec已交付并原位归档：19项验收覆盖，迁移后16必测新鲜通过；真实实现提交与三环境同APK证据已核对，经验和项目偏好已维护，PR #1已合并。"
+    tags: [v0.1, tech, m0]
+    paths:
+      - spec/versions/v0.1/specs/20261028-1059-tech-SDK与工具链可行性/lead/team-context.md
+      - spec/versions/v0.1/specs/20261028-1059-tech-SDK与工具链可行性/explorer/exploration-report.html
+      - spec/versions/v0.1/specs/20261028-1059-tech-SDK与工具链可行性/writer/plan.html
+      - spec/versions/v0.1/specs/20261028-1059-tech-SDK与工具链可行性/tester/test-plan.html
+      - spec/versions/v0.1/specs/20261028-1059-tech-SDK与工具链可行性/executor/summary.html
+      - spec/versions/v0.1/specs/20261028-1059-tech-SDK与工具链可行性/tester/test-report.html
+      - docs/validation-followups.md
+      - docs/android-compatibility-testing.md
+      - tests/collect-runtime-matrix.py
+      - spec/versions/v0.1/version-context.md
+      - spec/versions/v0.1/plan.html
+
+    evidence: ["spec/versions/v0.1/specs/20261028-1059-tech-SDK与工具链可行性/tester/test-report.html","spec/versions/v0.1/specs/20261028-1059-tech-SDK与工具链可行性/tester/artifacts/test-logs/20261028-203139-closeout/committed-completion-report.json"]
+    "verification": {"evidence_level":"locally_verified"}
+
+  - id: SPEC-offline-pairing
+    kind: tech
+    title: 离线配对与信令信任
+    status: completed
+    goal: "goal#artemis-v0.1"
+    milestone: VERSION-v0.1
+    priority: P0
+    required: true
+    depends_on:
+      - SPEC-sdk-toolchain
+    acceptance:
+      - 保留无需公网的配对和信令能力；本轮保持公网连接验证局域网配对与信令，检查无公网信令、STUN、TURN或CDN依赖；实际断公网运行记未实测，不作为本轮验收阻断。
+      - 验证首次确认、短期认证挑战/票据时效、撤销和未授权请求拒绝；设备信任及活动连接不设固定期限，知道IP本身不能取得媒体接收权限。
+      - 保留TLS证书信任、二维码绑定或替代信任方案的实测取舍及操作步骤。
+      - 自动发现已打开App的手机并由电脑单击选择，首次手机确认一次、后续重开或服务重启免配对；持久记住身份。
+      - 活动连接与设备信任不设固定到期或空闲期限，故障自动恢复已选设备；主动断开或取消信任后停止重连。
+      - App仅在前台且未锁屏时使用并请求保持常亮；切其他App或锁屏暂停连接与重试，返回App自动恢复原被选且受信的电脑；主动断开或取消信任仍保持停止。
+    next_action: "已原位归档并合入 dev（PR #3）；后续Spec以本Spec的配对/信任基线为前置。"
+    summary: "自动发现、持久信任、授权信令和前台连接恢复已交付并合入 dev；Node43/JVM18/集成44通过，S24同服务连续锁屏解锁通过。真实手机换IP未测，实际断公网排除，媒体属于后续Spec。"
+    tags: [v0.1, tech, m0]
+    paths:
+      - spec/versions/v0.1/specs/20261029-0934-tech-离线配对与信令信任/explorer/exploration-report.html
+      - spec/versions/v0.1/specs/20261029-0934-tech-离线配对与信令信任/writer/plan.html
+      - spec/versions/v0.1/specs/20261029-0934-tech-离线配对与信令信任/tester/test-plan.html
+      - spec/versions/v0.1/specs/20261029-0934-tech-离线配对与信令信任/executor/summary.html
+      - spec/versions/v0.1/specs/20261029-0934-tech-离线配对与信令信任/tester/test-report.html
+      - docs/pairing-phone-retest.md
+      - spec/versions/v0.1/specs/20261029-0934-tech-离线配对与信令信任/lead/team-context.md
+      - spec/versions/v0.1/version-context.md
+      - spec/versions/v0.1/plan.html
+    "evidence": ["spec/versions/v0.1/specs/20261029-0934-tech-离线配对与信令信任/evidence/end-verification.json"]
+    "verification": {"evidence_level":"locally_verified"}
+
+  - id: SPEC-app-refactor
+    kind: tech
+    title: 应用层无感改造
+    status: completed
+    goal: "goal#artemis-v0.1"
+    milestone: VERSION-v0.1
+    priority: P0
+    required: true
+    depends_on:
+      - SPEC-sdk-toolchain
+      - SPEC-offline-pairing
+    acceptance:
+      - 移除 OBS 浏览器源形态：/receiver 页、/api/receiver-tickets、/ws/receiver、signaling 与接收通道相关类型不再存在，且仓库内无残留引用。
+      - 配对、信任、发现、审批、断开、忘记与控制页操作行为不变；手机端 UI 与连接状态提示不退化。
+      - android/ 目录零改动；JVM 单元测试 18 项（17 通过 + 1 跳过）通过；APK 可构建。
+      - receiver 测试保留配对/信任/发现用例通过，删除的接收端用例逐条给出理由。
+      - 产品文档与协议文档口径同步为系统摄像头/麦克风方向。
+    next_action: 已完成并原位归档；后续 Spec 可直接以本 Spec 的配对/信任基线为前置。
+    summary: 已交付并归档：接收端页面/票据/信令通道移除，配对与连接状态不退化，android 零改动；45 项 Node、18 项 JVM、集成 trust/reconnect/limits 与模拟器/真机端到端全部通过。
+    tags: [v0.1, tech, refactor]
+    paths:
+      - spec/versions/v0.1/version-context.md
+      - spec/versions/v0.1/plan.html
+      - spec/versions/v0.1/specs/20261101-1013-tech-应用层无感改造/lead/team-context.md
+    verification: {evidence_level: locally_verified}
+  - id: SPEC-device-layer
+    kind: tech
+    title: Windows 系统摄像头（DirectShow + 共享内存）
+    status: completed
+    goal: "goal#artemis-v0.1"
+    milestone: VERSION-v0.1
+    priority: P0
+    required: true
+    depends_on:
+      - SPEC-app-refactor
+    acceptance:
+      - 64 位 DirectShow 源过滤器从共享内存取帧，输出合成画面。
+      - OBS 能枚举 Artemis Camera 并录制 30 秒回看有画面。
+    next_action: 已完成并原位归档；phone-media 已复用共享内存协议与注册方式。
+    summary: "Windows 系统摄像头设备层已交付并合入 dev：64 位 DirectShow 过滤器 Artemis Camera 从共享内存取帧，OBS 枚举、预览、41 秒录制回看与反注册恢复均通过。仅验证 720p30 与本开发机。"
+    tags: [v0.1, tech, device]
+    paths:
+      - spec/versions/v0.1/version-context.md
+      - spec/versions/v0.1/plan.html
+    verification: {evidence_level: locally_verified}
+  - id: SPEC-phone-media
+    kind: tech
+    title: 手机画面进 OBS（H.264 over TCP）
+    status: completed
+    goal: "goal#artemis-v0.1"
+    milestone: VERSION-v0.1
+    priority: P0
+    required: true
+    depends_on:
+      - SPEC-device-layer
+    acceptance:
+      - 手机 Camera2 + MediaCodec 编码 H.264，经已配对鉴权的 TCP 传输。
+      - Windows 客户端 FFmpeg 解码并写入共享内存，OBS 看到手机实时画面。
+    next_action: 已完成并原位归档；后续音频设备 Spec 复用本 Spec 的媒体通道与配对基线。
+    summary: "手机画面链路已交付并合入 dev：真机 S24 Camera2 + MediaCodec H.264 720p30 经 TLS 媒体通道到 Windows，FFmpeg 解码写共享内存，OBS 实时可见约 30fps；断流保留末帧，解码进程重启约 6 秒恢复。端到端延迟未实测，仅覆盖 720p30。"
+    tags: [v0.1, tech, media]
+    paths:
+      - spec/versions/v0.1/version-context.md
+      - spec/versions/v0.1/plan.html
+    verification: {evidence_level: locally_verified}
+  - id: SPEC-audio-device
+    kind: tech
+    title: 音频输出（用户自备虚拟声卡）
+    status: completed
+    goal: "goal#artemis-v0.1"
+    milestone: VERSION-v0.1
+    priority: P1
+    required: true
+    depends_on:
+      - SPEC-device-layer
+    acceptance:
+      - 手机麦克风音频经独立通道传到 PC，并输出到探测到的 VB-CABLE 渲染端（CABLE Input）；VoiceMeeter 不在本 Spec 范围。
+      - 未安装虚拟声卡时视频照常、音频不可用并明确提示原因；不自研内核驱动、不涉及签名。
+      - 无任何环境装有虚拟声卡，VB-CABLE 的端到端连通性记未实测，由 v0.1.1 验证；VoiceMeeter 由 v0.1.2 验证。
+    next_action: 按 writer/plan.html 实现独立 /audio 通道、手机端 Opus/AAC 采集编码、PC 端解码与 VB-CABLE 端点输出；连通性实测排入 v0.1.1。
+    summary: 由原 SPEC-media-obs 的音频目标拆分而来；2026-11-02 按 D-012 收缩范围，放弃自研驱动与签名。
+    tags: [v0.1, tech, audio]
+    paths:
+      - spec/versions/v0.1/version-context.md
+      - spec/versions/v0.1/plan.html
+
+  - id: SPEC-media-obs
+    kind: tech
+    title: 手机到 OBS 的最小音视频链路（已作废）
+    status: cancelled
+    goal: "goal#artemis-v0.1"
+    milestone: VERSION-v0.1
+    priority: P0
+    required: false
+    depends_on: []
+    acceptance:
+      - 已由 SPEC-phone-media 与 SPEC-audio-device 替代，不再单独验收。
+    next_action: 无；目标已拆分到 SPEC-phone-media 与 SPEC-audio-device。
+    summary: 2026-11-01 方向变更后作废，未启动且无已合并代码。
+    tags: [v0.1, tech, superseded]
+    paths:
+      - spec/versions/v0.1/version-context.md
+      - spec/versions/v0.1/plan.html
+
+  - id: SPEC-validation-baseline
+    kind: tech
+    title: 真机验证基线与复现交付
+    status: completed
+    goal: "goal#artemis-v0.1"
+    milestone: VERSION-v0.1
+    priority: P1
+    required: true
+    depends_on:
+      - SPEC-phone-media
+      - SPEC-audio-device
+    acceptance:
+      - 固定并记录设备和软件环境，保持公网连接完成局域网配对至 OBS 枚举 Artemis Camera 并录出画面的端到端复测；音频只在装有受支持虚拟声卡时验证其采集端可收到手机声音，未装则记音频不可用；保留离线功能，实际断公网运行记未实测，不作为本轮验收阻断。
+      - 单轮总测试预算300秒内实测短时推流及必要的重复启停；长期稳定性以代码/状态机与必要加速边界审查，保留实际结果和未覆盖项，不强制等待10分钟。
+      - 实测延迟与音画偏差并对照300ms和150ms产品目标，超标项明确处置，不记为达标。
+      - 提供可复现实验APK、PC启动步骤、依赖许可证和研究结论；不替代全部一期验收。
+    next_action: 音频设备 Spec 完成后，通过spec-start制定真机验证和实验原型交付方案；启动时复核docs/validation-followups.md中的延期设备项，具备对应环境时补测。
+    summary: v0.1技术预研规划项，尚未启动Spec或业务实现。
+    tags: [v0.1, tech, m0]
+    paths:
+      - spec/versions/v0.1/version-context.md
+      - spec/versions/v0.1/plan.html
+
+  - id: SPEC-release-package
+    kind: tech
+    title: 发布交付化（两个安装包、README、开发流程移出仓库）
+    status: completed
+    goal: "goal#artemis-v0.1"
+    milestone: VERSION-v0.1
+    priority: P0
+    required: true
+    depends_on:
+      - SPEC-validation-baseline
+    acceptance:
+      - 交付 Windows 安装包（接收服务、解码进程、DirectShow 过滤器、音频输出与启动入口）与安卓 APK 两个安装包，均含运行所需依赖。
+      - 在没有开发环境的 Windows 上，仅按 README 安装两个包即可完成一次连接与 OBS 采集。
+      - README 面向使用者重写：安装、首次配对、OBS 选设备、音频依赖 VB-CABLE 与排障；不出现内部流程内容。
+      - 开发流程资产（.agents/、.codex/、spec/ 与开发向 docs/）移出发布仓库，仓库只留产品代码、构建脚本、用户文档与许可证。
+      - 不包含代码签名证书采购、商店发布与自动更新。
+    next_action: 真机验证基线完成后，通过 spec-start 制定发布打包方案；启动时确认两个安装包的具体形态与开发流程资产的去处。
+    summary: 2026-11-03 按用户要求新增，位于 SPEC-validation-baseline 之后（D-014）。
+    tags: [v0.1, tech, release]
+    paths:
+      - spec/versions/v0.1/version-context.md
+      - spec/versions/v0.1/plan.html
+      - docs/validation-followups.md
+
+milestones:
+  - id: VERSION-v0.1
+    title: v0.1 最小音视频链路技术预研
+    status: in_progress
+    summary: "v0.1 技术预研执行中：SDK与工具链、离线配对与信令、应用层无感改造、系统摄像头设备层、手机画面链路 5 个 Spec 已交付并合入 dev；音频设备与真机验证基线 2 项未启动。核心验收（OBS 同时枚举 Artemis Camera 与 Artemis Microphone）尚未达成，以v0.1文档为版本状态权威来源。"
+    scope: SDK与工具链、离线配对信令、手机到OBS链路、真机验证和实验原型复现交付。
+    acceptance:
+      - 全部 7 个入版技术Spec均完成并保留真实验证证据。
+      - 实验原型可复现，关键路线与性能差距有明确处置结论。

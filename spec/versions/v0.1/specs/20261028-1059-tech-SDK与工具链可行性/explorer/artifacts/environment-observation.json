@@ -1,0 +1,14 @@
+{
+  "observed_at": "2026-10-28T11:24:24.7254115+08:00",
+  "java_version": "openjdk version \"17.0.19\" 2026-04-21 LTS\r\nOpenJDK Runtime Environment (build 17.0.19+11-LTS)\r\nOpenJDK 64-Bit Server VM (build 17.0.19+11-LTS, mixed mode, sharing)",
+  "node_version": "v24.18.0",
+  "npm_version": "11.16.0",
+  "java_home_configured": false,
+  "android_home_configured": false,
+  "android_sdk_root_configured": false,
+  "adb_on_path": false,
+  "gradle_on_path": false,
+  "common_localappdata_sdk_exists": false,
+  "device_connection_checked": false,
+  "source": "Read-only PATH, version commands, common SDK directories; no SDK installation or device execution."
+}

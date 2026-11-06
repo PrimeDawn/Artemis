@@ -1,0 +1,63 @@
+﻿=== Emulator instrumented run (core) ===
+Command: adb -s emulator-5554 shell am instrument -w -e class ...WebRtcSdkSmokeTest,ConnectionInstrumentedTest
+Timestamp: 2026-11-01T11:13:03.9677413+08:00
+
+io.github.primedawn.artemis.pairing.WebRtcSdkSmokeTest:
+Error in initializationError(io.github.primedawn.artemis.pairing.WebRtcSdkSmokeTest):
+java.lang.RuntimeException: Failed loading specified test class 'io.github.primedawn.artemis.pairing.WebRtcSdkSmokeTest'
+	at androidx.test.internal.runner.DirectTestLoader.doCreateRunner(DirectTestLoader.java:50)
+	at androidx.test.internal.runner.TestLoader.getRunnersFor(TestLoader.java:64)
+	at androidx.test.internal.runner.TestRequestBuilder.build(TestRequestBuilder.java:842)
+	at androidx.test.runner.AndroidJUnitRunner.buildRequest(AndroidJUnitRunner.java:672)
+	at androidx.test.runner.AndroidJUnitRunner.onStart(AndroidJUnitRunner.java:453)
+	at android.app.Instrumentation$InstrumentationThread.run(Instrumentation.java:2189)
+Caused by: java.lang.ClassNotFoundException: io.github.primedawn.artemis.pairing.WebRtcSdkSmokeTest
+	at java.lang.Class.classForName(Native Method)
+	at java.lang.Class.forName(Class.java:454)
+	at androidx.test.internal.runner.DirectTestLoader.doCreateRunner(DirectTestLoader.java:44)
+	... 5 more
+Caused by: java.lang.ClassNotFoundException: Didn't find class "io.github.primedawn.artemis.pairing.WebRtcSdkSmokeTest" on path: DexPathList[[zip file "/system/framework/android.test.runner.jar", zip file "/system/framework/android.test.mock.jar", zip file "/data/app/io.github.primedawn.artemis.test-xuarzRr9nXCyk8hjHwUwTQ==/base.apk", zip file "/data/app/io.github.primedawn.artemis-gBBQ5br7q-a2pgs_Z9CFGg==/base.apk"],nativeLibraryDirectories=[/data/app/io.github.primedawn.artemis.test-xuarzRr9nXCyk8hjHwUwTQ==/lib/x86_64, /data/app/io.github.primedawn.artemis-gBBQ5br7q-a2pgs_Z9CFGg==/lib/x86_64, /data/app/io.github.primedawn.artemis.test-xuarzRr9nXCyk8hjHwUwTQ==/base.apk!/lib/x86_64, /data/app/io.github.primedawn.artemis-gBBQ5br7q-a2pgs_Z9CFGg==/base.apk!/lib/x86_64, /system/lib64, /system/product/lib64]]
+	at dalvik.system.BaseDexClassLoader.findClass(BaseDexClassLoader.java:196)
+	at java.lang.ClassLoader.loadClass(ClassLoader.java:379)
+	at java.lang.ClassLoader.loadClass(ClassLoader.java:312)
+	... 8 more
+
+io.github.primedawn.artemis.pairing.ConnectionInstrumentedTest:
+Error in privateTrustStoragePersistsWithoutExpiryOnAndroid(io.github.primedawn.artemis.pairing.ConnectionInstrumentedTest):
+java.lang.NullPointerException: Attempt to invoke virtual method 'java.security.PublicKey java.security.cert.Certificate.getPublicKey()' on a null object reference
+	at io.github.primedawn.artemis.pairing.KeystoreDeviceIdentity.<init>(DeviceIdentity.kt:26)
+	at io.github.primedawn.artemis.pairing.KeystoreDeviceIdentity.<init>(DeviceIdentity.kt:11)
+	at io.github.primedawn.artemis.pairing.ConnectionInstrumentedTest.privateTrustStoragePersistsWithoutExpiryOnAndroid(ConnectionInstrumentedTest.kt:38)
+..
+
+Time: 2.78
+There were 2 failures:
+1) initializationError(io.github.primedawn.artemis.pairing.WebRtcSdkSmokeTest)
+java.lang.RuntimeException: Failed loading specified test class 'io.github.primedawn.artemis.pairing.WebRtcSdkSmokeTest'
+	at androidx.test.internal.runner.DirectTestLoader.doCreateRunner(DirectTestLoader.java:50)
+	at androidx.test.internal.runner.TestLoader.getRunnersFor(TestLoader.java:64)
+	at androidx.test.internal.runner.TestRequestBuilder.build(TestRequestBuilder.java:842)
+	at androidx.test.runner.AndroidJUnitRunner.buildRequest(AndroidJUnitRunner.java:672)
+	at androidx.test.runner.AndroidJUnitRunner.onStart(AndroidJUnitRunner.java:453)
+	at android.app.Instrumentation$InstrumentationThread.run(Instrumentation.java:2189)
+Caused by: java.lang.ClassNotFoundException: io.github.primedawn.artemis.pairing.WebRtcSdkSmokeTest
+	at java.lang.Class.classForName(Native Method)
+	at java.lang.Class.forName(Class.java:454)
+	at androidx.test.internal.runner.DirectTestLoader.doCreateRunner(DirectTestLoader.java:44)
+	... 5 more
+Caused by: java.lang.ClassNotFoundException: Didn't find class "io.github.primedawn.artemis.pairing.WebRtcSdkSmokeTest" on path: DexPathList[[zip file "/system/framework/android.test.runner.jar", zip file "/system/framework/android.test.mock.jar", zip file "/data/app/io.github.primedawn.artemis.test-xuarzRr9nXCyk8hjHwUwTQ==/base.apk", zip file "/data/app/io.github.primedawn.artemis-gBBQ5br7q-a2pgs_Z9CFGg==/base.apk"],nativeLibraryDirectories=[/data/app/io.github.primedawn.artemis.test-xuarzRr9nXCyk8hjHwUwTQ==/lib/x86_64, /data/app/io.github.primedawn.artemis-gBBQ5br7q-a2pgs_Z9CFGg==/lib/x86_64, /data/app/io.github.primedawn.artemis.test-xuarzRr9nXCyk8hjHwUwTQ==/base.apk!/lib/x86_64, /data/app/io.github.primedawn.artemis-gBBQ5br7q-a2pgs_Z9CFGg==/base.apk!/lib/x86_64, /system/lib64, /system/product/lib64]]
+	at dalvik.system.BaseDexClassLoader.findClass(BaseDexClassLoader.java:196)
+	at java.lang.ClassLoader.loadClass(ClassLoader.java:379)
+	at java.lang.ClassLoader.loadClass(ClassLoader.java:312)
+	... 8 more
+2) privateTrustStoragePersistsWithoutExpiryOnAndroid(io.github.primedawn.artemis.pairing.ConnectionInstrumentedTest)
+java.lang.NullPointerException: Attempt to invoke virtual method 'java.security.PublicKey java.security.cert.Certificate.getPublicKey()' on a null object reference
+	at io.github.primedawn.artemis.pairing.KeystoreDeviceIdentity.<init>(DeviceIdentity.kt:26)
+	at io.github.primedawn.artemis.pairing.KeystoreDeviceIdentity.<init>(DeviceIdentity.kt:11)
+	at io.github.primedawn.artemis.pairing.ConnectionInstrumentedTest.privateTrustStoragePersistsWithoutExpiryOnAndroid(ConnectionInstrumentedTest.kt:38)
+
+FAILURES!!!
+Tests run: 4,  Failures: 2
+
+
+Exit code: 0

@@ -1,0 +1,14 @@
+{
+  "command": "python tests/android-device-probe.py --sdk-root %USERPROFILE%\\AppData\\Local\\Android\\Sdk --report-dir spec/versions/v0.1/specs/20261028-1059-tech-SDK\u4e0e\u5de5\u5177\u94fe\u53ef\u884c\u6027/tester/artifacts/test-logs/20261028-175651-usb/device",
+  "startedAt": "2026-10-28T09:56:51.333518+00:00",
+  "finishedAt": "2026-10-28T09:56:51.438859+00:00",
+  "exitCode": 0,
+  "expectedExitCode": 0,
+  "durationSeconds": 0.106,
+  "stdoutSha256": "228840610771f2ef5b000ffee15a31e613878b3112ab1df97afe4f41bcc8e097",
+  "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "log": "usb-device-inventory.log",
+  "redactions": [
+    "personal user-root path"
+  ]
+}

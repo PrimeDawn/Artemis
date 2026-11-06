@@ -1,0 +1,14 @@
+{
+  "command": "python .cache/install-emulator-env.py",
+  "startedAt": "2026-10-28T10:41:04.019306+00:00",
+  "finishedAt": "2026-10-28T10:47:53.937424+00:00",
+  "exitCode": 0,
+  "expectedExitCode": 0,
+  "durationSeconds": 409.919,
+  "stdoutSha256": "14cbb7c478f24cc523c0adb985e662fb73a2711b515712a3bea7e15b3b541d99",
+  "stderrSha256": "7eb70257593da06f682a3ddda54a9d260d4fc514f645237f5ca74b08f8da61a6",
+  "log": "emulator-environment-install.log",
+  "redactions": [
+    "personal user-root path"
+  ]
+}

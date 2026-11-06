@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>测试计划 - 发布交付化（SPEC-release-package）</title>
+
+<meta name="rk:title"       content="测试计划：发布交付化">
+<meta name="rk:type"        content="test-plan">
+<meta name="rk:version"     content="v0.1">
+<meta name="rk:category"    content="tech">
+<meta name="rk:spec-dir"    content="spec/versions/v0.1/specs/20261106-1615-tech-发布交付化">
+<meta name="rk:role"        content="spec-tester">
+<meta name="rk:mode"        content="gated">
+<meta name="rk:status"      content="未确认">
+<meta name="rk:created"     content="2026-11-06">
+<meta name="rk:updated"     content="2026-11-06">
+<meta name="rk:revision"    content="2">
+<meta name="rk:git-branch"  content="tech/spec-20261106-1615-release-package">
+<meta name="rk:base-branch" content="dev">
+<meta name="rk:pr-url"      content="">
+<meta name="rk:tags"        content="spec,test-plan,release">
+<link rel="rk-plan"   href="../writer/plan.html">
+<link rel="rk-ledger" href="../lead/team-context.md">
+
+<link rel="stylesheet" href="../../../../../../html-report/assets/rk-report.css">
+<script defer src="../rk-manifest.js"></script>
+<script defer src="../../../../../../html-report/assets/rk-report.js"></script>
+</head>
+<body>
+
+<nav class="rk-nav"></nav>
+
+<header class="rk-head">
+  <h1>测试计划：发布交付化</h1>
+  <div class="rk-meta">
+    <span><b>类型</b> test-plan</span>
+    <span><b>版本</b> <code>v0.1</code></span>
+    <span><b>属性</b> <code>tech</code></span>
+    <span><b>Spec</b> <code>spec/versions/v0.1/specs/20261106-1615-tech-发布交付化</code></span>
+    <span><b>角色</b> spec-tester</span>
+    <span><b>状态</b> 未确认</span>
+    <span><b>分支</b> <code>tech/spec-20261106-1615-release-package</code> ← <code>dev</code></span>
+    <span><b>PR</b> —</span>
+    <span><b>创建</b> 2026-11-06</span>
+    <span><b>修订</b> r2（2026-11-06）</span>
+  </div>
+</header>
+
+<nav class="rk-revbar"></nav>
+
+<section class="rk-verdict">
+  <div class="rk-verdict-label">验收判定口径</div>
+  <p>本 Spec 的通过标准是<b>「只按 README 装两个包就能用」</b>：安装包在未装 Node、未装 Git 的账户下安装成功，OBS 能枚举 <code>Artemis Camera</code> 并录出手机画面，卸载后注册项与程序目录干净消失；APK 能通过 <code>apksigner</code> 校验。任何一项靠「本机恰好装过」才通过，都判不通过。</p>
+</section>
+
+<h2>修订历史</h2>
+<table class="rk-revs">
+  <thead><tr><th>修订</th><th>日期</th><th>修改人</th><th>改了什么</th><th>原因</th></tr></thead>
+  <tbody>
+    <tr><td>r1</td><td>2026-11-06</td><td>spec-tester</td><td>初版</td><td>—</td></tr>
+    <tr><td>r2</td><td>2026-11-06</td><td>spec-tester</td><td>AC-3/AC-5、TC-03/TC-04 与场景中的可执行文件名由 <code>ArtemisTray.exe</code> 同步为 <code>Artemis.exe</code></td><td>按 <code>D-009</code>（用户要求可执行文件叫 Artemis）</td></tr>
+  </tbody>
+</table>
+
+<h2>验收标准</h2>
+<table>
+  <thead><tr><th>编号</th><th>验收项</th><th>通过判据</th><th>不通过判据</th></tr></thead>
+  <tbody>
+    <tr><td>AC-1</td><td>证书签发不依赖外部程序</td><td>新签证书被 <code>X509Certificate.verify()</code> 验过、<code>checkIP(当前IP)</code> 为真、有效期 30 天 ±1 天；进程运行期间无 <code>openssl.exe</code> 子进程</td><td>任一条件不成立，或仍需设置 <code>ARTEMIS_OPENSSL_PATH</code></td></tr>
+    <tr><td>AC-2</td><td>托盘可独立拉起服务</td><td><code>Artemis.exe --console</code> 启动后 10 秒内 <code>http://127.0.0.1:3000/healthz</code> 返回 200 且 <code>service=artemis-receiver</code>，解码进程存活</td><td>控制页不可达，或需人工先启动别的进程</td></tr>
+    <tr><td>AC-3</td><td>安装包可安装</td><td>安装退出码 0；<code>{LOCALAPPDATA}\Programs\Artemis\Artemis.exe</code> 存在；<code>HKCU\Software\Classes\CLSID\{7E1F3A10-2C4B-4D8E-9A55-3F0C1B7D9E21}\InprocServer32</code> 存在</td><td>安装报错，或键不存在</td></tr>
+    <tr><td>AC-4</td><td>装完能采集</td><td>OBS 设备列表出现 <code>Artemis Camera</code>；录制 ≥10 秒的 mp4，回看非黑帧</td><td>设备缺失或录制全黑</td></tr>
+    <tr><td>AC-5</td><td>卸载干净</td><td>卸载后上述 CLSID 键消失、<code>Programs\Artemis</code> 目录删除、<code>%LOCALAPPDATA%\Artemis\data</code> 仍存在</td><td>残留键或残留程序文件</td></tr>
+    <tr><td>AC-6</td><td>APK 可校验</td><td><code>apksigner verify --print-certs</code> 退出码 0，签名者 <code>CN=Artemis Release</code></td><td>未签名或签名不匹配</td></tr>
+    <tr><td>AC-7</td><td>发布线无开发资产</td><td>导出树中 <code>spec/</code>、<code>.agents/</code>、<code>.codex/</code>、<code>.awr/</code>、<code>html-report/</code>、<code>work-ledger.yaml</code> 均不存在；<code>-Verify</code> 对人为植入的 <code>spec/</code> 返回非 0</td><td>任一开发资产出现，或 <code>-Verify</code> 漏报</td></tr>
+    <tr><td>AC-8</td><td>README 面向使用者</td><td>README 无 <code>spec/</code>、<code>.agents</code>、AWR、Spec、角色 等内部词；含 VB-CABLE 与 <code>CABLE Output</code> 说明；相对链接全部可达</td><td>出现内部流程词或死链</td></tr>
+  </tbody>
+</table>
+
+<h2>方案验收项 → 用例矩阵</h2>
+<p>每条功能需求（<code>writer/plan.html</code> §2.1）与每个实现任务（§5）都必须落到至少一条用例；无对应用例的条目视为覆盖缺口，不允许只写「已检查」。</p>
+<table>
+  <thead><tr><th>来源</th><th>验收项</th><th>覆盖用例</th><th>覆盖方式</th></tr></thead>
+  <tbody>
+    <tr><td>FR-001 / 任务 1</td><td>纯 JS 签发证书，保留 SAN 与同钥续签</td><td>TC-01、TC-02</td><td>自动化单测 + 运行时进程观察</td></tr>
+    <tr><td>FR-001 / 任务 2</td><td>启动脚本不再探测 openssl</td><td>TC-02</td><td>静态检查 + 冷启动实跑</td></tr>
+    <tr><td>FR-002 / 任务 3</td><td>托盘作为进程管家</td><td>TC-03、TC-04、TC-10</td><td>CLI 自检 + 实跑 + 失败注入</td></tr>
+    <tr><td>FR-003 / 任务 5</td><td>安装、注册过滤器</td><td>TC-07、TC-14</td><td>真实安装 + 静态权限检查</td></tr>
+    <tr><td>FR-004 / 任务 5</td><td>卸载干净</td><td>TC-09</td><td>真实卸载 + 注册表/文件系统断言</td></tr>
+    <tr><td>FR-005 / 任务 6</td><td>发布线导出与自检</td><td>TC-11</td><td>脚本实跑 + 反向注入</td></tr>
+    <tr><td>FR-006 / 任务 4</td><td>APK release 签名</td><td>TC-06</td><td>apksigner 校验</td></tr>
+    <tr><td>FR-007 / 任务 7</td><td>README 与用户文档</td><td>TC-12</td><td>文本断言 + 链接可达性</td></tr>
+    <tr><td>AC-4</td><td>装完能采集</td><td>TC-08</td><td>OBS 枚举 + 录制回看</td></tr>
+    <tr><td>AC-2 边界</td><td>未装 VB-CABLE 时的音频降级</td><td>TC-13</td><td>设备缺失场景实测（D-013 口径）</td></tr>
+  </tbody>
+</table>
+
+<h2>测试用例</h2>
+<table>
+  <thead><tr><th>用例编号</th><th>描述</th><th>输入 / 命令</th><th>预期输出</th><th>边界条件</th></tr></thead>
+  <tbody>
+    <tr><td>TC-01</td><td>证书签发的正确性与同钥续签</td><td><code>npm --prefix receiver test</code>（含新增 <code>cert.test.ts</code>）</td><td>退出码 0；<code># fail 0</code>；<code>cert.test.ts</code> 用例全通过</td><td>同一私钥两次签发公钥必须相同；错误 IP 的证书 <code>checkIP</code> 必须为假</td></tr>
+    <tr><td>TC-02</td><td>运行期不再依赖 openssl</td><td>不设置 <code>ARTEMIS_OPENSSL_PATH</code> 启动服务；同时 <code>Select-String -Path tools/start-artemis.ps1,receiver/src/pairing-config.ts -Pattern 'openssl'</code></td><td>服务正常生成 <code>certificate.pem</code>；上条命令无匹配</td><td>需先删掉数据目录下的旧证书，验证是重新签发的</td></tr>
+    <tr><td>TC-03</td><td>托盘自检</td><td><code>.\native\out\Artemis.exe --selftest</code></td><td>退出码 0；stdout 为 JSON 且含 <code>"controlPort":3000</code> 与合法 <code>lanIp</code></td><td>无网卡时应退出码非 0 并给出可读错误</td></tr>
+    <tr><td>TC-04</td><td>托盘拉起服务</td><td><code>Artemis.exe --console</code> 后轮询 <code>http://127.0.0.1:3000/healthz</code></td><td>10 秒内 HTTP 200 且 <code>service=artemis-receiver</code>；任务管理器可见 node 与 decode-host 子进程</td><td>子进程被强杀后托盘应只重启一次并写日志</td></tr>
+    <tr><td>TC-05</td><td>一键构建产物</td><td><code>.\scripts\build-release.ps1</code></td><td>退出码 0；<code>dist\Artemis-Setup-0.1.0.exe</code>、<code>dist\Artemis-0.1.0.apk</code>、<code>dist\SHA256SUMS.txt</code> 均存在且哈希一致</td><td>缺 keystore 时必须在 Android 步骤失败并给出提示，不产出未签名包</td></tr>
+    <tr><td>TC-06</td><td>APK 签名校验</td><td><code>apksigner verify --print-certs dist\Artemis-0.1.0.apk</code></td><td>退出码 0；输出含 <code>CN=Artemis Release</code></td><td>APK 内 <code>versionName</code> 必须为 <code>0.1.0</code></td></tr>
+    <tr><td>TC-07</td><td>全新安装</td><td>先 <code>regsvr32 /s /u</code> 反注册现有过滤器并删除程序目录，再静默运行安装包 <code>/VERYSILENT /SUPPRESSMSGBOXES</code></td><td>退出码 0；程序文件齐备；HKCU 下 CLSID 与 Instance 键存在且 <code>FriendlyName='Artemis Camera'</code></td><td>安装过程不得触发 UAC 提权弹窗</td></tr>
+    <tr><td>TC-08</td><td>OBS 采集</td><td>启动托盘 → 手机连接 → OBS 添加视频采集设备选 <code>Artemis Camera</code> → 录制 10 秒</td><td>设备出现在列表；录制的 mp4 回看有真实画面（抽帧亮度非全黑）</td><td>无手机接入时记「未实测」，不以静态检查替代</td></tr>
+    <tr><td>TC-09</td><td>卸载干净</td><td>控制面板卸载或 <code>{app}\unins000.exe /VERYSILENT</code></td><td>退出码 0；CLSID 键消失；程序目录删除；<code>%LOCALAPPDATA%\Artemis\data</code> 仍在</td><td>卸载时服务正在运行也必须成功（进程占用场景）</td></tr>
+    <tr><td>TC-10</td><td>失败路径可诊断</td><td>先占用 3000 端口再启动托盘</td><td>托盘气泡给出「端口被占用」类提示；<code>%LOCALAPPDATA%\Artemis\logs\tray.log</code> 含具体端口与错误</td><td>不得静默失败或只弹一个无信息的框</td></tr>
+    <tr><td>TC-11</td><td>导出脚本黑白名单</td><td><code>.\scripts\export-release.ps1 -Target .cache\release-tree</code> 后写入 <code>.cache\release-tree\spec\probe.md</code>，再执行 <code>-Verify</code></td><td>首次退出码 0 且 <code>spec</code> 目录不存在；注入后 <code>-Verify</code> 退出码非 0 并指名违规路径</td><td>白名单关键路径 <code>receiver\src</code>、<code>native\build.ps1</code> 必须存在</td></tr>
+    <tr><td>TC-12</td><td>README 口径</td><td><code>Select-String -Path README.md -Pattern 'spec/|\.agents|AWR|Spec|角色'</code> 与 <code>-Pattern 'CABLE Output'</code></td><td>前者无匹配；后者至少 1 条；README 内相对链接全部 <code>Test-Path</code> 为真</td><td>README 不得出现 <code>Artemis Microphone</code></td></tr>
+    <tr><td>TC-13</td><td>音频降级</td><td>未安装 VB-CABLE 的机器上启动并连接手机</td><td>托盘/控制页明确提示「未检测到虚拟声卡，音频不可用」；视频链路与 OBS 采集不受影响</td><td>按 D-013，不验真实出声；真实出声留 v0.1.1</td></tr>
+    <tr><td>TC-14</td><td>免提权安装的静态确认</td><td>检查 <code>installer/artemis.iss</code> 的 <code>PrivilegesRequired=lowest</code>；安装后确认无 HKLM 写入</td><td>配置为 <code>lowest</code>；安装仅写 <code>%LOCALAPPDATA%</code> 与 HKCU</td><td>本机为管理员账户时无法直接复现标准用户，用配置断言 + 安装路径断言替代，并在报告中说明</td></tr>
+  </tbody>
+</table>
+
+<h2>用户使用场景</h2>
+<table>
+  <thead><tr><th>场景编号</th><th>用户角色</th><th>业务目标</th><th>操作路径</th><th>关键断言</th><th>证据</th></tr></thead>
+  <tbody>
+    <tr><td>US-001</td><td>首次安装的普通用户</td><td>装完看到手机画面</td><td>运行安装包 → 双击开始菜单 Artemis → 控制页选中手机 → 手机点允许 → OBS 选设备 → 录制</td><td>全程不需要命令行、不需要装 Node/Git</td><td>安装日志、tray.log、OBS 录制文件抽帧</td></tr>
+    <tr><td>US-002</td><td>已装用户</td><td>卸载后不留垃圾</td><td>控制面板卸载 → 重装 → OBS 仍能枚举</td><td>卸载后无残留键与文件；重装后设备可用</td><td>注册表导出、目录清单、重装后枚举截图</td></tr>
+    <tr><td>US-003</td><td>出问题的用户</td><td>自己定位原因</td><td>找不到设备 → 读排障文档 → 查 tray.log</td><td>文档覆盖「OBS 以管理员运行」「端口占用」两类高频原因</td><td>文档章节、日志片段</td></tr>
+  </tbody>
+</table>
+
+<h2>覆盖率要求</h2>
+<ul>
+  <li><b>功能覆盖</b>：§2.1 的 FR-001 至 FR-007 全部有用例；AC-1 至 AC-8 全部有用例或明确引用既有 Spec 的证据。</li>
+  <li><b>失败路径覆盖</b>：端口占用（TC-10）、缺 keystore（TC-05 边界）、导出泄漏（TC-11）、卸载时进程占用（TC-09 边界）四条必须有实际执行记录。</li>
+  <li><b>不以静态检查替代</b>：AC-3/AC-4/AC-5 必须实装实跑；只有 TC-14 允许以配置与路径断言替代，且必须在报告中注明原因。</li>
+</ul>
+
+<h2>日志与审计要求</h2>
+
+<h3>关键路径可观测性</h3>
+<ul>
+  <li><b>证书签发</b>：日志需含「签发/复用」二选一、证书到期时间、SAN IP；不得记录私钥内容。</li>
+  <li><b>服务拉起</b>：托盘日志需含子进程 PID、使用端口、LAN IP、数据目录。</li>
+  <li><b>过滤器注册</b>：安装器日志需含 <code>regsvr32</code> 退出码；注册后用注册表读取 <code>FriendlyName</code> 作二次确认。</li>
+  <li><b>导出</b>：脚本需打印纳入/排除条目数与目标路径；<code>-Verify</code> 失败时逐条列出违规路径。</li>
+</ul>
+
+<h3>端侧审计日志</h3>
+<ul>
+  <li>证据目录：<code>tester/artifacts/test-logs/&lt;YYYYMMDD-HHMM&gt;/</code>，每个用例一个 <code>.log</code>，原始格式不转 HTML。</li>
+  <li>每条日志必须含命令、退出码与 ISO8601 时间戳（沿用 <code>spec-end</code> 的契约检查口径）。</li>
+  <li>安装/卸载证据额外保存注册表导出与目录清单；录制证据保存 mp4 与其抽帧亮度输出。</li>
+</ul>
+<div class="rk-cal warn"><div class="t">脱敏</div><p>不得保存 keystore 口令、私钥 <code>identity-key.pem</code> 内容、手机序列号明文或完整 MAC 地址。</p></div>
+
+<h2>测试环境要求</h2>
+<ul>
+  <li>Windows 11 x64（本机 <code>10.0.26200</code>），OBS 33.0.1，Inno Setup 6（需先安装到 <code>E:\Dev\Artemis\tools</code>）。</li>
+  <li>Node 24（构建期使用；<b>验收期不得依赖 PATH 中的 node</b>）。</li>
+  <li>Android 侧：JDK 17、SDK 36、Build Tools 36.0.0、release keystore（不入库）、<code>apksigner</code>（Build Tools 自带）。</li>
+  <li>手机 SM-S9210（<code>RFCX10MCR8F</code>），与 PC 同一局域网；VB-CABLE <b>不安装</b>（按 D-013 验证降级路径）。</li>
+  <li>验收前需备份并清理现有开发版：记录当前 CLSID 键、备份 <code>%LOCALAPPDATA%\Artemis\data</code>，再反注册与删除程序目录。</li>
+</ul>
+<div class="rk-cal risk"><div class="t">风险</div><p>TC-08 依赖手机现场接入。若测试时手机不可用，只能执行到 AC-3 并通过注册表断言证明设备已注册，AC-4 必须记「未实测」而不是「通过」——这一点与 <code>docs/validation-followups.md</code> 的历史口径一致。</p></div>
+
+<h2>关联产物</h2>
+<h3>本报告引用</h3>
+<ul class="rk-links">
+  <li><a href="../writer/plan.html" data-rk-link="plan">设计方案</a></li>
+  <li><a href="../explorer/exploration-report.html" data-rk-link="exploration">探索报告</a></li>
+  <li><a href="../lead/team-context.md" data-rk-link="ledger">运行账本</a></li>
+</ul>
+<h3>引用本报告</h3>
+<ul class="rk-backlinks">
+  <li><a href="test-report.html" data-rk-backlink="test-report">测试报告</a>（待创建）</li>
+  <li><a href="../writer/plan.html" data-rk-backlink="plan">设计方案</a></li>
+</ul>
+
+</body>
+</html>

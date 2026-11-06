@@ -1,0 +1,14 @@
+{
+  "command": "python .cache/collect-closeout-results.py --run-dir spec/versions/v0.1/specs/20261028-1059-tech-SDK\u4e0e\u5de5\u5177\u94fe\u53ef\u884c\u6027/tester/artifacts/test-logs/20261028-203139-closeout",
+  "startedAt": "2026-10-28T12:37:35.429288+00:00",
+  "finishedAt": "2026-10-28T12:37:36.365276+00:00",
+  "exitCode": 0,
+  "expectedExitCode": 0,
+  "durationSeconds": 0.937,
+  "stdoutSha256": "66c806205b514b7a7f76c8960e805d38954e9a1a6d2dcce89de8b8d4e804f2ed",
+  "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "log": "collect-independent-results.log",
+  "redactions": [
+    "personal user-root path"
+  ]
+}

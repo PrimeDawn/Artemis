@@ -1,0 +1,14 @@
+{
+  "command": "python scripts/tests/test_verify_native_libs.py",
+  "startedAt": "2026-10-28T06:04:27.074073+00:00",
+  "finishedAt": "2026-10-28T06:04:28.255031+00:00",
+  "exitCode": 0,
+  "expectedExitCode": 0,
+  "durationSeconds": 1.182,
+  "stdoutSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "stderrSha256": "0036666d9d2f7658971ed2b5c86a15a6431bd6767cd7180842c77b3724ba52e6",
+  "log": "native-checker-green.log",
+  "redactions": [
+    "personal user-root path"
+  ]
+}

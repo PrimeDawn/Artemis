@@ -1,0 +1,195 @@
+﻿=== TC-10 回归 ===
+Command: node --test --test-force-exit <11 files> ; node --test dist/test/server.test.js ; node --test --test-force-exit dist/test/media-relay.test.js ; gradlew :app:testDebugUnitTest
+Timestamp: 2026-11-06T00:07:17.8499146+08:00
+✔ legacy receiver page route is gone (1604.0965ms)
+✔ legacy receiver script route is gone (1371.2158ms)
+✔ public state served over real HTTP no longer exposes receiver channel fields (1227.3686ms)
+✔ waiting event over a real TLS device socket keeps the epoch key for phone compatibility (1291.2811ms)
+✔ PORT is 3000 only when the value is absent (2.6643ms)
+✔ accept decimal port 0 (0.2935ms)
+✔ accept decimal port 3000 (0.115ms)
+✔ accept decimal port 65535 (0.072ms)
+✔ accept decimal port 00080 (0.3375ms)
+✔ reject port "" without fallback (1.8591ms)
+✔ reject port "-1" without fallback (0.792ms)
+✔ reject port "65536" without fallback (0.249ms)
+✔ reject port "abc" without fallback (0.2991ms)
+✔ reject port "1.5" without fallback (0.328ms)
+✔ reject port " 3000" without fallback (0.5355ms)
+✔ reject port "3000 " without fallback (0.6041ms)
+✔ reject port "+80" without fallback (0.2795ms)
+✔ reject port "0x50" without fallback (0.3031ms)
+✔ reject port "1e3" without fallback (0.1917ms)
+✔ reject port "NaN" without fallback (0.2962ms)
+✔ reject port "999999999999999999999" without fallback (0.2563ms)
+✔ unknown presence requires a click and a signed phone decision exactly once (49.7899ms)
+✔ 72 hours do not expire trusted active connection (28.1727ms)
+✔ socket loss restores remembered selection without approval, manual disconnect stops restore (36.2939ms)
+✔ temporary phone loss clears the session and recovery issues a fresh sessionId (17.1323ms)
+✔ forgetting another remembered device does not disconnect the selected device (20.6041ms)
+✔ activation distinguishes a new PC click from automatic resume after socket loss (13.4687ms)
+✔ only an already selected trusted phone may request renewed first consent (16.1321ms)
+✔ fresh proof of the same selected identity can replace a stale transport without waiting 90 seconds (12.669ms)
+✔ control API requires a local session and CSRF; Host cannot be rebound (16.5672ms)
+✔ device socket issues a signed challenge and only accepts a matching private-key proof (27.3121ms)
+✔ identity survives restart and same-key renewal keeps the SPKI ID (2933.5222ms)
+✔ explicit assigned LAN address and absolute data directory are required (5.7032ms)
+✔ media port defaults to 3450 and accepts an explicit override (0.3342ms)
+✔ invalid media port is rejected without fallback (0.3734ms)
+✔ discovery advertises stable public identity and no credential (3.0166ms)
+✔ a base64url identity containing underscores still produces a valid DNS hostname (0.312ms)
+✔ pairing server binds two listeners and closes both without changing health service (1577.8815ms)
+✔ an exited process lock does not require manual repair before restart (1353.1802ms)
+✔ proof canonical bytes bind both peers, nonce and connection (3.9378ms)
+✔ real P-256 proof verifies and rejects changed transcript (5.1701ms)
+✔ peer identity is derived from SPKI, not label/IP (1.8623ms)
+✔ trust and selected intent survive restart with no expiry; forget revokes (42.3661ms)
+✔ corrupt persisted trust fails closed and is preserved (9.1443ms)
+✔ /media routes to the video channel (0.8046ms)
+✔ /media keeps routing with a query string (0.1762ms)
+✔ /audio routes to the audio channel (0.1421ms)
+✔ /audio keeps routing with a query string (1.0392ms)
+✔ lookalike prefixes stay on the control channel (0.2332ms)
+✔ the device control path stays on the control channel (0.1139ms)
+✔ an empty path stays on the control channel (0.1112ms)
+ℹ tests 51
+ℹ suites 0
+ℹ pass 51
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 5730.1674
+--- batch1 exit=0 ---
+✔ public server API serves the exact health contract and route boundaries (79.0325ms)
+✔ public close is concurrent-safe and releases the listening port (4.6336ms)
+✔ startup rejects with the original EADDRINUSE code (5.5516ms)
+ℹ tests 3
+ℹ suites 0
+ℹ pass 3
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 221.9289
+--- server exit=0 ---
+✔ hello with known session is authorized (1.1006ms)
+✔ hello with unknown session is rejected (0.1579ms)
+✔ hello with mismatched device id is rejected (0.1488ms)
+✔ hello that is not valid json is rejected (0.1613ms)
+✔ binary before hello closes the socket and writes nothing (0.3007ms)
+✔ binary after hello is forwarded to the sink (0.5352ms)
+✔ closing the socket ends the sink once (0.1964ms)
+ℹ tests 7
+ℹ suites 0
+ℹ pass 7
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 91.2588
+--- relay exit=0 ---
+--- JVM 单测 ---
+> Task :app:checkKotlinGradlePluginConfigurationErrors SKIPPED
+
+> Task :app:verifyWebRtcArtifact
+WebRTC Maven AAR SHA256 verified: 0a1627b1a48c2bc17d9a40d62fc47bd45166f44a311e95917f147c402de379b0
+
+> Task :app:preBuild
+> Task :app:preDebugBuild
+> Task :app:checkDebugAarMetadata UP-TO-DATE
+> Task :app:processDebugNavigationResources UP-TO-DATE
+> Task :app:compileDebugNavigationResources UP-TO-DATE
+> Task :app:generateDebugResValues UP-TO-DATE
+> Task :app:mapDebugSourceSetPaths UP-TO-DATE
+> Task :app:generateDebugResources UP-TO-DATE
+> Task :app:mergeDebugResources UP-TO-DATE
+> Task :app:packageDebugResources UP-TO-DATE
+> Task :app:parseDebugLocalResources UP-TO-DATE
+> Task :app:createDebugCompatibleScreenManifests UP-TO-DATE
+> Task :app:extractDeepLinksDebug UP-TO-DATE
+> Task :app:processDebugMainManifest UP-TO-DATE
+> Task :app:processDebugManifest UP-TO-DATE
+> Task :app:processDebugManifestForPackage UP-TO-DATE
+> Task :app:processDebugResources UP-TO-DATE
+> Task :app:compileDebugKotlin UP-TO-DATE
+> Task :app:javaPreCompileDebug UP-TO-DATE
+> Task :app:compileDebugJavaWithJavac NO-SOURCE
+> Task :app:preDebugUnitTestBuild
+> Task :app:javaPreCompileDebugUnitTest UP-TO-DATE
+> Task :app:processDebugJavaRes UP-TO-DATE
+> Task :app:bundleDebugClassesToRuntimeJar
+> Task :app:bundleDebugClassesToCompileJar
+
+> Task :app:compileDebugUnitTestKotlin
+w: file:///C:/workspace/Artemis/android/app/src/test/java/io/github/primedawn/artemis/pairing/CandidateCapacityIntegrationTest.kt:24:66 The corresponding parameter in the supertype 'DiscoveryClient' is named 'onFound'. This may cause problems when calling this function with named arguments.
+w: file:///C:/workspace/Artemis/android/app/src/test/java/io/github/primedawn/artemis/pairing/CandidateCapacityIntegrationTest.kt:24:93 The corresponding parameter in the supertype 'DiscoveryClient' is named 'onLost'. This may cause problems when calling this function with named arguments.
+w: file:///C:/workspace/Artemis/android/app/src/test/java/io/github/primedawn/artemis/pairing/CandidateCapacityIntegrationTest.kt:24:113 The corresponding parameter in the supertype 'DiscoveryClient' is named 'onError'. This may cause problems when calling this function with named arguments.
+w: file:///C:/workspace/Artemis/android/app/src/test/java/io/github/primedawn/artemis/pairing/CandidateCapacityIntegrationTest.kt:31:79 Java type mismatch: inferred type is 'String?', but 'String' was expected.
+w: file:///C:/workspace/Artemis/android/app/src/test/java/io/github/primedawn/artemis/pairing/ConnectionControllerTest.kt:43:85 Java type mismatch: inferred type is 'String?', but 'String' was expected.
+w: file:///C:/workspace/Artemis/android/app/src/test/java/io/github/primedawn/artemis/pairing/ConnectionControllerTest.kt:54:85 Java type mismatch: inferred type is 'String?', but 'String' was expected.
+w: file:///C:/workspace/Artemis/android/app/src/test/java/io/github/primedawn/artemis/pairing/ConnectionUnitTest.kt:42:70 Java type mismatch: inferred type is 'String?', but 'String' was expected.
+w: file:///C:/workspace/Artemis/android/app/src/test/java/io/github/primedawn/artemis/pairing/ForegroundConnectionTest.kt:37:105 Java type mismatch: inferred type is 'String?', but 'String' was expected.
+
+> Task :app:compileDebugUnitTestJavaWithJavac NO-SOURCE
+> Task :app:processDebugUnitTestJavaRes UP-TO-DATE
+> Task :app:testDebugUnitTest
+
+BUILD SUCCESSFUL in 23s
+25 actionable tasks: 5 executed, 20 up-to-date
+JVM exit=0
+--- APK 构建 ---
+
+> Task :app:verifyWebRtcArtifact
+WebRTC Maven AAR SHA256 verified: 0a1627b1a48c2bc17d9a40d62fc47bd45166f44a311e95917f147c402de379b0
+
+> Task :app:preBuild
+> Task :app:preDebugBuild
+> Task :app:mergeDebugNativeDebugMetadata NO-SOURCE
+> Task :app:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :app:checkDebugAarMetadata UP-TO-DATE
+> Task :app:processDebugNavigationResources UP-TO-DATE
+> Task :app:compileDebugNavigationResources UP-TO-DATE
+> Task :app:generateDebugResValues UP-TO-DATE
+> Task :app:mapDebugSourceSetPaths UP-TO-DATE
+> Task :app:generateDebugResources UP-TO-DATE
+> Task :app:mergeDebugResources UP-TO-DATE
+> Task :app:packageDebugResources UP-TO-DATE
+> Task :app:parseDebugLocalResources UP-TO-DATE
+> Task :app:createDebugCompatibleScreenManifests UP-TO-DATE
+> Task :app:extractDeepLinksDebug UP-TO-DATE
+> Task :app:processDebugMainManifest UP-TO-DATE
+> Task :app:processDebugManifest UP-TO-DATE
+> Task :app:processDebugManifestForPackage UP-TO-DATE
+> Task :app:processDebugResources UP-TO-DATE
+> Task :app:compileDebugKotlin UP-TO-DATE
+> Task :app:javaPreCompileDebug UP-TO-DATE
+> Task :app:compileDebugJavaWithJavac NO-SOURCE
+> Task :app:mergeDebugShaders UP-TO-DATE
+> Task :app:compileDebugShaders NO-SOURCE
+> Task :app:generateDebugAssets UP-TO-DATE
+> Task :app:mergeDebugAssets UP-TO-DATE
+> Task :app:compressDebugAssets UP-TO-DATE
+> Task :app:desugarDebugFileDependencies UP-TO-DATE
+> Task :app:dexBuilderDebug UP-TO-DATE
+> Task :app:mergeDebugGlobalSynthetics UP-TO-DATE
+> Task :app:processDebugJavaRes UP-TO-DATE
+> Task :app:mergeDebugJavaResource UP-TO-DATE
+> Task :app:checkDebugDuplicateClasses UP-TO-DATE
+> Task :app:mergeExtDexDebug UP-TO-DATE
+> Task :app:mergeLibDexDebug UP-TO-DATE
+> Task :app:mergeProjectDexDebug UP-TO-DATE
+> Task :app:mergeDebugJniLibFolders UP-TO-DATE
+> Task :app:mergeDebugNativeLibs UP-TO-DATE
+> Task :app:stripDebugDebugSymbols UP-TO-DATE
+> Task :app:validateSigningDebug UP-TO-DATE
+> Task :app:writeDebugAppMetadata UP-TO-DATE
+> Task :app:writeDebugSigningConfigVersions UP-TO-DATE
+> Task :app:packageDebug UP-TO-DATE
+> Task :app:createDebugApkListingFileRedirect UP-TO-DATE
+> Task :app:assembleDebug UP-TO-DATE
+
+BUILD SUCCESSFUL in 2s
+38 actionable tasks: 1 executed, 37 up-to-date
+APK exit=0
+Exit code: 0

@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>实现总结 · 系统摄像头设备层</title>
+
+<meta name="rk:title" content="实现总结：系统摄像头设备层">
+<meta name="rk:type" content="summary">
+<meta name="rk:version" content="v0.1">
+<meta name="rk:category" content="tech">
+<meta name="rk:spec-dir" content="spec/versions/v0.1/specs/20261101-1217-tech-系统摄像头设备层">
+<meta name="rk:role" content="spec-executor">
+<meta name="rk:mode" content="gated">
+<meta name="rk:created" content="2026-11-01">
+<meta name="rk:updated" content="2026-11-01">
+<meta name="rk:revision" content="2">
+<meta name="rk:git-branch" content="tech/spec-20261101-1217-device-layer">
+<meta name="rk:base-branch" content="dev">
+<meta name="rk:pr-url" content="">
+<meta name="rk:tags" content="spec,execution,directshow,ipc">
+
+<link rel="rk-plan" href="../writer/plan.html">
+<link rel="rk-test-plan" href="../tester/test-plan.html">
+<link rel="rk-ledger" href="../lead/team-context.md">
+<link rel="stylesheet" href="../../../../../../html-report/assets/rk-report.css">
+<script defer src="../rk-manifest.js"></script>
+<script defer src="../../../../../../html-report/assets/rk-report.js"></script>
+</head>
+<body>
+
+<header class="rk-head">
+<h1>实现总结：系统摄像头设备层</h1>
+<div class="rk-meta">
+<span><b>类型</b> summary</span>
+<span><b>Spec</b> <code>20261101-1217-tech-系统摄像头设备层</code></span>
+<span><b>角色</b> spec-executor</span>
+<span><b>模式</b> gated</span>
+<span><b>分支</b> <code>tech/spec-20261101-1217-device-layer</code> ← <code>dev</code></span>
+<span><b>PR</b> —</span>
+<span><b>创建</b> 2026-11-01</span>
+<span><b>修订</b> r2（2026-11-01）</span>
+</div>
+</header>
+
+<nav class="rk-revbar"></nav>
+
+<section class="rk-verdict">
+<div class="rk-verdict-label">结论</div>
+<p>设备层已打通：OBS「视频采集设备」能选到 <code>Artemis Camera</code>，画布实时显示共享内存里的合成帧，录制 41 秒回放有画面。注册改为逐用户，不再需要管理员。</p>
+</section>
+
+<h2>修订历史</h2>
+<table class="rk-revs">
+<thead><tr><th>修订</th><th>日期</th><th>修改人</th><th>改了什么</th><th>原因</th></tr></thead>
+<tbody>
+<tr><td>r1</td><td>2026-11-01</td><td>spec-executor</td><td>初版：记录构建、注册与 OBS 枚举进展</td><td>阶段三开始</td></tr>
+<tr><td>r2</td><td>2026-11-01</td><td>spec-executor</td><td>补齐 OBS 画面与录制证据；记录三处关键修复</td><td>按 D-003（逐用户注册）与实测结果更新</td></tr>
+</tbody>
+</table>
+
+<h2>1. 交付物</h2>
+<table>
+<thead><tr><th>文件</th><th>作用</th></tr></thead>
+<tbody>
+<tr><td><code>native/artemis-camera/ArtemisCamera.cpp</code></td><td>DLL 入口、类工厂、逐用户注册</td></tr>
+<tr><td><code>native/artemis-camera/Filter.cpp</code></td><td><code>IBaseFilter</code> 与引脚枚举</td></tr>
+<tr><td><code>native/artemis-camera/Pin.cpp</code></td><td>输出引脚、<code>IAMStreamConfig</code>、<code>IMediaSample</code></td></tr>
+<tr><td><code>native/artemis-camera/FrameSource.cpp</code></td><td>共享内存读取与色条回退</td></tr>
+<tr><td><code>native/artemis-camera/SharedFrame.h</code></td><td>帧协议常量与布局</td></tr>
+<tr><td><code>native/synthetic-producer/main.cpp</code></td><td>合成帧写入共享内存</td></tr>
+<tr><td><code>native/build.ps1</code></td><td>调用 <code>vcvars64</code> 编译两个产物</td></tr>
+<tr><td><code>native/register.ps1</code></td><td>注册/反注册并校验注册表</td></tr>
+</tbody>
+</table>
+
+<h2>2. 实现中修掉的四个真问题</h2>
+<table>
+<thead><tr><th>现象</th><th>根因</th><th>修复</th></tr></thead>
+<tbody>
+<tr><td>编译报 <code>windows.h</code> 缺失</td><td>Windows SDK 尚未装完</td><td>等 SDK 就位后重编</td></tr>
+<tr><td><code>IMediaSample::GetSize</code> 抽象未实现</td><td>签名写错（多了参数）</td><td>改为 <code>LONG GetSize()</code></td></tr>
+<tr><td><code>std::min</code> 报语法错误</td><td>Windows 的 <code>min</code>/<code>max</code> 宏</td><td>编译加 <code>/DNOMINMAX</code></td></tr>
+<tr><td>producer 建共享内存报错误 5</td><td><code>Global\</code> 命名空间需要全局权限</td><td>改用 <code>Local\</code></td></tr>
+</tbody>
+</table>
+
+<h2>3. OBS 接入的关键发现</h2>
+<p>手写场景集合时 OBS 报 <code>DecodeDeviceId failed</code>。做了对照实验：把 OBS 自带的 Virtual Camera 用同样方式写进去，**同样失败**，说明问题在集合写法而不在过滤器。</p>
+<p>改用 OBS 界面添加源后，读出 OBS 自己保存的 <code>video_device_id</code>：</p>
+<pre>Artemis Camera:@device#3Asw#3A{860BB310-5D01-11D0-BD3B-00A0C911CE86}\\{7E1F3A10-2C4B-4D8E-9A55-3F0C1B7D9E21}</pre>
+<p>即「友好名 + 冒号 + 设备路径（<code>:</code> 转义为 <code>#3A</code>）」，不是 base64。同时 OBS 要求设备在 <code>VideoInputDeviceCategory\Instance</code> 下带 <code>DevicePath</code>。</p>
+<p>另一个真实缺陷：OBS 传给 <code>IAMStreamConfig::SetFormat</code> 的 <code>biHeight</code> 是正值（bottom-up），过滤器原先只接受负值，导致 <code>VFW_E_INVALIDMEDIATYPE</code>。改为两种符号都接受后画面立即出来。</p>
+
+<h2>4. 注册方式变更</h2>
+<p>原先写 <code>HKEY_CLASSES_ROOT</code>，每次注册都要 UAC。实测 UAC 在无人值守时会被取消，导致设备处于未注册状态。改为写 <code>HKCU\Software\Classes\CLSID</code>：</p>
+<ul>
+<li>无需管理员，注册与反注册都能在普通会话完成</li>
+<li>OBS 与 DirectShow 枚举均能看到该设备（探针实测 <code>device: Artemis Camera</code>）</li>
+<li>影响范围收敛到当前用户，回滚只需反注册</li>
+</ul>
+
+<h2>5. 证据</h2>
+<table>
+<thead><tr><th>证据</th><th>文件</th></tr></thead>
+<tbody>
+<tr><td>构建过程与失败迭代</td><td><code>artifacts/build-attempt-1..5.log</code></td></tr>
+<tr><td>位数验证</td><td><code>artifacts/verify-bitness.log</code></td></tr>
+<tr><td>反注册与重注册</td><td><code>artifacts/unregister-reregister.log</code></td></tr>
+<tr><td>逐用户注册与枚举</td><td><code>artifacts/register-per-user.log</code></td></tr>
+<tr><td>OBS 属性对话框画面</td><td><code>artifacts/（截图已删除）</code></td></tr>
+<tr><td>录制回放抽帧</td><td><code>artifacts/（截图已删除）</code></td></tr>
+</tbody>
+</table>
+
+<h2>6. 与计划的偏离</h2>
+<table>
+<thead><tr><th>计划</th><th>实际</th><th>原因</th></tr></thead>
+<tbody>
+<tr><td>注册到 HKCR，需要管理员</td><td>注册到 HKCU，无需管理员</td><td>UAC 在无人值守时不可用，且逐用户注册满足 OBS 枚举</td></tr>
+<tr><td>OBS 界面验证 30 秒</td><td>录制 41 秒</td><td>操作时长未精确截断，不影响验收</td></tr>
+</tbody>
+</table>
+
+<h2>关联产物</h2>
+<h3>本报告引用</h3>
+<ul class="rk-links">
+<li><a href="../writer/plan.html" data-rk-link="plan">实现计划</a></li>
+<li><a href="../tester/test-plan.html" data-rk-link="test-plan">测试计划</a></li>
+<li><a href="../lead/team-context.md" data-rk-link="ledger">运行账本</a></li>
+</ul>
+<h3>引用本报告</h3>
+<ul class="rk-backlinks">
+<li>tester/test-report.html（待创建）</li>
+</ul>
+
+</body>
+</html>

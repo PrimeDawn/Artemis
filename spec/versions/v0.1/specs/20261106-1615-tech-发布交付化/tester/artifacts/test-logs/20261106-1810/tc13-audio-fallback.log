@@ -1,0 +1,12 @@
+Command: Artemis.exe --console ; 读 audio-status.json 与 /healthz
+=== TC-13 未装 VB-CABLE 时的音频降级 ===
+Timestamp: 2026-11-06T18:24:02+08:00
+console stdout:
+artemis: services started (decode pid 27096, node pid 25408)
+artemis: control page http://127.0.0.1:3000/control
+console stderr:
+decode child running=1
+audio-status: {"sink":"none","device":"","message":"鏈壘鍒拌櫄鎷熷０鍗★紙VB-CABLE锛夛紝闊抽涓嶅彲鐢紱瀹夎鍚庨噸鍚?Artemis 鍗冲彲"}
+
+healthz=200
+Exit code: 0

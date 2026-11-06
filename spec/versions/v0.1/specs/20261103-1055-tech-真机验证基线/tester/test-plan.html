@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>测试计划 - 真机验证基线（SPEC-validation-baseline）</title>
+<meta name="rk:type"        content="test-plan">
+<meta name="rk:version"     content="v0.1">
+<meta name="rk:category"    content="tech">
+<meta name="rk:spec-dir"    content="spec/versions/v0.1/specs/20261103-1055-tech-真机验证基线">
+<meta name="rk:role"        content="spec-tester">
+<meta name="rk:mode"        content="gated">
+<meta name="rk:created"     content="2026-11-03">
+<meta name="rk:updated"     content="2026-11-03">
+<meta name="rk:revision"    content="1">
+<meta name="rk:git-branch"  content="tech/spec-20261103-1055-validation-baseline">
+<meta name="rk:base-branch" content="dev">
+<meta name="rk:pr-url"      content="">
+<meta name="rk:tags"        content="spec,test-plan,validation">
+<link rel="rk-plan" href="../writer/plan.html">
+<link rel="rk-exploration" href="../explorer/exploration-report.html">
+<link rel="rk-ledger" href="../lead/team-context.md">
+<link rel="stylesheet" href="../../../../../../html-report/assets/rk-report.css">
+<script defer src="../rk-manifest.js"></script>
+<script defer src="../../../../../../html-report/assets/rk-report.js"></script>
+</head>
+<body>
+
+<nav class="rk-nav"></nav>
+
+<header class="rk-head">
+  <h1>测试计划：从零复现的验证基线</h1>
+  <div class="rk-meta">
+    <span><b>类型</b> test-plan</span>
+    <span><b>Spec</b> <code>spec/versions/v0.1/specs/20261103-1055-tech-真机验证基线</code></span>
+    <span><b>角色</b> spec-tester</span>
+    <span><b>模式</b> gated</span>
+    <span><b>分支</b> <code>tech/spec-20261103-1055-validation-baseline</code> ← <code>dev</code></span>
+    <span><b>PR</b> —</span>
+    <span><b>创建</b> 2026-11-03</span>
+    <span><b>修订</b> r1（2026-11-03）</span>
+  </div>
+</header>
+
+<nav class="rk-revbar"></nav>
+
+<section class="rk-verdict">
+  <div class="rk-verdict-label">计划结论</div>
+  <p>10 条用例，全部是真机/真实进程；<b>没有一条用 mock</b>。按 EXP-007 的教训，先给出「方案验收项 → 用例」覆盖矩阵：AC-1～AC-6 每条都有用例，音画偏差明确标注为「未实测 + 原因」而不是漏测。</p>
+</section>
+
+<h2>修订历史</h2>
+<table class="rk-revs">
+  <thead><tr><th>修订</th><th>日期</th><th>修改人</th><th>改了什么</th><th>原因</th></tr></thead>
+  <tbody>
+    <tr><td>r1</td><td>2026-11-03</td><td>spec-tester</td><td>初版（含覆盖矩阵）</td><td>按 EXP-007 与 `.agents/rules/spec-workflow.md` 的硬规则</td></tr>
+  </tbody>
+</table>
+
+<h2>1. 覆盖矩阵（先看覆盖，再看通过）</h2>
+<table>
+  <thead><tr><th>方案条款</th><th>用例</th><th>覆盖状态</th></tr></thead>
+  <tbody>
+    <tr><td>AC-1 无机器绑定、可冷启动</td><td>TC-01</td><td>覆盖</td></tr>
+    <tr><td>AC-2 从零配对</td><td>TC-02</td><td>覆盖（含人工点按计数）</td></tr>
+    <tr><td>AC-3 OBS 采集与 30 秒回看</td><td>TC-03、TC-04</td><td>覆盖</td></tr>
+    <tr><td>AC-4 延迟读数与粒度</td><td>TC-06</td><td>覆盖（记录型，不设阈值门禁）</td></tr>
+    <tr><td>AC-5 音频提示 + 音画偏差标注</td><td>TC-07、TC-08</td><td>提示覆盖；偏差按 D-013 记未实测</td></tr>
+    <tr><td>AC-6 许可证与回归</td><td>TC-09、TC-10</td><td>覆盖</td></tr>
+    <tr><td>连接耗时（报告要求，非门禁）</td><td>TC-05</td><td>覆盖（记录型）</td></tr>
+  </tbody>
+</table>
+
+<h2>2. 用例清单</h2>
+<table>
+  <thead><tr><th>编号</th><th>内容</th><th>步骤</th><th>通过标准</th><th>证据</th></tr></thead>
+  <tbody>
+    <tr>
+      <td>TC-01</td><td>脚本无机器绑定</td>
+      <td>用新数据目录参数冷启动 <code>tools/start-artemis.ps1</code>；检查脚本与文档中是否还有绝对路径</td>
+      <td>进程启动成功、数据目录生成；脚本与文档不含本机绝对路径（openssl 为探测或参数）</td>
+      <td><code>test-logs/&lt;run&gt;/tc01-cold-start.log</code></td>
+    </tr>
+    <tr>
+      <td>TC-02</td><td>从零配对</td>
+      <td>清数据目录 → 卸载重装 APK → 启动服务 → 控制页单击手机 → 手机上「允许并记住」</td>
+      <td>会话建立（<code>sessionId</code> 出现）；记录人工点按次数与耗时</td>
+      <td><code>tc02-pair-from-zero.log</code></td>
+    </tr>
+    <tr>
+      <td>TC-03</td><td>OBS 采集与录制回看</td>
+      <td>OBS 添加视频采集设备选 <code>Artemis Camera</code>，录 30 秒，回看并用 ffprobe 核对</td>
+      <td>录制文件可解析，时长 ≥ 30 秒，画面非纯黑（抽帧检查）</td>
+      <td><code>tc03-obs-record.log</code> + ffprobe 输出</td>
+    </tr>
+    <tr>
+      <td>TC-04</td><td>分辨率与帧率</td>
+      <td>读 OBS 设备属性与手机端编码日志的帧计数/时间差</td>
+      <td>记录实际分辨率与帧率；不达标（&lt;20fps）要写明而不是放过</td>
+      <td><code>tc04-fps.log</code></td>
+    </tr>
+    <tr>
+      <td>TC-05</td><td>连接耗时</td>
+      <td>记录控制页发起连接到 <code>sessionId</code> 出现的墙钟差</td>
+      <td>给出数值；人工点按等待单独标注</td>
+      <td><code>tc05-connect-time.log</code></td>
+    </tr>
+    <tr>
+      <td>TC-06</td><td>端到端延迟（同框）</td>
+      <td>手机毫秒计时器 + OBS 预览同框拍摄，读同一帧两处时间</td>
+      <td>给出读数与量化粒度（按相机帧率换算）；不宣称精度高于粒度</td>
+      <td><code>tc06-latency.log</code> + 同框照片索引</td>
+    </tr>
+    <tr>
+      <td>TC-07</td><td>音频提示与视频不受影响</td>
+      <td>未装虚拟声卡时启动，读控制页音频状态并同时确认画面正常</td>
+      <td>文案为「未找到虚拟声卡…」且视频继续；不出现静默失败</td>
+      <td><code>tc07-audio-hint.log</code></td>
+    </tr>
+    <tr>
+      <td>TC-08</td><td>音画偏差（受限）</td>
+      <td>核对音频与视频 PTS 同源设计；不做端到端拍手测试</td>
+      <td>报告中标注「未实测」及原因（D-013），不得填数值或写通过</td>
+      <td><code>tc08-av-sync-note.log</code></td>
+    </tr>
+    <tr>
+      <td>TC-09</td><td>依赖与许可证</td>
+      <td>核对 <code>docs/dependency-provenance.md</code> 与当前依赖清单</td>
+      <td>FFmpeg（GPL shared）、Opus、OkHttp、Compose 等均在册且版本一致</td>
+      <td><code>tc09-licenses.log</code></td>
+    </tr>
+    <tr>
+      <td>TC-10</td><td>回归</td>
+      <td>Node 测试、JVM 单测、APK 构建</td>
+      <td>与改动前同等通过项数；无新增失败</td>
+      <td><code>tc10-regression.log</code></td>
+    </tr>
+  </tbody>
+</table>
+
+<h2>3. 执行约束</h2>
+<ul>
+  <li>全部使用真机与真实进程；不构造假数据。人工环节（手机点「允许」、摆同框相机）单独计数，不算自动化。</li>
+  <li>不用真实时长做步骤：录制 30 秒是交付要求而非等待手段；其余一律短样本。</li>
+  <li>设备不在线时，对应用例记「未实测」并写明，不记为通过；连续两次采样确认后才判定设备不可用（EXP-007 第 4 条）。</li>
+  <li>证据由测试运行自动产出，写入 <code>tester/artifacts/test-logs/&lt;run-id&gt;/</code>。</li>
+</ul>
+
+<h2>4. 通过与升级规则</h2>
+<table>
+  <thead><tr><th>情形</th><th>处置</th></tr></thead>
+  <tbody>
+    <tr><td>TC-01 失败</td><td>阻断：机器绑定未消除，基线的前置条件不成立</td></tr>
+    <tr><td>TC-02/03 失败</td><td>阻断：核心链路不成立，交 spec-debugger</td></tr>
+    <tr><td>TC-04 帧率低于 20fps</td><td>不阻断但必须记录差距与处置结论</td></tr>
+    <tr><td>TC-06 拿不到同框读数</td><td>记「未实测」并写明原因，不得估算冒充</td></tr>
+    <tr><td>TC-08</td><td>永远是「未实测」，填数值即视为伪造</td></tr>
+    <tr><td>TC-10 失败</td><td>阻断：已有能力退化</td></tr>
+  </tbody>
+</table>
+
+<h2>关联产物</h2>
+<h3>本报告引用</h3>
+<ul class="rk-links">
+  <li><a href="../writer/plan.html" data-rk-link="plan">实现方案</a></li>
+  <li><a href="../explorer/exploration-report.html" data-rk-link="exploration">探索报告</a></li>
+  <li><a href="../lead/team-context.md" data-rk-link="ledger">运行账本</a></li>
+</ul>
+<h3>引用本报告</h3>
+<ul class="rk-backlinks">
+  <li><a href="../writer/plan.html" data-rk-backlink="plan">实现方案</a></li>
+</ul>
+
+</body>
+</html>

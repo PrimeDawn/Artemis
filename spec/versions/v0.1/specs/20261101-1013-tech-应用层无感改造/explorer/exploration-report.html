@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>探索报告 · 应用层无感改造</title>
+
+<meta name="rk:title" content="探索报告：应用层无感改造">
+<meta name="rk:type" content="exploration-report">
+<meta name="rk:version" content="v0.1">
+<meta name="rk:category" content="tech">
+<meta name="rk:spec-dir" content="spec/versions/v0.1/specs/20261101-1013-tech-应用层无感改造">
+<meta name="rk:role" content="spec-explorer">
+<meta name="rk:mode" content="gated">
+<meta name="rk:created" content="2026-11-01">
+<meta name="rk:updated" content="2026-11-01">
+<meta name="rk:revision" content="3">
+<meta name="rk:git-branch" content="tech/spec-20261101-1013-app-refactor">
+<meta name="rk:base-branch" content="dev">
+<meta name="rk:pr-url" content="">
+<meta name="rk:tags" content="spec,exploration,refactor,pairing">
+
+<link rel="rk-ledger" href="../lead/team-context.md">
+<link rel="stylesheet" href="../../../../../../html-report/assets/rk-report.css">
+<script defer src="../rk-manifest.js"></script>
+<script defer src="../../../../../../html-report/assets/rk-report.js"></script>
+</head>
+<body>
+
+<header class="rk-head">
+<h1>探索报告：应用层无感改造</h1>
+<div class="rk-meta">
+<span><b>类型</b> exploration-report</span>
+<span><b>Spec</b> <code>20261101-1013-tech-应用层无感改造</code></span>
+<span><b>角色</b> spec-explorer</span>
+<span><b>模式</b> gated</span>
+<span><b>分支</b> <code>tech/spec-20261101-1013-app-refactor</code> ← <code>dev</code></span>
+<span><b>PR</b> —</span>
+<span><b>创建</b> 2026-11-01</span>
+<span><b>修订</b> r3（2026-11-01）</span>
+</div>
+</header>
+
+<nav class="rk-revbar"></nav>
+
+<section class="rk-verdict">
+<div class="rk-verdict-label">结论</div>
+<p>删掉旧接收通道不会改变手机端任何行为：手机从未处理信令，连接状态由 <code>sessionId</code> 决定而非 <code>epoch</code>。改造可以做到手机端零改动，但 PC 端测试需要按用例逐条处置，不能整文件删除。</p>
+</section>
+
+<h2>修订历史</h2>
+<table class="rk-revs">
+<thead><tr><th>修订</th><th>日期</th><th>修改人</th><th>改了什么</th><th>原因</th></tr></thead>
+<tbody>
+<tr><td>r1</td><td>2026-11-01</td><td>spec-explorer</td><td>初版：盘点接收端耦合面、不退化基线与删除边界</td><td>D-001 定案后启动阶段二探索</td></tr>
+<tr class="rk-added" data-rev="2"><td>r2</td><td>2026-11-01</td><td>spec-explorer</td><td>风险表去掉真机门禁，改为模拟器验证；真机由 TeamLead 按需提出</td><td>按 <code>D-005</code>（真机由 TeamLead 判断并按需提出）</td></tr><tr class="rk-added" data-rev="3"><td>r3</td><td>2026-11-01</td><td>spec-explorer</td><td>真机是否补测改为由 TeamLead 判断并提出，不等待用户发起</td><td>按 <code>D-005</code>：用户明确「你需要真机你自己提」</td></tr>
+</tbody>
+</table>
+
+<h2>1. 任务与边界</h2>
+<p>v0.1 方向已从「手机 → WebRTC → OBS 浏览器源」改为「手机 = Windows 系统摄像头与麦克风」。本 Spec 只做第一层：让代码形态与方向一致，<strong>不新增任何媒体或设备功能</strong>。</p>
+<table>
+<thead><tr><th>纳入</th><th>不纳入</th></tr></thead>
+<tbody>
+<tr><td>删除接收页、接收票据、<code>/ws/receiver</code> 与信令通道</td><td>摄像头/麦克风采集</td></tr>
+<tr><td>保留配对、信任、发现、审批、断开、忘记</td><td>DirectShow 过滤器、虚拟音频驱动</td></tr>
+<tr><td>文档口径同步为系统设备方向</td><td>更改配对协议字段或握手</td></tr>
+</tbody>
+</table>
+
+<h2>2. 关键发现：手机端为什么不依赖接收通道</h2>
+<p>这是本次改造成立的前提，三条证据各自独立成立。</p>
+
+<div class="rk-cal key"><div class="t">证据一：手机从不处理信令</div>
+<p><span class="rk-ref">android/app/src/main/java/io/github/primedawn/artemis/pairing/ConnectionController.kt:119</span> 为 <code>is ServerEvent.Signal -&gt; Unit</code>，注释写着「Media consumers will be attached by the next Spec」。信令消息到达手机后被直接丢弃。</p></div>
+
+<div class="rk-cal key"><div class="t">证据二：连接状态只看 sessionId</div>
+<p><span class="rk-ref">ConnectionController.kt:108-113</span> 在 <code>ServerEvent.Session</code> 分支里只判断 <code>value.sessionId != null</code> 就置 <code>CONNECTED</code>，不读取 <code>kind</code> 字段；<span class="rk-ref">DeviceClient.kt:70</span> 把 <code>waiting</code> 与 <code>ready</code> 归一到同一条 <code>ServerEvent.Session</code>。</p></div>
+
+<div class="rk-cal key"><div class="t">证据三：epoch 缺失时 sessionId 仍然下发</div>
+<p><span class="rk-ref">receiver/src/connection-manager.ts</span> 的 <code>sendState()</code> 为 <code>kind=epoch?'ready':'waiting'</code>，但事件体始终包含 <code>sessionId</code>。移除 <code>epoch</code> 后手机收到 <code>waiting + sessionId</code>，仍判定为已连接。</p></div>
+
+<p>补充：<span class="rk-ref">DeviceClient.kt:86-89</span> 的 <code>send()</code> 要求 <code>epoch != null</code>，所以手机本来就发不出信令。接收通道对当前手机端是纯占位。</p>
+
+<h2>3. 影响面清单</h2>
+
+<h3>3.1 必须删除</h3>
+<table>
+<thead><tr><th>位置</th><th>内容</th><th>证据</th></tr></thead>
+<tbody>
+<tr><td><code>receiver/public/receiver.html</code>、<code>receiver.js</code></td><td>接收验证页</td><td>整文件</td></tr>
+<tr><td><code>receiver/src/signaling.ts</code></td><td><code>/ws/receiver</code> 升级与消息转发</td><td>整文件 16 行</td></tr>
+<tr><td><code>receiver/src/control-http.ts:6</code></td><td><code>/receiver</code>、<code>/assets/receiver.js</code> 资源条目</td><td>assets 表</td></tr>
+<tr><td><code>receiver/src/control-http.ts:33</code></td><td><code>/api/receiver-tickets</code> 路由</td><td>单行</td></tr>
+<tr><td><code>receiver/src/control-http.ts:29</code></td><td>接收票据分支与相关判断</td><td>—</td></tr>
+<tr><td><code>receiver/src/pairing-server.ts:3,15,26,29</code></td><td><code>createReceiverBroker</code> 引入、变量、关闭与控制端口 upgrade 挂接</td><td>—</td></tr>
+<tr><td><code>receiver/src/connection-manager.ts</code></td><td><code>issueReceiverTicket</code>、<code>redeemReceiverTicket</code>、<code>attachReceiver</code>、<code>lostReceiver</code>、<code>route</code>、<code>ReceiverChannel</code>、<code>ticket</code>、<code>reserved</code>、<code>epoch</code>、<code>receiver</code> 状态</td><td>—</td></tr>
+<tr><td><code>receiver/src/protocol.ts</code></td><td><code>ReceiverGrant</code> 相关类型、<code>SignalEnvelope</code>、<code>decodeClientSignal</code>、<code>Role</code>、<code>PublicState.receiverConnected/epoch</code></td><td>—</td></tr>
+<tr><td><code>receiver/public/control.js</code></td><td><code>receiver</code> 按钮监听与 <code>receiver.disabled</code> 赋值</td><td>第 1、9、7 行</td></tr>
+<tr><td><code>receiver/public/control.html</code></td><td><code>#receiver</code> 按钮</td><td>footer</td></tr>
+</tbody>
+</table>
+
+<h3>3.2 必须保留（不可误伤）</h3>
+<table>
+<thead><tr><th>位置</th><th>原因</th></tr></thead>
+<tbody>
+<tr><td><code>receiver/src/server.ts</code> 与 <code>server.test.ts</code></td><td><code>startReceiver</code> 是 PC 端健康服务，<code>service:"artemis-receiver"</code> 是产品服务名，不是浏览器接收页。文本里出现 receiver 不代表要删</td></tr>
+<tr><td><code>connection-manager</code> 的设备在线、信任、审批、<code>select</code>/<code>disconnect</code>/<code>forget</code>/<code>decide</code></td><td>配对主路径，删了手机端直接不可用</td></tr>
+<tr><td><code>device-broker</code>、<code>trust-repository</code>、<code>identity</code>、<code>discovery</code></td><td>认证、信任、发现，与接收端无关</td></tr>
+<tr><td><code>sessionId</code> 与 <code>activated</code>/<code>waiting</code>/<code>ready</code> 事件</td><td>手机端「已连接」的唯一依据</td></tr>
+<tr><td><code>android/**</code></td><td>本 Spec 要求零改动，是「无感」的证据</td></tr>
+</tbody>
+</table>
+
+<h3>3.3 必须改造</h3>
+<table>
+<thead><tr><th>位置</th><th>改造</th></tr></thead>
+<tbody>
+<tr><td><code>connection-manager.sendState()</code></td><td>去掉 <code>epoch</code> 后需决定 <code>kind</code> 取值。建议 <code>kind = sessionId ? 'ready' : 'waiting'</code>，保持语义直白</td></tr>
+<tr><td><code>protocol/pairing-v2.md</code></td><td>删除接收端与票据章节，保留设备侧契约</td></tr>
+<tr><td><code>GOALS.md</code>、<code>产品规划.md</code>、<code>README.md</code></td><td>OBS 浏览器源表述改为系统摄像头/麦克风</td></tr>
+</tbody>
+</table>
+
+<h2>4. 受影响的测试</h2>
+<table>
+<thead><tr><th>文件</th><th>用例</th><th>处置建议</th></tr></thead>
+<tbody>
+<tr><td><code>connection-manager.test.ts</code></td><td>tickets expire only before consumption</td><td>随票据删除移除，需在测试报告登记理由</td></tr>
+<tr><td><code>connection-manager.test.ts</code></td><td>temporary phone loss keeps the authorized receiver and produces a fresh epoch on recovery</td><td>改写为「手机短暂掉线后恢复，sessionId 重建」并去掉 epoch 断言</td></tr>
+<tr><td><code>device-broker.test.ts</code></td><td>receiver socket consumes its first-frame ticket before receiving a signal epoch</td><td>随接收通道删除移除</td></tr>
+<tr><td><code>protocol.test.ts</code></td><td>signal decoding preserves opaque mDNS candidate and checks role/epoch</td><td>随 <code>decodeClientSignal</code> 删除移除</td></tr>
+<tr><td><code>pairing-server.test.ts</code></td><td>pairing server binds two listeners and closes both…</td><td>保留；仅去掉接收通道关闭断言</td></tr>
+</tbody>
+</table>
+<p>基线：<code>npm --prefix receiver test</code> 当前 43 项全过；JVM 18 项（17 通过 + 1 跳过）。删除用例后总数会下降，测试报告必须给出「删除前 43 → 删除后 N」的对照与逐条理由。</p>
+
+<h2>5. 风险</h2>
+<table>
+<thead><tr><th>风险</th><th>影响</th><th>应对</th></tr></thead>
+<tbody>
+<tr><td>把 <code>artemis-receiver</code> 服务名当成接收页一起删</td><td>健康检查与 CLI 失效</td><td>删除清单按文件与行号执行，不按关键词批量替换</td></tr>
+<tr><td><code>PublicState</code> 字段删除引发控制页读取 undefined</td><td>控制页报错或按钮失效</td><td>同步改 <code>control.js</code>，并保留控制页 e2e 脚本验证</td></tr>
+<tr><td>删除 <code>signaling.ts</code> 后 <code>pairing-server</code> 仍 import</td><td>服务启动即崩</td><td>编译期由 TypeScript 捕获；启动后跑 <code>/healthz</code> 冒烟</td></tr>
+<tr><td>手机端验证方式</td><td><del class="rk-del" data-rev="2">「无感」只有单元测试背书</del><ins class="rk-ins" data-rev="2">「无感」需要有可运行的安卓环境背书</ins></td><td><del class="rk-del" data-rev="2">用户要求模拟器 + 真机两者都做，测试阶段执行</del><ins class="rk-ins" data-rev="2">用模拟器验证；真机是否补测由 TeamLead 判断并在需要时主动提出；状态机逻辑由单元测试覆盖</ins></td></tr>
+</tbody>
+</table>
+
+<h2>6. 建议</h2>
+<ol>
+<li>实施顺序：先删 PC 端接收通道并让编译通过，再改控制页，最后同步文档。每步跑一次 <code>npm --prefix receiver test</code>。</li>
+<li>删除测试用例时在提交信息里写清「因功能下线删除，非失败规避」。</li>
+<li>验收核心不是「新增了什么」，而是「手机端零 diff + 配对主路径与状态提示逐项照旧」。</li>
+</ol>
+
+<h2>关联产物</h2>
+<h3>本报告引用</h3>
+<ul class="rk-links">
+<li><a href="../lead/team-context.md" data-rk-link="ledger">运行账本</a></li>
+</ul>
+<h3>引用本报告</h3>
+<ul class="rk-backlinks">
+<li>writer/plan.html（待创建）</li>
+<li>tester/test-plan.html（待创建）</li>
+</ul>
+
+</body>
+</html>

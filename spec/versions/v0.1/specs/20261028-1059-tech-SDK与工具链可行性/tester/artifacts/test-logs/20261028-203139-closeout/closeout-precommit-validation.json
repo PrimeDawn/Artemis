@@ -1,0 +1,2817 @@
+{
+  "verifiedAt": "2026-10-28T12:52:52.136490+00:00",
+  "passed": true,
+  "checks": [
+    {
+      "id": "spec/versions/v0.1/specs/20261028-1059-tech-SDK与工具链可行性/ender/end-report.html:metadata",
+      "status": "pass",
+      "detail": "Required metadata"
+    },
+    {
+      "id": "spec/versions/v0.1/specs/20261028-1059-tech-SDK与工具链可行性/ender/end-report.html:structure",
+      "status": "pass",
+      "detail": "Required structure and five-column revision history; Spec navigation applies only inside the Spec"
+    },
+    {
+      "id": "spec/versions/v0.1/specs/20261028-1059-tech-SDK与工具链可行性/ender/end-report.html:assets",
+      "status": "pass",
+      "detail": "Shared asset depth; Spec manifest order"
+    },
+    {
+      "id": "spec/versions/v0.1/specs/20261028-1059-tech-SDK与工具链可行性/ender/end-report.html:styles",
+      "status": "pass",
+      "detail": "No inline style or file probes"
+    },
+    {
+      "id": "spec/versions/v0.1/specs/20261028-1059-tech-SDK与工具链可行性/ender/end-report.html:links",
+      "status": "pass",
+      "detail": []
+    },
+    {
+      "id": "spec/versions/v0.1/specs/20261028-1059-tech-SDK与工具链可行性/ender/end-report.html:revision",
+      "status": "pass",
+      "detail": "Current revision visible"
+    },
+    {
+      "id": "spec/versions/v0.1/specs/20261028-1059-tech-SDK与工具链可行性/ender/end-report.html:notes",
+      "status": "pass",
+      "detail": "No unresolved embedded user notes"
+    },
+    {
+      "id": "spec/versions/v0.1/specs/20261028-1059-tech-SDK与工具链可行性/executor/summary.html:metadata",
+      "status": "pass",
+      "detail": "Required metadata"
+    },
+    {
+      "id": "spec/versions/v0.1/specs/20261028-1059-tech-SDK与工具链可行性/executor/summary.html:structure",
+      "status": "pass",
+      "detail": "Required structure and five-column revision history; Spec navigation applies only inside the Spec"
+    },
+    {
+      "id": "spec/versions/v0.1/specs/20261028-1059-tech-SDK与工具链可行性/executor/summary.html:assets",
+      "status": "pass",
+      "detail": "Shared asset depth; Spec manifest order"
+    },
+    {
+      "id": "spec/versions/v0.1/specs/20261028-1059-tech-SDK与工具链可行性/executor/summary.html:styles",
+      "status": "pass",
+      "detail": "No inline style or file probes"
+    },
+    {
+      "id": "spec/versions/v0.1/specs/20261028-1059-tech-SDK与工具链可行性/executor/summary.html:links",
+      "status": "pass",
+      "detail": []
+    },
+    {
+      "id": "spec/versions/v0.1/specs/20261028-1059-tech-SDK与工具链可行性/executor/summary.html:revision",
+      "status": "pass",
+      "detail": "Current revision visible"
+    },
+    {
+      "id": "spec/versions/v0.1/specs/20261028-1059-tech-SDK与工具链可行性/executor/summary.html:notes",
+      "status": "pass",
+      "detail": "No unresolved embedded user notes"
+    },
+    {
+      "id": "spec/versions/v0.1/specs/20261028-1059-tech-SDK与工具链可行性/explorer/exploration-report.html:metadata",
+      "status": "pass",
+      "detail": "Required metadata"
+    },
+    {
+      "id": "spec/versions/v0.1/specs/20261028-1059-tech-SDK与工具链可行性/explorer/exploration-report.html:structure",
+      "status": "pass",
+      "detail": "Required structure and five-column revision history; Spec navigation applies only inside the Spec"
+    },
+    {
+      "id": "spec/versions/v0.1/specs/20261028-1059-tech-SDK与工具链可行性/explorer/exploration-report.html:assets",
+      "status": "pass",
+      "detail": "Shared asset depth; Spec manifest order"
+    },
+    {
+      "id": "spec/versions/v0.1/specs/20261028-1059-tech-SDK与工具链可行性/explorer/exploration-report.html:styles",
+      "status": "pass",
+      "detail": "No inline style or file probes"
+    },
+    {
+      "id": "spec/versions/v0.1/specs/20261028-1059-tech-SDK与工具链可行性/explorer/exploration-report.html:links",
+      "status": "pass",
+      "detail": []
+    },
+    {
+      "id": "spec/versions/v0.1/specs/20261028-1059-tech-SDK与工具链可行性/explorer/exploration-report.html:revision",
+      "status": "pass",
+      "detail": "Current revision visible"
+    },
+    {
+      "id": "spec/versions/v0.1/specs/20261028-1059-tech-SDK与工具链可行性/explorer/exploration-report.html:notes",
+      "status": "pass",
+      "detail": "No unresolved embedded user notes"
+    },
+    {
+      "id": "spec/versions/v0.1/specs/20261028-1059-tech-SDK与工具链可行性/tester/test-plan.html:metadata",
+      "status": "pass",
+      "detail": "Required metadata"
+    },
+    {
+      "id": "spec/versions/v0.1/specs/20261028-1059-tech-SDK与工具链可行性/tester/test-plan.html:structure",
+      "status": "pass",
+      "detail": "Required structure and five-column revision history; Spec navigation applies only inside the Spec"
+    },
+    {
+      "id": "spec/versions/v0.1/specs/20261028-1059-tech-SDK与工具链可行性/tester/test-plan.html:assets",
+      "status": "pass",
+      "detail": "Shared asset depth; Spec manifest order"
+    },
+    {
+      "id": "spec/versions/v0.1/specs/20261028-1059-tech-SDK与工具链可行性/tester/test-plan.html:styles",
+      "status": "pass",
+      "detail": "No inline style or file probes"
+    },
+    {
+      "id": "spec/versions/v0.1/specs/20261028-1059-tech-SDK与工具链可行性/tester/test-plan.html:links",
+      "status": "pass",
+      "detail": []
+    },
+    {
+      "id": "spec/versions/v0.1/specs/20261028-1059-tech-SDK与工具链可行性/tester/test-plan.html:revision",
+      "status": "pass",
+      "detail": "Current revision visible"
+    },
+    {
+      "id": "spec/versions/v0.1/specs/20261028-1059-tech-SDK与工具链可行性/tester/test-plan.html:notes",
+      "status": "pass",
+      "detail": "No unresolved embedded user notes"
+    },
+    {
+      "id": "spec/versions/v0.1/specs/20261028-1059-tech-SDK与工具链可行性/tester/test-report.html:metadata",
+      "status": "pass",
+      "detail": "Required metadata"
+    },
+    {
+      "id": "spec/versions/v0.1/specs/20261028-1059-tech-SDK与工具链可行性/tester/test-report.html:structure",
+      "status": "pass",
+      "detail": "Required structure and five-column revision history; Spec navigation applies only inside the Spec"
+    },
+    {
+      "id": "spec/versions/v0.1/specs/20261028-1059-tech-SDK与工具链可行性/tester/test-report.html:assets",
+      "status": "pass",
+      "detail": "Shared asset depth; Spec manifest order"
+    },
+    {
+      "id": "spec/versions/v0.1/specs/20261028-1059-tech-SDK与工具链可行性/tester/test-report.html:styles",
+      "status": "pass",
+      "detail": "No inline style or file probes"
+    },
+    {
+      "id": "spec/versions/v0.1/specs/20261028-1059-tech-SDK与工具链可行性/tester/test-report.html:links",
+      "status": "pass",
+      "detail": []
+    },
+    {
+      "id": "spec/versions/v0.1/specs/20261028-1059-tech-SDK与工具链可行性/tester/test-report.html:revision",
+      "status": "pass",
+      "detail": "Current revision visible"
+    },
+    {
+      "id": "spec/versions/v0.1/specs/20261028-1059-tech-SDK与工具链可行性/tester/test-report.html:notes",
+      "status": "pass",
+      "detail": "No unresolved embedded user notes"
+    },
+    {
+      "id": "spec/versions/v0.1/specs/20261028-1059-tech-SDK与工具链可行性/writer/plan.html:metadata",
+      "status": "pass",
+      "detail": "Required metadata"
+    },
+    {
+      "id": "spec/versions/v0.1/specs/20261028-1059-tech-SDK与工具链可行性/writer/plan.html:structure",
+      "status": "pass",
+      "detail": "Required structure and five-column revision history; Spec navigation applies only inside the Spec"
+    },
+    {
+      "id": "spec/versions/v0.1/specs/20261028-1059-tech-SDK与工具链可行性/writer/plan.html:assets",
+      "status": "pass",
+      "detail": "Shared asset depth; Spec manifest order"
+    },
+    {
+      "id": "spec/versions/v0.1/specs/20261028-1059-tech-SDK与工具链可行性/writer/plan.html:styles",
+      "status": "pass",
+      "detail": "No inline style or file probes"
+    },
+    {
+      "id": "spec/versions/v0.1/specs/20261028-1059-tech-SDK与工具链可行性/writer/plan.html:links",
+      "status": "pass",
+      "detail": []
+    },
+    {
+      "id": "spec/versions/v0.1/specs/20261028-1059-tech-SDK与工具链可行性/writer/plan.html:revision",
+      "status": "pass",
+      "detail": "Current revision visible"
+    },
+    {
+      "id": "spec/versions/v0.1/specs/20261028-1059-tech-SDK与工具链可行性/writer/plan.html:notes",
+      "status": "pass",
+      "detail": "No unresolved embedded user notes"
+    },
+    {
+      "id": "spec/versions/v0.1/plan.html:metadata",
+      "status": "pass",
+      "detail": "Required metadata"
+    },
+    {
+      "id": "spec/versions/v0.1/plan.html:structure",
+      "status": "pass",
+      "detail": "Required structure and five-column revision history; Spec navigation applies only inside the Spec"
+    },
+    {
+      "id": "spec/versions/v0.1/plan.html:assets",
+      "status": "pass",
+      "detail": "Shared asset depth; Spec manifest order"
+    },
+    {
+      "id": "spec/versions/v0.1/plan.html:styles",
+      "status": "pass",
+      "detail": "No inline style or file probes"
+    },
+    {
+      "id": "spec/versions/v0.1/plan.html:links",
+      "status": "pass",
+      "detail": []
+    },
+    {
+      "id": "spec/versions/v0.1/plan.html:revision",
+      "status": "pass",
+      "detail": "Current revision visible"
+    },
+    {
+      "id": "spec/versions/v0.1/plan.html:notes",
+      "status": "pass",
+      "detail": "No unresolved embedded user notes"
+    },
+    {
+      "id": "ender:reverse:explorer",
+      "status": "pass",
+      "detail": "HTML reverse relation"
+    },
+    {
+      "id": "ender:reverse:writer",
+      "status": "pass",
+      "detail": "HTML reverse relation"
+    },
+    {
+      "id": "ender:reverse:tester",
+      "status": "pass",
+      "detail": "HTML reverse relation"
+    },
+    {
+      "id": "ender:reverse:executor",
+      "status": "pass",
+      "detail": "HTML reverse relation"
+    },
+    {
+      "id": "ender:reverse:tester",
+      "status": "pass",
+      "detail": "HTML reverse relation"
+    },
+    {
+      "id": "ender:reverse:explorer",
+      "status": "pass",
+      "detail": "HTML reverse relation"
+    },
+    {
+      "id": "ender:reverse:writer",
+      "status": "pass",
+      "detail": "HTML reverse relation"
+    },
+    {
+      "id": "ender:reverse:tester",
+      "status": "pass",
+      "detail": "HTML reverse relation"
+    },
+    {
+      "id": "ender:reverse:executor",
+      "status": "pass",
+      "detail": "HTML reverse relation"
+    },
+    {
+      "id": "ender:reverse:tester",
+      "status": "pass",
+      "detail": "HTML reverse relation"
+    },
+    {
+      "id": "ender:reverse:v0.1",
+      "status": "pass",
+      "detail": "HTML reverse relation"
+    },
+    {
+      "id": "executor:reverse:writer",
+      "status": "pass",
+      "detail": "HTML reverse relation"
+    },
+    {
+      "id": "executor:reverse:tester",
+      "status": "pass",
+      "detail": "HTML reverse relation"
+    },
+    {
+      "id": "executor:reverse:explorer",
+      "status": "pass",
+      "detail": "HTML reverse relation"
+    },
+    {
+      "id": "executor:reverse:tester",
+      "status": "pass",
+      "detail": "HTML reverse relation"
+    },
+    {
+      "id": "explorer:reverse:writer",
+      "status": "pass",
+      "detail": "HTML reverse relation"
+    },
+    {
+      "id": "explorer:reverse:tester",
+      "status": "pass",
+      "detail": "HTML reverse relation"
+    },
+    {
+      "id": "tester:reverse:writer",
+      "status": "pass",
+      "detail": "HTML reverse relation"
+    },
+    {
+      "id": "tester:reverse:explorer",
+      "status": "pass",
+      "detail": "HTML reverse relation"
+    },
+    {
+      "id": "tester:reverse:executor",
+      "status": "pass",
+      "detail": "HTML reverse relation"
+    },
+    {
+      "id": "tester:reverse:tester",
+      "status": "pass",
+      "detail": "HTML reverse relation"
+    },
+    {
+      "id": "tester:reverse:tester",
+      "status": "pass",
+      "detail": "HTML reverse relation"
+    },
+    {
+      "id": "tester:reverse:writer",
+      "status": "pass",
+      "detail": "HTML reverse relation"
+    },
+    {
+      "id": "tester:reverse:executor",
+      "status": "pass",
+      "detail": "HTML reverse relation"
+    },
+    {
+      "id": "tester:reverse:explorer",
+      "status": "pass",
+      "detail": "HTML reverse relation"
+    },
+    {
+      "id": "writer:reverse:explorer",
+      "status": "pass",
+      "detail": "HTML reverse relation"
+    },
+    {
+      "id": "writer:reverse:tester",
+      "status": "pass",
+      "detail": "HTML reverse relation"
+    },
+    {
+      "id": "writer:reverse:executor",
+      "status": "pass",
+      "detail": "HTML reverse relation"
+    },
+    {
+      "id": "writer:reverse:tester",
+      "status": "pass",
+      "detail": "HTML reverse relation"
+    },
+    {
+      "id": "log:executor/artifacts/android/android-clean-build-1.log",
+      "status": "pass",
+      "detail": "Command/time/exit recorded by actual runs"
+    },
+    {
+      "id": "log:executor/artifacts/android/android-clean-build-2.log",
+      "status": "pass",
+      "detail": "Command/time/exit recorded by actual runs"
+    },
+    {
+      "id": "log:executor/artifacts/android/apk-metadata-build-1.log",
+      "status": "pass",
+      "detail": "Command/time/exit recorded by actual runs"
+    },
+    {
+      "id": "log:executor/artifacts/android/apk-metadata-build-2.log",
+      "status": "pass",
+      "detail": "Command/time/exit recorded by actual runs"
+    },
+    {
+      "id": "log:executor/artifacts/android/apk-zipalign-build-1.log",
+      "status": "pass",
+      "detail": "Command/time/exit recorded by actual runs"
+    },
+    {
+      "id": "log:executor/artifacts/android/apk-zipalign-build-2.log",
+      "status": "pass",
+      "detail": "Command/time/exit recorded by actual runs"
+    },
+    {
+      "id": "log:executor/artifacts/android/gradle-configuration-official.log",
+      "status": "pass",
+      "detail": "Command/time/exit recorded by actual runs"
+    },
+    {
+      "id": "log:executor/artifacts/android/gradle-configuration-official.sanitized.log",
+      "status": "pass",
+      "detail": "Command/time/exit recorded by actual runs"
+    },
+    {
+      "id": "log:executor/artifacts/android/gradle-configuration-official.sanitized.portable.log",
+      "status": "pass",
+      "detail": "Command/time/exit recorded by actual runs"
+    },
+    {
+      "id": "log:executor/artifacts/downloads/build-input-downloads.log",
+      "status": "pass",
+      "detail": "Command/time/exit recorded by actual runs"
+    },
+    {
+      "id": "log:executor/artifacts/environment/environment-preflight-final.log",
+      "status": "pass",
+      "detail": "Command/time/exit recorded by actual runs"
+    },
+    {
+      "id": "log:executor/artifacts/environment/environment-preflight-local.log",
+      "status": "pass",
+      "detail": "Command/time/exit recorded by actual runs"
+    },
+    {
+      "id": "log:executor/artifacts/environment/environment-preflight.log",
+      "status": "pass",
+      "detail": "Command/time/exit recorded by actual runs"
+    },
+    {
+      "id": "log:executor/artifacts/environment/preflight-missing-sdk.log",
+      "status": "pass",
+      "detail": "Command/time/exit recorded by actual runs"
+    },
+    {
+      "id": "log:executor/artifacts/environment/sdk-cli-download-retry.log",
+      "status": "pass",
+      "detail": "Command/time/exit recorded by actual runs"
+    },
+    {
+      "id": "log:executor/artifacts/environment/sdk-cli-download.log",
+      "status": "pass",
+      "detail": "Command/time/exit recorded by actual runs"
+    },
+    {
+      "id": "log:executor/artifacts/environment/sdk-cli-download.sanitized.log",
+      "status": "pass",
+      "detail": "Command/time/exit recorded by actual runs"
+    },
+    {
+      "id": "log:executor/artifacts/environment/sdk-license-guard.log",
+      "status": "pass",
+      "detail": "Command/time/exit recorded by actual runs"
+    },
+    {
+      "id": "log:executor/artifacts/environment/sdk-license-guard.sanitized.log",
+      "status": "pass",
+      "detail": "Command/time/exit recorded by actual runs"
+    },
+    {
+      "id": "log:executor/artifacts/environment/sdk-packages-install.log",
+      "status": "pass",
+      "detail": "Command/time/exit recorded by actual runs"
+    },
+    {
+      "id": "log:executor/artifacts/native/aar-native-inspection.log",
+      "status": "pass",
+      "detail": "Command/time/exit recorded by actual runs"
+    },
+    {
+      "id": "log:executor/artifacts/native/apk-native-check-final.log",
+      "status": "pass",
+      "detail": "Command/time/exit recorded by actual runs"
+    },
+    {
+      "id": "log:executor/artifacts/native/apk-native-check.log",
+      "status": "pass",
+      "detail": "Command/time/exit recorded by actual runs"
+    },
+    {
+      "id": "log:executor/artifacts/receiver/cli-invalid-port.log",
+      "status": "pass",
+      "detail": "Command/time/exit recorded by actual runs"
+    },
+    {
+      "id": "log:executor/artifacts/receiver/cli-start-stop.log",
+      "status": "pass",
+      "detail": "Command/time/exit recorded by actual runs"
+    },
+    {
+      "id": "log:executor/artifacts/receiver/receiver-clean-install.log",
+      "status": "pass",
+      "detail": "Command/time/exit recorded by actual runs"
+    },
+    {
+      "id": "log:executor/artifacts/tdd/config-red-verified.log",
+      "status": "pass",
+      "detail": "Command/time/exit recorded by actual runs"
+    },
+    {
+      "id": "log:executor/artifacts/tdd/config-red-verified.portable.log",
+      "status": "pass",
+      "detail": "Command/time/exit recorded by actual runs"
+    },
+    {
+      "id": "log:executor/artifacts/tdd/config-red.log",
+      "status": "pass",
+      "detail": "Command/time/exit recorded by actual runs"
+    },
+    {
+      "id": "log:executor/artifacts/tdd/config-red.portable.log",
+      "status": "pass",
+      "detail": "Command/time/exit recorded by actual runs"
+    },
+    {
+      "id": "log:executor/artifacts/tdd/native-checker-green.log",
+      "status": "pass",
+      "detail": "Command/time/exit recorded by actual runs"
+    },
+    {
+      "id": "log:executor/artifacts/tdd/native-checker-red-assertions.log",
+      "status": "pass",
+      "detail": "Command/time/exit recorded by actual runs"
+    },
+    {
+      "id": "log:executor/artifacts/tdd/native-checker-red-assertions.sanitized.log",
+      "status": "pass",
+      "detail": "Command/time/exit recorded by actual runs"
+    },
+    {
+      "id": "log:executor/artifacts/tdd/native-checker-red.log",
+      "status": "pass",
+      "detail": "Command/time/exit recorded by actual runs"
+    },
+    {
+      "id": "log:executor/artifacts/tdd/native-checker-red.sanitized.log",
+      "status": "pass",
+      "detail": "Command/time/exit recorded by actual runs"
+    },
+    {
+      "id": "log:executor/artifacts/tdd/native-checker-red.sanitized.portable.log",
+      "status": "pass",
+      "detail": "Command/time/exit recorded by actual runs"
+    },
+    {
+      "id": "log:executor/artifacts/tdd/native-relro-padding-green.log",
+      "status": "pass",
+      "detail": "Command/time/exit recorded by actual runs"
+    },
+    {
+      "id": "log:executor/artifacts/tdd/native-relro-padding-red.log",
+      "status": "pass",
+      "detail": "Command/time/exit recorded by actual runs"
+    },
+    {
+      "id": "log:executor/artifacts/tdd/native-relro-padding-red.sanitized.log",
+      "status": "pass",
+      "detail": "Command/time/exit recorded by actual runs"
+    },
+    {
+      "id": "log:executor/artifacts/tdd/receiver-final-unit.log",
+      "status": "pass",
+      "detail": "Command/time/exit recorded by actual runs"
+    },
+    {
+      "id": "log:executor/artifacts/tdd/receiver-green-localhost.log",
+      "status": "pass",
+      "detail": "Command/time/exit recorded by actual runs"
+    },
+    {
+      "id": "log:executor/artifacts/tdd/receiver-green.log",
+      "status": "pass",
+      "detail": "Command/time/exit recorded by actual runs"
+    },
+    {
+      "id": "log:executor/artifacts/tdd/server-red-assertions.log",
+      "status": "pass",
+      "detail": "Command/time/exit recorded by actual runs"
+    },
+    {
+      "id": "log:executor/artifacts/tdd/server-red-assertions.portable.log",
+      "status": "pass",
+      "detail": "Command/time/exit recorded by actual runs"
+    },
+    {
+      "id": "log:executor/artifacts/tdd/server-red.log",
+      "status": "pass",
+      "detail": "Command/time/exit recorded by actual runs"
+    },
+    {
+      "id": "log:executor/artifacts/tdd/server-red.portable.log",
+      "status": "pass",
+      "detail": "Command/time/exit recorded by actual runs"
+    },
+    {
+      "id": "log:tester/artifacts/test-logs/20261028-144342/android-independent-build-1.log",
+      "status": "pass",
+      "detail": "Command/time/exit recorded by actual runs"
+    },
+    {
+      "id": "log:tester/artifacts/test-logs/20261028-144342/android-independent-build-2.log",
+      "status": "pass",
+      "detail": "Command/time/exit recorded by actual runs"
+    },
+    {
+      "id": "log:tester/artifacts/test-logs/20261028-144342/collect-independent-results-final.log",
+      "status": "pass",
+      "detail": "Command/time/exit recorded by actual runs"
+    },
+    {
+      "id": "log:tester/artifacts/test-logs/20261028-144342/collect-independent-results-final.sanitized.log",
+      "status": "pass",
+      "detail": "Command/time/exit recorded by actual runs"
+    },
+    {
+      "id": "log:tester/artifacts/test-logs/20261028-144342/collect-independent-results-local.log",
+      "status": "pass",
+      "detail": "Command/time/exit recorded by actual runs"
+    },
+    {
+      "id": "log:tester/artifacts/test-logs/20261028-144342/collect-independent-results.log",
+      "status": "pass",
+      "detail": "Command/time/exit recorded by actual runs"
+    },
+    {
+      "id": "log:tester/artifacts/test-logs/20261028-144342/collect-independent-results.sanitized.log",
+      "status": "pass",
+      "detail": "Command/time/exit recorded by actual runs"
+    },
+    {
+      "id": "log:tester/artifacts/test-logs/20261028-144342/device-inventory.log",
+      "status": "pass",
+      "detail": "Command/time/exit recorded by actual runs"
+    },
+    {
+      "id": "log:tester/artifacts/test-logs/20261028-144342/independent-provenance.log",
+      "status": "pass",
+      "detail": "Command/time/exit recorded by actual runs"
+    },
+    {
+      "id": "log:tester/artifacts/test-logs/20261028-144342/native-checker-independent-unit.log",
+      "status": "pass",
+      "detail": "Command/time/exit recorded by actual runs"
+    },
+    {
+      "id": "log:tester/artifacts/test-logs/20261028-144342/node-independent-setup.log",
+      "status": "pass",
+      "detail": "Command/time/exit recorded by actual runs"
+    },
+    {
+      "id": "log:tester/artifacts/test-logs/20261028-144342/receiver-independent.log",
+      "status": "pass",
+      "detail": "Command/time/exit recorded by actual runs"
+    },
+    {
+      "id": "log:tester/artifacts/test-logs/20261028-144342/tester-apk-metadata-1.log",
+      "status": "pass",
+      "detail": "Command/time/exit recorded by actual runs"
+    },
+    {
+      "id": "log:tester/artifacts/test-logs/20261028-144342/tester-apk-metadata-2.log",
+      "status": "pass",
+      "detail": "Command/time/exit recorded by actual runs"
+    },
+    {
+      "id": "log:tester/artifacts/test-logs/20261028-144342/tester-final-native.log",
+      "status": "pass",
+      "detail": "Command/time/exit recorded by actual runs"
+    },
+    {
+      "id": "log:tester/artifacts/test-logs/20261028-144342/tester-final-zipalign.log",
+      "status": "pass",
+      "detail": "Command/time/exit recorded by actual runs"
+    },
+    {
+      "id": "log:tester/artifacts/test-logs/20261028-144342/tester-preflight-negative.log",
+      "status": "pass",
+      "detail": "Command/time/exit recorded by actual runs"
+    },
+    {
+      "id": "log:tester/artifacts/test-logs/20261028-144342/tester-preflight.log",
+      "status": "pass",
+      "detail": "Command/time/exit recorded by actual runs"
+    },
+    {
+      "id": "log:tester/artifacts/test-logs/20261028-155217-ending/android-independent-build-1.log",
+      "status": "pass",
+      "detail": "Command/time/exit recorded by actual runs"
+    },
+    {
+      "id": "log:tester/artifacts/test-logs/20261028-155217-ending/android-independent-build-2.log",
+      "status": "pass",
+      "detail": "Command/time/exit recorded by actual runs"
+    },
+    {
+      "id": "log:tester/artifacts/test-logs/20261028-155217-ending/collect-independent-results.log",
+      "status": "pass",
+      "detail": "Command/time/exit recorded by actual runs"
+    },
+    {
+      "id": "log:tester/artifacts/test-logs/20261028-155217-ending/device-inventory.log",
+      "status": "pass",
+      "detail": "Command/time/exit recorded by actual runs"
+    },
+    {
+      "id": "log:tester/artifacts/test-logs/20261028-155217-ending/independent-provenance.log",
+      "status": "pass",
+      "detail": "Command/time/exit recorded by actual runs"
+    },
+    {
+      "id": "log:tester/artifacts/test-logs/20261028-155217-ending/native-checker-independent-unit.log",
+      "status": "pass",
+      "detail": "Command/time/exit recorded by actual runs"
+    },
+    {
+      "id": "log:tester/artifacts/test-logs/20261028-155217-ending/node-independent-setup.log",
+      "status": "pass",
+      "detail": "Command/time/exit recorded by actual runs"
+    },
+    {
+      "id": "log:tester/artifacts/test-logs/20261028-155217-ending/receiver-independent.log",
+      "status": "pass",
+      "detail": "Command/time/exit recorded by actual runs"
+    },
+    {
+      "id": "log:tester/artifacts/test-logs/20261028-155217-ending/tester-apk-metadata-1.log",
+      "status": "pass",
+      "detail": "Command/time/exit recorded by actual runs"
+    },
+    {
+      "id": "log:tester/artifacts/test-logs/20261028-155217-ending/tester-apk-metadata-2.log",
+      "status": "pass",
+      "detail": "Command/time/exit recorded by actual runs"
+    },
+    {
+      "id": "log:tester/artifacts/test-logs/20261028-155217-ending/tester-final-native.log",
+      "status": "pass",
+      "detail": "Command/time/exit recorded by actual runs"
+    },
+    {
+      "id": "log:tester/artifacts/test-logs/20261028-155217-ending/tester-final-zipalign.log",
+      "status": "pass",
+      "detail": "Command/time/exit recorded by actual runs"
+    },
+    {
+      "id": "log:tester/artifacts/test-logs/20261028-155217-ending/tester-preflight-negative.log",
+      "status": "pass",
+      "detail": "Command/time/exit recorded by actual runs"
+    },
+    {
+      "id": "log:tester/artifacts/test-logs/20261028-155217-ending/tester-preflight.log",
+      "status": "pass",
+      "detail": "Command/time/exit recorded by actual runs"
+    },
+    {
+      "id": "log:tester/artifacts/test-logs/20261028-175651-usb/emulator-readiness.log",
+      "status": "pass",
+      "detail": "Command/time/exit recorded by actual runs"
+    },
+    {
+      "id": "log:tester/artifacts/test-logs/20261028-175651-usb/usb-collect-pending.log",
+      "status": "pass",
+      "detail": "Command/time/exit recorded by actual runs"
+    },
+    {
+      "id": "log:tester/artifacts/test-logs/20261028-175651-usb/usb-delivery-validation-final.log",
+      "status": "pass",
+      "detail": "Command/time/exit recorded by actual runs"
+    },
+    {
+      "id": "log:tester/artifacts/test-logs/20261028-175651-usb/usb-delivery-validation-portable.log",
+      "status": "pass",
+      "detail": "Command/time/exit recorded by actual runs"
+    },
+    {
+      "id": "log:tester/artifacts/test-logs/20261028-175651-usb/usb-delivery-validation.log",
+      "status": "pass",
+      "detail": "Command/time/exit recorded by actual runs"
+    },
+    {
+      "id": "log:tester/artifacts/test-logs/20261028-175651-usb/usb-device-inventory-2.log",
+      "status": "pass",
+      "detail": "Command/time/exit recorded by actual runs"
+    },
+    {
+      "id": "log:tester/artifacts/test-logs/20261028-175651-usb/usb-device-inventory-3.log",
+      "status": "pass",
+      "detail": "Command/time/exit recorded by actual runs"
+    },
+    {
+      "id": "log:tester/artifacts/test-logs/20261028-175651-usb/usb-device-inventory.log",
+      "status": "pass",
+      "detail": "Command/time/exit recorded by actual runs"
+    },
+    {
+      "id": "log:tester/artifacts/test-logs/20261028-175651-usb/usb-driver-observation.log",
+      "status": "pass",
+      "detail": "Command/time/exit recorded by actual runs"
+    },
+    {
+      "id": "log:tester/artifacts/test-logs/20261028-175651-usb/usb-runtime-attempt-1.log",
+      "status": "pass",
+      "detail": "Command/time/exit recorded by actual runs"
+    },
+    {
+      "id": "log:tester/artifacts/test-logs/20261028-175651-usb/usb-runtime-attempt-2.log",
+      "status": "pass",
+      "detail": "Command/time/exit recorded by actual runs"
+    },
+    {
+      "id": "log:tester/artifacts/test-logs/20261028-175651-usb/usb-runtime-attempt-3.log",
+      "status": "pass",
+      "detail": "Command/time/exit recorded by actual runs"
+    },
+    {
+      "id": "log:tester/artifacts/test-logs/20261028-175651-usb/usb-runtime-attempt-5.log",
+      "status": "pass",
+      "detail": "Command/time/exit recorded by actual runs"
+    },
+    {
+      "id": "log:tester/artifacts/test-logs/20261028-175651-usb/usb-runtime-final.log",
+      "status": "pass",
+      "detail": "Command/time/exit recorded by actual runs"
+    },
+    {
+      "id": "log:tester/artifacts/test-logs/20261028-175651-usb/usb-ui-diagnostic.log",
+      "status": "pass",
+      "detail": "Command/time/exit recorded by actual runs"
+    },
+    {
+      "id": "log:tester/artifacts/test-logs/20261028-175651-usb/usb-wait-unlock-and-runtime-4.log",
+      "status": "pass",
+      "detail": "Command/time/exit recorded by actual runs"
+    },
+    {
+      "id": "log:tester/artifacts/test-logs/20261028-181629-usb-final/android-independent-build-1.log",
+      "status": "pass",
+      "detail": "Command/time/exit recorded by actual runs"
+    },
+    {
+      "id": "log:tester/artifacts/test-logs/20261028-181629-usb-final/android-independent-build-2.log",
+      "status": "pass",
+      "detail": "Command/time/exit recorded by actual runs"
+    },
+    {
+      "id": "log:tester/artifacts/test-logs/20261028-181629-usb-final/collect-device-results-command-bound.log",
+      "status": "pass",
+      "detail": "Command/time/exit recorded by actual runs"
+    },
+    {
+      "id": "log:tester/artifacts/test-logs/20261028-181629-usb-final/collect-independent-results.log",
+      "status": "pass",
+      "detail": "Command/time/exit recorded by actual runs"
+    },
+    {
+      "id": "log:tester/artifacts/test-logs/20261028-181629-usb-final/device-inventory.log",
+      "status": "pass",
+      "detail": "Command/time/exit recorded by actual runs"
+    },
+    {
+      "id": "log:tester/artifacts/test-logs/20261028-181629-usb-final/independent-provenance.log",
+      "status": "pass",
+      "detail": "Command/time/exit recorded by actual runs"
+    },
+    {
+      "id": "log:tester/artifacts/test-logs/20261028-181629-usb-final/native-checker-independent-unit.log",
+      "status": "pass",
+      "detail": "Command/time/exit recorded by actual runs"
+    },
+    {
+      "id": "log:tester/artifacts/test-logs/20261028-181629-usb-final/node-independent-setup.log",
+      "status": "pass",
+      "detail": "Command/time/exit recorded by actual runs"
+    },
+    {
+      "id": "log:tester/artifacts/test-logs/20261028-181629-usb-final/receiver-independent.log",
+      "status": "pass",
+      "detail": "Command/time/exit recorded by actual runs"
+    },
+    {
+      "id": "log:tester/artifacts/test-logs/20261028-181629-usb-final/tester-apk-metadata-1.log",
+      "status": "pass",
+      "detail": "Command/time/exit recorded by actual runs"
+    },
+    {
+      "id": "log:tester/artifacts/test-logs/20261028-181629-usb-final/tester-apk-metadata-2.log",
+      "status": "pass",
+      "detail": "Command/time/exit recorded by actual runs"
+    },
+    {
+      "id": "log:tester/artifacts/test-logs/20261028-181629-usb-final/tester-final-native.log",
+      "status": "pass",
+      "detail": "Command/time/exit recorded by actual runs"
+    },
+    {
+      "id": "log:tester/artifacts/test-logs/20261028-181629-usb-final/tester-final-zipalign.log",
+      "status": "pass",
+      "detail": "Command/time/exit recorded by actual runs"
+    },
+    {
+      "id": "log:tester/artifacts/test-logs/20261028-181629-usb-final/tester-preflight-negative.log",
+      "status": "pass",
+      "detail": "Command/time/exit recorded by actual runs"
+    },
+    {
+      "id": "log:tester/artifacts/test-logs/20261028-181629-usb-final/tester-preflight.log",
+      "status": "pass",
+      "detail": "Command/time/exit recorded by actual runs"
+    },
+    {
+      "id": "log:tester/artifacts/test-logs/20261028-184012-emulator/api29-runtime.log",
+      "status": "pass",
+      "detail": "Command/time/exit recorded by actual runs"
+    },
+    {
+      "id": "log:tester/artifacts/test-logs/20261028-184012-emulator/api36-16k-runtime.log",
+      "status": "pass",
+      "detail": "Command/time/exit recorded by actual runs"
+    },
+    {
+      "id": "log:tester/artifacts/test-logs/20261028-184012-emulator/consolidated-runtime-matrix.log",
+      "status": "pass",
+      "detail": "Command/time/exit recorded by actual runs"
+    },
+    {
+      "id": "log:tester/artifacts/test-logs/20261028-184012-emulator/emulator-acceleration-probe.log",
+      "status": "pass",
+      "detail": "Command/time/exit recorded by actual runs"
+    },
+    {
+      "id": "log:tester/artifacts/test-logs/20261028-184012-emulator/emulator-avd-create.log",
+      "status": "pass",
+      "detail": "Command/time/exit recorded by actual runs"
+    },
+    {
+      "id": "log:tester/artifacts/test-logs/20261028-184012-emulator/emulator-delivery-validation-final.log",
+      "status": "pass",
+      "detail": "Command/time/exit recorded by actual runs"
+    },
+    {
+      "id": "log:tester/artifacts/test-logs/20261028-184012-emulator/emulator-delivery-validation.log",
+      "status": "pass",
+      "detail": "Command/time/exit recorded by actual runs"
+    },
+    {
+      "id": "log:tester/artifacts/test-logs/20261028-184012-emulator/emulator-environment-install.log",
+      "status": "pass",
+      "detail": "Command/time/exit recorded by actual runs"
+    },
+    {
+      "id": "log:tester/artifacts/test-logs/20261028-184012-emulator/emulator-package-observation-explicit-root.log",
+      "status": "pass",
+      "detail": "Command/time/exit recorded by actual runs"
+    },
+    {
+      "id": "log:tester/artifacts/test-logs/20261028-184012-emulator/emulator-package-observation.log",
+      "status": "pass",
+      "detail": "Command/time/exit recorded by actual runs"
+    },
+    {
+      "id": "log:tester/artifacts/test-logs/20261028-184012-emulator/emulator-package-observation.portable-v2.log",
+      "status": "pass",
+      "detail": "Command/time/exit recorded by actual runs"
+    },
+    {
+      "id": "log:tester/artifacts/test-logs/20261028-184012-emulator/emulator-package-observation.portable.log",
+      "status": "pass",
+      "detail": "Command/time/exit recorded by actual runs"
+    },
+    {
+      "id": "log:tester/artifacts/test-logs/20261028-195438-relocation/adb-isolated-start-final.log",
+      "status": "pass",
+      "detail": "Command/time/exit recorded by actual runs"
+    },
+    {
+      "id": "log:tester/artifacts/test-logs/20261028-195438-relocation/adb-isolated-start-home-final.log",
+      "status": "pass",
+      "detail": "Command/time/exit recorded by actual runs"
+    },
+    {
+      "id": "log:tester/artifacts/test-logs/20261028-195438-relocation/adb-isolated-start.log",
+      "status": "pass",
+      "detail": "Command/time/exit recorded by actual runs"
+    },
+    {
+      "id": "log:tester/artifacts/test-logs/20261028-195438-relocation/adb-isolated-status-final.log",
+      "status": "pass",
+      "detail": "Command/time/exit recorded by actual runs"
+    },
+    {
+      "id": "log:tester/artifacts/test-logs/20261028-195438-relocation/adb-isolated-status-final.portable.log",
+      "status": "pass",
+      "detail": "Command/time/exit recorded by actual runs"
+    },
+    {
+      "id": "log:tester/artifacts/test-logs/20261028-195438-relocation/adb-isolated-status-home-final.log",
+      "status": "pass",
+      "detail": "Command/time/exit recorded by actual runs"
+    },
+    {
+      "id": "log:tester/artifacts/test-logs/20261028-195438-relocation/adb-isolated-status-home-final.portable.log",
+      "status": "pass",
+      "detail": "Command/time/exit recorded by actual runs"
+    },
+    {
+      "id": "log:tester/artifacts/test-logs/20261028-195438-relocation/adb-isolated-stop-final.log",
+      "status": "pass",
+      "detail": "Command/time/exit recorded by actual runs"
+    },
+    {
+      "id": "log:tester/artifacts/test-logs/20261028-195438-relocation/adb-isolated-stop-home-final.log",
+      "status": "pass",
+      "detail": "Command/time/exit recorded by actual runs"
+    },
+    {
+      "id": "log:tester/artifacts/test-logs/20261028-195438-relocation/adb-isolated-stop.log",
+      "status": "pass",
+      "detail": "Command/time/exit recorded by actual runs"
+    },
+    {
+      "id": "log:tester/artifacts/test-logs/20261028-195438-relocation/adb-server.log",
+      "status": "pass",
+      "detail": "Command/time/exit recorded by actual runs"
+    },
+    {
+      "id": "log:tester/artifacts/test-logs/20261028-195438-relocation/clean-apk-build.log",
+      "status": "pass",
+      "detail": "Command/time/exit recorded by actual runs"
+    },
+    {
+      "id": "log:tester/artifacts/test-logs/20261028-195438-relocation/clean-apk-build.portable.log",
+      "status": "pass",
+      "detail": "Command/time/exit recorded by actual runs"
+    },
+    {
+      "id": "log:tester/artifacts/test-logs/20261028-195438-relocation/native-apk-check.log",
+      "status": "pass",
+      "detail": "Command/time/exit recorded by actual runs"
+    },
+    {
+      "id": "log:tester/artifacts/test-logs/20261028-195438-relocation/npm-offline-cache-reuse.log",
+      "status": "pass",
+      "detail": "Command/time/exit recorded by actual runs"
+    },
+    {
+      "id": "log:tester/artifacts/test-logs/20261028-195438-relocation/post-cleanup-preflight.log",
+      "status": "pass",
+      "detail": "Command/time/exit recorded by actual runs"
+    },
+    {
+      "id": "log:tester/artifacts/test-logs/20261028-195438-relocation/preflight-missing-root.log",
+      "status": "pass",
+      "detail": "Command/time/exit recorded by actual runs"
+    },
+    {
+      "id": "log:tester/artifacts/test-logs/20261028-195438-relocation/preflight-selected-root.log",
+      "status": "pass",
+      "detail": "Command/time/exit recorded by actual runs"
+    },
+    {
+      "id": "log:tester/artifacts/test-logs/20261028-195438-relocation/receiver-tests.log",
+      "status": "pass",
+      "detail": "Command/time/exit recorded by actual runs"
+    },
+    {
+      "id": "log:tester/artifacts/test-logs/20261028-195438-relocation/sdk-bootstrap-selected-root.log",
+      "status": "pass",
+      "detail": "Command/time/exit recorded by actual runs"
+    },
+    {
+      "id": "log:tester/artifacts/test-logs/20261028-195438-relocation/sdk-installed.log",
+      "status": "pass",
+      "detail": "Command/time/exit recorded by actual runs"
+    },
+    {
+      "id": "log:tester/artifacts/test-logs/20261028-195438-relocation/signing-location-final.log",
+      "status": "pass",
+      "detail": "Command/time/exit recorded by actual runs"
+    },
+    {
+      "id": "log:tester/artifacts/test-logs/20261028-195438-relocation/signing-location-final.portable.log",
+      "status": "pass",
+      "detail": "Command/time/exit recorded by actual runs"
+    },
+    {
+      "id": "log:tester/artifacts/test-logs/20261028-195438-relocation/signing-location.log",
+      "status": "pass",
+      "detail": "Command/time/exit recorded by actual runs"
+    },
+    {
+      "id": "log:tester/artifacts/test-logs/20261028-195438-relocation/zipalign-check.log",
+      "status": "pass",
+      "detail": "Command/time/exit recorded by actual runs"
+    },
+    {
+      "id": "log:tester/artifacts/test-logs/20261028-203139-closeout/android-independent-build-1.log",
+      "status": "pass",
+      "detail": "Command/time/exit recorded by actual runs"
+    },
+    {
+      "id": "log:tester/artifacts/test-logs/20261028-203139-closeout/android-independent-build-2.log",
+      "status": "pass",
+      "detail": "Command/time/exit recorded by actual runs"
+    },
+    {
+      "id": "log:tester/artifacts/test-logs/20261028-203139-closeout/awr-global-gap-check.log",
+      "status": "pass",
+      "detail": "Command/time/exit recorded by actual runs"
+    },
+    {
+      "id": "log:tester/artifacts/test-logs/20261028-203139-closeout/awr-global-gap-check.portable.log",
+      "status": "pass",
+      "detail": "Command/time/exit recorded by actual runs"
+    },
+    {
+      "id": "log:tester/artifacts/test-logs/20261028-203139-closeout/collect-independent-results.log",
+      "status": "pass",
+      "detail": "Command/time/exit recorded by actual runs"
+    },
+    {
+      "id": "log:tester/artifacts/test-logs/20261028-203139-closeout/consolidate-runtime-matrix.log",
+      "status": "pass",
+      "detail": "Command/time/exit recorded by actual runs"
+    },
+    {
+      "id": "log:tester/artifacts/test-logs/20261028-203139-closeout/device-inventory.log",
+      "status": "pass",
+      "detail": "Command/time/exit recorded by actual runs"
+    },
+    {
+      "id": "log:tester/artifacts/test-logs/20261028-203139-closeout/independent-provenance.log",
+      "status": "pass",
+      "detail": "Command/time/exit recorded by actual runs"
+    },
+    {
+      "id": "log:tester/artifacts/test-logs/20261028-203139-closeout/native-checker-independent-unit.log",
+      "status": "pass",
+      "detail": "Command/time/exit recorded by actual runs"
+    },
+    {
+      "id": "log:tester/artifacts/test-logs/20261028-203139-closeout/node-independent-setup.log",
+      "status": "pass",
+      "detail": "Command/time/exit recorded by actual runs"
+    },
+    {
+      "id": "log:tester/artifacts/test-logs/20261028-203139-closeout/receiver-independent.log",
+      "status": "pass",
+      "detail": "Command/time/exit recorded by actual runs"
+    },
+    {
+      "id": "log:tester/artifacts/test-logs/20261028-203139-closeout/tester-apk-metadata-1.log",
+      "status": "pass",
+      "detail": "Command/time/exit recorded by actual runs"
+    },
+    {
+      "id": "log:tester/artifacts/test-logs/20261028-203139-closeout/tester-apk-metadata-2.log",
+      "status": "pass",
+      "detail": "Command/time/exit recorded by actual runs"
+    },
+    {
+      "id": "log:tester/artifacts/test-logs/20261028-203139-closeout/tester-final-native.log",
+      "status": "pass",
+      "detail": "Command/time/exit recorded by actual runs"
+    },
+    {
+      "id": "log:tester/artifacts/test-logs/20261028-203139-closeout/tester-final-zipalign.log",
+      "status": "pass",
+      "detail": "Command/time/exit recorded by actual runs"
+    },
+    {
+      "id": "log:tester/artifacts/test-logs/20261028-203139-closeout/tester-preflight-negative.log",
+      "status": "pass",
+      "detail": "Command/time/exit recorded by actual runs"
+    },
+    {
+      "id": "log:tester/artifacts/test-logs/20261028-203139-closeout/tester-preflight.log",
+      "status": "pass",
+      "detail": "Command/time/exit recorded by actual runs"
+    },
+    {
+      "id": "log:tester/artifacts/test-logs/20261028-195438-relocation/api29/emulator-boot.log",
+      "status": "pass",
+      "detail": "Command/time/exit recorded by actual runs"
+    },
+    {
+      "id": "log:tester/artifacts/test-logs/20261028-195438-relocation/api29/runtime-run.log",
+      "status": "pass",
+      "detail": "Command/time/exit recorded by actual runs"
+    },
+    {
+      "id": "log:tester/artifacts/test-logs/20261028-195438-relocation/api36-final/emulator-boot.log",
+      "status": "pass",
+      "detail": "Command/time/exit recorded by actual runs"
+    },
+    {
+      "id": "log:tester/artifacts/test-logs/20261028-195438-relocation/api36-final/runtime-run.log",
+      "status": "pass",
+      "detail": "Command/time/exit recorded by actual runs"
+    },
+    {
+      "id": "log:tester/artifacts/test-logs/20261028-195438-relocation/api36-verified/emulator-boot.log",
+      "status": "pass",
+      "detail": "Command/time/exit recorded by actual runs"
+    },
+    {
+      "id": "log:tester/artifacts/test-logs/20261028-195438-relocation/api36-verified/runtime-run.log",
+      "status": "pass",
+      "detail": "Command/time/exit recorded by actual runs"
+    },
+    {
+      "id": "log:tester/artifacts/test-logs/20261028-195438-relocation/api36-verified/runtime/app-screenshot.log",
+      "status": "pass",
+      "detail": "Command/time/exit recorded by actual runs"
+    },
+    {
+      "id": "log:tester/artifacts/test-logs/20261028-195438-relocation/api36-verified/runtime/device-abi.log",
+      "status": "pass",
+      "detail": "Command/time/exit recorded by actual runs"
+    },
+    {
+      "id": "log:tester/artifacts/test-logs/20261028-195438-relocation/api36-verified/runtime/device-android.log",
+      "status": "pass",
+      "detail": "Command/time/exit recorded by actual runs"
+    },
+    {
+      "id": "log:tester/artifacts/test-logs/20261028-195438-relocation/api36-verified/runtime/device-api.log",
+      "status": "pass",
+      "detail": "Command/time/exit recorded by actual runs"
+    },
+    {
+      "id": "log:tester/artifacts/test-logs/20261028-195438-relocation/api36-verified/runtime/device-manufacturer.log",
+      "status": "pass",
+      "detail": "Command/time/exit recorded by actual runs"
+    },
+    {
+      "id": "log:tester/artifacts/test-logs/20261028-195438-relocation/api36-verified/runtime/device-model.log",
+      "status": "pass",
+      "detail": "Command/time/exit recorded by actual runs"
+    },
+    {
+      "id": "log:tester/artifacts/test-logs/20261028-195438-relocation/api36-verified/runtime/device-pageSize.log",
+      "status": "pass",
+      "detail": "Command/time/exit recorded by actual runs"
+    },
+    {
+      "id": "log:tester/artifacts/test-logs/20261028-195438-relocation/api36-verified/runtime/install-app.log",
+      "status": "pass",
+      "detail": "Command/time/exit recorded by actual runs"
+    },
+    {
+      "id": "log:tester/artifacts/test-logs/20261028-195438-relocation/api36-verified/runtime/install-test.log",
+      "status": "pass",
+      "detail": "Command/time/exit recorded by actual runs"
+    },
+    {
+      "id": "log:tester/artifacts/test-logs/20261028-195438-relocation/api36-verified/runtime/jni-instrumentation.log",
+      "status": "pass",
+      "detail": "Command/time/exit recorded by actual runs"
+    },
+    {
+      "id": "log:tester/artifacts/test-logs/20261028-195438-relocation/api36-verified/runtime/launch-activity.log",
+      "status": "pass",
+      "detail": "Command/time/exit recorded by actual runs"
+    },
+    {
+      "id": "log:tester/artifacts/test-logs/20261028-195438-relocation/api36-verified/runtime/ui-dump.log",
+      "status": "pass",
+      "detail": "Command/time/exit recorded by actual runs"
+    },
+    {
+      "id": "log:tester/artifacts/test-logs/20261028-195438-relocation/api36-verified/runtime/ui-read.log",
+      "status": "pass",
+      "detail": "Command/time/exit recorded by actual runs"
+    },
+    {
+      "id": "log:tester/artifacts/test-logs/20261028-195438-relocation/api36-final/runtime/device-abi.log",
+      "status": "pass",
+      "detail": "Command/time/exit recorded by actual runs"
+    },
+    {
+      "id": "log:tester/artifacts/test-logs/20261028-195438-relocation/api36-final/runtime/device-android.log",
+      "status": "pass",
+      "detail": "Command/time/exit recorded by actual runs"
+    },
+    {
+      "id": "log:tester/artifacts/test-logs/20261028-195438-relocation/api36-final/runtime/device-api.log",
+      "status": "pass",
+      "detail": "Command/time/exit recorded by actual runs"
+    },
+    {
+      "id": "log:tester/artifacts/test-logs/20261028-195438-relocation/api36-final/runtime/device-manufacturer.log",
+      "status": "pass",
+      "detail": "Command/time/exit recorded by actual runs"
+    },
+    {
+      "id": "log:tester/artifacts/test-logs/20261028-195438-relocation/api36-final/runtime/device-model.log",
+      "status": "pass",
+      "detail": "Command/time/exit recorded by actual runs"
+    },
+    {
+      "id": "log:tester/artifacts/test-logs/20261028-195438-relocation/api36-final/runtime/device-pageSize.log",
+      "status": "pass",
+      "detail": "Command/time/exit recorded by actual runs"
+    },
+    {
+      "id": "log:tester/artifacts/test-logs/20261028-195438-relocation/api36-final/runtime/install-app.log",
+      "status": "pass",
+      "detail": "Command/time/exit recorded by actual runs"
+    },
+    {
+      "id": "log:tester/artifacts/test-logs/20261028-195438-relocation/api36-final/runtime/install-test.log",
+      "status": "pass",
+      "detail": "Command/time/exit recorded by actual runs"
+    },
+    {
+      "id": "log:tester/artifacts/test-logs/20261028-195438-relocation/api36-final/runtime/jni-instrumentation.log",
+      "status": "pass",
+      "detail": "Command/time/exit recorded by actual runs"
+    },
+    {
+      "id": "log:tester/artifacts/test-logs/20261028-195438-relocation/api36-final/runtime/launch-activity.log",
+      "status": "pass",
+      "detail": "Command/time/exit recorded by actual runs"
+    },
+    {
+      "id": "log:tester/artifacts/test-logs/20261028-195438-relocation/api36-final/runtime/ui-dump.log",
+      "status": "pass",
+      "detail": "Command/time/exit recorded by actual runs"
+    },
+    {
+      "id": "log:tester/artifacts/test-logs/20261028-195438-relocation/api36-final/runtime/ui-read.log",
+      "status": "pass",
+      "detail": "Command/time/exit recorded by actual runs"
+    },
+    {
+      "id": "log:tester/artifacts/test-logs/20261028-195438-relocation/api29/runtime/app-screenshot.log",
+      "status": "pass",
+      "detail": "Command/time/exit recorded by actual runs"
+    },
+    {
+      "id": "log:tester/artifacts/test-logs/20261028-195438-relocation/api29/runtime/device-abi.log",
+      "status": "pass",
+      "detail": "Command/time/exit recorded by actual runs"
+    },
+    {
+      "id": "log:tester/artifacts/test-logs/20261028-195438-relocation/api29/runtime/device-android.log",
+      "status": "pass",
+      "detail": "Command/time/exit recorded by actual runs"
+    },
+    {
+      "id": "log:tester/artifacts/test-logs/20261028-195438-relocation/api29/runtime/device-api.log",
+      "status": "pass",
+      "detail": "Command/time/exit recorded by actual runs"
+    },
+    {
+      "id": "log:tester/artifacts/test-logs/20261028-195438-relocation/api29/runtime/device-manufacturer.log",
+      "status": "pass",
+      "detail": "Command/time/exit recorded by actual runs"
+    },
+    {
+      "id": "log:tester/artifacts/test-logs/20261028-195438-relocation/api29/runtime/device-model.log",
+      "status": "pass",
+      "detail": "Command/time/exit recorded by actual runs"
+    },
+    {
+      "id": "log:tester/artifacts/test-logs/20261028-195438-relocation/api29/runtime/device-pageSize.log",
+      "status": "pass",
+      "detail": "Command/time/exit recorded by actual runs"
+    },
+    {
+      "id": "log:tester/artifacts/test-logs/20261028-195438-relocation/api29/runtime/install-app.log",
+      "status": "pass",
+      "detail": "Command/time/exit recorded by actual runs"
+    },
+    {
+      "id": "log:tester/artifacts/test-logs/20261028-195438-relocation/api29/runtime/install-test.log",
+      "status": "pass",
+      "detail": "Command/time/exit recorded by actual runs"
+    },
+    {
+      "id": "log:tester/artifacts/test-logs/20261028-195438-relocation/api29/runtime/jni-instrumentation.log",
+      "status": "pass",
+      "detail": "Command/time/exit recorded by actual runs"
+    },
+    {
+      "id": "log:tester/artifacts/test-logs/20261028-195438-relocation/api29/runtime/launch-activity.log",
+      "status": "pass",
+      "detail": "Command/time/exit recorded by actual runs"
+    },
+    {
+      "id": "log:tester/artifacts/test-logs/20261028-195438-relocation/api29/runtime/ui-dump.log",
+      "status": "pass",
+      "detail": "Command/time/exit recorded by actual runs"
+    },
+    {
+      "id": "log:tester/artifacts/test-logs/20261028-195438-relocation/api29/runtime/ui-read.log",
+      "status": "pass",
+      "detail": "Command/time/exit recorded by actual runs"
+    },
+    {
+      "id": "log:tester/artifacts/test-logs/20261028-184012-emulator/api29/emulator-boot.log",
+      "status": "pass",
+      "detail": "Command/time/exit recorded by actual runs"
+    },
+    {
+      "id": "log:tester/artifacts/test-logs/20261028-184012-emulator/api29/runtime-run.log",
+      "status": "pass",
+      "detail": "Command/time/exit recorded by actual runs"
+    },
+    {
+      "id": "log:tester/artifacts/test-logs/20261028-184012-emulator/api36/emulator-boot.log",
+      "status": "pass",
+      "detail": "Command/time/exit recorded by actual runs"
+    },
+    {
+      "id": "log:tester/artifacts/test-logs/20261028-184012-emulator/api36/emulator-boot.portable.log",
+      "status": "pass",
+      "detail": "Command/time/exit recorded by actual runs"
+    },
+    {
+      "id": "log:tester/artifacts/test-logs/20261028-184012-emulator/api36/runtime-run.log",
+      "status": "pass",
+      "detail": "Command/time/exit recorded by actual runs"
+    },
+    {
+      "id": "log:tester/artifacts/test-logs/20261028-184012-emulator/api36/runtime/app-screenshot.log",
+      "status": "pass",
+      "detail": "Command/time/exit recorded by actual runs"
+    },
+    {
+      "id": "log:tester/artifacts/test-logs/20261028-184012-emulator/api36/runtime/device-abi.log",
+      "status": "pass",
+      "detail": "Command/time/exit recorded by actual runs"
+    },
+    {
+      "id": "log:tester/artifacts/test-logs/20261028-184012-emulator/api36/runtime/device-android.log",
+      "status": "pass",
+      "detail": "Command/time/exit recorded by actual runs"
+    },
+    {
+      "id": "log:tester/artifacts/test-logs/20261028-184012-emulator/api36/runtime/device-api.log",
+      "status": "pass",
+      "detail": "Command/time/exit recorded by actual runs"
+    },
+    {
+      "id": "log:tester/artifacts/test-logs/20261028-184012-emulator/api36/runtime/device-manufacturer.log",
+      "status": "pass",
+      "detail": "Command/time/exit recorded by actual runs"
+    },
+    {
+      "id": "log:tester/artifacts/test-logs/20261028-184012-emulator/api36/runtime/device-model.log",
+      "status": "pass",
+      "detail": "Command/time/exit recorded by actual runs"
+    },
+    {
+      "id": "log:tester/artifacts/test-logs/20261028-184012-emulator/api36/runtime/device-pageSize.log",
+      "status": "pass",
+      "detail": "Command/time/exit recorded by actual runs"
+    },
+    {
+      "id": "log:tester/artifacts/test-logs/20261028-184012-emulator/api36/runtime/install-app.log",
+      "status": "pass",
+      "detail": "Command/time/exit recorded by actual runs"
+    },
+    {
+      "id": "log:tester/artifacts/test-logs/20261028-184012-emulator/api36/runtime/install-test.log",
+      "status": "pass",
+      "detail": "Command/time/exit recorded by actual runs"
+    },
+    {
+      "id": "log:tester/artifacts/test-logs/20261028-184012-emulator/api36/runtime/jni-instrumentation.log",
+      "status": "pass",
+      "detail": "Command/time/exit recorded by actual runs"
+    },
+    {
+      "id": "log:tester/artifacts/test-logs/20261028-184012-emulator/api36/runtime/launch-activity.log",
+      "status": "pass",
+      "detail": "Command/time/exit recorded by actual runs"
+    },
+    {
+      "id": "log:tester/artifacts/test-logs/20261028-184012-emulator/api36/runtime/ui-dump.log",
+      "status": "pass",
+      "detail": "Command/time/exit recorded by actual runs"
+    },
+    {
+      "id": "log:tester/artifacts/test-logs/20261028-184012-emulator/api36/runtime/ui-read.log",
+      "status": "pass",
+      "detail": "Command/time/exit recorded by actual runs"
+    },
+    {
+      "id": "log:tester/artifacts/test-logs/20261028-184012-emulator/api29/runtime/app-screenshot.log",
+      "status": "pass",
+      "detail": "Command/time/exit recorded by actual runs"
+    },
+    {
+      "id": "log:tester/artifacts/test-logs/20261028-184012-emulator/api29/runtime/device-abi.log",
+      "status": "pass",
+      "detail": "Command/time/exit recorded by actual runs"
+    },
+    {
+      "id": "log:tester/artifacts/test-logs/20261028-184012-emulator/api29/runtime/device-android.log",
+      "status": "pass",
+      "detail": "Command/time/exit recorded by actual runs"
+    },
+    {
+      "id": "log:tester/artifacts/test-logs/20261028-184012-emulator/api29/runtime/device-api.log",
+      "status": "pass",
+      "detail": "Command/time/exit recorded by actual runs"
+    },
+    {
+      "id": "log:tester/artifacts/test-logs/20261028-184012-emulator/api29/runtime/device-manufacturer.log",
+      "status": "pass",
+      "detail": "Command/time/exit recorded by actual runs"
+    },
+    {
+      "id": "log:tester/artifacts/test-logs/20261028-184012-emulator/api29/runtime/device-model.log",
+      "status": "pass",
+      "detail": "Command/time/exit recorded by actual runs"
+    },
+    {
+      "id": "log:tester/artifacts/test-logs/20261028-184012-emulator/api29/runtime/device-pageSize.log",
+      "status": "pass",
+      "detail": "Command/time/exit recorded by actual runs"
+    },
+    {
+      "id": "log:tester/artifacts/test-logs/20261028-184012-emulator/api29/runtime/install-app.log",
+      "status": "pass",
+      "detail": "Command/time/exit recorded by actual runs"
+    },
+    {
+      "id": "log:tester/artifacts/test-logs/20261028-184012-emulator/api29/runtime/install-test.log",
+      "status": "pass",
+      "detail": "Command/time/exit recorded by actual runs"
+    },
+    {
+      "id": "log:tester/artifacts/test-logs/20261028-184012-emulator/api29/runtime/jni-instrumentation.log",
+      "status": "pass",
+      "detail": "Command/time/exit recorded by actual runs"
+    },
+    {
+      "id": "log:tester/artifacts/test-logs/20261028-184012-emulator/api29/runtime/launch-activity.log",
+      "status": "pass",
+      "detail": "Command/time/exit recorded by actual runs"
+    },
+    {
+      "id": "log:tester/artifacts/test-logs/20261028-184012-emulator/api29/runtime/ui-dump.log",
+      "status": "pass",
+      "detail": "Command/time/exit recorded by actual runs"
+    },
+    {
+      "id": "log:tester/artifacts/test-logs/20261028-184012-emulator/api29/runtime/ui-read.log",
+      "status": "pass",
+      "detail": "Command/time/exit recorded by actual runs"
+    },
+    {
+      "id": "log:tester/artifacts/test-logs/20261028-175651-usb/runtime-attempt-2/device-abi.log",
+      "status": "pass",
+      "detail": "Command/time/exit recorded by actual runs"
+    },
+    {
+      "id": "log:tester/artifacts/test-logs/20261028-175651-usb/runtime-attempt-2/device-android.log",
+      "status": "pass",
+      "detail": "Command/time/exit recorded by actual runs"
+    },
+    {
+      "id": "log:tester/artifacts/test-logs/20261028-175651-usb/runtime-attempt-2/device-api.log",
+      "status": "pass",
+      "detail": "Command/time/exit recorded by actual runs"
+    },
+    {
+      "id": "log:tester/artifacts/test-logs/20261028-175651-usb/runtime-attempt-2/device-manufacturer.log",
+      "status": "pass",
+      "detail": "Command/time/exit recorded by actual runs"
+    },
+    {
+      "id": "log:tester/artifacts/test-logs/20261028-175651-usb/runtime-attempt-2/device-model.log",
+      "status": "pass",
+      "detail": "Command/time/exit recorded by actual runs"
+    },
+    {
+      "id": "log:tester/artifacts/test-logs/20261028-175651-usb/runtime-attempt-2/device-pageSize.log",
+      "status": "pass",
+      "detail": "Command/time/exit recorded by actual runs"
+    },
+    {
+      "id": "log:tester/artifacts/test-logs/20261028-175651-usb/runtime-attempt-2/install-app.log",
+      "status": "pass",
+      "detail": "Command/time/exit recorded by actual runs"
+    },
+    {
+      "id": "log:tester/artifacts/test-logs/20261028-175651-usb/runtime-attempt-2/install-test.log",
+      "status": "pass",
+      "detail": "Command/time/exit recorded by actual runs"
+    },
+    {
+      "id": "log:tester/artifacts/test-logs/20261028-175651-usb/runtime-attempt-2/launch-activity.log",
+      "status": "pass",
+      "detail": "Command/time/exit recorded by actual runs"
+    },
+    {
+      "id": "log:tester/artifacts/test-logs/20261028-175651-usb/runtime-attempt-2/ui-dump.log",
+      "status": "pass",
+      "detail": "Command/time/exit recorded by actual runs"
+    },
+    {
+      "id": "log:tester/artifacts/test-logs/20261028-175651-usb/runtime-attempt-2/ui-read.log",
+      "status": "pass",
+      "detail": "Command/time/exit recorded by actual runs"
+    },
+    {
+      "id": "log:tester/artifacts/test-logs/20261028-175651-usb/runtime-attempt-3/device-abi.log",
+      "status": "pass",
+      "detail": "Command/time/exit recorded by actual runs"
+    },
+    {
+      "id": "log:tester/artifacts/test-logs/20261028-175651-usb/runtime-attempt-3/device-android.log",
+      "status": "pass",
+      "detail": "Command/time/exit recorded by actual runs"
+    },
+    {
+      "id": "log:tester/artifacts/test-logs/20261028-175651-usb/runtime-attempt-3/device-api.log",
+      "status": "pass",
+      "detail": "Command/time/exit recorded by actual runs"
+    },
+    {
+      "id": "log:tester/artifacts/test-logs/20261028-175651-usb/runtime-attempt-3/device-manufacturer.log",
+      "status": "pass",
+      "detail": "Command/time/exit recorded by actual runs"
+    },
+    {
+      "id": "log:tester/artifacts/test-logs/20261028-175651-usb/runtime-attempt-3/device-model.log",
+      "status": "pass",
+      "detail": "Command/time/exit recorded by actual runs"
+    },
+    {
+      "id": "log:tester/artifacts/test-logs/20261028-175651-usb/runtime-attempt-3/device-pageSize.log",
+      "status": "pass",
+      "detail": "Command/time/exit recorded by actual runs"
+    },
+    {
+      "id": "log:tester/artifacts/test-logs/20261028-175651-usb/runtime-attempt-3/installed-hash-app.log",
+      "status": "pass",
+      "detail": "Command/time/exit recorded by actual runs"
+    },
+    {
+      "id": "log:tester/artifacts/test-logs/20261028-175651-usb/runtime-attempt-3/installed-hash-test.log",
+      "status": "pass",
+      "detail": "Command/time/exit recorded by actual runs"
+    },
+    {
+      "id": "log:tester/artifacts/test-logs/20261028-175651-usb/runtime-attempt-3/installed-path-app.log",
+      "status": "pass",
+      "detail": "Command/time/exit recorded by actual runs"
+    },
+    {
+      "id": "log:tester/artifacts/test-logs/20261028-175651-usb/runtime-attempt-3/installed-path-test.log",
+      "status": "pass",
+      "detail": "Command/time/exit recorded by actual runs"
+    },
+    {
+      "id": "log:tester/artifacts/test-logs/20261028-175651-usb/runtime-attempt-3/jni-instrumentation.log",
+      "status": "pass",
+      "detail": "Command/time/exit recorded by actual runs"
+    },
+    {
+      "id": "log:tester/artifacts/test-logs/20261028-175651-usb/runtime-attempt-3/launch-activity.log",
+      "status": "pass",
+      "detail": "Command/time/exit recorded by actual runs"
+    },
+    {
+      "id": "log:tester/artifacts/test-logs/20261028-175651-usb/runtime-attempt-3/ui-dump.log",
+      "status": "pass",
+      "detail": "Command/time/exit recorded by actual runs"
+    },
+    {
+      "id": "log:tester/artifacts/test-logs/20261028-175651-usb/runtime-attempt-3/ui-read.log",
+      "status": "pass",
+      "detail": "Command/time/exit recorded by actual runs"
+    },
+    {
+      "id": "log:tester/artifacts/test-logs/20261028-175651-usb/runtime-attempt-5/app-screenshot.log",
+      "status": "pass",
+      "detail": "Command/time/exit recorded by actual runs"
+    },
+    {
+      "id": "log:tester/artifacts/test-logs/20261028-175651-usb/runtime-attempt-5/device-abi.log",
+      "status": "pass",
+      "detail": "Command/time/exit recorded by actual runs"
+    },
+    {
+      "id": "log:tester/artifacts/test-logs/20261028-175651-usb/runtime-attempt-5/device-android.log",
+      "status": "pass",
+      "detail": "Command/time/exit recorded by actual runs"
+    },
+    {
+      "id": "log:tester/artifacts/test-logs/20261028-175651-usb/runtime-attempt-5/device-api.log",
+      "status": "pass",
+      "detail": "Command/time/exit recorded by actual runs"
+    },
+    {
+      "id": "log:tester/artifacts/test-logs/20261028-175651-usb/runtime-attempt-5/device-manufacturer.log",
+      "status": "pass",
+      "detail": "Command/time/exit recorded by actual runs"
+    },
+    {
+      "id": "log:tester/artifacts/test-logs/20261028-175651-usb/runtime-attempt-5/device-model.log",
+      "status": "pass",
+      "detail": "Command/time/exit recorded by actual runs"
+    },
+    {
+      "id": "log:tester/artifacts/test-logs/20261028-175651-usb/runtime-attempt-5/device-pageSize.log",
+      "status": "pass",
+      "detail": "Command/time/exit recorded by actual runs"
+    },
+    {
+      "id": "log:tester/artifacts/test-logs/20261028-175651-usb/runtime-attempt-5/installed-hash-app.log",
+      "status": "pass",
+      "detail": "Command/time/exit recorded by actual runs"
+    },
+    {
+      "id": "log:tester/artifacts/test-logs/20261028-175651-usb/runtime-attempt-5/installed-hash-test.log",
+      "status": "pass",
+      "detail": "Command/time/exit recorded by actual runs"
+    },
+    {
+      "id": "log:tester/artifacts/test-logs/20261028-175651-usb/runtime-attempt-5/installed-path-app.log",
+      "status": "pass",
+      "detail": "Command/time/exit recorded by actual runs"
+    },
+    {
+      "id": "log:tester/artifacts/test-logs/20261028-175651-usb/runtime-attempt-5/installed-path-test.log",
+      "status": "pass",
+      "detail": "Command/time/exit recorded by actual runs"
+    },
+    {
+      "id": "log:tester/artifacts/test-logs/20261028-175651-usb/runtime-attempt-5/jni-instrumentation.log",
+      "status": "pass",
+      "detail": "Command/time/exit recorded by actual runs"
+    },
+    {
+      "id": "log:tester/artifacts/test-logs/20261028-175651-usb/runtime-attempt-5/launch-activity.log",
+      "status": "pass",
+      "detail": "Command/time/exit recorded by actual runs"
+    },
+    {
+      "id": "log:tester/artifacts/test-logs/20261028-175651-usb/runtime-attempt-5/ui-dump.log",
+      "status": "pass",
+      "detail": "Command/time/exit recorded by actual runs"
+    },
+    {
+      "id": "log:tester/artifacts/test-logs/20261028-175651-usb/runtime-attempt-5/ui-read.log",
+      "status": "pass",
+      "detail": "Command/time/exit recorded by actual runs"
+    },
+    {
+      "id": "log:tester/artifacts/test-logs/20261028-175651-usb/runtime-final/app-screenshot.log",
+      "status": "pass",
+      "detail": "Command/time/exit recorded by actual runs"
+    },
+    {
+      "id": "log:tester/artifacts/test-logs/20261028-175651-usb/runtime-final/device-abi.log",
+      "status": "pass",
+      "detail": "Command/time/exit recorded by actual runs"
+    },
+    {
+      "id": "log:tester/artifacts/test-logs/20261028-175651-usb/runtime-final/device-android.log",
+      "status": "pass",
+      "detail": "Command/time/exit recorded by actual runs"
+    },
+    {
+      "id": "log:tester/artifacts/test-logs/20261028-175651-usb/runtime-final/device-api.log",
+      "status": "pass",
+      "detail": "Command/time/exit recorded by actual runs"
+    },
+    {
+      "id": "log:tester/artifacts/test-logs/20261028-175651-usb/runtime-final/device-manufacturer.log",
+      "status": "pass",
+      "detail": "Command/time/exit recorded by actual runs"
+    },
+    {
+      "id": "log:tester/artifacts/test-logs/20261028-175651-usb/runtime-final/device-model.log",
+      "status": "pass",
+      "detail": "Command/time/exit recorded by actual runs"
+    },
+    {
+      "id": "log:tester/artifacts/test-logs/20261028-175651-usb/runtime-final/device-pageSize.log",
+      "status": "pass",
+      "detail": "Command/time/exit recorded by actual runs"
+    },
+    {
+      "id": "log:tester/artifacts/test-logs/20261028-175651-usb/runtime-final/installed-hash-app.log",
+      "status": "pass",
+      "detail": "Command/time/exit recorded by actual runs"
+    },
+    {
+      "id": "log:tester/artifacts/test-logs/20261028-175651-usb/runtime-final/installed-hash-test.log",
+      "status": "pass",
+      "detail": "Command/time/exit recorded by actual runs"
+    },
+    {
+      "id": "log:tester/artifacts/test-logs/20261028-175651-usb/runtime-final/installed-path-app.log",
+      "status": "pass",
+      "detail": "Command/time/exit recorded by actual runs"
+    },
+    {
+      "id": "log:tester/artifacts/test-logs/20261028-175651-usb/runtime-final/installed-path-test.log",
+      "status": "pass",
+      "detail": "Command/time/exit recorded by actual runs"
+    },
+    {
+      "id": "log:tester/artifacts/test-logs/20261028-175651-usb/runtime-final/jni-instrumentation.log",
+      "status": "pass",
+      "detail": "Command/time/exit recorded by actual runs"
+    },
+    {
+      "id": "log:tester/artifacts/test-logs/20261028-175651-usb/runtime-final/launch-activity.log",
+      "status": "pass",
+      "detail": "Command/time/exit recorded by actual runs"
+    },
+    {
+      "id": "log:tester/artifacts/test-logs/20261028-175651-usb/runtime-final/ui-dump.log",
+      "status": "pass",
+      "detail": "Command/time/exit recorded by actual runs"
+    },
+    {
+      "id": "log:tester/artifacts/test-logs/20261028-175651-usb/runtime-final/ui-read.log",
+      "status": "pass",
+      "detail": "Command/time/exit recorded by actual runs"
+    },
+    {
+      "id": "all19",
+      "status": "pass",
+      "detail": "19 actual case records"
+    },
+    {
+      "id": "source:android/app/build.gradle.kts",
+      "status": "pass",
+      "detail": "Actual tested input still matches"
+    },
+    {
+      "id": "source:android/app/proguard-rules.pro",
+      "status": "pass",
+      "detail": "Actual tested input still matches"
+    },
+    {
+      "id": "source:android/app/src/androidTest/java/io/github/primedawn/artemis/WebRtcSdkSmokeTest.kt",
+      "status": "pass",
+      "detail": "Actual tested input still matches"
+    },
+    {
+      "id": "source:android/app/src/main/AndroidManifest.xml",
+      "status": "pass",
+      "detail": "Actual tested input still matches"
+    },
+    {
+      "id": "source:android/app/src/main/java/io/github/primedawn/artemis/MainActivity.kt",
+      "status": "pass",
+      "detail": "Actual tested input still matches"
+    },
+    {
+      "id": "source:android/app/src/main/res/values/strings.xml",
+      "status": "pass",
+      "detail": "Actual tested input still matches"
+    },
+    {
+      "id": "source:android/app/src/main/res/values/themes.xml",
+      "status": "pass",
+      "detail": "Actual tested input still matches"
+    },
+    {
+      "id": "source:android/build.gradle.kts",
+      "status": "pass",
+      "detail": "Actual tested input still matches"
+    },
+    {
+      "id": "source:android/gradle.properties",
+      "status": "pass",
+      "detail": "Actual tested input still matches"
+    },
+    {
+      "id": "source:android/gradle/libs.versions.toml",
+      "status": "pass",
+      "detail": "Actual tested input still matches"
+    },
+    {
+      "id": "source:android/gradle/wrapper/gradle-wrapper.jar",
+      "status": "pass",
+      "detail": "Actual tested input still matches"
+    },
+    {
+      "id": "source:android/gradle/wrapper/gradle-wrapper.properties",
+      "status": "pass",
+      "detail": "Actual tested input still matches"
+    },
+    {
+      "id": "source:android/gradlew",
+      "status": "pass",
+      "detail": "Actual tested input still matches"
+    },
+    {
+      "id": "source:android/gradlew.bat",
+      "status": "pass",
+      "detail": "Actual tested input still matches"
+    },
+    {
+      "id": "source:android/settings.gradle.kts",
+      "status": "pass",
+      "detail": "Actual tested input still matches"
+    },
+    {
+      "id": "source:receiver/.node-version",
+      "status": "pass",
+      "detail": "Actual tested input still matches"
+    },
+    {
+      "id": "source:receiver/.npmrc",
+      "status": "pass",
+      "detail": "Actual tested input still matches"
+    },
+    {
+      "id": "source:receiver/package-lock.json",
+      "status": "pass",
+      "detail": "Actual tested input still matches"
+    },
+    {
+      "id": "source:receiver/package.json",
+      "status": "pass",
+      "detail": "Actual tested input still matches"
+    },
+    {
+      "id": "source:receiver/src/cli.ts",
+      "status": "pass",
+      "detail": "Actual tested input still matches"
+    },
+    {
+      "id": "source:receiver/src/config.ts",
+      "status": "pass",
+      "detail": "Actual tested input still matches"
+    },
+    {
+      "id": "source:receiver/src/server.ts",
+      "status": "pass",
+      "detail": "Actual tested input still matches"
+    },
+    {
+      "id": "source:receiver/test/config.test.ts",
+      "status": "pass",
+      "detail": "Actual tested input still matches"
+    },
+    {
+      "id": "source:receiver/test/server.test.ts",
+      "status": "pass",
+      "detail": "Actual tested input still matches"
+    },
+    {
+      "id": "source:receiver/tsconfig.json",
+      "status": "pass",
+      "detail": "Actual tested input still matches"
+    },
+    {
+      "id": "source:scripts/bootstrap-android-sdk.ps1",
+      "status": "pass",
+      "detail": "Actual tested input still matches"
+    },
+    {
+      "id": "source:scripts/rk-awr-checkpoint.ps1",
+      "status": "pass",
+      "detail": "Actual tested input still matches"
+    },
+    {
+      "id": "source:scripts/rk-awr-checkpoint.sh",
+      "status": "pass",
+      "detail": "Actual tested input still matches"
+    },
+    {
+      "id": "source:scripts/tests/test_verify_native_libs.py",
+      "status": "pass",
+      "detail": "Actual tested input still matches"
+    },
+    {
+      "id": "source:scripts/verify-native-libs.py",
+      "status": "pass",
+      "detail": "Actual tested input still matches"
+    },
+    {
+      "id": "source:scripts/verify-toolchain.ps1",
+      "status": "pass",
+      "detail": "Actual tested input still matches"
+    },
+    {
+      "id": "source:tests/android-device-probe.py",
+      "status": "pass",
+      "detail": "Actual tested input still matches"
+    },
+    {
+      "id": "source:tests/android-runtime-smoke.py",
+      "status": "pass",
+      "detail": "Actual tested input still matches"
+    },
+    {
+      "id": "source:tests/collect-runtime-matrix.py",
+      "status": "pass",
+      "detail": "Actual tested input still matches"
+    },
+    {
+      "id": "source:tests/collect-sdk-results.py",
+      "status": "pass",
+      "detail": "Actual tested input still matches"
+    },
+    {
+      "id": "source:tests/receiver-smoke.mjs",
+      "status": "pass",
+      "detail": "Actual tested input still matches"
+    },
+    {
+      "id": "source:tests/toolchain-provenance.py",
+      "status": "pass",
+      "detail": "Actual tested input still matches"
+    },
+    {
+      "id": "source:tests/windows-cli-signal.py",
+      "status": "pass",
+      "detail": "Actual tested input still matches"
+    },
+    {
+      "id": "source:.cache/run-emulator-runtime.py",
+      "status": "pass",
+      "detail": "Actual tested input still matches"
+    },
+    {
+      "id": "source:.cache/create-emulator-avds.ps1",
+      "status": "pass",
+      "detail": "Actual tested input still matches"
+    },
+    {
+      "id": "TC-D1:runtime",
+      "status": "pass",
+      "detail": "Original runtime bytes and JNI result"
+    },
+    {
+      "id": "TC-D1:apk:android/app/build/outputs/apk/debug/app-debug.apk",
+      "status": "pass",
+      "detail": "Current exact APK bytes"
+    },
+    {
+      "id": "TC-D1:apk:android/app/build/outputs/apk/androidTest/debug/app-debug-androidTest.apk",
+      "status": "pass",
+      "detail": "Current exact APK bytes"
+    },
+    {
+      "id": "TC-D1:exit:device-manufacturer",
+      "status": "pass",
+      "detail": "Runtime command succeeded"
+    },
+    {
+      "id": "TC-D1:exit:device-model",
+      "status": "pass",
+      "detail": "Runtime command succeeded"
+    },
+    {
+      "id": "TC-D1:exit:device-android",
+      "status": "pass",
+      "detail": "Runtime command succeeded"
+    },
+    {
+      "id": "TC-D1:exit:device-api",
+      "status": "pass",
+      "detail": "Runtime command succeeded"
+    },
+    {
+      "id": "TC-D1:exit:device-abi",
+      "status": "pass",
+      "detail": "Runtime command succeeded"
+    },
+    {
+      "id": "TC-D1:exit:device-pageSize",
+      "status": "pass",
+      "detail": "Runtime command succeeded"
+    },
+    {
+      "id": "TC-D1:exit:installed-path-app",
+      "status": "pass",
+      "detail": "Runtime command succeeded"
+    },
+    {
+      "id": "TC-D1:exit:installed-hash-app",
+      "status": "pass",
+      "detail": "Runtime command succeeded"
+    },
+    {
+      "id": "TC-D1:exit:installed-path-test",
+      "status": "pass",
+      "detail": "Runtime command succeeded"
+    },
+    {
+      "id": "TC-D1:exit:installed-hash-test",
+      "status": "pass",
+      "detail": "Runtime command succeeded"
+    },
+    {
+      "id": "TC-D1:exit:jni-instrumentation",
+      "status": "pass",
+      "detail": "Runtime command succeeded"
+    },
+    {
+      "id": "TC-D1:exit:launch-activity",
+      "status": "pass",
+      "detail": "Runtime command succeeded"
+    },
+    {
+      "id": "TC-D1:exit:ui-dump",
+      "status": "pass",
+      "detail": "Runtime command succeeded"
+    },
+    {
+      "id": "TC-D1:exit:ui-read",
+      "status": "pass",
+      "detail": "Runtime command succeeded"
+    },
+    {
+      "id": "TC-D1:exit:app-screenshot",
+      "status": "pass",
+      "detail": "Runtime command succeeded"
+    },
+    {
+      "id": "TC-D1:png",
+      "status": "pass",
+      "detail": "Actual screenshot bytes"
+    },
+    {
+      "id": "TC-D2:runtime",
+      "status": "pass",
+      "detail": "Original runtime bytes and JNI result"
+    },
+    {
+      "id": "TC-D2:apk:android/app/build/outputs/apk/debug/app-debug.apk",
+      "status": "pass",
+      "detail": "Current exact APK bytes"
+    },
+    {
+      "id": "TC-D2:apk:android/app/build/outputs/apk/androidTest/debug/app-debug-androidTest.apk",
+      "status": "pass",
+      "detail": "Current exact APK bytes"
+    },
+    {
+      "id": "TC-D2:exit:device-manufacturer",
+      "status": "pass",
+      "detail": "Runtime command succeeded"
+    },
+    {
+      "id": "TC-D2:exit:device-model",
+      "status": "pass",
+      "detail": "Runtime command succeeded"
+    },
+    {
+      "id": "TC-D2:exit:device-android",
+      "status": "pass",
+      "detail": "Runtime command succeeded"
+    },
+    {
+      "id": "TC-D2:exit:device-api",
+      "status": "pass",
+      "detail": "Runtime command succeeded"
+    },
+    {
+      "id": "TC-D2:exit:device-abi",
+      "status": "pass",
+      "detail": "Runtime command succeeded"
+    },
+    {
+      "id": "TC-D2:exit:device-pageSize",
+      "status": "pass",
+      "detail": "Runtime command succeeded"
+    },
+    {
+      "id": "TC-D2:exit:install-app",
+      "status": "pass",
+      "detail": "Runtime command succeeded"
+    },
+    {
+      "id": "TC-D2:exit:install-test",
+      "status": "pass",
+      "detail": "Runtime command succeeded"
+    },
+    {
+      "id": "TC-D2:exit:jni-instrumentation",
+      "status": "pass",
+      "detail": "Runtime command succeeded"
+    },
+    {
+      "id": "TC-D2:exit:launch-activity",
+      "status": "pass",
+      "detail": "Runtime command succeeded"
+    },
+    {
+      "id": "TC-D2:exit:ui-dump",
+      "status": "pass",
+      "detail": "Runtime command succeeded"
+    },
+    {
+      "id": "TC-D2:exit:ui-read",
+      "status": "pass",
+      "detail": "Runtime command succeeded"
+    },
+    {
+      "id": "TC-D2:exit:app-screenshot",
+      "status": "pass",
+      "detail": "Runtime command succeeded"
+    },
+    {
+      "id": "TC-D2:png",
+      "status": "pass",
+      "detail": "Actual screenshot bytes"
+    },
+    {
+      "id": "TC-D3:runtime",
+      "status": "pass",
+      "detail": "Original runtime bytes and JNI result"
+    },
+    {
+      "id": "TC-D3:apk:android/app/build/outputs/apk/debug/app-debug.apk",
+      "status": "pass",
+      "detail": "Current exact APK bytes"
+    },
+    {
+      "id": "TC-D3:apk:android/app/build/outputs/apk/androidTest/debug/app-debug-androidTest.apk",
+      "status": "pass",
+      "detail": "Current exact APK bytes"
+    },
+    {
+      "id": "TC-D3:exit:device-manufacturer",
+      "status": "pass",
+      "detail": "Runtime command succeeded"
+    },
+    {
+      "id": "TC-D3:exit:device-model",
+      "status": "pass",
+      "detail": "Runtime command succeeded"
+    },
+    {
+      "id": "TC-D3:exit:device-android",
+      "status": "pass",
+      "detail": "Runtime command succeeded"
+    },
+    {
+      "id": "TC-D3:exit:device-api",
+      "status": "pass",
+      "detail": "Runtime command succeeded"
+    },
+    {
+      "id": "TC-D3:exit:device-abi",
+      "status": "pass",
+      "detail": "Runtime command succeeded"
+    },
+    {
+      "id": "TC-D3:exit:device-pageSize",
+      "status": "pass",
+      "detail": "Runtime command succeeded"
+    },
+    {
+      "id": "TC-D3:exit:install-app",
+      "status": "pass",
+      "detail": "Runtime command succeeded"
+    },
+    {
+      "id": "TC-D3:exit:install-test",
+      "status": "pass",
+      "detail": "Runtime command succeeded"
+    },
+    {
+      "id": "TC-D3:exit:jni-instrumentation",
+      "status": "pass",
+      "detail": "Runtime command succeeded"
+    },
+    {
+      "id": "TC-D3:exit:launch-activity",
+      "status": "pass",
+      "detail": "Runtime command succeeded"
+    },
+    {
+      "id": "TC-D3:exit:ui-dump",
+      "status": "pass",
+      "detail": "Runtime command succeeded"
+    },
+    {
+      "id": "TC-D3:exit:ui-read",
+      "status": "pass",
+      "detail": "Runtime command succeeded"
+    },
+    {
+      "id": "TC-D3:exit:app-screenshot",
+      "status": "pass",
+      "detail": "Runtime command succeeded"
+    },
+    {
+      "id": "TC-D3:png",
+      "status": "pass",
+      "detail": "Actual screenshot bytes"
+    },
+    {
+      "id": "TC-01:tester-preflight.log",
+      "status": "pass",
+      "detail": "Evidence exists"
+    },
+    {
+      "id": "TC-01:tester-preflight-negative.log",
+      "status": "pass",
+      "detail": "Evidence exists"
+    },
+    {
+      "id": "TC-01:preflight.json",
+      "status": "pass",
+      "detail": "Evidence exists"
+    },
+    {
+      "id": "TC-02:provenance.json",
+      "status": "pass",
+      "detail": "Evidence exists"
+    },
+    {
+      "id": "TC-02:independent-provenance.log",
+      "status": "pass",
+      "detail": "Evidence exists"
+    },
+    {
+      "id": "TC-03:provenance.json",
+      "status": "pass",
+      "detail": "Evidence exists"
+    },
+    {
+      "id": "TC-03:independent-provenance.log",
+      "status": "pass",
+      "detail": "Evidence exists"
+    },
+    {
+      "id": "TC-04:provenance.json",
+      "status": "pass",
+      "detail": "Evidence exists"
+    },
+    {
+      "id": "TC-04:independent-provenance.log",
+      "status": "pass",
+      "detail": "Evidence exists"
+    },
+    {
+      "id": "TC-05:android-independent-build-1.log",
+      "status": "pass",
+      "detail": "Evidence exists"
+    },
+    {
+      "id": "TC-05:build-1-apk.json",
+      "status": "pass",
+      "detail": "Evidence exists"
+    },
+    {
+      "id": "TC-06:android-independent-build-2.log",
+      "status": "pass",
+      "detail": "Evidence exists"
+    },
+    {
+      "id": "TC-06:build-2-apk.json",
+      "status": "pass",
+      "detail": "Evidence exists"
+    },
+    {
+      "id": "TC-07:native-apk.json",
+      "status": "pass",
+      "detail": "Evidence exists"
+    },
+    {
+      "id": "TC-07:native-checker-independent-unit.log",
+      "status": "pass",
+      "detail": "Evidence exists"
+    },
+    {
+      "id": "TC-08:tester-final-zipalign.log",
+      "status": "pass",
+      "detail": "Evidence exists"
+    },
+    {
+      "id": "TC-09:node-independent-setup.log",
+      "status": "pass",
+      "detail": "Evidence exists"
+    },
+    {
+      "id": "TC-10:node-independent-setup.log",
+      "status": "pass",
+      "detail": "Evidence exists"
+    },
+    {
+      "id": "TC-11:results.json",
+      "status": "pass",
+      "detail": "Evidence exists"
+    },
+    {
+      "id": "TC-11:audit.ndjson",
+      "status": "pass",
+      "detail": "Evidence exists"
+    },
+    {
+      "id": "TC-11:network-summary.json",
+      "status": "pass",
+      "detail": "Evidence exists"
+    },
+    {
+      "id": "TC-11:signal-summary.json",
+      "status": "pass",
+      "detail": "Evidence exists"
+    },
+    {
+      "id": "TC-12:results.json",
+      "status": "pass",
+      "detail": "Evidence exists"
+    },
+    {
+      "id": "TC-12:audit.ndjson",
+      "status": "pass",
+      "detail": "Evidence exists"
+    },
+    {
+      "id": "TC-12:network-summary.json",
+      "status": "pass",
+      "detail": "Evidence exists"
+    },
+    {
+      "id": "TC-12:signal-summary.json",
+      "status": "pass",
+      "detail": "Evidence exists"
+    },
+    {
+      "id": "TC-13:results.json",
+      "status": "pass",
+      "detail": "Evidence exists"
+    },
+    {
+      "id": "TC-13:audit.ndjson",
+      "status": "pass",
+      "detail": "Evidence exists"
+    },
+    {
+      "id": "TC-13:network-summary.json",
+      "status": "pass",
+      "detail": "Evidence exists"
+    },
+    {
+      "id": "TC-13:signal-summary.json",
+      "status": "pass",
+      "detail": "Evidence exists"
+    },
+    {
+      "id": "TC-14:results.json",
+      "status": "pass",
+      "detail": "Evidence exists"
+    },
+    {
+      "id": "TC-14:audit.ndjson",
+      "status": "pass",
+      "detail": "Evidence exists"
+    },
+    {
+      "id": "TC-14:network-summary.json",
+      "status": "pass",
+      "detail": "Evidence exists"
+    },
+    {
+      "id": "TC-14:signal-summary.json",
+      "status": "pass",
+      "detail": "Evidence exists"
+    },
+    {
+      "id": "TC-15:results.json",
+      "status": "pass",
+      "detail": "Evidence exists"
+    },
+    {
+      "id": "TC-15:audit.ndjson",
+      "status": "pass",
+      "detail": "Evidence exists"
+    },
+    {
+      "id": "TC-15:network-summary.json",
+      "status": "pass",
+      "detail": "Evidence exists"
+    },
+    {
+      "id": "TC-15:signal-summary.json",
+      "status": "pass",
+      "detail": "Evidence exists"
+    },
+    {
+      "id": "TC-16:results.json",
+      "status": "pass",
+      "detail": "Evidence exists"
+    },
+    {
+      "id": "TC-16:audit.ndjson",
+      "status": "pass",
+      "detail": "Evidence exists"
+    },
+    {
+      "id": "TC-16:network-summary.json",
+      "status": "pass",
+      "detail": "Evidence exists"
+    },
+    {
+      "id": "TC-16:signal-summary.json",
+      "status": "pass",
+      "detail": "Evidence exists"
+    },
+    {
+      "id": "TC-D1:runtime-results.json",
+      "status": "pass",
+      "detail": "Evidence exists"
+    },
+    {
+      "id": "TC-D1:installed-hash-app.log",
+      "status": "pass",
+      "detail": "Evidence exists"
+    },
+    {
+      "id": "TC-D1:installed-hash-test.log",
+      "status": "pass",
+      "detail": "Evidence exists"
+    },
+    {
+      "id": "TC-D1:launch-activity.log",
+      "status": "pass",
+      "detail": "Evidence exists"
+    },
+    {
+      "id": "TC-D1:artemis-ui.xml",
+      "status": "pass",
+      "detail": "Evidence exists"
+    },
+    {
+      "id": "TC-D1:artemis-validation.png",
+      "status": "pass",
+      "detail": "Evidence exists"
+    },
+    {
+      "id": "TC-D1:jni-instrumentation.log",
+      "status": "pass",
+      "detail": "Evidence exists"
+    },
+    {
+      "id": "TC-D1:device-api.log",
+      "status": "pass",
+      "detail": "Evidence exists"
+    },
+    {
+      "id": "TC-D1:device-pageSize.log",
+      "status": "pass",
+      "detail": "Evidence exists"
+    },
+    {
+      "id": "TC-D1:device-abi.log",
+      "status": "pass",
+      "detail": "Evidence exists"
+    },
+    {
+      "id": "TC-D2:runtime-results.json",
+      "status": "pass",
+      "detail": "Evidence exists"
+    },
+    {
+      "id": "TC-D2:install-app.log",
+      "status": "pass",
+      "detail": "Evidence exists"
+    },
+    {
+      "id": "TC-D2:install-test.log",
+      "status": "pass",
+      "detail": "Evidence exists"
+    },
+    {
+      "id": "TC-D2:launch-activity.log",
+      "status": "pass",
+      "detail": "Evidence exists"
+    },
+    {
+      "id": "TC-D2:artemis-ui.xml",
+      "status": "pass",
+      "detail": "Evidence exists"
+    },
+    {
+      "id": "TC-D2:artemis-validation.png",
+      "status": "pass",
+      "detail": "Evidence exists"
+    },
+    {
+      "id": "TC-D2:jni-instrumentation.log",
+      "status": "pass",
+      "detail": "Evidence exists"
+    },
+    {
+      "id": "TC-D2:device-api.log",
+      "status": "pass",
+      "detail": "Evidence exists"
+    },
+    {
+      "id": "TC-D2:device-pageSize.log",
+      "status": "pass",
+      "detail": "Evidence exists"
+    },
+    {
+      "id": "TC-D2:device-abi.log",
+      "status": "pass",
+      "detail": "Evidence exists"
+    },
+    {
+      "id": "TC-D3:runtime-results.json",
+      "status": "pass",
+      "detail": "Evidence exists"
+    },
+    {
+      "id": "TC-D3:install-app.log",
+      "status": "pass",
+      "detail": "Evidence exists"
+    },
+    {
+      "id": "TC-D3:install-test.log",
+      "status": "pass",
+      "detail": "Evidence exists"
+    },
+    {
+      "id": "TC-D3:launch-activity.log",
+      "status": "pass",
+      "detail": "Evidence exists"
+    },
+    {
+      "id": "TC-D3:artemis-ui.xml",
+      "status": "pass",
+      "detail": "Evidence exists"
+    },
+    {
+      "id": "TC-D3:artemis-validation.png",
+      "status": "pass",
+      "detail": "Evidence exists"
+    },
+    {
+      "id": "TC-D3:jni-instrumentation.log",
+      "status": "pass",
+      "detail": "Evidence exists"
+    },
+    {
+      "id": "TC-D3:device-api.log",
+      "status": "pass",
+      "detail": "Evidence exists"
+    },
+    {
+      "id": "TC-D3:device-pageSize.log",
+      "status": "pass",
+      "detail": "Evidence exists"
+    },
+    {
+      "id": "TC-D3:device-abi.log",
+      "status": "pass",
+      "detail": "Evidence exists"
+    },
+    {
+      "id": "portable:spec/versions/v0.1/specs/20261028-1059-tech-SDK与工具链可行性/ender/artifacts/20261028-203139-closeout/awr-intake-inspect.json",
+      "status": "pass",
+      "detail": "Original and derivative bytes preserved"
+    },
+    {
+      "id": "portable:spec/versions/v0.1/specs/20261028-1059-tech-SDK与工具链可行性/ender/artifacts/20261028-203139-closeout/zero-gap-result.json",
+      "status": "pass",
+      "detail": "Original and derivative bytes preserved"
+    },
+    {
+      "id": "portable:spec/versions/v0.1/specs/20261028-1059-tech-SDK与工具链可行性/executor/artifacts/tdd/native-checker-red.sanitized.log",
+      "status": "pass",
+      "detail": "Original and derivative bytes preserved"
+    },
+    {
+      "id": "portable:spec/versions/v0.1/specs/20261028-1059-tech-SDK与工具链可行性/tester/artifacts/test-logs/20261028-184012-emulator/api36/emulator-boot.log",
+      "status": "pass",
+      "detail": "Original and derivative bytes preserved"
+    },
+    {
+      "id": "portable:spec/versions/v0.1/specs/20261028-1059-tech-SDK与工具链可行性/tester/artifacts/test-logs/20261028-195438-relocation/adb-isolated-status-final.log",
+      "status": "pass",
+      "detail": "Original and derivative bytes preserved"
+    },
+    {
+      "id": "portable:spec/versions/v0.1/specs/20261028-1059-tech-SDK与工具链可行性/tester/artifacts/test-logs/20261028-195438-relocation/adb-isolated-status-home-final.log",
+      "status": "pass",
+      "detail": "Original and derivative bytes preserved"
+    },
+    {
+      "id": "portable:spec/versions/v0.1/specs/20261028-1059-tech-SDK与工具链可行性/tester/artifacts/test-logs/20261028-195438-relocation/clean-apk-build.json",
+      "status": "pass",
+      "detail": "Original and derivative bytes preserved"
+    },
+    {
+      "id": "portable:spec/versions/v0.1/specs/20261028-1059-tech-SDK与工具链可行性/tester/artifacts/test-logs/20261028-195438-relocation/clean-apk-build.log",
+      "status": "pass",
+      "detail": "Original and derivative bytes preserved"
+    },
+    {
+      "id": "portable:spec/versions/v0.1/specs/20261028-1059-tech-SDK与工具链可行性/tester/artifacts/test-logs/20261028-195438-relocation/signing-location-final.json",
+      "status": "pass",
+      "detail": "Original and derivative bytes preserved"
+    },
+    {
+      "id": "portable:spec/versions/v0.1/specs/20261028-1059-tech-SDK与工具链可行性/tester/artifacts/test-logs/20261028-195438-relocation/signing-location-final.log",
+      "status": "pass",
+      "detail": "Original and derivative bytes preserved"
+    },
+    {
+      "id": "portable:spec/versions/v0.1/specs/20261028-1059-tech-SDK与工具链可行性/tester/artifacts/test-logs/20261028-203139-closeout/acceptance-source.json",
+      "status": "pass",
+      "detail": "Original and derivative bytes preserved"
+    },
+    {
+      "id": "portable:spec/versions/v0.1/specs/20261028-1059-tech-SDK与工具链可行性/tester/artifacts/test-logs/20261028-203139-closeout/awr-global-gap-check.log",
+      "status": "pass",
+      "detail": "Original and derivative bytes preserved"
+    },
+    {
+      "id": "product-plan",
+      "status": "pass",
+      "detail": "Original product source"
+    },
+    {
+      "id": "historical-completion",
+      "status": "pass",
+      "detail": "Previously registered evidence unchanged"
+    },
+    {
+      "id": "branch",
+      "status": "pass",
+      "detail": "Correct isolated Spec branch"
+    },
+    {
+      "id": "preferences",
+      "status": "pass",
+      "detail": "User-stated preference recorded"
+    },
+    {
+      "id": "memory-link:exp-001-RELRO按实际保护范围判断.md:../../../scripts/verify-native-libs.py",
+      "status": "pass",
+      "detail": "Memory reference resolves"
+    },
+    {
+      "id": "memory-link:exp-001-RELRO按实际保护范围判断.md:../../../scripts/tests/test_verify_native_libs.py",
+      "status": "pass",
+      "detail": "Memory reference resolves"
+    },
+    {
+      "id": "memory-link:exp-001-RELRO按实际保护范围判断.md:../../versions/v0.1/specs/20261028-1059-tech-SDK与工具链可行性/ender/end-report.html#memory-drafts",
+      "status": "pass",
+      "detail": "Memory reference resolves"
+    },
+    {
+      "id": "memory-link:exp-001-RELRO按实际保护范围判断.md:../../versions/v0.1/specs/20261028-1059-tech-SDK与工具链可行性/executor/artifacts/tdd/",
+      "status": "pass",
+      "detail": "Memory reference resolves"
+    },
+    {
+      "id": "memory-link:exp-002-Windows关闭以真实控制台事件验证.md:../../../tests/windows-cli-signal.py",
+      "status": "pass",
+      "detail": "Memory reference resolves"
+    },
+    {
+      "id": "memory-link:exp-002-Windows关闭以真实控制台事件验证.md:../../../tests/receiver-smoke.mjs",
+      "status": "pass",
+      "detail": "Memory reference resolves"
+    },
+    {
+      "id": "memory-link:exp-002-Windows关闭以真实控制台事件验证.md:../../versions/v0.1/specs/20261028-1059-tech-SDK与工具链可行性/tester/artifacts/test-logs/20261028-203139-closeout/receiver/signal-summary.json",
+      "status": "pass",
+      "detail": "Memory reference resolves"
+    },
+    {
+      "id": "memory-link:exp-002-Windows关闭以真实控制台事件验证.md:../../versions/v0.1/specs/20261028-1059-tech-SDK与工具链可行性/ender/end-report.html#memory-drafts",
+      "status": "pass",
+      "detail": "Memory reference resolves"
+    },
+    {
+      "id": "whitespace",
+      "status": "pass",
+      "detail": ""
+    }
+  ],
+  "scope": "Current report contract, fresh required tests, exact APK runtime bindings, original evidence bytes and memory references. Does not claim fresh phone operation or media functionality."
+}

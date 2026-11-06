@@ -1,0 +1,9 @@
+=== usb-ui-diagnostic Run ===
+Command: python .cache/inspect-artemis-ui.py
+Timestamp: 2026-10-28T10:06:14.998515+00:00
+{"verifiedAt": "2026-10-28T10:06:17.837451+00:00", "currentFocusComponents": [], "keyguard": ["mKeyguardOccluded=false mKeyguardOccludedChanged=false mPendingKeyguardOccluded=false", "showing=true", "inputRestricted=false", "occluded=false"], "artemisProcessPresent": true, "uiPackages": ["com.android.systemui"], "privacy": "Only focus components, lock state and package names retained; text from other apps was discarded."}
+
+--- stderr ---
+
+Exit code: 0
+Finished: 2026-10-28T10:06:17.843855+00:00

@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>收尾报告 - 虚拟麦克风音频链路（SPEC-audio-device）</title>
+<meta name="rk:type"        content="end-report">
+<meta name="rk:version"     content="v0.1">
+<meta name="rk:category"    content="tech">
+<meta name="rk:spec-dir"    content="spec/versions/v0.1/specs/20261102-1117-tech-虚拟麦克风音频链路">
+<meta name="rk:role"        content="spec-ender">
+<meta name="rk:mode"        content="gated">
+<meta name="rk:created"     content="2026-11-02">
+<meta name="rk:updated"     content="2026-11-02">
+<meta name="rk:revision"    content="1">
+<meta name="rk:git-branch"  content="tech/spec-20261102-1117-audio-device">
+<meta name="rk:base-branch" content="dev">
+<meta name="rk:pr-url"      content="https://github.com/PrimeDawn/Artemis/pull/7">
+<meta name="rk:tags"        content="spec,end-report,audio">
+<link rel="rk-plan" href="../writer/plan.html">
+<link rel="rk-test-report" href="../tester/test-report.html">
+<link rel="rk-summary" href="../executor/summary.html">
+<link rel="rk-ledger" href="../lead/team-context.md">
+<link rel="stylesheet" href="../../../../../../html-report/assets/rk-report.css">
+<script defer src="../rk-manifest.js"></script>
+<script defer src="../../../../../../html-report/assets/rk-report.js"></script>
+</head>
+<body>
+
+<nav class="rk-nav"></nav>
+
+<header class="rk-head">
+  <h1>收尾报告：音频链路（手机麦克风 → PC → 用户自备虚拟声卡）</h1>
+  <div class="rk-meta">
+    <span><b>类型</b> end-report</span>
+    <span><b>Spec</b> <code>spec/versions/v0.1/specs/20261102-1117-tech-虚拟麦克风音频链路</code></span>
+    <span><b>角色</b> spec-ender</span>
+    <span><b>模式</b> gated</span>
+    <span><b>分支</b> <code>tech/spec-20261102-1117-audio-device</code> ← <code>dev</code></span>
+    <span><b>PR</b> <a href="https://github.com/PrimeDawn/Artemis/pull/7">#7</a></span>
+    <span><b>创建</b> 2026-11-02</span>
+    <span><b>修订</b> r1（2026-11-02）</span>
+  </div>
+</header>
+
+<nav class="rk-revbar"></nav>
+
+<section class="rk-verdict is-pass">
+  <div class="rk-verdict-label">收尾结论</div>
+  <p>本 Spec 按 D-012/D-013 收缩后的范围完成：手机麦克风音频经独立通道到 PC，解码后可写入 WAV；断网可自愈；未装虚拟声卡时界面明确提示。
+  自研驱动与签名整体移出版本（用户决定），真实 VB-CABLE 出声留 v0.1.1、VoiceMeeter 留 v0.1.2。测试证据与截图已按用户要求清理，报告保留命令与结论。</p>
+</section>
+
+<h2>修订历史</h2>
+<table class="rk-revs">
+  <thead><tr><th>修订</th><th>日期</th><th>修改人</th><th>改了什么</th><th>原因</th></tr></thead>
+  <tbody>
+    <tr><td>r1</td><td>2026-11-02</td><td>spec-ender</td><td>初版</td><td>—</td></tr>
+  </tbody>
+</table>
+
+<h2>1. 交付了什么</h2>
+<table>
+  <thead><tr><th>能力</th><th>状态</th><th>说明</th></tr></thead>
+  <tbody>
+    <tr><td>手机端音频采集与编码</td><td>完成（真机验证）</td><td>48 kHz 单声道；Opus 优先、AAC-LC 回退；配置包在手机端归一化为标准 OpusHead</td></tr>
+    <tr><td>独立 <code>/audio</code> 通道</td><td>完成</td><td>与 <code>/media</code> 同构，复用 TLS 固定、绑定、保活与重连；帧头未改动</td></tr>
+    <tr><td>PC 端解码与输出</td><td>完成</td><td>FFmpeg 解码 + swresample；WAV 落盘（证据）与 WASAPI 渲染（虚拟声卡）</td></tr>
+    <tr><td>虚拟声卡探测与状态提示</td><td>完成（提示可验）</td><td>只认 VB-CABLE；控制页显示当前输出与缺失指引</td></tr>
+    <tr><td>运行中设备变化</td><td>完成（部分验证）</td><td>每 3 秒枚举：断开暂停并提示、重新出现自动接上；插拔实际切换无设备可验</td></tr>
+  </tbody>
+</table>
+
+<h2>2. 验证摘要</h2>
+<ul>
+  <li>单元：编码器选择、编码判定、Opus/AAC 解码、regulator、WAV 头部、升级路由——全部通过。</li>
+  <li>真机：S24 经 <code>/audio</code> 送 Opus，WAV 61.99 秒可播放；Wi-Fi 断 8 秒后自动重连并继续写入。</li>
+  <li>回归：Node 59 项、JVM 单测、APK 构建通过。</li>
+  <li>缺陷：真机首轮暴露六项（权限、重连、csd 死循环、三星头误判、WAV 截断、半开连接），全部修复见 <a href="../debugger/debug-001-fix.html">debug-001-fix</a>。</li>
+</ul>
+
+<h2>3. 遗留与去向</h2>
+<table>
+  <thead><tr><th>项</th><th>原因</th><th>去向</th></tr></thead>
+  <tbody>
+    <tr><td>VB-CABLE 真实出声</td><td>没有任何环境装有虚拟声卡（D-013）</td><td>v0.1.1 补丁</td></tr>
+    <tr><td>VoiceMeeter 支持</td><td>本 Spec 只支持一个声卡（D-012）</td><td>v0.1.2 补丁</td></tr>
+    <tr><td>OBS 枚举复测</td><td>本轮未复跑 OBS</td><td>validation-baseline / 下次回归</td></tr>
+    <tr><td>跨品牌机型</td><td>只有 S24 一台</td><td>vivo 到位后补测</td></tr>
+  </tbody>
+</table>
+
+<h2>4. 经验与规范沉淀</h2>
+<ul>
+  <li>新增 <a href="../../../../../context/experience/exp-007-测试方案必须带条款覆盖矩阵.md">EXP-007 测试方案必须带条款覆盖矩阵</a>，并登记进经验索引。</li>
+  <li><code>.agents/rules/spec-workflow.md</code> 增加三条硬规则：测试计划必须带覆盖矩阵、先覆盖后结论、环境类「未实测」需二次确认。</li>
+</ul>
+
+<h2>5. 工作区与证据处理</h2>
+<div class="rk-cal warn">
+  <div class="t">按用户要求清理</div>
+  <p>收尾时删除了 <code>tester/artifacts/test-logs/</code>（日志与录音，约 17 MB）、<code>executor/artifacts/</code> 以及仓库内历史测试截图（<code>.cache/*/screenshots</code>）。各报告保留当时的命令、结果与结论，原始文件不再随仓库交付。</p>
+</div>
+<p>Spec 目录原位归档，保持同一路径；版本账本中该 Spec 状态更新为「已归档」。</p>
+
+<h2>关联产物</h2>
+<h3>本报告引用</h3>
+<ul class="rk-links">
+  <li><a href="../explorer/exploration-report.html" data-rk-link="exploration">探索报告</a></li>
+  <li><a href="../writer/plan.html" data-rk-link="plan">实现方案</a></li>
+  <li><a href="../tester/test-plan.html" data-rk-link="test-plan">测试计划</a></li>
+  <li><a href="../tester/test-report.html" data-rk-link="test-report">测试报告</a></li>
+  <li><a href="../executor/summary.html" data-rk-link="summary">实现总结</a></li>
+  <li><a href="../debugger/debug-001.html" data-rk-link="debug">调试报告</a></li>
+  <li><a href="../lead/team-context.md" data-rk-link="ledger">运行账本</a></li>
+</ul>
+<h3>引用本报告</h3>
+<ul class="rk-backlinks">
+  <li><a href="../../../version-context.md" data-rk-backlink="version-ledger">版本账本</a></li>
+</ul>
+
+</body>
+</html>

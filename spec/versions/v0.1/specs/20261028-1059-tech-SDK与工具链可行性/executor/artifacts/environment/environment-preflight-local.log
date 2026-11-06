@@ -1,0 +1,16 @@
+=== environment-preflight-local Run ===
+Command: powershell -NoProfile -File scripts/verify-toolchain.ps1 -SdkRoot %USERPROFILE%/AppData/Local/Android/Sdk -ReportPath spec/versions/v0.1/specs/20261028-1059-tech-SDK与工具链可行性/executor/artifacts/environment/preflight.json
+Timestamp: 2026-10-28T06:03:12.079710+00:00
+jdk17: pass
+node24: pass
+platform-api36: pass
+build-tools36: pass
+platform-tools: pass
+cli-tools19: pass
+
+--- stderr ---
+warning: in the working copy of '.gitignore', CRLF will be replaced by LF the next time Git touches it
+warning: in the working copy of 'work-ledger.yaml', CRLF will be replaced by LF the next time Git touches it
+
+Exit code: 0
+Finished: 2026-10-28T06:03:12.744562+00:00

@@ -1,0 +1,9 @@
+=== consolidated-runtime-matrix Run ===
+Command: python tests/collect-runtime-matrix.py --base-results spec/versions/v0.1/specs/20261028-1059-tech-SDK与工具链可行性/tester/artifacts/test-logs/20261028-181629-usb-final/verified-test-results.json --base-completion spec/versions/v0.1/specs/20261028-1059-tech-SDK与工具链可行性/tester/artifacts/test-logs/20261028-181629-usb-final/verified-completion-report.json --phone-runtime spec/versions/v0.1/specs/20261028-1059-tech-SDK与工具链可行性/tester/artifacts/test-logs/20261028-175651-usb/runtime-final/runtime-results.json --api29-runtime spec/versions/v0.1/specs/20261028-1059-tech-SDK与工具链可行性/tester/artifacts/test-logs/20261028-184012-emulator/api29/runtime/runtime-results.json --page16k-runtime spec/versions/v0.1/specs/20261028-1059-tech-SDK与工具链可行性/tester/artifacts/test-logs/20261028-184012-emulator/api36/runtime/runtime-results.json --output-dir spec/versions/v0.1/specs/20261028-1059-tech-SDK与工具链可行性/tester/artifacts/test-logs/20261028-184012-emulator
+Timestamp: 2026-10-28T10:55:58.650663+00:00
+{"passed": 19, "notRun": 0, "failed": 0, "snapshotSha256": "960fc7785cdf55d6998378d3e30209f9eac34a70f867f4353f61ae09ee21c49d"}
+
+--- stderr ---
+
+Exit code: 0
+Finished: 2026-10-28T10:55:59.026039+00:00

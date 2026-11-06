@@ -1,0 +1,10 @@
+﻿=== TC-02 运行期不再依赖 openssl ===
+Timestamp: 2026-11-06T18:16:58+08:00
+Command: 删除 certificate.pem → Artemis.exe --console → 校验重新签发；同时检查 openssl 进程与源码引用
+certificate regenerated: True
+openssl processes: 0
+subject: CN=Artemis local receiver
+notAfter: 2026-12-06T18:17:00+08:00
+SAN: IP Address=192.168.1.5
+openssl references in receiver config/cert: 1
+Exit code: 0

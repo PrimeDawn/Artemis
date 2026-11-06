@@ -1,0 +1,17 @@
+=== emulator-package-observation Run ===
+Command: python .cache/emulator-package-observation.py
+Timestamp: 2026-10-28T10:49:48.769366+00:00
+
+--- stderr ---
+Traceback (most recent call last):
+  File "%PROJECT_ROOT%\.cache\emulator-package-observation.py", line 9, in <module>
+    tree=ET.parse(sdk/name/'package.xml')
+  File "E:\Dev\miniconda\Lib\xml\etree\ElementTree.py", line 1210, in parse
+    tree.parse(source, parser)
+    ~~~~~~~~~~^^^^^^^^^^^^^^^^
+  File "E:\Dev\miniconda\Lib\xml\etree\ElementTree.py", line 562, in parse
+    source = open(source, "rb")
+FileNotFoundError: [Errno 2] No such file or directory: '%USERPROFILE%\\AppData\\Local\\Packages\\sandbox.{6d37b4cd-2b0e-4b4b-980b-28c23e7f96e2}\\AC\\Android\\Sdk\\emulator\\package.xml'
+
+Exit code: 1
+Finished: 2026-10-28T10:49:48.894180+00:00

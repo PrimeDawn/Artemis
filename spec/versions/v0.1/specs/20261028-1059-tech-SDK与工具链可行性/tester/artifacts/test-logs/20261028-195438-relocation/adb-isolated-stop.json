@@ -1,0 +1,14 @@
+{
+  "command": "E:\\Dev\\Artemis\\Android\\Sdk\\platform-tools\\adb.exe kill-server",
+  "startedAt": "2026-10-28T12:09:45.513877+00:00",
+  "finishedAt": "2026-10-28T12:09:47.582867+00:00",
+  "exitCode": 0,
+  "expectedExitCode": 0,
+  "durationSeconds": 2.07,
+  "stdoutSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "stderrSha256": "bbee76e856a60e73ea525dad7fff1c9f2e29011ea45a94442583b1f872e6e38b",
+  "log": "adb-isolated-stop.log",
+  "redactions": [
+    "personal user-root path"
+  ]
+}

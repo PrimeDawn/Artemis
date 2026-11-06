@@ -1,0 +1,28 @@
+{
+  "name": "@artemis/receiver",
+  "version": "0.1.0-dev",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=24 <25",
+    "npm": ">=11 <12"
+  },
+  "packageManager": "npm@11.16.0",
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "start": "node dist/src/cli.js",
+    "test": "npm run build && node --test dist/test/*.test.js",
+    "pairing": "node dist/src/pairing-cli.js"
+  },
+  "devDependencies": {
+    "@types/node": "24.10.1",
+    "@types/ws": "8.18.2",
+    "typescript": "6.0.3"
+  },
+  "dependencies": {
+    "@peculiar/x509": "^3.1.0",
+    "bonjour-service": "1.4.4",
+    "reflect-metadata": "^0.2.2",
+    "ws": "8.22.0"
+  }
+}

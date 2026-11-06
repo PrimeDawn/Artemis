@@ -1,0 +1,14 @@
+{
+  "command": "E:\\Dev\\Artemis\\Android\\Sdk\\platform-tools\\adb.exe start-server",
+  "startedAt": "2026-10-28T12:09:43.346160+00:00",
+  "finishedAt": "2026-10-28T12:09:45.417380+00:00",
+  "exitCode": 4294967295,
+  "expectedExitCode": 0,
+  "durationSeconds": 2.072,
+  "stdoutSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "stderrSha256": "d4a3239c8378378ef8fa500e5b258bcf5b887aa280184ebd2ccbb5620e44132e",
+  "log": "adb-isolated-start.log",
+  "redactions": [
+    "personal user-root path"
+  ]
+}

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>修复记录 · 媒体通道自动重连</title>
+<meta name="rk:title" content="修复记录：媒体通道自动重连">
+<meta name="rk:type" content="debug">
+<meta name="rk:version" content="v0.1">
+<meta name="rk:category" content="tech">
+<meta name="rk:spec-dir" content="spec/versions/v0.1/specs/20261101-1857-tech-手机画面链路">
+<meta name="rk:role" content="spec-debugger">
+<meta name="rk:mode" content="gated">
+<meta name="rk:created" content="2026-11-01">
+<meta name="rk:updated" content="2026-11-01">
+<meta name="rk:revision" content="1">
+<meta name="rk:git-branch" content="tech/spec-20261101-1857-phone-media">
+<meta name="rk:base-branch" content="dev">
+<meta name="rk:pr-url" content="">
+<link rel="rk-debug" href="debug-004.html">
+<link rel="rk-test-report" href="../tester/test-report.html">
+<link rel="rk-ledger" href="../lead/team-context.md">
+<link rel="stylesheet" href="../../../../../../html-report/assets/rk-report.css">
+<script defer src="../rk-manifest.js"></script>
+<script defer src="../../../../../../html-report/assets/rk-report.js"></script>
+</head>
+<body>
+<header class="rk-head">
+<h1>修复记录：媒体通道自动重连</h1>
+<div class="rk-meta">
+<span><b>类型</b> debug-fix</span>
+<span><b>编号</b> debug-004-fix（I-007）</span>
+<span><b>角色</b> spec-debugger</span>
+<span><b>分支</b> <code>tech/spec-20261101-1857-phone-media</code> ← <code>dev</code></span>
+<span><b>创建</b> 2026-11-01</span>
+<span><b>修订</b> r1（2026-11-01）</span>
+</div>
+</header>
+<nav class="rk-revbar"></nav>
+<section class="rk-verdict is-pass">
+<div class="rk-verdict-label">结果</div>
+<p>杀掉解码进程再重启，全程不触碰手机，画面在约 6 秒内自动恢复；实测恢复后 3 秒写入 88 帧（约 29fps）。</p>
+</section>
+<h2>修订历史</h2>
+<table class="rk-revs">
+<thead><tr><th>修订</th><th>日期</th><th>修改人</th><th>改了什么</th><th>原因</th></tr></thead>
+<tbody><tr><td>r1</td><td>2026-11-01</td><td>spec-debugger</td><td>初版：改动、复验与回归</td><td>按 debug-004 结论实施</td></tr></tbody>
+</table>
+<h2>1. 改动</h2>
+<table>
+<thead><tr><th>文件</th><th>改动</th></tr></thead>
+<tbody>
+<tr><td><code>receiver/src/media-relay.ts</code></td><td>绑定后每 2 秒发心跳；上游断开时停止心跳并关闭手机连接</td></tr>
+<tr><td><code>receiver/src/pairing-server.ts</code></td><td>媒体 socket 包装增加 <code>send</code>；上游 <code>error</code>/<code>close</code> 触发关闭手机连接</td></tr>
+<tr><td><code>media/MediaConnection.kt</code></td><td>心跳看门狗（6 秒无消息即取消并回调）；socket 延迟到绑定消息发出后赋值</td></tr>
+<tr><td><code>media/MediaSessionCoordinator.kt</code></td><td>断线后 1→5 秒递增重连；缓存配置帧并在重连就绪时补发；就绪后请求关键帧</td></tr>
+</tbody>
+</table>
+<h2>2. 复验</h2>
+<pre>基线: frameIndex=565
+杀掉解码进程 → 6 秒后重启（未触碰手机）
+接收服务: media_upstream_lost → 手机重连 → media_bound
+新解码进程: media channel connected
+恢复后: frameIndex 404 → 492（3 秒，约 29fps）</pre>
+<h2>3. 回归影响</h2>
+<ul>
+<li>心跳每 2 秒一条文本消息，带宽可忽略</li>
+<li>手机端断流判定为 6 秒，弱网下会触发重连，属于预期行为</li>
+<li>接收服务测试 52/52 通过</li>
+</ul>
+<h2>关联产物</h2>
+<h3>本报告引用</h3>
+<ul class="rk-links">
+<li><a href="debug-004.html" data-rk-link="debug">诊断记录</a></li>
+<li><a href="../tester/test-report.html" data-rk-link="test-report">测试报告</a></li>
+<li><a href="../lead/team-context.md" data-rk-link="ledger">运行账本</a></li>
+</ul>
+<h3>引用本报告</h3>
+<ul class="rk-backlinks"><li><a href="../tester/test-report.html" data-rk-backlink="test-report">测试报告</a></li></ul>
+</body>
+</html>

@@ -1,0 +1,14 @@
+{
+  "command": "python scripts/verify-native-libs.py --aar %USERPROFILE%/.codex/visualizations/2026/10/28/01a18039-bc65-7d70-a62e-dd82e702130c/sdk-toolchain-cache/android-150.7871.01.aar --report spec/versions/v0.1/specs/20261028-1059-tech-SDK\u4e0e\u5de5\u5177\u94fe\u53ef\u884c\u6027/executor/artifacts/native/aar-check.json",
+  "startedAt": "2026-10-28T06:04:28.366551+00:00",
+  "finishedAt": "2026-10-28T06:04:28.551931+00:00",
+  "exitCode": 0,
+  "expectedExitCode": 0,
+  "durationSeconds": 0.186,
+  "stdoutSha256": "b5aed28c1e496e4358572dcfb2d63447fa79a6c50b28dcb9ae01f84416274a7e",
+  "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "log": "aar-native-inspection.log",
+  "redactions": [
+    "personal user-root path"
+  ]
+}

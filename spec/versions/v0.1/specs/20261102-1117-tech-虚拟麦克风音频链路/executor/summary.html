@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>实现总结 - 虚拟麦克风音频链路（SPEC-audio-device）</title>
+<meta name="rk:type"        content="summary">
+<meta name="rk:version"     content="v0.1">
+<meta name="rk:category"    content="tech">
+<meta name="rk:spec-dir"    content="spec/versions/v0.1/specs/20261102-1117-tech-虚拟麦克风音频链路">
+<meta name="rk:role"        content="spec-executor">
+<meta name="rk:mode"        content="gated">
+<meta name="rk:created"     content="2026-11-02">
+<meta name="rk:updated"     content="2026-11-02">
+<meta name="rk:revision"    content="1">
+<meta name="rk:git-branch"  content="tech/spec-20261102-1117-audio-device">
+<meta name="rk:base-branch" content="dev">
+<meta name="rk:pr-url"      content="">
+<meta name="rk:tags"        content="spec,summary,audio,opus,aac,wasapi">
+<link rel="rk-plan" href="../writer/plan.html">
+<link rel="rk-exploration" href="../explorer/exploration-report.html">
+<link rel="rk-ledger" href="../lead/team-context.md">
+<link rel="stylesheet" href="../../../../../../html-report/assets/rk-report.css">
+<script defer src="../rk-manifest.js"></script>
+<script defer src="../../../../../../html-report/assets/rk-report.js"></script>
+</head>
+<body>
+
+<nav class="rk-nav"></nav>
+
+<header class="rk-head">
+  <h1>实现总结：音频通道与手机端采集编码</h1>
+  <div class="rk-meta">
+    <span><b>类型</b> summary</span>
+    <span><b>Spec</b> <code>spec/versions/v0.1/specs/20261102-1117-tech-虚拟麦克风音频链路</code></span>
+    <span><b>角色</b> spec-executor</span>
+    <span><b>模式</b> gated</span>
+    <span><b>分支</b> <code>tech/spec-20261102-1117-audio-device</code> ← <code>dev</code></span>
+    <span><b>PR</b> —</span>
+    <span><b>创建</b> 2026-11-02</span>
+    <span><b>修订</b> r1（2026-11-02）</span>
+  </div>
+</header>
+
+<nav class="rk-revbar"></nav>
+
+<section class="rk-verdict is-pass">
+  <div class="rk-verdict-label">结论</div>
+  <p>方案 §10 的 1–4 步已实现：独立 <code>/audio</code> 通道、手机端 AudioRecord + Opus/AAC 编码、PC 端 Opus/AAC 解码与 regulator、VB-CABLE 端点识别与音频输出路由。
+  C++ 单测 26 项全绿，AAC 逐帧链路冒烟产出 48 kHz 单声道 1.024 s 的 WAV，Kotlin 编码器选择单测通过。真实虚拟声卡连通性按 D-013 记未实测，由 v0.1.1 补丁验证。</p>
+</section>
+
+<h2>修订历史</h2>
+<table class="rk-revs">
+  <thead><tr><th>修订</th><th>日期</th><th>修改人</th><th>改了什么</th><th>原因</th></tr></thead>
+  <tbody>
+    <tr><td>r1</td><td>2026-11-02</td><td>spec-executor</td><td>初版</td><td>—</td></tr>
+  </tbody>
+</table>
+
+<h2>1. 实现范围</h2>
+<table>
+  <thead><tr><th>方案步骤</th><th>交付</th><th>状态</th></tr></thead>
+  <tbody>
+    <tr><td>§10-1 通道层</td><td><code>receiver/src/upgrade-router.ts</code>；<code>pairing-server.ts</code> 增加 <code>/audio</code> 升级与独立 relay（sink 指向 decode-host 音频端口 3451）</td><td>完成，单测 7 项</td></tr>
+    <tr><td>§10-2 手机端</td><td><code>AudioCapture.kt</code>、<code>AudioEncoder.kt</code>、<code>AudioStream.kt</code>、<code>AudioCodecChoice.kt</code>；manifest 增加 <code>RECORD_AUDIO</code>；<code>MediaSessionCoordinator</code> 挂接音频生命周期</td><td>完成，编码器选择单测 4 项</td></tr>
+    <tr><td>§10-3 PC 端</td><td><code>AudioDecoder</code>（Opus/AAC + swresample）、<code>AudioRegulator</code>、<code>WavFileSink</code>、<code>main.cpp</code> 音频线程与 <code>--audio-wav</code></td><td>完成，单测覆盖解码与落盘</td></tr>
+    <tr><td>§10-4 端点路由</td><td><code>AudioEndpoint</code>（CABLE Input/Output 成对识别）、<code>WasapiSink</code>（按名渲染到 CABLE Input）、未命中时降级为仅解码</td><td>代码完成；设备路径未实测</td></tr>
+  </tbody>
+</table>
+
+<h2>2. TDD 与证据</h2><div class="rk-cal warn"><div class="t">证据文件已清理</div><p>按用户要求，收尾时删除了 <code>executor/artifacts/</code> 下的日志；下表保留当时的命令与结果。</p></div>
+<table>
+  <thead><tr><th>环节</th><th>RED</th><th>GREEN</th><th>结果</th></tr></thead>
+  <tbody>
+    <tr>
+      <td>升级路径分流（Node）</td>
+      <td><code>executor/artifacts/red-upgrade-router.log</code>：空桩返回 control，7 项中 5 项断言失败</td>
+      <td><code>executor/artifacts/green-upgrade-router.log</code>：7/7 通过，退出码 0；<code>green-node-channel.log</code>：与 media-relay 合计 14/14 通过，退出码 0</td>
+      <td>通过</td>
+    </tr>
+    <tr>
+      <td>编码器选择（Kotlin JVM）</td>
+      <td><code>executor/artifacts/red-audio-codec-choice.log</code>：空桩返回 null，4 项中 3 项失败</td>
+      <td><code>executor/artifacts/green-audio-codec-choice.log</code>：BUILD SUCCESSFUL，退出码 0</td>
+      <td>通过</td>
+    </tr>
+    <tr>
+      <td>原生音频单测（C++）</td>
+      <td>见下方偏差说明</td>
+      <td><code>executor/artifacts/green-audio-unit.log</code>：regulator / 端点 / WAV / Opus 48648 样本 / AAC 49152 样本，failures=0</td>
+      <td>通过</td>
+    </tr>
+    <tr>
+      <td>音频通道逐帧冒烟</td>
+      <td>—（链路级验证）</td>
+      <td><code>executor/artifacts/green-smoke-audio-channel.log</code>：48 个 ADTS 帧 → WAV 98348 字节，ffprobe 报 48 kHz 单声道 1.024 s</td>
+      <td>通过</td>
+    </tr>
+    <tr>
+      <td>原生构建</td>
+      <td>—</td>
+      <td><code>executor/artifacts/build-native.log</code>：BUILD OK，退出码 0</td>
+      <td>通过</td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="rk-cal warn">
+  <div class="t">TDD 偏差（如实记录）</div>
+  <p>C++ 的 regulator / 端点识别 / WAV sink 是先写实现再补测试，没有先产出断言级 RED；这与「没有失败的测试就不写实现」有偏差。补救方式是让测试真的有效：Opus 最初按容器文件整块喂入失败（<code>Error parsing the packet header</code>），据此补上 extradata 支持与解复用喂包；冒烟又暴露了 1 字节 ASC 导致 <code>decoder unavailable</code>，改为合法 2 字节 ASC 后通过。两次失败都说明断言在执行，不是恒真测试。</p>
+</div>
+
+<h2>3. 主要改动文件</h2>
+<ul>
+  <li><span class="rk-ref">receiver/src/upgrade-router.ts</span>、<span class="rk-ref">receiver/test/upgrade-router.test.ts</span>、<span class="rk-ref">receiver/src/pairing-server.ts</span></li>
+  <li><span class="rk-ref">android/.../audio/AudioCapture.kt</span>、<span class="rk-ref">AudioEncoder.kt</span>、<span class="rk-ref">AudioStream.kt</span>、<span class="rk-ref">AudioCodecChoice.kt</span>、<span class="rk-ref">android/app/src/test/.../AudioCodecChoiceTest.kt</span></li>
+  <li><span class="rk-ref">android/.../media/MediaSessionCoordinator.kt</span>、<span class="rk-ref">android/app/src/main/AndroidManifest.xml</span></li>
+  <li><span class="rk-ref">native/decode-host/AudioDecoder.{h,cpp}</span>、<span class="rk-ref">AudioRegulator.h</span>、<span class="rk-ref">AudioEndpoint.{h,cpp}</span>、<span class="rk-ref">AudioSink.h</span>、<span class="rk-ref">WavFileSink.h</span>、<span class="rk-ref">WasapiSink.{h,cpp}</span>、<span class="rk-ref">test-audio.cpp</span>、<span class="rk-ref">main.cpp</span>、<span class="rk-ref">native/build.ps1</span></li>
+</ul>
+
+<h2>4. 未验证与偏差</h2>
+<table>
+  <thead><tr><th>项</th><th>状态</th><th>原因与去向</th></tr></thead>
+  <tbody>
+    <tr><td>VB-CABLE 真实连通性</td><td>未实测</td><td>没有任何环境装有虚拟声卡（D-013）；由 v0.1.1 补丁验证</td></tr>
+    <tr><td><code>WasapiSink</code> 渲染路径</td><td>仅编译通过</td><td>同前；代码路径未在设备上执行</td></tr>
+    <tr><td>手机端采集/编码在真机运行</td><td>未实测</td><td>JVM 单测只覆盖编码器选择；AudioRecord/MediaCodec 需 Android 运行时，留给测试阶段</td></tr>
+    <tr><td>Node 全量测试</td><td>未运行</td><td>只跑定向件；<code>node --test</code> 在本环境不自动退出，需加 <code>--test-force-exit</code>（账本 I-004），全量属 spec-tester 职责</td></tr>
+  </tbody>
+</table>
+
+<h2>5. 交接</h2>
+<ul>
+  <li>待 <code>tester/test-plan.html</code> 的 TC-01～TC-09、TC-11、TC-12 在本分支上执行；TC-10（CABLE 连通性）按 D-013 记未实测。</li>
+  <li>未归档、未提交、未推送。</li>
+</ul>
+
+<h2>关联产物</h2>
+<h3>本报告引用</h3>
+<ul class="rk-links">
+  <li><a href="../writer/plan.html" data-rk-link="plan">实现方案</a></li>
+  <li><a href="../tester/test-plan.html" data-rk-link="test-plan">测试计划</a></li>
+  <li><a href="../lead/team-context.md" data-rk-link="ledger">运行账本</a></li>
+</ul>
+<h3>引用本报告</h3>
+<ul class="rk-backlinks">
+  <li><a href="../lead/team-context.md" data-rk-backlink="ledger">运行账本（产物注册表）</a></li>
+</ul>
+
+</body>
+</html>

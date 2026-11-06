@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>测试计划 — SDK与工具链可行性</title>
+<meta name="rk:title" content="测试计划">
+<meta name="rk:type" content="test-plan">
+<meta name="rk:version" content="v0.1">
+<meta name="rk:category" content="tech">
+<meta name="rk:spec-dir" content="spec/versions/v0.1/specs/20261028-1059-tech-SDK与工具链可行性">
+<meta name="rk:role" content="spec-tester">
+<meta name="rk:mode" content="gated">
+<meta name="rk:status" content="archived">
+<meta name="rk:created" content="2026-10-28">
+<meta name="rk:updated" content="2026-10-28">
+<meta name="rk:revision" content="8">
+<meta name="rk:git-branch" content="tech/spec-20261028-1059-sdk-toolchain">
+<meta name="rk:base-branch" content="dev">
+<meta name="rk:pr-url" content="https://github.com/PrimeDawn/Artemis/pull/1">
+<meta name="rk:tags" content="spec,sdk,toolchain,test-plan">
+<link rel="rk-plan" href="../writer/plan.html"><link rel="rk-exploration" href="../explorer/exploration-report.html">
+<link rel="rk-summary" href="../executor/summary.html">
+<link rel="rk-test-report" href="test-report.html">
+<link rel="rk-ledger" href="../lead/team-context.md">
+<link rel="rk-version-plan" href="../../../plan.html">
+<link rel="stylesheet" href="../../../../../../html-report/assets/rk-report.css">
+<script defer src="../rk-manifest.js"></script>
+<script defer src="../../../../../../html-report/assets/rk-report.js"></script>
+<link rel="rk-end-report" href="../ender/end-report.html">
+</head><body><nav class="rk-nav"></nav>
+<header class="rk-head"><h1>测试计划：SDK与工具链可行性</h1><div class="rk-meta">
+<span><b>类型</b> test-plan</span><span><b>版本</b> v0.1</span><span><b>属性</b> tech</span>
+<span><b>Spec</b> <code>spec/versions/v0.1/specs/20261028-1059-tech-SDK与工具链可行性</code></span><span><b>角色</b> spec-tester</span><span><b>模式</b> gated</span>
+<span><b>状态</b> <del class="rk-del" data-rev="7"> <del class="rk-del" data-rev="2">未确认</del><ins class="rk-ins" data-rev="2">已确认</ins></del><ins class="rk-ins" data-rev="7">archived</ins></span>
+<span><b>分支</b> <code>tech/spec-20261028-1059-sdk-toolchain</code> ← <code>dev</code></span><span><b>PR</b> <a href="https://github.com/PrimeDawn/Artemis/pull/1">https://github.com/PrimeDawn/Artemis/pull/1</a></span>
+<span><b>创建</b> 2026-10-28</span><span><b>更新</b> 2026-10-28</span><span><b>修订</b> r8</span>
+
+</div></header><nav class="rk-revbar"></nav>
+<section class="rk-verdict"><div class="rk-verdict-label">验收判定口径</div><p>构建/来源/服务层必须有本轮真实证据；设备与16KB运行项缺条件时明确未实测，不把计划或静态分析当作实际兼容结论。</p></section>
+<h2>修订历史</h2><table class="rk-revs"><thead><tr><th>修订</th><th>日期</th><th>修改人</th><th>改了什么</th><th>原因</th></tr></thead><tbody><tr><td>r1</td><td>2026-10-28</td><td>spec-tester</td><td>初版</td><td>按账本D-001、D-002的已确认范围与运行方式</td></tr><tr class="rk-added" data-rev="2"><td>r2</td><td>2026-10-28</td><td>TeamLead</td><td>登记用户确认；补充镜像源与聚焦测试说明</td><td>用户原话及账本D-007、D-008；未改变业务范围</td></tr><tr class="rk-added" data-rev="3"><td>r3</td><td>2026-10-28</td><td>TeamLead</td><td>登记独立测试报告关联；验收边界不变</td><td>本轮测试报告及账本D-011、D-012</td></tr><tr class="rk-added" data-rev="4"><td>r4</td><td>2026-10-28</td><td>TeamLead</td><td>登记收尾报告反链</td><td>收尾报告已形成；保留原阶段观察与结论</td></tr><tr class="rk-added" data-rev="5"><td>r5</td><td>2026-10-28</td><td>TeamLead</td><td>登记原条件设备测试的实际执行与汇总入口</td><td>D-016补测授权，测试边界不变</td></tr><tr class="rk-added" data-rev="6"><td>r6</td><td>2026-10-28</td><td>TeamLead</td><td>登记官方模拟器实际执行与同APK矩阵汇总</td><td>D-017：按原测试范围建立官方模拟器环境并实测</td></tr><tr class="rk-added" data-rev="7"><td>r7</td><td>2026-10-28</td><td>TeamLead / spec-ender</td><td>登记当前Spec收尾及环境迁移后的验收边界</td><td>按D-019收尾授权；保留原始证据与修订历史</td></tr><tr class="rk-added" data-rev="8"><td>r8</td><td>2026-10-28</td><td>TeamLead / spec-ender</td><td>写回真实PR链接与交付状态</td><td>按D-019收尾授权；保留原始证据与修订历史</td></tr></tbody></table><section class="rk-added" data-rev="8"><h2>GitHub交付</h2><p>当前Spec已提交并推送，<a href="https://github.com/PrimeDawn/Artemis/pull/1">向dev的PR已创建</a>，首个Spec已原位归档。合并由用户处理。</p></section><section class="rk-added" data-rev="7"><h2>收尾登记</h2><p>按D-019完成当前Spec原位归档。<a href="../ender/end-report.html">收尾报告</a>和<a href="../tester/test-report.html">测试报告</a>记录迁移后16项新鲜复测与19项同APK验收覆盖。原计划与实现内容保留，后续媒体工作按原版本规划推进。</p></section>
+<h2>1. 验收标准与当前状态</h2>
+<p>本文件是测试计划，<del class="rk-del" data-rev="2">所有用例尚未执行。</del><ins class="rk-ins" data-rev="2">独立测试阶段尚未开始；executor聚焦证据见实现总结，本计划不登记最终通过。</ins><ins class="rk-ins" data-rev="3">本轮已执行16项必测，三个设备条件项未实测，具体结论见测试报告。</ins>本Spec构建/来源/服务层通过条件：TC-01至TC-16全部有本轮真实证据并通过；运行条件用例TC-D1至TC-D3按实际设备执行，没有条件时标not-run及原因。</p>
+<p>缺设备不把本Spec已有的构建层证据作废，但不得宣布JNI、Android10或16KB运行兼容已通过，也不能据此通过v0.1音视频链路或正式产品验收。任何必需构建/服务项失败都不通过；测试不直接修复产品代码。</p>
+
+<h2>2. 测试用例</h2>
+<table><thead><tr><th>用例</th><th>描述/归属</th><th>输入</th><th>预期输出</th><th>边界与证据要求</th></tr></thead><tbody><tr><td>TC-01</td><td>工具链预检</td><td>verify-toolchain实际进程</td><td>JDK17、Node24、API36、Build Tools36.0.0与sdkmanager存在时退出0；缺项明确非零</td><td>缺JAVA_HOME但PATH可定位JDK时写清使用路径，不擅改全局</td></tr>
+<tr><td>TC-02</td><td>Wrapper来源</td><td>官方Wrapper与分发</td><td>JAR及分发SHA256与已记录官方值相同</td><td>损坏/不匹配立即失败，不禁用校验</td></tr>
+<tr><td>TC-03</td><td>SDK来源与锁定</td><td>固定Maven坐标和缓存AAR</td><td>SHA256为0a1627...379b0；4个ABI和期望Java入口存在</td><td>不接受不同哈希的GitHub原附件替代</td></tr>
+<tr><td>TC-04</td><td>许可证链</td><td>来源文档、POM和通知集合</td><td>区分发布仓库MIT、WebRTC BSD及第三方通知，保留原版本完整集合</td><td>不能只保留MIT一句话</td></tr>
+<tr><td>TC-05</td><td>第一次clean构建</td><td>gradlew clean assembleDebug</td><td>退出0、生成APK；Manifest min29/target36，包名io.github.primedawn.artemis</td><td>Gradle依赖解析失败不能标通过</td></tr>
+<tr><td>TC-06</td><td>第二次clean构建</td><td>按相同文档再次执行</td><td>再次退出0；产物存在且配置相同，记录两次SHA256</td><td>不要求调试APK字节完全一致，不用旧产物冒充本次产物</td></tr>
+<tr><td>TC-07</td><td>64位ELF</td><td>解包最终APK的arm64和x86_64 .so</td><td>PT_LOAD至少16384，GNU_RELRO存在时核对段末端16KB边界</td><td>32位4KB库单独记录，不套64位判据</td></tr>
+<tr><td>TC-08</td><td>APK ZIP对齐</td><td>Build Tools36.0.0 zipalign -c -P 16 -v 4</td><td>退出0且输出成功</td><td>AAR内部ELF检查不能替代最终APK ZIP检查</td></tr>
+<tr><td>TC-09</td><td>Node安装与构建</td><td>npm ci --ignore-scripts、npm run build</td><td>依固定lockfile安装并编译；不依赖全局tsc</td><td>干净node_modules复测</td></tr>
+<tr><td>TC-10</td><td>端口解析（executor）</td><td>undefined、0、3000、65535</td><td>分别得到3000、0、3000、65535</td><td>由本轮真实失败/成功运行保存RED/GREEN</td></tr>
+<tr><td>TC-11</td><td>端口拒绝（executor）</td><td>空串、-1、65536、abc、1.5、前后空白</td><td>RangeError；CLI非零退出并输出receiver_error</td><td>不默默回退到默认端口</td></tr>
+<tr><td>TC-12</td><td>健康接口（tester）</td><td>实际进程GET /healthz</td><td>200、JSON，service/status/version等于契约；Content-Type匹配</td><td>只证明服务健康，不代表媒体链路</td></tr>
+<tr><td>TC-13</td><td>错误路径（tester）</td><td>GET /missing、GET /healthz?x=1</td><td>404及error=not_found</td><td>按当前精确路径契约，不隐式增设router</td></tr>
+<tr><td>TC-14</td><td>方法边界（tester）</td><td>POST /healthz</td><td>405、Allow: GET、error=method_not_allowed</td><td>不解析请求体</td></tr>
+<tr><td>TC-15</td><td>端口占用</td><td>另一个实际server占据端口后启动CLI</td><td>保留EADDRINUSE信息，非零退出，不留下监听进程</td><td>使用OS分配端口，不假定3000空闲</td></tr>
+<tr><td>TC-16</td><td>关闭与再启动</td><td>真实RunningReceiver.close重复调用两次，随后重新绑定相同端口；CLI退出另行检查</td><td>关闭幂等成功、端口可复用；CLI子进程清理后不留监听</td><td>Windows强杀只证明终止，不证明信号处理；有真实Ctrl+C输入才可记录SIGINT优雅退出。超时失败保存日志。</td></tr>
+<tr><td>TC-D1</td><td>Android运行时（条件设备）</td><td>安装APK、启动Activity并运行WebRtcSdkSmokeTest</td><td>真实设备上JNI初始化及factory创建/释放通过，保存运行日志与截图</td><td>无设备为not-run；不以JVM测试或APK解包代替</td></tr>
+<tr><td>TC-D2</td><td>最低版本（条件设备）</td><td>Android10/API29设备或对应模拟器</td><td>安装和启动通过；设备/镜像与ABI记录明确</td><td>无对应环境为not-run，不写Android10已验证</td></tr>
+<tr><td>TC-D3</td><td>16KB环境（条件设备）</td><td>adb shell getconf PAGE_SIZE为16384的设备/镜像</td><td>SmokeTest通过并保存页面大小结果</td><td>普通4KB设备不能代表该用例；未实测如实记录</td></tr></tbody></table>
+
+<h2>3. 用户使用场景</h2>
+<table><thead><tr><th>场景</th><th>角色与目标</th><th>操作路径</th><th>关键断言</th><th>证据</th></tr></thead><tbody>
+<tr><td>US-01</td><td>开发者复现Android构建</td><td>准备官方SDK与JDK17 → 运行预检 → 两次clean构建 → ELF/ZIP检查</td><td>版本、来源、两次构建与当前APK一致，无全局环境改写</td><td>环境JSON、stdout/stderr、退出码、APK哈希和检查报告</td></tr>
+<tr><td>US-02</td><td>开发者运行PC实验服务</td><td>npm ci → build → 启动 → HTTP检查 → 关闭 → 重新绑定端口</td><td>实际服务契约和进程生命周期正确，不依赖浏览器截图或mock fetch</td><td>进程日志、真实HTTP响应、退出码与端口复用结果</td></tr>
+<tr><td>US-03</td><td>有设备时核实SDK可加载</td><td>读取API/ABI/page size → 安装 → 启动静态页面 → instrumentation</td><td>真实JNI smoke成功；无相机和麦克风采集；不推断未测系统</td><td>脱敏设备元数据、instrumentation输出、logcat摘要和截图</td></tr>
+</tbody></table>
+
+<h2>4. 测试方法与所有权</h2>
+<ul>
+<li>spec-executor拥有receiver/test/config.test.ts的聚焦测试。先建立能编译的骨架，再让断言因预期行为不成立而失败；编译失败、找不到命令和空断言不算有效RED。</li>
+<li>spec-tester拥有tests/receiver-smoke.mjs和Android设备侧SmokeTest，独立执行真实HTTP/子进程及条件设备验证；不修改executor的单元测试来制造通过。SmokeTest使用AndroidJUnitRunner 1.7.0及ext.junit 1.3.0的JUnit4入口。</li>
+<li>构建、依赖、许可证和静态对齐采用实际工具输出；不为声明式配置、常量字段或静态文字额外制作镜像实现的测试。</li>
+<li>本轮关键行为应覆盖已定义的所有成功、失败与退出路径；不对构建配置和静态界面机械套用80%代码覆盖率阈值。</li>
+</ul>
+
+<h2>5. 执行命令与证据生成</h2>
+<p>从项目根执行；每轮独立runId，原始日志与JSON只能由实际运行自动生成。以下是实施后的验证入口，当前未执行。</p>
+<pre><code>$SpecDir = &quot;spec/versions/v0.1/specs/20261028-1059-tech-SDK与工具链可行性&quot;
+$RunId = [DateTimeOffset]::UtcNow.ToString(&quot;yyyyMMdd-HHmmss&quot;)
+$Logs = Join-Path $SpecDir &quot;tester/artifacts/test-logs/$RunId&quot;
+New-Item -ItemType Directory -Path $Logs -Force
+
+powershell -NoProfile -File scripts/verify-toolchain.ps1 -ReportPath &quot;$Logs/environment.json&quot;
+.\android\gradlew.bat -p android --no-daemon clean :app:assembleDebug
+.\android\gradlew.bat -p android --no-daemon clean :app:assembleDebug
+python scripts/verify-native-libs.py --apk android/app/build/outputs/apk/debug/app-debug.apk --report &quot;$Logs/native-check.json&quot;
+# zipalign从SDK build-tools/36.0.0目录调用，路径由实际SdkRoot提供；不依赖全局PATH
+npm --prefix receiver ci --ignore-scripts
+npm --prefix receiver test
+node tests/receiver-smoke.mjs --report-dir &quot;$Logs/receiver&quot;
+
+# 有相应设备时才运行，并保存实际结果：
+.\android\gradlew.bat -p android connectedDebugAndroidTest</code></pre>
+<p>测试运行器为每条命令采集stdout、stderr、退出码、开始/结束时间、源SHA、工具版本及产物SHA256；必须等待子进程结束。禁止在运行后手填success或补造JSON。命令失败保留原始输出，交回TeamLead判定是否启动debug角色。</p>
+<p>HTTP集成运行器接收<code>--report-dir PATH</code>，缺参退出非零；使用临时端口与带超时的真实请求；finally关闭所有自建进程。设备标识在日志中脱敏，不保存完整设备序列号、配对信息、token或个人路径。</p>
+<p>关闭幂等和释放监听由真实RunningReceiver.close及重绑端口验证；CLI可另用真实终端Ctrl+C观察正常退出。Node.js说明Windows信号行为不同，自动化强杀结果不作为SIGINT/SIGTERM处理通过的证据，未具备终端条件时该细项列未实测。参见<a href="https://nodejs.org/docs/latest-v24.x/api/process.html#signal-events">Node.js官方信号说明</a>。</p>
+
+<h2>6. 日志与审计要求</h2>
+<ul>
+<li>环境/SDK缺项、依赖校验失败、服务启动成功、无效端口、端口占用和正常关闭都应留下可追溯记录。</li>
+<li>仅在测试完成后生成tester/test-report.html及completion.report.v1报告，criteria从权威台账原文读取，绑定真实源SHA；不手工勾选尚未执行的用例。</li>
+<li>设备未连接、未授权或不存在16KB环境时，使用not-run并写具体原因；不尝试规避设备授权或把静态检查升级为运行结论。</li>
+<li>本轮不触发媒体采集、LAN外部服务、账号或真实用户数据；本地诊断服务只绑定127.0.0.1。</li>
+</ul>
+
+<h2>7. 风险、失败处理与复测</h2>
+<p>失败时记录用例、输入、预期、实际、退出码及证据位置，交TeamLead。需要test-debug修复循环时先确认轮数与无进展预算；未确认预算前不自行反复修复。版本组合实质变化须先修订实现计划和本测试计划。</p>
+<p>报告浏览器file协议预览受当前工具策略限制，本轮只做HTML结构、引用路径、导航和元信息检查；不据此宣称视觉渲染验证通过。产品设备UI验证仍由条件设备用例承担。</p>
+
+<section class="rk-added" data-rev="5"><h2>设备补测执行入口</h2><p>原TC-D1至D3验收不变。新增tester拥有的tests/android-runtime-smoke.py执行实际安装、启动、JNI与本应用界面审计；--skip-install先核对设备上两个APK哈希。集成汇总器接受--runtime-report，验证实际设备条件、相同APK哈希及证据文件引用；本轮补测结果见测试报告。屏幕解锁由用户操作，锁屏不被当作应用UI。</p></section><section class="rk-added" data-rev="6"><h2>条件设备执行补充</h2><p>原TC-D2/D3已允许对应模拟器环境，验收条件未改。本轮由官方API29默认镜像与API36 Google APIs 16KB镜像执行，先断言真实API及PAGE_SIZE，再安装、观察界面及运行JNI；tests/collect-runtime-matrix.py将三环境运行绑定到同一APK及未变化的必测输入。完整结果见测试报告。</p></section><h2>关联产物</h2><h3>本报告引用</h3><ul class="rk-links">
+<li><a href="../writer/plan.html" data-rk-link="plan">实现计划与接口契约</a></li><li><a href="../explorer/exploration-report.html" data-rk-link="exploration">探索报告</a></li><li><a href="../lead/team-context.md" data-rk-link="ledger">运行账本</a></li>
+<li class="rk-added" data-rev="2"><a href="../executor/summary.html" data-rk-link="summary">实施结果与新鲜证据</a></li><li class="rk-added" data-rev="3"><a href="test-report.html" data-rk-link="test-report">本轮独立测试报告</a></li></ul><h3>引用本报告</h3><ul class="rk-backlinks"><li class="rk-added" data-rev="4"><a href="../ender/end-report.html" data-rk-backlink="end-report">收尾报告</a></li>
+<li><a href="../writer/plan.html" data-rk-backlink="plan">实现计划</a></li><li><a href="../explorer/exploration-report.html" data-rk-backlink="exploration">探索报告</a></li><li><a href="../executor/summary.html" data-rk-backlink="summary">实现总结</a>；测试报告尚未创建。</li><li class="rk-added" data-rev="3"><a href="test-report.html" data-rk-backlink="test-report">独立测试报告</a></li></ul>
+</body></html>

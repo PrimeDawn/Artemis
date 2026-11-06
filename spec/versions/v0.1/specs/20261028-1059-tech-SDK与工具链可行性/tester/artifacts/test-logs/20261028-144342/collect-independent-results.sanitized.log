@@ -1,0 +1,12 @@
+=== collect-independent-results Run ===
+Command: python tests/collect-sdk-results.py --run-dir spec/versions/v0.1/specs/20261028-1059-tech-SDK与工具链可行性/tester/artifacts/test-logs/20261028-144342
+Timestamp: 2026-10-28T07:00:14.737602+00:00
+
+--- stderr ---
+Traceback (most recent call last):
+  File "%PROJECT_ROOT%\tests\collect-sdk-results.py", line 10, in <module>
+    import yaml
+ModuleNotFoundError: No module named 'yaml'
+
+Exit code: 1
+Finished: 2026-10-28T07:00:14.847328+00:00

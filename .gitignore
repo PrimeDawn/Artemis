@@ -25,6 +25,7 @@ local.properties
 *.iml
 *.jks
 *.keystore
+android/signing.properties
 
 # Node and generated outputs
 node_modules/
@@ -33,11 +34,21 @@ dist/
 coverage/
 *.tsbuildinfo
 
+# Local tool downloads, SDKs and extracted native libraries
+.tools/
+.cache/
+*.apk
+*.aar
+*.aab
+
 # Local credentials and machine state
 .env
 .env.*
 !.env.example
 *.log
+!spec/**/artifacts/**/*.log
+__pycache__/
+*.pyc
 .DS_Store
 Thumbs.db
 
@@ -50,3 +61,54 @@ Thumbs.db
 .awr/cache/
 .awr/clients/
 .awr/executions/
+
+# Original early diagnostics stay local; sanitized transcripts and hash map are versioned
+/spec/versions/v0.1/specs/20261028-1059-tech-SDK与工具链可行性/executor/artifacts/android/gradle-configuration-official.log
+/spec/versions/v0.1/specs/20261028-1059-tech-SDK与工具链可行性/executor/artifacts/environment/sdk-cli-download.log
+/spec/versions/v0.1/specs/20261028-1059-tech-SDK与工具链可行性/executor/artifacts/environment/sdk-license-guard.log
+/spec/versions/v0.1/specs/20261028-1059-tech-SDK与工具链可行性/executor/artifacts/tdd/native-checker-red-assertions.log
+/spec/versions/v0.1/specs/20261028-1059-tech-SDK与工具链可行性/executor/artifacts/tdd/native-checker-red.log
+/spec/versions/v0.1/specs/20261028-1059-tech-SDK与工具链可行性/executor/artifacts/tdd/native-relro-padding-red.log
+/spec/versions/v0.1/specs/20261028-1059-tech-SDK与工具链可行性/tester/artifacts/test-logs/20261028-144342/collect-independent-results-final.log
+/spec/versions/v0.1/specs/20261028-1059-tech-SDK与工具链可行性/tester/artifacts/test-logs/20261028-144342/collect-independent-results.log
+
+# Absolute file URI roots in historical diagnostics stay local; portable copies are versioned
+/spec/versions/v0.1/specs/20261028-1059-tech-SDK与工具链可行性/ender/artifacts/20261028-155217-ending/awr-intake-inspect.json
+/spec/versions/v0.1/specs/20261028-1059-tech-SDK与工具链可行性/ender/artifacts/20261028-155217-ending/ending-zero-gap.log
+/spec/versions/v0.1/specs/20261028-1059-tech-SDK与工具链可行性/ender/artifacts/20261028-155217-ending/zero-gap-result.json
+/spec/versions/v0.1/specs/20261028-1059-tech-SDK与工具链可行性/executor/artifacts/android/gradle-configuration-official.sanitized.log
+/spec/versions/v0.1/specs/20261028-1059-tech-SDK与工具链可行性/executor/artifacts/tdd/config-red-verified.log
+/spec/versions/v0.1/specs/20261028-1059-tech-SDK与工具链可行性/executor/artifacts/tdd/config-red.log
+/spec/versions/v0.1/specs/20261028-1059-tech-SDK与工具链可行性/executor/artifacts/tdd/server-red-assertions.log
+/spec/versions/v0.1/specs/20261028-1059-tech-SDK与工具链可行性/executor/artifacts/tdd/server-red.log
+/spec/versions/v0.1/specs/20261028-1059-tech-SDK与工具链可行性/tester/artifacts/test-logs/20261028-144342/acceptance-source.json
+/spec/versions/v0.1/specs/20261028-1059-tech-SDK与工具链可行性/tester/artifacts/test-logs/20261028-155217-ending/acceptance-source.json
+/spec/versions/v0.1/specs/20261028-1059-tech-SDK与工具链可行性/tester/artifacts/test-logs/20261028-181629-usb-final/acceptance-source.json
+/spec/versions/v0.1/specs/20261028-1059-tech-SDK与工具链可行性/tester/artifacts/test-logs/20261028-181629-usb-final/verified-acceptance-source.json
+
+# Absolute file URI roots in historical diagnostics stay local; portable copies are versioned
+/spec/versions/v0.1/specs/20261028-1059-tech-SDK与工具链可行性/tester/artifacts/test-logs/20261028-184012-emulator/emulator-package-observation.log
+
+# Closeout evidence originals remain local; portable derivatives are reviewed
+/spec/versions/v0.1/specs/20261028-1059-tech-SDK与工具链可行性/ender/artifacts/20261028-203139-closeout/awr-intake-inspect.json
+/spec/versions/v0.1/specs/20261028-1059-tech-SDK与工具链可行性/ender/artifacts/20261028-203139-closeout/zero-gap-result.json
+/spec/versions/v0.1/specs/20261028-1059-tech-SDK与工具链可行性/executor/artifacts/tdd/native-checker-red.sanitized.log
+/spec/versions/v0.1/specs/20261028-1059-tech-SDK与工具链可行性/tester/artifacts/test-logs/20261028-184012-emulator/api36/emulator-boot.log
+/spec/versions/v0.1/specs/20261028-1059-tech-SDK与工具链可行性/tester/artifacts/test-logs/20261028-195438-relocation/adb-isolated-status-final.log
+/spec/versions/v0.1/specs/20261028-1059-tech-SDK与工具链可行性/tester/artifacts/test-logs/20261028-195438-relocation/adb-isolated-status-home-final.log
+/spec/versions/v0.1/specs/20261028-1059-tech-SDK与工具链可行性/tester/artifacts/test-logs/20261028-195438-relocation/clean-apk-build.json
+/spec/versions/v0.1/specs/20261028-1059-tech-SDK与工具链可行性/tester/artifacts/test-logs/20261028-195438-relocation/clean-apk-build.log
+/spec/versions/v0.1/specs/20261028-1059-tech-SDK与工具链可行性/tester/artifacts/test-logs/20261028-195438-relocation/signing-location-final.json
+/spec/versions/v0.1/specs/20261028-1059-tech-SDK与工具链可行性/tester/artifacts/test-logs/20261028-195438-relocation/signing-location-final.log
+/spec/versions/v0.1/specs/20261028-1059-tech-SDK与工具链可行性/tester/artifacts/test-logs/20261028-203139-closeout/acceptance-source.json
+/spec/versions/v0.1/specs/20261028-1059-tech-SDK与工具链可行性/tester/artifacts/test-logs/20261028-203139-closeout/awr-global-gap-check.log
+
+# Preserve the first portable derivative locally; v2 also redacts escaped JSON roots
+/spec/versions/v0.1/specs/20261028-1059-tech-SDK与工具链可行性/tester/artifacts/test-logs/20261028-184012-emulator/emulator-package-observation.portable.log
+
+# 原生构建产物
+native/out/
+*.obj
+*.lib
+*.exp
+*.pdb

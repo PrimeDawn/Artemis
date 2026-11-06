@@ -1,0 +1,26 @@
+=== emulator-readiness Run ===
+Command: powershell -NoProfile -File .cache/emulator-readiness.ps1
+Timestamp: 2026-10-28T10:17:54.628195+00:00
+{
+    "verifiedAt":  "2026-10-28T10:17:55.4345116+00:00",
+    "emulatorInstalled":  false,
+    "api29ImageInstalled":  false,
+    "page16kImageInstalled":  false,
+    "hypervisorPresent":  true,
+    "windowsFeatures":  [
+                            {
+                                "Name":  "VirtualMachinePlatform",
+                                "InstallState":  1
+                            },
+                            {
+                                "Name":  "HypervisorPlatform",
+                                "InstallState":  2
+                            }
+                        ],
+    "action":  "Read-only; no SDK image download, Windows feature change or reboot performed."
+}
+
+--- stderr ---
+
+Exit code: 0
+Finished: 2026-10-28T10:17:55.484263+00:00

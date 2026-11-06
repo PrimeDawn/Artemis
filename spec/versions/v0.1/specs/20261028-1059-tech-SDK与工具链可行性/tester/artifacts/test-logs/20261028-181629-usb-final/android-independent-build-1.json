@@ -1,0 +1,14 @@
+{
+  "command": "powershell -NoProfile -File .cache/gradle-testing.ps1 -IncludeInstrumentation",
+  "startedAt": "2026-10-28T10:16:37.070885+00:00",
+  "finishedAt": "2026-10-28T10:17:03.123049+00:00",
+  "exitCode": 0,
+  "expectedExitCode": 0,
+  "durationSeconds": 26.053,
+  "stdoutSha256": "5616a92f9a7700cb5796e671e48efd8251934bdb80786c978d9785e30e67530b",
+  "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "log": "android-independent-build-1.log",
+  "redactions": [
+    "personal user-root path"
+  ]
+}

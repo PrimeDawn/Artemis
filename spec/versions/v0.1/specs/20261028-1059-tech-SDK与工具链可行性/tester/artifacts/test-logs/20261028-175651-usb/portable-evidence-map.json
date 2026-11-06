@@ -1,0 +1,89 @@
+{
+  "createdAt": "2026-10-28T10:31:49.328101+00:00",
+  "files": [
+    {
+      "original": "spec/versions/v0.1/specs/20261028-1059-tech-SDK与工具链可行性/ender/artifacts/20261028-155217-ending/awr-intake-inspect.json",
+      "originalSha256": "6074b85b4ae02ea82f598ad90f81cb17c77a51c29f70b471fcba4275261fd097",
+      "portable": "spec/versions/v0.1/specs/20261028-1059-tech-SDK与工具链可行性/ender/artifacts/20261028-155217-ending/awr-intake-inspect.portable.json",
+      "portableSha256": "261733681d9b6061302d68d8058a57081ce7955ae5aeaec4abec38e0db281165",
+      "operation": "Replace absolute local root paths only; original bytes retained locally."
+    },
+    {
+      "original": "spec/versions/v0.1/specs/20261028-1059-tech-SDK与工具链可行性/ender/artifacts/20261028-155217-ending/ending-zero-gap.log",
+      "originalSha256": "60263fddb5f6a01f4ac407f929c254e116a07b911c604d51c6cc0f988bfd2144",
+      "portable": "spec/versions/v0.1/specs/20261028-1059-tech-SDK与工具链可行性/ender/artifacts/20261028-155217-ending/ending-zero-gap.portable.log",
+      "portableSha256": "b623dafb00e08230dcd75c59ae3238eec0132d8e25baa4f6deab6cd12dbb115a",
+      "operation": "Replace absolute local root paths only; original bytes retained locally."
+    },
+    {
+      "original": "spec/versions/v0.1/specs/20261028-1059-tech-SDK与工具链可行性/ender/artifacts/20261028-155217-ending/zero-gap-result.json",
+      "originalSha256": "368d24181cbf48aa512cc7fa8f7796536cc89ed24557cc3fb14653afaf09ec6d",
+      "portable": "spec/versions/v0.1/specs/20261028-1059-tech-SDK与工具链可行性/ender/artifacts/20261028-155217-ending/zero-gap-result.portable.json",
+      "portableSha256": "b2d14f33df3c503f5024f2acbdcb3f1f231f3f899281d23dc0f0abd20584dc2a",
+      "operation": "Replace absolute local root paths only; original bytes retained locally."
+    },
+    {
+      "original": "spec/versions/v0.1/specs/20261028-1059-tech-SDK与工具链可行性/executor/artifacts/android/gradle-configuration-official.sanitized.log",
+      "originalSha256": "e4076dd02c8e42cc12f4723ffb0078e66ff9c6612aa090990935e2460b4e2d4f",
+      "portable": "spec/versions/v0.1/specs/20261028-1059-tech-SDK与工具链可行性/executor/artifacts/android/gradle-configuration-official.sanitized.portable.log",
+      "portableSha256": "74b07a81a4d31caf0775a1a36c5a8309f28805ea6632fec0c918516479226cb7",
+      "operation": "Replace absolute local root paths only; original bytes retained locally."
+    },
+    {
+      "original": "spec/versions/v0.1/specs/20261028-1059-tech-SDK与工具链可行性/executor/artifacts/tdd/config-red-verified.log",
+      "originalSha256": "51c5ffd9dd15dc01e2d7dc990e77012cfcb7b0512cf6ca79f4a06831bf843d07",
+      "portable": "spec/versions/v0.1/specs/20261028-1059-tech-SDK与工具链可行性/executor/artifacts/tdd/config-red-verified.portable.log",
+      "portableSha256": "db102d7bb13e08956242ca5c1cb148d0eae22b8bdadcd1bfaa55ba4b3ca249b3",
+      "operation": "Replace absolute local root paths only; original bytes retained locally."
+    },
+    {
+      "original": "spec/versions/v0.1/specs/20261028-1059-tech-SDK与工具链可行性/executor/artifacts/tdd/config-red.log",
+      "originalSha256": "8a6021485c9238b9faad18b411fd945a6d5c27dba299118914a3db0460aaac8d",
+      "portable": "spec/versions/v0.1/specs/20261028-1059-tech-SDK与工具链可行性/executor/artifacts/tdd/config-red.portable.log",
+      "portableSha256": "bd5a8fdd5f202ff2f62671ffec7de2759d982461a02e6e785cfe0c44b7442b33",
+      "operation": "Replace absolute local root paths only; original bytes retained locally."
+    },
+    {
+      "original": "spec/versions/v0.1/specs/20261028-1059-tech-SDK与工具链可行性/executor/artifacts/tdd/server-red-assertions.log",
+      "originalSha256": "8657a361e7c7f95eeba71ae0fa7eb56e26717fafd05f3ddbb8624e94640373ba",
+      "portable": "spec/versions/v0.1/specs/20261028-1059-tech-SDK与工具链可行性/executor/artifacts/tdd/server-red-assertions.portable.log",
+      "portableSha256": "df023f015e693b6b8632489b1955cd91542dd5b633137c152f207253cd38b691",
+      "operation": "Replace absolute local root paths only; original bytes retained locally."
+    },
+    {
+      "original": "spec/versions/v0.1/specs/20261028-1059-tech-SDK与工具链可行性/executor/artifacts/tdd/server-red.log",
+      "originalSha256": "f39696db6cdbfea002caf05b152914666a878bcbd49932b33af4ebf07ff4b850",
+      "portable": "spec/versions/v0.1/specs/20261028-1059-tech-SDK与工具链可行性/executor/artifacts/tdd/server-red.portable.log",
+      "portableSha256": "0192188608af1b1adffa4115adce22376357c13275425e54eed529cc60514dc3",
+      "operation": "Replace absolute local root paths only; original bytes retained locally."
+    },
+    {
+      "original": "spec/versions/v0.1/specs/20261028-1059-tech-SDK与工具链可行性/tester/artifacts/test-logs/20261028-144342/acceptance-source.json",
+      "originalSha256": "00ab92efc5b8e0f3ea0ee0ddcd16b5461e85f88b63107f540aef8dd897a9b207",
+      "portable": "spec/versions/v0.1/specs/20261028-1059-tech-SDK与工具链可行性/tester/artifacts/test-logs/20261028-144342/acceptance-source.portable.json",
+      "portableSha256": "1c6bfd1ceb0e5f4a9f896eb24e6cd1d755610b16104efd5707bcc4fafff9009e",
+      "operation": "Replace absolute local root paths only; original bytes retained locally."
+    },
+    {
+      "original": "spec/versions/v0.1/specs/20261028-1059-tech-SDK与工具链可行性/tester/artifacts/test-logs/20261028-155217-ending/acceptance-source.json",
+      "originalSha256": "0a05f5fb4fb138bb1a87165d35a6508b5e4ba6f8f31a047885e246813c587303",
+      "portable": "spec/versions/v0.1/specs/20261028-1059-tech-SDK与工具链可行性/tester/artifacts/test-logs/20261028-155217-ending/acceptance-source.portable.json",
+      "portableSha256": "e82f741a33645143aef0d6f9711b6834de745db2071bdc496e06a5d1d3369b5e",
+      "operation": "Replace absolute local root paths only; original bytes retained locally."
+    },
+    {
+      "original": "spec/versions/v0.1/specs/20261028-1059-tech-SDK与工具链可行性/tester/artifacts/test-logs/20261028-181629-usb-final/acceptance-source.json",
+      "originalSha256": "243326f22bae0629bc12256ff86e9c36f376ad021921a398e8a05fd9cd2f553f",
+      "portable": "spec/versions/v0.1/specs/20261028-1059-tech-SDK与工具链可行性/tester/artifacts/test-logs/20261028-181629-usb-final/acceptance-source.portable.json",
+      "portableSha256": "5b48e2ec216c1acb4c27f5f27626f11c591784346073cdc97e0c6b2b01367bf7",
+      "operation": "Replace absolute local root paths only; original bytes retained locally."
+    },
+    {
+      "original": "spec/versions/v0.1/specs/20261028-1059-tech-SDK与工具链可行性/tester/artifacts/test-logs/20261028-181629-usb-final/verified-acceptance-source.json",
+      "originalSha256": "bfe422272eb37be34d9ae36a70022e594dc6d0ef92f2a57b27759e73304383da",
+      "portable": "spec/versions/v0.1/specs/20261028-1059-tech-SDK与工具链可行性/tester/artifacts/test-logs/20261028-181629-usb-final/verified-acceptance-source.portable.json",
+      "portableSha256": "d36a71e39114ebd37fda0a020c6b3930d67cf268d54e30e9fb05c7a337cf0086",
+      "operation": "Replace absolute local root paths only; original bytes retained locally."
+    }
+  ]
+}

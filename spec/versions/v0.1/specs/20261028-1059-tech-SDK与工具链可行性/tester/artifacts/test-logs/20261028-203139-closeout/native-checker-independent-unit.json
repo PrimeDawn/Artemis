@@ -1,0 +1,14 @@
+{
+  "command": "E:\\Dev\\miniconda\\python.exe scripts/tests/test_verify_native_libs.py",
+  "startedAt": "2026-10-28T12:34:38.681501+00:00",
+  "finishedAt": "2026-10-28T12:34:39.910390+00:00",
+  "exitCode": 0,
+  "expectedExitCode": 0,
+  "durationSeconds": 1.229,
+  "stdoutSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "stderrSha256": "79c4a125962e61fe71e70065e11c9e99a7e7b0b2a0517368e156a678ef9fd762",
+  "log": "native-checker-independent-unit.log",
+  "redactions": [
+    "personal user-root path"
+  ]
+}

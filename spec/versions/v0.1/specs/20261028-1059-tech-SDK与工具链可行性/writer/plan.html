@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>实现计划 — SDK与工具链可行性</title>
+<meta name="rk:title" content="实现计划">
+<meta name="rk:type" content="plan">
+<meta name="rk:version" content="v0.1">
+<meta name="rk:category" content="tech">
+<meta name="rk:spec-dir" content="spec/versions/v0.1/specs/20261028-1059-tech-SDK与工具链可行性">
+<meta name="rk:role" content="spec-writer">
+<meta name="rk:mode" content="gated">
+<meta name="rk:status" content="archived">
+<meta name="rk:created" content="2026-10-28">
+<meta name="rk:updated" content="2026-10-28">
+<meta name="rk:revision" content="6">
+<meta name="rk:git-branch" content="tech/spec-20261028-1059-sdk-toolchain">
+<meta name="rk:base-branch" content="dev">
+<meta name="rk:pr-url" content="https://github.com/PrimeDawn/Artemis/pull/1">
+<meta name="rk:tags" content="spec,sdk,toolchain,plan">
+<meta name="rk:execution-mode" content="single-agent"><meta name="rk:priority" content="高"><link rel="rk-exploration" href="../explorer/exploration-report.html"><link rel="rk-test-plan" href="../tester/test-plan.html">
+<link rel="rk-summary" href="../executor/summary.html">
+<link rel="rk-test-report" href="../tester/test-report.html">
+<link rel="rk-ledger" href="../lead/team-context.md">
+<link rel="rk-version-plan" href="../../../plan.html">
+<link rel="stylesheet" href="../../../../../../html-report/assets/rk-report.css">
+<script defer src="../rk-manifest.js"></script>
+<script defer src="../../../../../../html-report/assets/rk-report.js"></script>
+<link rel="rk-end-report" href="../ender/end-report.html">
+</head><body><nav class="rk-nav"></nav>
+<header class="rk-head"><h1>实现计划：SDK与工具链可行性</h1><div class="rk-meta">
+<span><b>类型</b> plan</span><span><b>版本</b> v0.1</span><span><b>属性</b> tech</span>
+<span><b>Spec</b> <code>spec/versions/v0.1/specs/20261028-1059-tech-SDK与工具链可行性</code></span><span><b>角色</b> spec-writer</span><span><b>模式</b> gated</span>
+<span><b>状态</b> <del class="rk-del" data-rev="5"> <del class="rk-del" data-rev="2">未确认</del><ins class="rk-ins" data-rev="2">已确认</ins></del><ins class="rk-ins" data-rev="5">archived</ins></span>
+<span><b>分支</b> <code>tech/spec-20261028-1059-sdk-toolchain</code> ← <code>dev</code></span><span><b>PR</b> <a href="https://github.com/PrimeDawn/Artemis/pull/1">https://github.com/PrimeDawn/Artemis/pull/1</a></span>
+<span><b>创建</b> 2026-10-28</span><span><b>更新</b> 2026-10-28</span><span><b>修订</b> r6</span>
+<span><b>执行模式</b> single-agent</span>
+<span><b>优先级</b> 高</span>
+</div></header><nav class="rk-revbar"></nav>
+<section class="rk-verdict"><div class="rk-verdict-label">设计结论</div><p>拟采用可追溯Maven WebRTC、JDK17/API36的最小Android工程及Node内置HTTP实验服务；源与静态证据已核查，构建和运行验证将在gate-2批准后实施。</p></section>
+<h2>修订历史</h2><table class="rk-revs"><thead><tr><th>修订</th><th>日期</th><th>修改人</th><th>改了什么</th><th>原因</th></tr></thead><tbody><tr><td>r1</td><td>2026-10-28</td><td>spec-writer</td><td>初版</td><td>按账本D-001、D-002的已确认范围与运行方式</td></tr><tr class="rk-added" data-rev="2"><td>r2</td><td>2026-10-28</td><td>TeamLead</td><td>登记用户确认；补充镜像源与聚焦测试说明</td><td>用户原话及账本D-007、D-008；未改变业务范围</td></tr><tr class="rk-added" data-rev="3"><td>r3</td><td>2026-10-28</td><td>TeamLead</td><td>登记独立测试报告关联；验收边界不变</td><td>本轮测试报告及账本D-011、D-012</td></tr><tr class="rk-added" data-rev="4"><td>r4</td><td>2026-10-28</td><td>TeamLead</td><td>登记收尾报告反链</td><td>收尾报告已形成；保留原阶段观察与结论</td></tr><tr class="rk-added" data-rev="5"><td>r5</td><td>2026-10-28</td><td>TeamLead / spec-ender</td><td>登记当前Spec收尾及环境迁移后的验收边界</td><td>按D-019收尾授权；保留原始证据与修订历史</td></tr><tr class="rk-added" data-rev="6"><td>r6</td><td>2026-10-28</td><td>TeamLead / spec-ender</td><td>写回真实PR链接与交付状态</td><td>按D-019收尾授权；保留原始证据与修订历史</td></tr></tbody></table><section class="rk-added" data-rev="6"><h2>GitHub交付</h2><p>当前Spec已提交并推送，<a href="https://github.com/PrimeDawn/Artemis/pull/1">向dev的PR已创建</a>，首个Spec已原位归档。合并由用户处理。</p></section><section class="rk-added" data-rev="5"><h2>收尾登记</h2><p>按D-019完成当前Spec原位归档。<a href="../ender/end-report.html">收尾报告</a>和<a href="../tester/test-report.html">测试报告</a>记录迁移后16项新鲜复测与19项同APK验收覆盖。原计划与实现内容保留，后续媒体工作按原版本规划推进。</p></section>
+<p class="rk-added" data-rev="2">用户已确认执行。Maven下载失败时允许切换镜像，继续核验固定坐标与哈希，并记录实际来源。补充receiver/test/server.test.ts作为公共服务函数的聚焦测试；独立CLI集成验证仍归tester。</p>
+<h2>1. 概述</h2>
+<p>当前没有Android或PC业务工程。本Spec验证后续WebRTC研究的构建前置：依赖有明确来源，最小APK能重复构建，PC实验服务能启动，静态检查和设备实测分别记账。</p>
+<ul><li>纳入：工具链与来源锁定、最小Compose APK、只含健康检查的TypeScript服务、验证入口与文档。</li>
+<li>边界：本Spec不实现配对、TLS、二维码、摄像头/麦克风采集、信令、OBS媒体接收、便携打包或产品交互。</li></ul>
+
+<h2>2. 需求分析</h2>
+<table><thead><tr><th>编号</th><th>需求</th><th>可观察结果</th></tr></thead><tbody>
+<tr><td>FR-01</td><td>可追溯WebRTC依赖</td><td>固定坐标、SHA256、ABI、许可证和分发处理说明，避免使用不同哈希的GitHub附件</td></tr>
+<tr><td>FR-02</td><td>Android最小可构建工程</td><td>两次clean assembleDebug成功；APK配置与64位原生库静态检查通过</td></tr>
+<tr><td>FR-03</td><td>PC实验服务</td><td>npm ci/build、GET /healthz、错误端口和退出行为可验证</td></tr>
+<tr><td>FR-04</td><td>验证边界与复现</td><td>自动保存命令/退出码/环境/哈希；没有设备的项目写“未实测”</td></tr>
+</tbody></table>
+
+<h2>3. 设计方案</h2>
+<h3>3.1 模块与版本组合</h3>
+<table><thead><tr><th>模块</th><th>明确选择</th></tr></thead><tbody>
+<tr><td>Android</td><td>JDK17；AGP8.13.2；Gradle8.13；Kotlin和Compose编译插件2.3.10；Compose BOM2025.10.01；activity-compose1.11.0；minSdk29、compile/target36、Build Tools36.0.0</td></tr>
+<tr><td>WebRTC</td><td>io.github.webrtc-sdk:android:150.7871.01，Maven AAR SHA256 <code>0a1627b1a48c2bc17d9a40d62fc47bd45166f44a311e95917f147c402de379b0</code>；保留其4个ABI，不把32位库4KB对齐当作64位16KB失败</td></tr>
+<tr><td>PC</td><td>Node24.18.0、npm11.16.0、TypeScript6.0.3、@types/node24.10.1；使用Node内置HTTP，无运行时Web框架依赖</td></tr>
+<tr><td>设备测试依赖</td><td>androidx.test:runner:1.7.0、androidx.test.ext:junit:1.3.0；testInstrumentationRunner为androidx.test.runner.AndroidJUnitRunner。设备SmokeTest使用InstrumentationRegistry的targetContext，不增加媒体采集。</td></tr>
+<tr><td>SDK安装</td><td>官方CLI tools19.0 Windows包；安装platforms;android-36、build-tools;36.0.0、platform-tools，记录实际包修订。默认SDK根为当前用户LOCALAPPDATA/Android/Sdk，可显式传入已有根。</td></tr>
+</tbody></table>
+<p>CLI19.0包名为commandlinetools-win-13114758_latest.zip，官方元数据SHA1为54a582f3bf73e04253602f2d1c80bd5868aac115。Gradle分发及Wrapper JAR分别校验探索报告中的官方SHA256；WebRTC解析必须使用固定Maven哈希。下载清单保留URL、校验算法、实际哈希和时间。</p>
+<div class="rk-cal key"><div class="t"><del class="rk-del" data-rev="2">拟议取舍，待gate-2确认</del><ins class="rk-ins" data-rev="2">用户已确认的取舍</ins></div><p>优先验证已核查的Maven分发；本轮不增设Linux源码编译环境。Compose/编译器使用与API36、JDK17组合明确的候选版本，不直接追随示例中的最新版本。选型发生实质变化时修订方案后再放行。</p></div>
+
+<h3>3.2 接口签名与错误约定</h3>
+<pre><code>// receiver/src/config.ts
+export interface ReceiverConfig { host: &quot;127.0.0.1&quot;; port: number }
+export function parsePort(raw: string | undefined): number;
+// undefined =&gt; 3000；十进制整数字符串0..65535；空串、小数、负数、前后空白、非数字、越界 =&gt; RangeError
+
+// receiver/src/server.ts
+export interface RunningReceiver {
+  server: import(&quot;node:http&quot;).Server;
+  address: import(&quot;node:net&quot;).AddressInfo;
+  close(): Promise&lt;void&gt;; // 幂等，重复调用成功
+}
+export function createReceiverServer(): import(&quot;node:http&quot;).Server;
+export function startReceiver(config: ReceiverConfig): Promise&lt;RunningReceiver&gt;;
+// listen失败reject NodeJS.ErrnoException，保留EADDRINUSE等code；不吞异常
+
+// receiver/src/cli.ts
+export function main(env: NodeJS.ProcessEnv = process.env): Promise&lt;void&gt;;
+// PORT由parsePort解析；启动成功输出receiver_started及实际端口；无效端口/启动失败输出receiver_error并设exitCode=1
+// 实际收到SIGINT/SIGTERM时等待close完成；Windows强杀不是优雅退出证据
+// 只绑定127.0.0.1，不在本Spec开放局域网监听
+
+// Android（静态验证页）
+class MainActivity : ComponentActivity { override fun onCreate(savedInstanceState: Bundle?): Unit }
+// 不实现相机/麦克风或虚构SDK运行成功提示。实际JNI加载由设备侧SmokeTest验证。</code></pre>
+<table><thead><tr><th>HTTP输入</th><th>响应</th><th>行为边界</th></tr></thead><tbody>
+<tr><td>GET /healthz</td><td>200，application/json，HealthResponse</td><td>表示实验服务进程可用，不表示手机或OBS已连接</td></tr>
+<tr><td>非GET访问/healthz</td><td>405，Allow: GET，error=method_not_allowed</td><td>不读取请求体</td></tr>
+<tr><td>其它路径（含带查询参数的不同URL）</td><td>404，error=not_found</td><td>不提供静态目录、信令或设备状态接口</td></tr>
+</tbody></table>
+<h3>3.3 数据结构</h3>
+<pre><code>interface ToolchainLock {
+  schemaVersion: 1;
+  android: {
+    minSdk: 29; compileSdk: 36; targetSdk: 36; buildTools: "36.0.0";
+    jdkMajor: 17; agp: "8.13.2"; gradle: "8.13"; kotlin: "2.3.10";
+    composeBom: "2025.10.01"; activityCompose: "1.11.0";
+    testRunner: "1.7.0"; testJunit: "1.3.0";
+    gradleDistributionSha256: string; gradleWrapperSha256: string;
+    commandlineToolsUrl: string; commandlineToolsSha1: string;
+  };
+  node: { version: "24.18.0"; npm: "11.16.0"; typescript: "6.0.3"; nodeTypes: "24.10.1" };
+  webrtc: {
+    coordinate: "io.github.webrtc-sdk:android:150.7871.01";
+    aarSha256: string; releaseTag: "v150.7871.01"; sourceUrl: string;
+    manifestMinSdk: 21; abis: string[]; licenseFiles: string[]; distributionNote: string;
+  };
+  sources: { component: string; url: string; checkedAt: string }[];
+}
+interface VerificationReport {
+  schemaVersion: 1; runId: string; verifiedAt: string; sourceSha: string;
+  dirty: boolean; workingTreeDiffSha256: string | null;
+  commands: {
+    command: string; exitCode: number | null;
+    stdoutPath: string | null; stderrPath: string | null;
+    startedAt: string; finishedAt: string | null;
+  }[];
+  checks: { id: string; status: "pass" | "fail" | "not-run"; reason: string }[];
+  environment: {
+    jdkVersion: string | null; nodeVersion: string | null; sdkPackages: string[];
+    deviceChecked: boolean; deviceSummary: string | null;
+  };
+  artifacts: { path: string; sha256: string }[];
+}</code></pre>
+<p>以上字段均必填；仅显式联合null的字段可空。时间为ISO8601，哈希为完整小写十六进制；数组无项时为空数组。未结束或未启动的命令exitCode为null且相应检查不能pass；未探测设备时deviceChecked=false、deviceSummary=null。sourceSha记录HEAD；有未提交修改时dirty=true并附工作区差异哈希，不能把HEAD当作已覆盖未提交实现的证据。</p>
+
+<table><thead><tr><th>结构</th><th>字段、类型、可空与默认</th></tr></thead><tbody>
+<tr><td>HealthResponse</td><td>service:string固定artemis-receiver；status:string固定ok；version:string固定0.1.0-dev；均不可空、无时间戳</td></tr>
+<tr><td>ErrorResponse</td><td>error:string，枚举not_found或method_not_allowed；不可空</td></tr>
+<tr><td>ReceiverConfig</td><td>host:字面量127.0.0.1不可空；port:number默认3000，0表示由OS分配端口</td></tr>
+<tr><td>ToolchainLock</td><td>schemaVersion:number=1；android/node/webrtc:对象不可空；每项版本、来源URL、校验算法/值、许可证索引；没有运行验证不写通过</td></tr>
+<tr><td>VerificationReport</td><td>schemaVersion:number=1；runId:string；verifiedAt:ISO字符串；sourceSha:string；commands:数组（command、exitCode、stdout/stderr路径）；checks:数组（id、status=pass/fail/not-run、reason）；environment:脱敏对象</td></tr>
+</tbody></table>
+<p><code>scripts/verify-native-libs.py --aar PATH --apk PATH --report PATH</code> 至少提供aar或apk之一；返回0表示检查项通过、1表示输入或校验失败。对64位库检查PT_LOAD及存在的GNU_RELRO段末端，记录32位ABI；APK ZIP对齐另外运行官方zipalign。脚本不得把静态检查写成设备运行通过。</p>
+<p><code>scripts/bootstrap-android-sdk.ps1 [-SdkRoot string] [-DownloadOnly]</code> 只在指定根及其临时子目录操作；验证官方包清单后展开CLI工具。许可证未接受时明确退出并说明缺项，不以自动yes接受。<code>scripts/verify-toolchain.ps1 [-SdkRoot string] -ReportPath string</code> 检查JDK17、Node24、SDK平台和构建工具，返回0或非零并输出结构化缺项。代理配置仅用于当前进程/本机未跟踪配置，不提交或更改系统代理。</p>
+
+<h3>3.4 文件清单</h3>
+<table><thead><tr><th>具体文件</th><th>动作/归属</th><th>变更区块</th></tr></thead><tbody><tr><td>android/gradle.properties；android/settings.gradle.kts；android/build.gradle.kts；android/gradle/libs.versions.toml</td><td>新建</td><td>AndroidX、仓库、AGP/Kotlin/Compose版本目录；不启用Jetifier或产品flavor</td></tr>
+<tr><td>android/gradlew；android/gradlew.bat；android/gradle/wrapper/gradle-wrapper.jar；android/gradle/wrapper/gradle-wrapper.properties</td><td>新建</td><td>官方Gradle8.13 Wrapper；固定分发URL及SHA256</td></tr>
+<tr><td>android/app/build.gradle.kts；android/app/proguard-rules.pro</td><td>新建</td><td>min29/compile36/target36/buildTools36.0.0；引入固定WebRTC和Compose依赖；配置AndroidJUnitRunner与上述设备测试依赖</td></tr>
+<tr><td>android/app/src/main/AndroidManifest.xml；android/app/src/main/java/io/github/primedawn/artemis/MainActivity.kt</td><td>新建</td><td>静态Compose验证页；不采集媒体、不请求相机或麦克风权限</td></tr>
+<tr><td>android/app/src/main/res/values/strings.xml；android/app/src/main/res/values/themes.xml</td><td>新建</td><td>项目名称和平台主题，支持系统深浅模式</td></tr>
+<tr><td>android/app/src/androidTest/java/io/github/primedawn/artemis/WebRtcSdkSmokeTest.kt</td><td>新建（tester）</td><td>条件具备时实际加载WebRTC并创建/释放factory，不采集媒体</td></tr>
+<tr><td>receiver/package.json；receiver/package-lock.json；receiver/tsconfig.json；receiver/.node-version</td><td>新建</td><td>Node24.18.0、TypeScript6.0.3、@types/node24.10.1；type=module；NodeNext/strict/ES2022/types=node；rootDir=.、outDir=dist；build=tsc -p tsconfig.json、start=node dist/src/cli.js、test=先build再node --test dist/test/*.test.js</td></tr>
+<tr><td>receiver/src/config.ts；receiver/src/server.ts；receiver/src/cli.ts</td><td>新建</td><td>端口校验、loopback健康检查、启动/关闭与非零失败退出</td></tr>
+<tr><td>receiver/test/config.test.ts</td><td>新建（executor）</td><td>端口解析的真实边界行为；经RED/GREEN产生证据</td></tr>
+<tr class="rk-added" data-rev="2"><td>receiver/test/server.test.ts；scripts/tests/test_verify_native_libs.py</td><td>新建（executor）</td><td>公共服务函数与原生校验脚本的聚焦RED/GREEN；含RELRO独立LOAD例外，不替代tester独立集成</td></tr>
+<tr><td>tests/receiver-smoke.mjs</td><td>新建（tester）</td><td>真实HTTP、端口冲突、信号关闭与重启检查</td></tr>
+<tr><td>scripts/bootstrap-android-sdk.ps1；scripts/verify-toolchain.ps1；scripts/verify-native-libs.py</td><td>新建</td><td>限定目录SDK准备、环境检查、AAR/APK只读校验；不接受许可证、不改全局配置</td></tr>
+<tr><td>docs/toolchain.md；docs/dependency-provenance.md；docs/toolchain-lock.json；docs/third-party/WEBRTC-150.7871.01.md</td><td>新建</td><td>可复现步骤、SDK来源/分发差异、工具与依赖锁定、原版本完整通知集合</td></tr>
+<tr><td>README.md；.gitignore</td><td>修改</td><td>追加构建/实验服务入口；忽略本机SDK路径、下载缓存和native临时展开目录</td></tr></tbody></table>
+<p>android/local.properties、SDK包、AAR缓存、构建产物和本机代理配置不提交。docs/third-party保留发布源对应版本的完整第三方通知；POM的BSD声明和发布仓库MIT分层记录。</p>
+
+<p class="rk-added" data-rev="3">tester测试辅助文件：tests/windows-cli-signal.py、tests/toolchain-provenance.py、tests/android-device-probe.py、tests/collect-sdk-results.py。它们为原定独立CLI、来源核验、设备条件与证据汇总提供执行入口，不增加业务功能。</p>
+<h2>4. 执行模式</h2>
+<p>实现阶段固定<code>single-agent</code>；整个Spec为<code>gated + serial</code>。当前Agent按角色协议串行执行，AWR会话真实owner为TeamLead，在检查点摘要注明所履行角色。gate-2未通过前不编写以上实现文件或安装产品工具链。</p>
+
+<h2>5. 实现步骤与逐项验证命令</h2>
+<p>以下命令均为实施后应运行的验证入口，目前未执行，也不代表已通过。所有日志由命令运行自动采集，实际Spec根如下：</p>
+<pre><code>$SpecDir = &quot;spec/versions/v0.1/specs/20261028-1059-tech-SDK与工具链可行性&quot;</code></pre>
+<table><thead><tr><th>任务</th><th>文件/具体区块</th><th>验证命令</th><th>预期观察</th></tr></thead><tbody>
+<tr><td>T1 环境与锁定</td><td>bootstrap/verify-toolchain脚本、toolchain-lock.json、toolchain.md</td><td><code>powershell -NoProfile -File scripts/verify-toolchain.ps1 -ReportPath "$SpecDir/executor/artifacts/preflight.json"</code></td><td>退出0，列出实际JDK/Node/SDK版本；缺项非零且不自动更改全局配置</td></tr>
+<tr><td>T2 Android骨架与依赖</td><td>android/的Wrapper、版本目录、构建配置、Activity、Manifest及资源</td><td><code>.\android\gradlew.bat -p android --no-daemon clean :app:assembleDebug</code>，连续执行两次</td><td>两次退出0并产生debug APK；不以字节完全一致代替“可重复构建”定义</td></tr>
+<tr><td>T3 来源和静态native验证</td><td>verify-native-libs.py、dependency-provenance.md、原版本通知</td><td><code>python scripts/verify-native-libs.py --apk android/app/build/outputs/apk/debug/app-debug.apk --report "$SpecDir/executor/artifacts/native-check.json"</code>；<code>zipalign -c -P 16 -v 4 android/app/build/outputs/apk/debug/app-debug.apk</code>（使用SDK Build Tools36.0.0中的可执行文件）</td><td>固定来源和哈希正确；64位ELF/RELRO与最终APK ZIP检查通过；不替代运行验证</td></tr>
+<tr><td>T4 PC行为</td><td>receiver/src/config.ts、server.ts、cli.ts；executor聚焦测试</td><td><code>npm --prefix receiver ci --ignore-scripts</code>；<code>npm --prefix receiver test</code></td><td>编译成功；端口解析的失败/成功行为经过真实RED→GREEN；不把“文件不存在”报错当作RED</td></tr>
+<tr><td>T5 独立集成与条件设备验证</td><td>tester拥有的tests/receiver-smoke.mjs、WebRtcSdkSmokeTest.kt</td><td><code>node tests/receiver-smoke.mjs --report-dir "$SpecDir/tester/artifacts/test-logs/$RunId/receiver"</code>；有设备时<code>.\android\gradlew.bat -p android connectedDebugAndroidTest</code></td><td>真实HTTP与进程退出检查通过；缺设备时设备项not-run并说明原因。RunId由测试运行时生成。</td></tr>
+<tr><td>T6 文档复现</td><td>README构建入口、docs/toolchain.md、许可证与来源说明</td><td>依文档在干净依赖目录执行<code>npm --prefix receiver ci --ignore-scripts</code>及第二次Android clean构建</td><td>无个人绝对路径/凭据，实际命令与记录一致，未验证的设备能力明确列出</td></tr>
+</tbody></table>
+<p>声明性工程骨架先建立测试运行前提；接收服务的端口、路由、退出等可观察行为遵循RED/GREEN。静态文本和配置不额外编写镜像实现的测试。具体用例与证据判据由独立的tester/test-plan.html承载。</p>
+
+<h2>6. 风险和依赖</h2>
+<ul>
+<li>SDK尚未安装；首次许可证接受是环境前置。无法获取官方包或用户未接受许可时停在环境缺项，不替换来历不明的安装包。</li>
+<li>固定的版本组合已核对来源和兼容区间，真实Gradle解析、D8编译及运行尚未完成；发生实质选型变更时修订报告并重过gate-2。</li>
+<li>本Spec可判定构建/来源/服务层验收；无设备时JNI、Android10安装和16KB运行只能列未实测，后续链路与版本验收不能沿用为通过。</li>
+<li>GitHub/Maven AAR不是同一容器哈希；Java版本头处理有来源依据，实施时只用固定Maven分发并保留处理说明。</li>
+</ul>
+
+<h2>7. 关联产物</h2><h3>本报告引用</h3><ul class="rk-links">
+<li><a href="../explorer/exploration-report.html" data-rk-link="exploration">探索报告与一手来源</a></li><li><a href="../tester/test-plan.html" data-rk-link="test-plan">测试计划</a></li><li><a href="../lead/team-context.md" data-rk-link="ledger">运行账本与决策</a></li>
+<li><a href="https://developer.android.com/jetpack/androidx/releases/test">AndroidX Test官方发布记录</a>；<a href="https://nodejs.org/docs/latest-v24.x/api/process.html#signal-events">Node.js信号与Windows边界</a>。</li>
+<li class="rk-added" data-rev="2"><a href="../executor/summary.html" data-rk-link="summary">实施结果与新鲜证据</a></li><li class="rk-added" data-rev="3"><a href="../tester/test-report.html" data-rk-link="test-report">本轮独立测试报告</a></li></ul><h3>引用本报告</h3><ul class="rk-backlinks"><li class="rk-added" data-rev="4"><a href="../ender/end-report.html" data-rk-backlink="end-report">收尾报告</a></li>
+<li><a href="../explorer/exploration-report.html" data-rk-backlink="exploration">探索报告</a></li><li><a href="../tester/test-plan.html" data-rk-backlink="test-plan">测试计划</a></li><li><a href="../executor/summary.html" data-rk-backlink="summary">实现总结</a>；测试报告尚未创建</li><li class="rk-added" data-rev="3"><a href="../tester/test-report.html" data-rk-backlink="test-report">独立测试报告</a></li></ul>
+</body></html>

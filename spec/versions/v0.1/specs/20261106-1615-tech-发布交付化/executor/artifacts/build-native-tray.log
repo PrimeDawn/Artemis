@@ -1,0 +1,5 @@
+﻿=== Native build (filters + decode host + Artemis.exe) ===
+Command: .\native\build.ps1
+Timestamp: 2026-11-06T17:09:02+08:00
+
+Exit code: 0

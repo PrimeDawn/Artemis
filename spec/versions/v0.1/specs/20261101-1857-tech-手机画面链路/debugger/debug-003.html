@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>缺陷诊断 · 画面频繁闪烁色条</title>
+<meta name="rk:title" content="缺陷诊断：画面频繁闪烁色条">
+<meta name="rk:type" content="debug">
+<meta name="rk:version" content="v0.1">
+<meta name="rk:category" content="tech">
+<meta name="rk:spec-dir" content="spec/versions/v0.1/specs/20261101-1857-tech-手机画面链路">
+<meta name="rk:role" content="spec-debugger">
+<meta name="rk:mode" content="gated">
+<meta name="rk:created" content="2026-11-01">
+<meta name="rk:updated" content="2026-11-01">
+<meta name="rk:revision" content="1">
+<meta name="rk:git-branch" content="tech/spec-20261101-1857-phone-media">
+<meta name="rk:base-branch" content="dev">
+<meta name="rk:pr-url" content="">
+<link rel="rk-test-report" href="../tester/test-report.html">
+<link rel="rk-ledger" href="../lead/team-context.md">
+<link rel="stylesheet" href="../../../../../../html-report/assets/rk-report.css">
+<script defer src="../rk-manifest.js"></script>
+<script defer src="../../../../../../html-report/assets/rk-report.js"></script>
+</head>
+<body>
+<header class="rk-head">
+<h1>缺陷诊断：画面频繁闪烁色条</h1>
+<div class="rk-meta">
+<span><b>类型</b> debug</span>
+<span><b>编号</b> debug-003（I-006）</span>
+<span><b>角色</b> spec-debugger</span>
+<span><b>分支</b> <code>tech/spec-20261101-1857-phone-media</code> ← <code>dev</code></span>
+<span><b>创建</b> 2026-11-01</span>
+<span><b>修订</b> r1（2026-11-01）</span>
+</div>
+</header>
+<nav class="rk-revbar"></nav>
+<section class="rk-verdict">
+<div class="rk-label">结论</div>
+<p>过滤器读共享内存失败时直接回退到合成色条。写入端每帧都有短暂的「写入中」窗口（<code>writeIndex</code> 为奇数），读取端撞上就闪一帧色条，因此闪烁频率与帧率相当。</p>
+</section>
+<h2>修订历史</h2>
+<table class="rk-revs">
+<thead><tr><th>修订</th><th>日期</th><th>修改人</th><th>改了什么</th><th>原因</th></tr></thead>
+<tbody><tr><td>r1</td><td>2026-11-01</td><td>spec-debugger</td><td>初版：现象、根因与修复方案</td><td>用户使用中反馈闪烁</td></tr></tbody>
+</table>
+<h2>1. 现象</h2>
+<p>OBS 中手机画面正常，但高频穿插短暂色条，观感为强烈闪烁；手机端与解码进程无异常，帧号持续递增。</p>
+<h2>2. 根因</h2>
+<p><code>FrameSource::FillFrame</code> 的逻辑是：读到有效帧就输出，读不到就调用 <code>RenderBars</code>。而 <code>TryReadShared</code> 在这些情况下返回失败：</p>
+<ul>
+<li><code>writeIndex</code> 为奇数（写入端正在写）</li>
+<li>两次读取 <code>writeIndex</code> 不一致（读到一半被写）</li>
+<li>映射尚未建立</li>
+</ul>
+<p>30fps 写入下，每次写入都会经历一个奇数窗口，读取端按 30fps 轮询，撞上就渲染一帧色条，于是与帧率同频闪烁。</p>
+<h2>3. 修复方案</h2>
+<p>读取失败时不再立刻回退色条，而是复用上一帧；只有从未成功读到过任何一帧时才回退到合成色条（即解码进程从未启动的场景）。</p>
+<h2>关联产物</h2>
+<h3>本报告引用</h3>
+<ul class="rk-links">
+<li><a href="../tester/test-report.html" data-rk-link="test-report">测试报告</a></li>
+<li><a href="../lead/team-context.md" data-rk-link="ledger">运行账本</a></li>
+</ul>
+<h3>引用本报告</h3>
+<ul class="rk-backlinks"><li><a href="debug-003-fix.html" data-rk-backlink="fix">修复记录</a></li></ul>
+</body>
+</html>

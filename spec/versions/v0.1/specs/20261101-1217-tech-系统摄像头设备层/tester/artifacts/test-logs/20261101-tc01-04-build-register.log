@@ -1,0 +1,34 @@
+﻿=== TC-01..TC-04 干净重建与注册 ===
+Command: Stop-Process obs64,synthetic-producer ; rm native/out ; powershell -File native/build.ps1 ; register.ps1 -Action unregister ; -Action register
+Timestamp: 2026-11-01T16:12:57.2442171+08:00
+clean out/ removed: True
+Building Artemis Camera...
+ArtemisCamera.cpp
+Filter.cpp
+Pin.cpp
+FrameSource.cpp
+正在生成代码...
+LINK : warning LNK4104: 导出符号“DllGetClassObject”应为 PRIVATE
+LINK : warning LNK4104: 导出符号“DllCanUnloadNow”应为 PRIVATE
+LINK : warning LNK4104: 导出符号“DllRegisterServer”应为 PRIVATE
+LINK : warning LNK4104: 导出符号“DllUnregisterServer”应为 PRIVATE
+  正在创建库 C:\workspace\Artemis\native\out\ArtemisCamera.lib 和对象 C:\workspace\Artemis\native\out\ArtemisCamera.exp
+main.cpp
+BUILD OK: C:\workspace\Artemis\native\out\ArtemisCamera.dll
+BUILD OK: C:\workspace\Artemis\native\out\synthetic-producer.exe
+TC-01 build exit: 0
+            8664 machine (x64)
+            8664 machine (x64)
+TC-02 dumpbin exit: 0
+NOTE: running unelevated; registering per-user under HKCU\Software\Classes
+UNREGISTER OK
+TC-03 unregister exit: 0
+NOTE: running unelevated; registering per-user under HKCU\Software\Classes
+REGISTER OK: Artemis Camera
+TC-03 register exit: 0
+TC-04 FriendlyName: Artemis Camera
+TC-04 DevicePath: @device:sw:{860BB310-5D01-11D0-BD3B-00A0C911CE86}\{7E1F3A10-2C4B-4D8E-9A55-3F0C1B7D9E21}
+TC-04 InprocServer32: C:\workspace\Artemis\native\out\ArtemisCamera.dll
+TC-04 ThreadingModel: Both
+TC-04 exit: 0
+Exit code: 0

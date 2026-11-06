@@ -1,0 +1,13 @@
+Command: obs-websocket v5: CreateInput(dshow_input) + StartRecord/StopRecord ; ffprobe + ffmpeg signalstats
+=== TC-08b OBS 录制验证（最终构建） ===
+Timestamp: 2026-11-06T22:02:12+08:00
+说明：安装包 A78E44BC41370AFB… 重装后手机自动重连（trusted=true，免配对），再用 OBS 录制。
+recording=C:\Users\35692\Videos\2026-11-06 22-01-47.mp4 size=8.78 MB
+codec_name=h264
+width=1280
+height=720
+r_frame_rate=30/1
+duration=12.033333
+
+frames=32 YAVG_min=61.8913 YAVG_max=63.5299 YAVG_avg=62.2
+Exit code: 0

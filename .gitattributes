@@ -6,3 +6,6 @@
 *.json text eol=lf
 *.sh text eol=lf
 *.ps1 text eol=crlf
+
+# Preserve the exact bytes of hash-bound validation evidence.
+spec/**/artifacts/** -text whitespace=cr-at-eol
