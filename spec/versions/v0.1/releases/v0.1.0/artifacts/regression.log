@@ -1,0 +1,25 @@
+﻿=== v0.1 发版全量回归 ===
+Branch: release/v0.1 @ 440569b
+Command: npm --prefix receiver test ; gradlew :app:testDebugUnitTest ; native/build.ps1 ; scripts/build-release.ps1 ; apksigner verify
+Timestamp: 2026-11-07T00:15:36+08:00
+--- receiver unit ---
+ℹ tests 67
+ℹ pass 67
+ℹ fail 0
+receiver_exit=0
+--- jvm ---
+BUILD SUCCESSFUL in 24s
+jvm_exit=0
+--- native ---
+native_exit=0
+--- release build ---
+C:\workspace\Artemis\dist\Artemis-Setup-0.1.0.exe
+build_exit=0
+7a5cb5caf1e7e8567a383170a78e147dac234780c1accdba6f42688ea6a0b135  Artemis-Setup-0.1.0.exe
+dbfb8a4df9d0722f945f4b7c2d5027e2a9c96befa664807685702341166a9747  Artemis-0.1.0.apk
+--- apk signature ---
+Signer #1 certificate DN: CN=Artemis Release, O=Artemis, C=CN
+Signer #1 certificate SHA-256 digest: 15bd8e36775722098301b02fcbe99fc70865393678c95fbbd576e12b7ee4daf2
+apk_verify_exit=0
+=== 汇总 ===
+Exit code: 0

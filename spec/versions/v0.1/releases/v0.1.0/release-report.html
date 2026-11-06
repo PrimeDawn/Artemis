@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>发版交付报告：v0.1.0</title>
+
+<meta name="rk:title"       content="发版交付报告：v0.1.0">
+<meta name="rk:type"        content="release-report">
+<meta name="rk:version"     content="v0.1">
+<meta name="rk:role"        content="TeamLead">
+<meta name="rk:created"     content="2026-11-07">
+<meta name="rk:updated"     content="2026-11-07">
+<meta name="rk:revision"    content="1">
+<meta name="rk:base-branch" content="release/v0.1">
+<meta name="rk:pr-url"      content="">
+<meta name="rk:tags"        content="version,release">
+
+<link rel="stylesheet" href="../../../../../html-report/assets/rk-report.css">
+<script defer src="../../../../../html-report/assets/rk-report.js"></script>
+</head>
+<body>
+
+<header class="rk-head">
+  <h1>发版交付报告：v0.1.0</h1>
+  <div class="rk-meta">
+    <span><b>类型</b> release-report</span>
+    <span><b>版本</b> <code>v0.1</code></span>
+    <span><b>Tag</b> <code>v0.1.0</code>（待打）</span>
+    <span><b>提测分支</b> <code>release/v0.1</code> ← <code>dev</code></span>
+    <span><b>角色</b> TeamLead</span>
+    <span><b>创建</b> 2026-11-07</span>
+    <span><b>修订</b> r1（2026-11-07）</span>
+  </div>
+</header>
+
+<nav class="rk-revbar"></nav>
+
+<section class="rk-verdict is-pass">
+  <div class="rk-verdict-label">发版结论</div>
+  <p>v0.1.0 可以发：8 个 Spec 全部归档并入版，`release/v0.1` 上全量回归零失败，端到端冒烟（装包 → 配对 → OBS 录制 → 卸载）在本轮新鲜跑通。候选产物 <code>Artemis-Setup-0.1.0.exe</code>（63.4 MB）与 <code>Artemis-0.1.0.apk</code>（67.5 MB）已构建并校验。</p>
+</section>
+
+<h2>修订历史</h2>
+<table class="rk-revs">
+  <thead><tr><th>修订</th><th>日期</th><th>修改人</th><th>改了什么</th><th>原因</th></tr></thead>
+  <tbody>
+    <tr><td>r1</td><td>2026-11-07</td><td>TeamLead</td><td>初版</td><td>—</td></tr>
+  </tbody>
+</table>
+
+<h2>1. 纳入的 Spec 清单与交付度</h2>
+<p>冻结提交 <code>99d87bb</code>（`dev`），提测分支 <code>release/v0.1</code>。</p>
+<table>
+  <thead><tr><th>Spec</th><th>主题</th><th>合并 PR</th><th>状态</th><th>收尾报告</th></tr></thead>
+  <tbody>
+    <tr><td>SPEC-sdk-toolchain</td><td>SDK 与工具链可行性</td><td>#1</td><td>done·已归档</td><td><a href="../../specs/20261028-1059-tech-SDK与工具链可行性/ender/end-report.html">end-report</a></td></tr>
+    <tr><td>SPEC-offline-pairing</td><td>离线配对与信令信任</td><td>#3</td><td>done·已归档</td><td><a href="../../specs/20261029-0934-tech-离线配对与信令信任/lead/team-context.md">账本</a></td></tr>
+    <tr><td>SPEC-app-refactor</td><td>应用层无感改造</td><td>#4</td><td>done·已归档</td><td><a href="../../specs/20261101-1013-tech-应用层无感改造/lead/team-context.md">账本</a></td></tr>
+    <tr><td>SPEC-device-layer</td><td>系统摄像头设备层</td><td>#5</td><td>done·已归档</td><td><a href="../../specs/20261101-1217-tech-系统摄像头设备层/lead/team-context.md">账本</a></td></tr>
+    <tr><td>SPEC-phone-media</td><td>手机画面链路</td><td>#6</td><td>done·已归档</td><td><a href="../../specs/20261101-1857-tech-手机画面链路/lead/team-context.md">账本</a></td></tr>
+    <tr><td>SPEC-audio-device</td><td>虚拟麦克风音频链路</td><td>#7</td><td>done·已归档</td><td><a href="../../specs/20261102-1117-tech-虚拟麦克风音频链路/lead/team-context.md">账本</a></td></tr>
+    <tr><td>SPEC-validation-baseline</td><td>真机验证基线</td><td>#8</td><td>done·已归档</td><td><a href="../../specs/20261103-1055-tech-真机验证基线/ender/end-report.html">end-report</a></td></tr>
+    <tr><td>SPEC-release-package</td><td>发布交付化</td><td>#9</td><td>done·已归档</td><td><a href="../../specs/20261106-1615-tech-发布交付化/ender/end-report.html">end-report</a></td></tr>
+  </tbody>
+</table>
+<p>作废：<code>SPEC-media-obs</code>（被 SPEC-phone-media 与 SPEC-audio-device 替代）。</p>
+
+<h2>2. 全量回归测试与质量证据</h2>
+<p>在 <code>release/v0.1</code> @ <code>440569b</code> 上新鲜执行，原始输出见 <a href="artifacts/regression.log">artifacts/regression.log</a>。</p>
+<table>
+  <thead><tr><th>套件</th><th>命令</th><th>结果</th><th>退出码</th></tr></thead>
+  <tbody>
+    <tr><td>接收服务单元</td><td><code>npm --prefix receiver test</code></td><td>67 pass / 0 fail</td><td>0</td></tr>
+    <tr><td>安卓 JVM 单元</td><td><code>gradlew :app:testDebugUnitTest</code></td><td>BUILD SUCCESSFUL</td><td>0</td></tr>
+    <tr><td>原生构建</td><td><code>.\native\build.ps1</code></td><td>过滤器 / 解码进程 / Artemis.exe 全部 BUILD OK</td><td>0</td></tr>
+    <tr><td>发版构建</td><td><code>.\scripts\build-release.ps1</code></td><td>安装包 + APK + SHA256SUMS</td><td>0</td></tr>
+    <tr><td>APK 签名</td><td><code>apksigner verify --print-certs</code></td><td><code>CN=Artemis Release</code></td><td>0</td></tr>
+  </tbody>
+</table>
+<h3>端到端冒烟（同一构建产物）</h3>
+<p>原始输出见 <a href="artifacts/e2e-smoke.log">artifacts/e2e-smoke.log</a>，抽帧见 <a href="artifacts/release-frame.jpg">release-frame.jpg</a>。</p>
+<table>
+  <thead><tr><th>步骤</th><th>结果</th></tr></thead>
+  <tbody>
+    <tr><td>安装包静默安装</td><td>退出码 0；程序目录与 HKCU 过滤器注册就位</td></tr>
+    <tr><td>安装态 <code>--selftest</code></td><td><code>installed=true</code>，路径指向 <code>app\receiver</code></td></tr>
+    <tr><td>托盘拉起服务</td><td><code>/healthz</code> 200，解码子进程存活</td></tr>
+    <tr><td>手机配对</td><td>手机首次授权后 <code>trusted=true</code>、<code>state=connected</code></td></tr>
+    <tr><td>OBS 采集</td><td>obs-websocket 建 dshow 源，录制 12.00 秒 / 1280×720 / 30fps / H.264，抽帧亮度 YAVG 61.9（非黑）</td></tr>
+    <tr><td>卸载</td><td>退出码 0；残留文件 0、CLSID 消失、用户数据目录保留</td></tr>
+  </tbody>
+</table>
+<div class="rk-cal warn"><div class="t">注意：安装包首次被 Smart App Control 拦截</div><p>本轮重建的安装包首次执行被 CI 拦截（事件 3077/3033，Policy <code>{0283ac0f-…}</code>），等待约两分钟后同一文件放行并安装成功。这是未签名文件的信誉评估行为，与代码无关；已记入经验 EXP-010 与 README 的已知限制。</p></div>
+
+<h2>3. 构建产物与部署</h2>
+<table>
+  <thead><tr><th>产物</th><th>大小</th><th>SHA256</th></tr></thead>
+  <tbody>
+    <tr><td><code>Artemis-Setup-0.1.0.exe</code></td><td>63.4 MB</td><td><code>7a5cb5caf1e7e8567a383170a78e147dac234780c1accdba6f42688ea6a0b135</code></td></tr>
+    <tr><td><code>Artemis-0.1.0.apk</code></td><td>67.5 MB</td><td><code>dbfb8a4df9d0722f945f4b7c2d5027e2a9c96befa664807685702341166a9747</code></td></tr>
+  </tbody>
+</table>
+<ul>
+  <li>产物落在构建机 <code>dist\</code>（不入库），发版时作为 GitHub Release 附件上传（D-005）。</li>
+  <li>安装包为逐用户安装（<code>PrivilegesRequired=lowest</code>），装到 <code>%LOCALAPPDATA%\Programs\Artemis</code>；卸载不删用户数据目录。</li>
+  <li>APK 为 release 签名（keystore 不入库），<code>versionName=0.1.0</code>、<code>versionCode=1</code>。</li>
+</ul>
+
+<h2>4. 变更说明与数据迁移</h2>
+<p><b>数据迁移</b>：无。v0.1 是首次对外发布，不存在旧版本数据。开发期的 <code>%LOCALAPPDATA%\Artemis\data</code> 可保留（身份与信任），也可删除后重新配对。</p>
+<p><b>运行时依赖变化</b>：不再需要用户安装 Node.js、Git for Windows 或 OpenSSL——安装包自带 <code>runtime\node.exe</code>，证书在进程内签发了。</p>
+<p><b>用户需知</b>：</p>
+<ul>
+  <li>音频需要用户自备 VB-CABLE（D-012/D-013），未安装时只有画面。</li>
+  <li>Smart App Control 开启的 Windows 11 可能拦截未签名安装包，需自行关闭该功能（README 已写明）。</li>
+  <li>从旧 debug 签名版升级必须先卸载（签名不同无法覆盖安装），会丢失已保存的配对。</li>
+</ul>
+
+<h2>5. 发版动作</h2>
+<table>
+  <thead><tr><th>动作</th><th>状态</th></tr></thead>
+  <tbody>
+    <tr><td>提测冻结（账本 <code>验收中</code>，冻结提交 <code>440569b</code>）</td><td>已完成</td></tr>
+    <tr><td><code>release/v0.1</code> 分支创建并推送</td><td>已完成</td></tr>
+    <tr><td>本报告与回归证据提交</td><td>待提交</td></tr>
+    <tr><td>PR <code>release/v0.1</code> → <code>main</code> 合并</td><td>待用户放行</td></tr>
+    <tr><td>在 <code>main</code> 合并提交上打 <code>v0.1.0</code> Tag</td><td>待用户放行</td></tr>
+    <tr><td>回流 <code>dev</code> 并更新账本为 <code>已发布</code></td><td>待执行</td></tr>
+  </tbody>
+</table>
+
+<h2>关联产物</h2>
+<h3>本报告引用</h3>
+<ul class="rk-links">
+  <li><a href="../../version-context.md" data-rk-link="version-context">版本运行账本</a></li>
+  <li><a href="../../plan.html" data-rk-link="version-plan">版本规划报告</a></li>
+  <li><a href="artifacts/regression.log" data-rk-link="evidence">全量回归证据</a></li>
+  <li><a href="artifacts/e2e-smoke.log" data-rk-link="evidence">端到端冒烟证据</a></li>
+</ul>
+<h3>引用本报告</h3>
+<ul class="rk-backlinks">
+  <li><a href="../../version-context.md" data-rk-backlink="version-context">版本运行账本</a></li>
+</ul>
+
+</body>
+</html>

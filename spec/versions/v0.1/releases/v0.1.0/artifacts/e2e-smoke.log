@@ -1,0 +1,31 @@
+﻿=== 发版端到端冒烟 ===
+Timestamp: 2026-11-07T00:18:36+08:00
+Command: 安装 dist\Artemis-Setup-0.1.0.exe（从 %TEMP% 副本）; Artemis.exe --selftest ; --console + GET /healthz ; 卸载 ; 断言残留
+setup_sha256=7A5CB5CAF1E7E8567A383170A78E147DAC234780C1ACCDBA6F42688EA6A0B135
+install_exit=blocked
+app_dir=False
+clsid=False
+selftest:
+healthz200=False
+decode_child=0
+Exit code: 0
+install_exit=0 (after CI released)
+app_dir=True
+clsid=True
+selftest_exit=
+{"lanIp":"192.168.1.5","controlPort":3000,"tlsPort":3443,"mediaPort":3450,"installed":true,"dataDir":"C:\\Users\\35692\\AppData\\Local\\Artemis\\data","logDir":"C:\\Users\\35692\\AppData\\Local\\Artemis\\logs","receiverEntry":"C:\\Users\\35692\\AppData\\Local\\Programs\\Artemis\\app\\receiver\\dist\\src\\pairing-cli.js"}
+healthz200=True
+decode_child=1
+devices=0
+pairing: trusted=True state=connected
+recording=C:\Users\35692\Videos\2026-11-07 00-25-54.mp4 size=8.76 MB
+codec_name=h264
+width=1280
+height=720
+r_frame_rate=30/1
+duration=12.000000
+
+frames=22 YAVG_avg=61.9 min=61.8182 max=62.0141
+uninstall_exit=0
+after_uninstall: app_dir=False leftover_files=0 clsid=False data_dir=True
+Exit code: 0
