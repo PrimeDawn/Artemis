@@ -11,8 +11,8 @@ export function parsePairingConfig(env: NodeJS.ProcessEnv, interfaces: NodeJS.Di
   const lanHost = env.ARTEMIS_LAN_HOST ?? fail();
   const assigned = Object.values(interfaces).flat().some(i => i?.family === 'IPv4' && i.address === lanHost && !i.internal);
   if (!privateIpv4(lanHost) || !assigned) fail();
-  const dataDir = env.ARTEMIS_DATA_DIR ?? fail(), opensslPath = env.ARTEMIS_OPENSSL_PATH ?? fail();
-  if (!win32.isAbsolute(dataDir) || !win32.isAbsolute(opensslPath)) fail();
+  const dataDir = env.ARTEMIS_DATA_DIR ?? fail();
+  if (!win32.isAbsolute(dataDir)) fail();
   function port(raw: string | undefined, fallback: number): number {
     if (raw === undefined) return fallback;
     if (!/^[0-9]+$/u.test(raw)) return fail();
@@ -22,5 +22,5 @@ export function parsePairingConfig(env: NodeJS.ProcessEnv, interfaces: NodeJS.Di
   if (controlPort === tlsPort) fail();
   // 解码进程的视频端口必须与这里的 mediaPort 一致，否则 /media 会连到没人监听的口。
   const mediaPort=port(env.ARTEMIS_MEDIA_PORT,3450);
-  return { controlHost:'127.0.0.1',controlPort,lanHost,tlsPort,dataDir,opensslPath,mediaPort };
+  return { controlHost:'127.0.0.1',controlPort,lanHost,tlsPort,dataDir,mediaPort };
 }

@@ -1,9 +1,12 @@
 ﻿# 一键启动：解码进程 + 接收服务 + 打开控制页；关闭窗口或按 Ctrl+C 时全部停止。
-# 供本机试用，不是最终产品形态（最终形态是托盘常驻程序，留给打包阶段）。
+# 供开发机试用；用户安装包里的入口是 Artemis.exe（进程管家）。
+#
+# 运行时依赖只有随包 Node：优先用安装目录的 runtime\node.exe，没有时回退 PATH 中的 node。
+# 证书由进程内签发（writer/plan.html §3.2），不再需要 openssl。
 #
 # 所有机器相关的输入都可覆盖，默认值不指向某台开发机：
 #   -DataDir       数据目录（身份、信任、日志），默认 %LOCALAPPDATA%\Artemis\data
-#   -OpenSslPath   指定 openssl.exe；省略时自动探测并做功能验证
+#   -NodePath      指定 node.exe；省略时按 runtime\node.exe → PATH 顺序探测
 #   -LanIp         指定局域网 IPv4；省略时按默认路由自动选取
 #   -NoBrowser     不自动打开控制页（自动化/无桌面环境用）
 #   -NonInteractive 出错时直接退出，不等待按键
@@ -11,7 +14,7 @@
 [CmdletBinding()]
 param(
     [string]$DataDir,
-    [string]$OpenSslPath,
+    [string]$NodePath,
     [string]$LanIp,
     [int]$MediaPort = 3450,
     [int]$ControlPort = 3000,
@@ -37,60 +40,23 @@ function Fail($message) {
     exit 1
 }
 
-# openssl 只有能真正生成密钥才可用：PATH 里可能有一个缺少默认配置的构建。
-# 用 Start-Process 重定向而不是 & 调用——openssl 会往 stderr 写进度，
-# 在 $ErrorActionPreference='Stop' 下会被当成错误抛出。
-function Test-OpenSsl($path) {
-    if (-not (Test-Path $path)) { return $false }
-    $probeDir = Join-Path ([System.IO.Path]::GetTempPath()) ("artemis-openssl-probe-" + [guid]::NewGuid().ToString('N'))
-    try {
-        New-Item -ItemType Directory -Force -Path $probeDir | Out-Null
-        $keyOut = Join-Path $probeDir 'k.pem'
-        $crtOut = Join-Path $probeDir 'c.pem'
-        $opensslArgs = @(
-            'req', '-x509', '-newkey', 'ec', '-pkeyopt', 'ec_paramgen_curve:P-256', '-nodes',
-            '-keyout', $keyOut, '-out', $crtOut, '-subj', '/CN=artemis-probe', '-days', '1'
-        )
-        $probe = Start-Process -FilePath $path -ArgumentList $opensslArgs -Wait -PassThru -NoNewWindow `
-            -RedirectStandardOutput (Join-Path $probeDir 'out.txt') `
-            -RedirectStandardError (Join-Path $probeDir 'err.txt')
-        return ($probe.ExitCode -eq 0) -and (Test-Path $keyOut) -and (Test-Path $crtOut)
-    } catch {
-        return $false
-    } finally {
-        Remove-Item $probeDir -Recurse -Force -ErrorAction SilentlyContinue
-    }
-}
-
-function Resolve-OpenSsl($explicit) {
+# 安装布局把 Node 放在程序目录下；开发布局用 PATH 里的 node。
+function Resolve-Node($explicit) {
     if ($explicit) {
-        if (-not (Test-OpenSsl $explicit)) { Fail "指定的 OpenSSL 不可用：$explicit（需要能执行 req 生成密钥）" }
+        if (-not (Test-Path $explicit)) { Fail "指定的 Node 不存在：$explicit" }
         return $explicit
     }
-    $candidates = @()
-    $cmd = Get-Command openssl -ErrorAction SilentlyContinue
-    if ($cmd) { $candidates += $cmd.Source }
-    $candidates += @(
-        (Join-Path $env:ProgramFiles 'Git\usr\bin\openssl.exe'),
-        (Join-Path $env:ProgramFiles 'Git\mingw64\bin\openssl.exe')
-    )
-    if (${env:ProgramFiles(x86)}) {
-        $candidates += (Join-Path ${env:ProgramFiles(x86)} 'Git\usr\bin\openssl.exe')
-    }
-    foreach ($candidate in $candidates) {
-        if ($candidate -and (Test-Path $candidate) -and (Test-OpenSsl $candidate)) { return $candidate }
-    }
-    Fail @'
-找不到可用的 openssl（需要能执行 `openssl req` 生成自签名证书）。
-  - 安装 Git for Windows（自带 openssl），或
-  - 用 -OpenSslPath 指定一个可用的 openssl.exe
-'@
+    $bundled = Join-Path $root 'runtime\node.exe'
+    if (Test-Path $bundled) { return $bundled }
+    $cmd = Get-Command node -ErrorAction SilentlyContinue
+    if ($cmd) { return $cmd.Source }
+    Fail '找不到 node.exe（安装包应自带 runtime\node.exe，开发机可用 -NodePath 指定）'
 }
 
 foreach ($path in @($decodeHost, $receiverDist)) {
     if (-not (Test-Path $path)) { Fail "缺少 $path，请先构建：native/build.ps1 与 receiver 的 npm run build" }
 }
-$openssl = Resolve-OpenSsl $OpenSslPath
+$node = Resolve-Node $NodePath
 
 # 取本机局域网 IPv4（接收服务要广播这个地址给手机）
 # 取默认路由所在网卡的 IPv4，避免选中 WSL/Docker/Hyper-V 虚拟网卡
@@ -107,7 +73,6 @@ if (-not $LanIp) { Fail '找不到局域网 IPv4 地址，请确认已连接 Wi-
 New-Item -ItemType Directory -Force -Path $DataDir | Out-Null
 $env:ARTEMIS_LAN_HOST = $LanIp
 $env:ARTEMIS_DATA_DIR = $DataDir
-$env:ARTEMIS_OPENSSL_PATH = $openssl
 $env:ARTEMIS_MEDIA_PORT = "$MediaPort"
 $env:ARTEMIS_CONTROL_PORT = "$ControlPort"
 $env:ARTEMIS_TLS_PORT = "$TlsPort"
@@ -116,7 +81,7 @@ $env:ARTEMIS_AUDIO_STATUS_PATH = $audioStatusPath
 
 Write-Host "Artemis 启动中" -ForegroundColor Cyan
 Write-Host "  数据目录：$DataDir" -ForegroundColor DarkGray
-Write-Host "  OpenSSL：$openssl" -ForegroundColor DarkGray
+Write-Host "  Node：$node" -ForegroundColor DarkGray
 Write-Host "  局域网地址：$LanIp" -ForegroundColor DarkGray
 Write-Host "  控制页：http://127.0.0.1:$ControlPort/control" -ForegroundColor DarkGray
 $logDir = Join-Path $DataDir 'logs'
@@ -134,7 +99,7 @@ try {
     $children += $decodeProc
     Write-Host "  [1/2] 解码进程已启动" -ForegroundColor Green
 
-    $receiverProc = Start-Process -FilePath 'node' -ArgumentList @($receiverDist) -WorkingDirectory $root `
+    $receiverProc = Start-Process -FilePath $node -ArgumentList @($receiverDist) -WorkingDirectory $root `
         -PassThru -WindowStyle Hidden `
         -RedirectStandardOutput $receiverLog -RedirectStandardError "$receiverLog.err"
     $children += $receiverProc

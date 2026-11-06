@@ -1,0 +1,15 @@
+Command: obs-websocket v5: CreateInput(dshow_input) + StartRecord/StopRecord ; ffprobe + ffmpeg signalstats
+=== TC-08b 复验：加图标后的最终构建 ===
+Timestamp: 2026-11-06T23:57:47+08:00
+说明：本轮在加图标（D-014）后重新构建并安装，手机自动重连（trusted=true），再用 OBS 录制。
+setup_sha256=FE501CE033F7D693D6593222D504C9B62B22C8D8663BA7158FFA4511F8075A5D
+apk_sha256=DBFB8A4DF9D0722F945F4B7C2D5027E2A9C96BEFA664807685702341166A9747
+recording=C:\Users\35692\Videos\2026-11-06 23-57-14.mp4 size=8.75 MB
+codec_name=h264
+width=1280
+height=720
+r_frame_rate=30/1
+duration=12.000000
+
+frames=22 YAVG_avg=64.1 min=64.0677 max=64.0895
+Exit code: 0

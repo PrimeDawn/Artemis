@@ -211,7 +211,7 @@ work_items:
   - id: SPEC-release-package
     kind: tech
     title: 发布交付化（两个安装包、README、开发流程移出仓库）
-    status: planned
+    status: completed
     goal: "goal#artemis-v0.1"
     milestone: VERSION-v0.1
     priority: P0

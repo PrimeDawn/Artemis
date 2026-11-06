@@ -25,6 +25,7 @@ local.properties
 *.iml
 *.jks
 *.keystore
+android/signing.properties
 
 # Node and generated outputs
 node_modules/

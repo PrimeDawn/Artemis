@@ -1,5 +1,7 @@
 # 工具链与本地复现
 
+> 开发文档，不随发布包分发。使用者请看仓库根 `README.md` 与 `docs/user/`。
+
 固定组合见 [toolchain-lock.json](toolchain-lock.json)，供应链与通知见 [dependency-provenance.md](dependency-provenance.md)。本工程仅有 Android 静态验证页和 loopback 健康服务，尚无配对、信令或媒体链路。
 
 ## Windows 环境

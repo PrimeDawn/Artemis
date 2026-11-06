@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>测试报告 - 发布交付化（SPEC-release-package）</title>
+
+<meta name="rk:type"        content="test-report">
+<meta name="rk:version"     content="v0.1">
+<meta name="rk:category"    content="tech">
+<meta name="rk:spec-dir"    content="spec/versions/v0.1/specs/20261106-1615-tech-发布交付化">
+<meta name="rk:role"        content="spec-tester">
+<meta name="rk:mode"        content="gated">
+<meta name="rk:status"      content="未确认">
+<meta name="rk:created"     content="2026-11-06">
+<meta name="rk:updated"     content="2026-11-06">
+<meta name="rk:revision"    content="4">
+<meta name="rk:git-branch"  content="tech/spec-20261106-1615-release-package">
+<meta name="rk:base-branch" content="dev">
+<meta name="rk:pr-url"      content="">
+<meta name="rk:tags"        content="spec,test-report,release">
+<link rel="rk-plan"       href="../writer/plan.html">
+<link rel="rk-test-plan"  href="test-plan.html">
+<link rel="rk-summary"    href="../executor/summary.html">
+<link rel="rk-ledger"     href="../lead/team-context.md">
+
+<link rel="stylesheet" href="../../../../../../html-report/assets/rk-report.css">
+<script defer src="../rk-manifest.js"></script>
+<script defer src="../../../../../../html-report/assets/rk-report.js"></script>
+</head>
+<body>
+
+<nav class="rk-nav"></nav>
+
+<header class="rk-head">
+  <h1>测试报告：发布交付化</h1>
+  <div class="rk-meta">
+    <span><b>类型</b> test-report</span>
+    <span><b>版本</b> <code>v0.1</code></span>
+    <span><b>属性</b> <code>tech</code></span>
+    <span><b>Spec</b> <code>spec/versions/v0.1/specs/20261106-1615-tech-发布交付化</code></span>
+    <span><b>角色</b> spec-tester</span>
+    <span><b>状态</b> 未确认</span>
+    <span><b>分支</b> <code>tech/spec-20261106-1615-release-package</code> ← <code>dev</code></span>
+    <span><b>PR</b> —</span>
+    <span><b>创建</b> 2026-11-06</span>
+    <span><b>修订</b> r4（2026-11-06）</span>
+  </div>
+</header>
+
+<nav class="rk-revbar"></nav>
+
+<section class="rk-verdict is-pass">
+  <div class="rk-verdict-label">测试结论</div>
+  <p>14 条用例 <b>全部通过</b>（0 失败 / 0 未实测）。手机接入后完成了端到端录制：OBS 经 obs-websocket 建成 <code>dshow_input</code> 源，录出 11.97 秒的 1280×720 / 30fps H.264，抽帧亮度 YAVG 65.4（非黑）。测试过程中发现并修复了 3 个真实缺陷：卸载残留被占用的映像、端口占用无可读提示、控制页重复写头导致接收服务崩溃。</p>
+</section>
+
+<h2>修订历史</h2>
+<table class="rk-revs">
+  <thead><tr><th>修订</th><th>日期</th><th>修改人</th><th>改了什么</th><th>原因</th></tr></thead>
+  <tbody>
+    <tr><td>r1</td><td>2026-11-06</td><td>spec-tester</td><td>初版</td><td>—</td></tr>
+    <tr><td>r2</td><td>2026-11-06</td><td>spec-tester</td><td>手机接入后补测 TC-08b：OBS 通过 obs-websocket 建成 dshow 源并录制 12 秒，抽帧确认 720p30 非黑；同时补记控制页崩溃缺陷（I-013）</td><td>用户要求补测 TC-08b；I-013 为测试期间发现的真实崩溃</td></tr>
+    <tr><td>r3</td><td>2026-11-06</td><td>spec-tester</td><td>按 D-014 加图标后重建，重新录制验证（12.00 秒、720p30、YAVG 64.1），证据与最终产物哈希对齐</td><td>用户要求补图标；需证明交付物（非上一版）可跑</td></tr>
+    <tr><td>r4</td><td>2026-11-06</td><td>spec-tester</td><td>补记 I-016（托盘无单实例 → 重复弹窗）的修复与验证；说明 r3 录制证据所用的构建与最终产物只差这两处托盘守卫</td><td>清理环境时定位到弹窗根因，属真实缺陷</td></tr>
+  </tbody>
+</table>
+
+<h2>1. 用例执行结果</h2>
+<div class="rk-kpis">
+  <div class="rk-kpi is-pass"><div class="v">14</div><div class="k">通过</div></div>
+  <div class="rk-kpi is-pass"><div class="v">0</div><div class="k">失败</div></div>
+  <div class="rk-kpi is-pass"><div class="v">0</div><div class="k">未实测</div></div>
+  <div class="rk-kpi"><div class="v">3</div><div class="k">发现并修复缺陷</div></div>
+</div>
+<table>
+  <thead><tr><th>用例</th><th>描述</th><th>结果</th><th>关键证据</th></tr></thead>
+  <tbody>
+    <tr><td>TC-01</td><td>接收服务全量单测</td><td><b>通过</b> 66 pass / 0 fail</td><td><code>tc01-unit-suite.log</code></td></tr>
+    <tr><td>TC-02</td><td>运行期不再依赖 openssl</td><td><b>通过</b>：删除证书后自动重签，30 天有效期，SAN=192.168.1.5，全程无 openssl 进程</td><td><code>tc02-no-openssl.log</code></td></tr>
+    <tr><td>TC-03</td><td>托盘自检</td><td><b>通过</b>：退出码 0，<code>installed=true</code>，路径指向 <code>app\receiver</code></td><td><code>tc03-tc04-tc07-install-run.log</code></td></tr>
+    <tr><td>TC-04</td><td>托盘拉起服务</td><td><b>通过</b>：<code>/healthz</code> 返回 200 且 <code>service=artemis-receiver</code>，解码子进程存活</td><td>同上</td></tr>
+    <tr><td>TC-05</td><td>一键构建产物</td><td><b>通过</b>：exit 0；安装包 63.4 MB、APK 67.5 MB、SHA256SUMS 与产物哈希一致</td><td><code>tc05-build-release.log</code>、<code>tc05b-rebuild-after-fix.log</code></td></tr>
+    <tr><td>TC-06</td><td>APK 签名校验</td><td><b>通过</b>：<code>CN=Artemis Release</code>，<code>versionName=0.1.0</code></td><td><code>tc06-apk-signature.log</code></td></tr>
+    <tr><td>TC-07</td><td>全新安装</td><td><b>通过</b>：安装 exit 0；程序目录齐备；HKCU 下 <code>InprocServer32</code> 存在，类别实例 <code>FriendlyName=Artemis Camera</code></td><td><code>tc03-tc04-tc07-install-run.log</code></td></tr>
+    <tr><td>TC-08a</td><td>DirectShow 枚举设备</td><td><b>通过</b>：<code>ffmpeg -list_devices</code> 列出 <code>"Artemis Camera"</code></td><td><code>tc08-dshow-enumeration.log</code></td></tr>
+    <tr><td>TC-08b</td><td>手机接入后 OBS 实际录制</td><td><b>通过</b>：obs-websocket 建源后录制；最终（含图标）构建 12.00 秒、1280×720 / 30fps / H.264、YAVG 64.1（非黑）</td><td><code>tc08b-obs-recording-icons.log</code>、<code>tc08b-frame-icons.jpg</code></td></tr>
+    <tr><td>TC-09</td><td>服务运行中卸载</td><td><b>修复后通过</b>：卸载 exit 0；程序目录、CLSID 全部消失；0 个残留文件；数据目录保留</td><td><code>tc09-uninstall-running-retest.log</code></td></tr>
+    <tr><td>TC-10</td><td>端口占用失败路径</td><td><b>修复后通过</b>：占用 3000 后启动给出「控制页端口 3000 已被其它程序占用…」，并写入 <code>tray.log</code></td><td><code>tc10-port-conflict-retest.log</code></td></tr>
+    <tr><td>TC-11</td><td>导出黑白名单与泄漏自检</td><td><b>通过</b>：237 文件、verify=0；植入 <code>spec\probe.md</code> 后 verify=1 并指名违规路径</td><td><code>tc11-export-release.log</code></td></tr>
+    <tr><td>TC-12</td><td>README 使用者口径</td><td><b>通过</b>：内部词 0、VB-CABLE 3 处、无 <code>Artemis Microphone</code>、相对链接 3/3 可达</td><td><code>tc12-readme.log</code></td></tr>
+    <tr><td>TC-13</td><td>未装 VB-CABLE 的音频降级</td><td><b>通过</b>：<code>audio-status.json</code> 为 <code>sink=none</code> 并给出中文提示；解码进程存活、<code>/healthz</code> 200</td><td><code>tc13-audio-fallback.log</code></td></tr>
+    <tr><td>TC-14</td><td>免提权安装的静态确认</td><td><b>通过</b>：<code>PrivilegesRequired=lowest</code>；安装到 <code>%LOCALAPPDATA%\Programs\Artemis</code>；HKLM 下无 CLSID 写入 | <code>tc14-no-elevation.log</code></td></tr>
+  </tbody>
+</table>
+
+<h2>2. 覆盖矩阵（方案验收项 → 用例 → 结论）</h2>
+<table>
+  <thead><tr><th>验收项</th><th>用例</th><th>结论</th></tr></thead>
+  <tbody>
+    <tr><td>AC-1 证书不依赖外部程序</td><td>TC-01、TC-02</td><td>通过</td></tr>
+    <tr><td>AC-2 托盘可独立拉起服务</td><td>TC-03、TC-04</td><td>通过</td></tr>
+    <tr><td>AC-3 安装包可安装</td><td>TC-07、TC-14</td><td>通过</td></tr>
+    <tr><td>AC-4 装完能采集</td><td>TC-08a / TC-08b</td><td>通过（枚举 + 实际录制）</td></tr>
+    <tr><td>AC-5 卸载干净</td><td>TC-09</td><td>修复后通过</td></tr>
+    <tr><td>AC-6 APK 可校验</td><td>TC-06</td><td>通过</td></tr>
+    <tr><td>AC-7 发布线无开发资产</td><td>TC-11</td><td>通过</td></tr>
+    <tr><td>AC-8 README 面向使用者</td><td>TC-12</td><td>通过</td></tr>
+    <tr><td>FR-001 纯 JS 签发证书</td><td>TC-01、TC-02</td><td>通过</td></tr>
+    <tr><td>FR-002 托盘进程管家</td><td>TC-03、TC-04、TC-10</td><td>通过</td></tr>
+    <tr><td>FR-003 安装</td><td>TC-07、TC-14</td><td>通过</td></tr>
+    <tr><td>FR-004 卸载</td><td>TC-09</td><td>通过</td></tr>
+    <tr><td>FR-005 发布线导出</td><td>TC-11</td><td>通过</td></tr>
+    <tr><td>FR-006 APK 签名</td><td>TC-06</td><td>通过</td></tr>
+    <tr><td>FR-007 用户文档</td><td>TC-12</td><td>通过</td></tr>
+    <tr><td>音频降级（D-013）</td><td>TC-13</td><td>通过</td></tr>
+  </tbody>
+</table>
+
+<h2>3. 发现并修复的缺陷</h2>
+<div class="rk-cal risk"><div class="t">缺陷 1：卸载残留正在运行的可执行文件（I-011）</div>
+<p><b>现象</b>：服务运行中卸载，<code>unins000.exe</code> 返回 0、CLSID 已删除，但安装目录残留 7 个文件——<code>Artemis.exe</code>、<code>app\native\artemis-decode-host.exe</code>、<code>runtime\node.exe</code> 与 4 个 FFmpeg DLL，正是当时被占用的可执行映像。</p>
+<p><b>根因</b>：Inno Setup 的 <code>[UninstallRun]</code> 在文件删除之后才执行，<code>taskkill</code> 来得太晚。</p>
+<p><b>修复</b>：改为 <code>[Code] CurUninstallStepChanged(usUninstall)</code> 阶段先 <code>taskkill</code>、等待 1.5 秒释放句柄，再 <code>regsvr32 /u</code> 反注册。复测：残留文件 0、CLSID 消失、数据目录保留。</p></div>
+<div class="rk-cal risk"><div class="t">缺陷 2：端口被占用时没有任何可读提示（I-012）</div>
+<p><b>现象</b>：先占住 3000 端口再启动，<code>--console</code> 打印「services started」，两秒后子进程静默退出，日志只有一句「a service exited unexpectedly」，既没有端口号也没有原因。</p>
+<p><b>根因</b>：托盘不感知子进程失败原因；且 <code>fwprintf</code> 写重定向流时按本地代码页转换，中文变成问号。</p>
+<p><b>修复</b>：启动前用 Winsock 独占绑定探测 3000/3443/3450，命中占用就把「控制页端口 3000 已被其它程序占用…」写进 <code>tray.log</code> 与 stderr；stderr 改为 UTF-8 输出。复测通过。</p></div>
+
+<div class="rk-cal risk"><div class="t">缺陷 3：控制页重复写响应头，直接把接收服务打挂（I-013）</div>
+<p><b>现象</b>：<code>receiver.log</code> 出现 <code>Error [ERR_HTTP_HEADERS_SENT]: Cannot set headers after they are sent to the client</code>，随后整个 Node 进程退出；用户看到的是「托盘图标在、控制页偶发打不开、服务自己重启」。</p>
+<p><b>根因</b>：<code>control-http.ts</code> 的 <code>json()</code> 无条件 <code>setHeader</code>；当响应已经发出、后续代码（例如日志回调）再抛错时，catch 里又调用一次 <code>json()</code>，异常从 catch 逃逸成未捕获异常。</p>
+<p><b>修复</b>：<code>json()</code> 与 catch 分支都先判断 <code>res.headersSent</code>，已发送则只 <code>end()</code>。新增回归用例：构造「响应已发出后日志回调抛错」的场景，断言不抛异常且状态码仍为 204；<code>npm test</code> 67 项全绿。</p></div>
+
+<h2>4. 本机环境差异（不计入产品缺陷）</h2>
+<div class="rk-cal warn"><div class="t">注意：<code>dist\</code> 目录无法直接运行安装包</div>
+<p>本会话在工作区创建的目录会带上一条 <code>Everyone:(CI)(DENY)(DC)</code> 的继承 ACE，Inno 加载器在该目录下解包失败（退出码 1，报 <code>is-XXXX.tmp</code> 无法创建）。同一个 exe 复制到 <code>%TEMP%</code> 后安装正常；测试前已用 SHA256 核对副本与原产物一致。这是本机沙箱写出的 ACL，用户从 Release 页面下载的文件不带该 ACL。</p></div>
+<div class="rk-cal warn"><div class="t">注意：Smart App Control 间歇拦截未签名可执行文件</div>
+<p>测试过程中出现过两次 <code>Start-Process</code> 被 SAC 拒绝（事件 3077/3033，Policy <code>{0283ac0f-…}</code>），同一文件稍后又能正常运行。对照：本机未签名的 <code>AgentSpace.Bridge.exe</code> 一直可运行，说明拦截判据是<b>按文件信誉</b>而非「未签名一律拦截」。对用户的实际影响：全新安装的 Win11（SAC 默认开启）可能拦下新构建的安装包，需要用户自行关闭 SAC；这一点已写入 README「已知限制」。</p></div>
+
+<h2>5. 录制证据与最终产物的差异</h2>
+<div class="rk-cal warn"><div class="t">注意：r3 的录制证据早于两处托盘守卫</div><p>r3 录制用的构建已经包含图标、控制页崩溃修复与卸载顺序修复；此后为修复 I-016（单实例、失败只提示一次）又重建过一次产物，因此 <code>dist/SHA256SUMS.txt</code> 里的安装包哈希与 <code>tc08b-obs-recording-icons.log</code> 记录的不同。差异仅为 <code>main.cpp</code> 的单实例守卫与 <code>TrayApp.cpp</code> 的 <code>failureNotified</code>，不触及采集链路；单实例行为已单独实测（第二个实例 exit=0、实例数=1）。</p></div>
+
+<h2>6. 未覆盖项与原因</h2>
+<table>
+  <thead><tr><th>项</th><th>原因</th><th>后续</th></tr></thead>
+  <tbody>
+    <tr><td>音频真实出声</td><td>D-013 已把 VB-CABLE 实连通排到 v0.1.1，本轮只验降级路径（TC-13）</td><td>v0.1.1 补丁验证</td></tr>
+  </tbody>
+</table>
+
+<h2>7. 证据索引</h2>
+<p>目录：<code>tester/artifacts/test-logs/20261106-1810/</code>，每条日志含 <code>Command:</code> / <code>Timestamp:</code> / <code>Exit code:</code> 三要素。</p>
+<ul>
+  <li><code>tc01-unit-suite.log</code>、<code>tc02-no-openssl.log</code>、<code>tc03-tc04-tc07-install-run.log</code></li>
+  <li><code>tc05-build-release.log</code>、<code>tc05b-rebuild-after-fix.log</code>、<code>tc06-apk-signature.log</code></li>
+  <li><code>tc08-dshow-enumeration.log</code>、<code>tc09-uninstall-running-retest.log</code>、<code>tc10-port-conflict-retest.log</code></li>
+  <li><code>tc11-export-release.log</code>、<code>tc12-readme.log</code>、<code>tc13-audio-fallback.log</code>、<code>tc14-no-elevation.log</code></li>
+  <li><code>tc08b-obs-recording-icons.log</code>（含图标的最终构建：12.00 秒、1280×720/30fps、YAVG 64.1）、<code>tc08b-frame-icons.jpg</code>；过程轮次见 <code>tc08b-obs-recording.log</code>、<code>tc08b-obs-recording-final.log</code></li>
+</ul>
+
+<h2>关联产物</h2>
+<h3>本报告引用</h3>
+<ul class="rk-links">
+  <li><a href="test-plan.html" data-rk-link="test-plan">测试计划</a></li>
+  <li><a href="../writer/plan.html" data-rk-link="plan">设计方案</a></li>
+  <li><a href="../executor/summary.html" data-rk-link="summary">实现总结</a></li>
+  <li><a href="../lead/team-context.md" data-rk-link="ledger">运行账本</a></li>
+</ul>
+<h3>引用本报告</h3>
+<ul class="rk-backlinks">
+  <li><a href="../ender/end-report.html" data-rk-backlink="end-report">收尾报告</a>（待创建）</li>
+  <li><a href="../reviewer/review.html" data-rk-backlink="review">审查报告</a>（待创建）</li>
+</ul>
+
+</body>
+</html>

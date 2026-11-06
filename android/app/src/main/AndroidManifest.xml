@@ -9,6 +9,7 @@
         android:name=".ArtemisApplication"
         android:allowBackup="false"
         android:label="@string/app_name"
+        android:icon="@mipmap/ic_artemis"
         android:supportsRtl="true"
         android:theme="@style/Theme.Artemis">
         <activity android:name=".MainActivity" android:exported="true">

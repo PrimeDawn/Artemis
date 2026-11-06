@@ -1,0 +1,87 @@
+﻿=== TDD GREEN Run (receiver unit suite) ===
+Command: npm --prefix receiver test
+Timestamp: 2026-11-06T17:04:33+08:00
+
+> @artemis/receiver@0.1.0-dev test
+> npm run build && node --test dist/test/*.test.js
+
+
+> @artemis/receiver@0.1.0-dev build
+> tsc -p tsconfig.json
+
+✔ legacy receiver page route is gone (1513.3478ms)
+✔ legacy receiver script route is gone (1251.6869ms)
+✔ public state served over real HTTP no longer exposes receiver channel fields (1141.8088ms)
+✔ waiting event over a real TLS device socket keeps the epoch key for phone compatibility (1033.0527ms)
+✔ issues a self-signed certificate that verifies against its own key and carries the IP SAN (28.7331ms)
+✔ re-issuing with the same private key keeps the pinned public key while changing the serial number (21.6719ms)
+✔ rejects an address that is not an IPv4 literal instead of silently emitting a broken SAN (6.5035ms)
+✔ rejects a private key that is not a P-256 PKCS#8 PEM (27.082ms)
+✔ exposes the parsed identity through node:crypto without an external openssl process (10.6793ms)
+✔ PORT is 3000 only when the value is absent (7.2752ms)
+✔ accept decimal port 0 (0.3795ms)
+✔ accept decimal port 3000 (0.3143ms)
+✔ accept decimal port 65535 (0.1633ms)
+✔ accept decimal port 00080 (0.1543ms)
+✔ reject port "" without fallback (0.6844ms)
+✔ reject port "-1" without fallback (0.2263ms)
+✔ reject port "65536" without fallback (0.1649ms)
+✔ reject port "abc" without fallback (0.1724ms)
+✔ reject port "1.5" without fallback (0.2347ms)
+✔ reject port " 3000" without fallback (0.224ms)
+✔ reject port "3000 " without fallback (0.185ms)
+✔ reject port "+80" without fallback (0.1296ms)
+✔ reject port "0x50" without fallback (0.1145ms)
+✔ reject port "1e3" without fallback (0.1022ms)
+✔ reject port "NaN" without fallback (0.1744ms)
+✔ reject port "999999999999999999999" without fallback (0.193ms)
+✔ unknown presence requires a click and a signed phone decision exactly once (50.8471ms)
+✔ 72 hours do not expire trusted active connection (32.7234ms)
+✔ socket loss restores remembered selection without approval, manual disconnect stops restore (61.5366ms)
+✔ temporary phone loss clears the session and recovery issues a fresh sessionId (16.4381ms)
+✔ forgetting another remembered device does not disconnect the selected device (30.1805ms)
+✔ activation distinguishes a new PC click from automatic resume after socket loss (18.3204ms)
+✔ only an already selected trusted phone may request renewed first consent (18.3535ms)
+✔ fresh proof of the same selected identity can replace a stale transport without waiting 90 seconds (14.2302ms)
+✔ control API requires a local session and CSRF; Host cannot be rebound (18.7165ms)
+✔ device socket issues a signed challenge and only accepts a matching private-key proof (35.34ms)
+✔ identity survives restart and same-key renewal keeps the SPKI ID (2656.3599ms)
+✔ hello with known session is authorized (1.6988ms)
+✔ hello with unknown session is rejected (0.374ms)
+✔ hello with mismatched device id is rejected (0.2174ms)
+✔ hello that is not valid json is rejected (0.3821ms)
+✔ binary before hello closes the socket and writes nothing (0.7276ms)
+✔ binary after hello is forwarded to the sink (2.7921ms)
+✔ closing the socket ends the sink once (1.8382ms)
+✔ explicit assigned LAN address and absolute data directory are required (3.0988ms)
+✔ media port defaults to 3450 and accepts an explicit override (0.3866ms)
+✔ invalid media port is rejected without fallback (0.473ms)
+✔ discovery advertises stable public identity and no credential (3.2363ms)
+✔ a base64url identity containing underscores still produces a valid DNS hostname (0.2641ms)
+✔ pairing server binds two listeners and closes both without changing health service (1491.8714ms)
+✔ an exited process lock does not require manual repair before restart (1227.0051ms)
+✔ proof canonical bytes bind both peers, nonce and connection (1.8127ms)
+✔ real P-256 proof verifies and rejects changed transcript (6.199ms)
+✔ peer identity is derived from SPKI, not label/IP (2.947ms)
+✔ public server API serves the exact health contract and route boundaries (111.3211ms)
+✔ public close is concurrent-safe and releases the listening port (5.176ms)
+✔ startup rejects with the original EADDRINUSE code (2.4757ms)
+✔ trust and selected intent survive restart with no expiry; forget revokes (45.1633ms)
+✔ corrupt persisted trust fails closed and is preserved (5.0382ms)
+✔ /media routes to the video channel (1.8018ms)
+✔ /media keeps routing with a query string (0.2879ms)
+✔ /audio routes to the audio channel (0.1849ms)
+✔ /audio keeps routing with a query string (1.0614ms)
+✔ lookalike prefixes stay on the control channel (0.2611ms)
+✔ the device control path stays on the control channel (0.1463ms)
+✔ an empty path stays on the control channel (0.2117ms)
+ℹ tests 66
+ℹ suites 0
+ℹ pass 66
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 5476.7373
+
+Exit code: 0

@@ -1,0 +1,26 @@
+Command: start "%TEMP%\artemis-tc2\setup.exe" /VERYSILENT /SUPPRESSMSGBOXES /NORESTART ; Artemis.exe --selftest ; Artemis.exe --console + GET /healthz
+Exit code: 0
+=== TC-07 安装 / TC-03 自检 / TC-04 拉起服务 ===
+Timestamp: 2026-11-06T18:17:22+08:00
+Note: 直接运行 dist\Artemis-Setup-0.1.0.exe 返回 1（仓库 dist 目录带沙箱 ACL，Inno 加载器无法解包，见 I-009）；以下用 %TEMP% 副本执行，exe 本身与 dist 中的哈希一致。
+hash match=True (9AAEDE9E31BE8DF15751F3ED0A56D47838841E6B05E9072848545DFE7D9DD7AE)
+install exit=0
+app dir=True
+CLSID InprocServer32=True
+FriendlyName=
+== TC-03 selftest ==
+selftest exit=
+{"lanIp":"192.168.1.5","controlPort":3000,"tlsPort":3443,"mediaPort":3450,"installed":true,"dataDir":"C:\\Users\\35692\\AppData\\Local\\Artemis\\data","logDir":"C:\\Users\\35692\\AppData\\Local\\Artemis\\logs","receiverEntry":"C:\\Users\\35692\\AppData\\Local\\Programs\\Artemis\\app\\receiver\\dist\\src\\pairing-cli.js"}
+Category Instance FriendlyName=Artemis Camera
+== TC-04 拉起服务 ==
+healthz 200=True body={"service":"artemis-receiver","status":"ok","version":"0.1.0-dev"}
+decode child=1
+== TC-09 运行中卸载 ==
+tray/console running before uninstall=True
+uninstall exit=0
+after: app dir=True
+after: CLSID=False
+after: data dir=True
+after: leftover files=7
+after: decode leftover=0
+after: artemis leftover=0

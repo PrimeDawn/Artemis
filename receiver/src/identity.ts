@@ -1,8 +1,8 @@
 import type { PairingConfig, TlsIdentity } from './protocol.js';
 import { PairingError,parsePeer } from './protocol.js';
 import { generateKeyPairSync,createHash,createPrivateKey,createPublicKey,X509Certificate,randomUUID } from 'node:crypto';
-import { mkdir,readFile,writeFile,rename,unlink,realpath,access } from 'node:fs/promises';
-import { join,win32 } from 'node:path';import { hostname } from 'node:os';import { execFile } from 'node:child_process';import { promisify } from 'node:util';
+import { mkdir,readFile,writeFile,rename,unlink,realpath } from 'node:fs/promises';
+import { join,win32 } from 'node:path';import { hostname } from 'node:os';import { execFile } from 'node:child_process';import { promisify } from 'node:util';import { issueSelfSignedCertificate } from './cert.js';
 const exec=promisify(execFile),contexts=new WeakMap<TlsIdentity,PairingConfig>();
 async function protect(dir:string):Promise<void>{
   if(!win32.isAbsolute(await realpath(dir)))throw new PairingError('E_IDENTITY',500);
@@ -20,15 +20,18 @@ function describe(key:Buffer,certificate:Buffer,ip:string,config:PairingConfig):
   const identity={peer,privateKeyPem:key,certificatePem:certificate,certificateExpiresAt:Date.parse(cert.validTo),ipAddress:ip};contexts.set(identity,config);return identity;
 }
 async function issue(config:PairingConfig,key:Buffer,ip:string):Promise<TlsIdentity>{
-  const tmp=join(config.dataDir,`.certificate-${randomUUID()}.pem`),keyPath=join(config.dataDir,'identity-key.pem');
+  const tmp=join(config.dataDir,`.certificate-${randomUUID()}.pem`);
   try{
-    await exec(config.opensslPath,['req','-new','-x509','-key',keyPath,'-sha256','-days','30','-subj','/CN=Artemis local receiver','-addext',`subjectAltName=IP:${ip}`,'-addext','basicConstraints=critical,CA:FALSE','-addext','extendedKeyUsage=serverAuth','-out',tmp],{windowsHide:true,timeout:15000});
-    const certificate=await readFile(tmp);const identity=describe(key,certificate,ip,config);await rename(tmp,join(config.dataDir,'certificate.pem'));return identity;
+    // 依据 writer/plan.html §3.2：自签证书在进程内生成，不再调用外部 openssl。
+    const issued=await issueSelfSignedCertificate({privateKeyPem:key.toString('utf8'),ipAddress:ip,notBeforeMs:Date.now(),validDays:30});
+    const identity=describe(key,issued.certificatePem,ip,config);
+    await writeFile(tmp,issued.certificatePem,{mode:0o600});
+    await rename(tmp,join(config.dataDir,'certificate.pem'));return identity;
   }catch{await unlink(tmp).catch(()=>{});throw new PairingError('E_IDENTITY',500);}
 }
 export async function loadOrCreateIdentity(config: PairingConfig): Promise<TlsIdentity> {
   try{
-    await mkdir(config.dataDir,{recursive:true,mode:0o700});await protect(config.dataDir);await access(config.opensslPath);
+    await mkdir(config.dataDir,{recursive:true,mode:0o700});await protect(config.dataDir);
     const keyPath=join(config.dataDir,'identity-key.pem');let key:Buffer;
     try{key=await readFile(keyPath);}catch(e){if((e as NodeJS.ErrnoException).code!=='ENOENT')throw e;key=Buffer.from(generateKeyPairSync('ec',{namedCurve:'prime256v1',privateKeyEncoding:{type:'pkcs8',format:'pem'},publicKeyEncoding:{type:'spki',format:'pem'}}).privateKey);await writeFile(keyPath,key,{flag:'wx',mode:0o600});}
     try{const certificate=await readFile(join(config.dataDir,'certificate.pem'));const identity=describe(key,certificate,config.lanHost,config);const now=Date.now(),cert=new X509Certificate(certificate);if(Date.parse(cert.validFrom)>now)throw new Error();if(identity.certificateExpiresAt-now>=7*86400000)return identity;}catch{}

@@ -98,6 +98,9 @@ export function createMediaRelay(options: MediaRelayOptions): { handle(socket: M
           keepalive = setInterval(() => {
             if (!closed) socket.send?.(KEEPALIVE_TEXT);
           }, KEEPALIVE_INTERVAL_MS);
+          // 保活定时器不该单独把进程钉住：生产的进程由服务器 socket 保活，
+          // 而单测里没有其它句柄时，未 unref 的定时器会让测试进程永不退出。
+          keepalive.unref();
           sink = openSink(session, () => {
             // 出口（解码进程）断开：关闭手机侧连接，让手机按重连策略重建
             if (!closed) {

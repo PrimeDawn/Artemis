@@ -17,7 +17,7 @@ android {
         minSdk = 29
         targetSdk = 36
         versionCode = 1
-        versionName = "0.1.0-dev"
+        versionName = "0.1.0"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
     buildFeatures { compose = true }
@@ -25,12 +25,40 @@ android {
         sourceCompatibility = JavaVersion.VERSION_17
         targetCompatibility = JavaVersion.VERSION_17
     }
+    // 发布签名：口令与 keystore 只在本地 signing.properties 里（不入库）。
+    // 缺失时只有 assembleRelease 失败，debug 构建不受影响（writer/plan.html §3.6）。
+    val signingProperties = providers.fileContents(
+        rootProject.layout.projectDirectory.file("signing.properties")
+    ).asText.map { text ->
+        text.lineSequence()
+            .filter { it.isNotBlank() && !it.trimStart().startsWith("#") }
+            .mapNotNull { line ->
+                val index = line.indexOf('=')
+                if (index <= 0) null else line.substring(0, index).trim() to line.substring(index + 1).trim()
+            }
+            .toMap()
+    }
+
+    signingConfigs {
+        create("release") {
+            val properties = signingProperties.orNull
+            if (properties != null && properties["storeFile"].isNullOrBlank().not()) {
+                storeFile = rootProject.file(properties.getValue("storeFile"))
+                storePassword = properties["storePassword"]
+                keyAlias = properties["keyAlias"]
+                keyPassword = properties["keyPassword"]
+            }
+        }
+    }
     buildTypes {
         release {
             isMinifyEnabled = false
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
+            signingConfig = signingConfigs.findByName("release")
         }
     }
+
+
 }
 
 kotlin {
