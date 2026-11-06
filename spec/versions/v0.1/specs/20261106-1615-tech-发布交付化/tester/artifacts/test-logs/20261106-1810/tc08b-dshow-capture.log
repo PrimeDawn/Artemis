@@ -1,0 +1,15 @@
+﻿=== TC-08b DirectShow 实际取帧（ffmpeg dshow 采集 10 秒） ===
+Timestamp: 2026-11-06T21:40:32+08:00
+Command: ffmpeg -hide_banner -f dshow -i "video=Artemis Camera" -t 10 -y capture.mp4
+ffmpeg.exe : [in#0 @ 000001434a824c00] Could not find output pin from video capture device.
+所在位置 行:1 字符: 603
++ ... p4"; $out = & $ff -hide_banner -f dshow -i 'video=Artemis Camera' -t  ...
++                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: ([in#0 @ 0000014...capture device.:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+[in#0 @ 000001434a81ce80] Error opening input: I/O error
+Error opening input file video=Artemis Camera.
+Error opening input files: I/O error
+
+Exit code: -5

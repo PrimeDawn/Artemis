@@ -4,7 +4,12 @@ export interface ControlContext {config:PairingConfig;manager:ConnectionManager;
 export function createControlHandler(context:ControlContext):(req:IncomingMessage,res:ServerResponse)=>Promise<void>{
  const sessions=new Map<string,string>(),base=new URL('../../public/',import.meta.url);
  const assets:Record<string,[string,string]>={'/control':['control.html','text/html'],'/assets/control.js':['control.js','text/javascript'],'/assets/app.css':['app.css','text/css']};
- function json(res:ServerResponse,status:number,value:unknown){res.setHeader('Content-Type','application/json; charset=utf-8');res.writeHead(status).end(JSON.stringify(value));}
+ function json(res:ServerResponse,status:number,value:unknown){
+  // 响应头已发出时再 setHeader 会抛 ERR_HTTP_HEADERS_SENT；旧实现里这个异常从 catch 里逃出去，
+  // 直接让整个接收服务进程退出（真机日志见 tester 阶段的 receiver.log）。
+  if(res.headersSent){if(!res.writableEnded)res.end();return;}
+  res.setHeader('Content-Type','application/json; charset=utf-8');res.writeHead(status).end(JSON.stringify(value));
+}
  async function body(req:IncomingMessage):Promise<unknown>{let length=0,parts:Buffer[]=[];for await(const data of req){const part=Buffer.from(data);length+=part.length;if(length>4096)throw new PairingError('E_TOO_LARGE',413);parts.push(part);}try{return JSON.parse(Buffer.concat(parts).toString());}catch{throw new PairingError('E_INPUT');}}
  return async(req,res)=>{
   const requestId=randomUUID(),origin=`http://127.0.0.1:${context.config.controlPort}`;
@@ -32,6 +37,6 @@ export function createControlHandler(context:ControlContext):(req:IncomingMessag
    else if(path==='/api/disconnect'&&req.method==='POST'){await context.manager.disconnect();res.writeHead(204).end();}
    else throw new PairingError('E_NOT_FOUND',404);
    context.log({name:'control_action',requestId,code:null});
-  }catch(e){const error=e instanceof PairingError?e:new PairingError('E_INTERNAL',500);context.log({name:'control_rejected',requestId,code:error.code});json(res,error.status,{code:error.code,message:error.code,requestId});}
+  }catch(e){if(res.headersSent){if(!res.writableEnded)res.end();return;}const error=e instanceof PairingError?e:new PairingError('E_INTERNAL',500);context.log({name:'control_rejected',requestId,code:error.code});json(res,error.status,{code:error.code,message:error.code,requestId});}
  };
 }

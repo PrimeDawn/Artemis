@@ -1,4 +1,4 @@
-# 编译 Artemis Camera 过滤器与合成帧 producer。
+﻿# 编译 Artemis Camera 过滤器与合成帧 producer。
 # 依据 writer/plan.html §4：不引入 CMake，直接调用 cl.exe。
 param(
     [string]$VsRoot = 'C:\DEV\ArtemisEnv\VS2022BuildTools',
@@ -31,6 +31,14 @@ $decodeSources = @(
     (Join-Path $root 'decode-host\AudioEndpoint.cpp'),
     (Join-Path $root 'decode-host\WasapiSink.cpp')
 )
+$traySources = @(
+    (Join-Path $root 'tray\main.cpp'),
+    (Join-Path $root 'tray\TrayApp.cpp'),
+    (Join-Path $root 'tray\ProcessManager.cpp'),
+    (Join-Path $root 'tray\NetworkAddress.cpp')
+)
+$trayManifest = Join-Path $root 'tray\Artemis.manifest'
+$trayResourceScript = Join-Path $root 'tray\Artemis.rc'
 $audioTestSources = @(
     (Join-Path $root 'decode-host\test-audio.cpp'),
     (Join-Path $root 'decode-host\AudioDecoder.cpp'),
@@ -45,8 +53,9 @@ $dll = "cl $common /LD `"$($filterSources -join '" "')`" /Fe:`"$out\ArtemisCamer
 $exe = "cl $common `"$($producerSources -join '" "')`" /Fe:`"$out\synthetic-producer.exe`" /link kernel32.lib"
 $decode = "cl $common /I`"$FfmpegRoot\include`" `"$($decodeSources -join '" "')`" /Fe:`"$out\artemis-decode-host.exe`" /link /LIBPATH:`"$FfmpegRoot\lib`" avcodec.lib avutil.lib swscale.lib swresample.lib ws2_32.lib ole32.lib oleaut32.lib uuid.lib"
 $audioTest = "cl $common /I`"$FfmpegRoot\include`" `"$($audioTestSources -join '" "')`" /Fe:`"$out\test-audio.exe`" /link /LIBPATH:`"$FfmpegRoot\lib`" avcodec.lib avutil.lib swresample.lib avformat.lib"
+$tray = "rc /nologo /fo `"$out\Artemis.res`" `"$trayResourceScript`" && cl $common /D_WINDOWS `"$($traySources -join '" "')`" `"$out\Artemis.res`" /Fe:`"$out\Artemis.exe`" /link /SUBSYSTEM:WINDOWS /MANIFEST:EMBED /MANIFESTINPUT:`"$trayManifest`" shell32.lib user32.lib ole32.lib oleaut32.lib advapi32.lib iphlpapi.lib ws2_32.lib"
 
-$script = "call `"$($vcvars.FullName)`" >nul && $dll && $exe && $decode && $audioTest"
+$script = "call `"$($vcvars.FullName)`" >nul && $dll && $exe && $decode && $audioTest && $tray"
 Write-Host "Building Artemis Camera..."
 $output = cmd /c $script 2>&1
 $code = $LASTEXITCODE
@@ -60,7 +69,8 @@ if ($code -ne 0) {
 $dllPath = Join-Path $out 'ArtemisCamera.dll'
 $exePath = Join-Path $out 'synthetic-producer.exe'
 $decodePath = Join-Path $out 'artemis-decode-host.exe'
-if (-not (Test-Path $dllPath) -or -not (Test-Path $exePath) -or -not (Test-Path $decodePath)) {
+$trayPath = Join-Path $out 'Artemis.exe'
+if (-not (Test-Path $dllPath) -or -not (Test-Path $exePath) -or -not (Test-Path $decodePath) -or -not (Test-Path $trayPath)) {
     Write-Host "BUILD FAILED: expected artifacts missing" -ForegroundColor Red
     exit 3
 }
@@ -68,6 +78,7 @@ if (-not (Test-Path $dllPath) -or -not (Test-Path $exePath) -or -not (Test-Path 
 Write-Host "BUILD OK: $dllPath"
 Write-Host "BUILD OK: $exePath"
 Write-Host "BUILD OK: $decodePath"
+Write-Host "BUILD OK: $trayPath"
 foreach ($dll in @('avcodec-63.dll','avutil-61.dll','swscale-10.dll','swresample-7.dll','avformat-63.dll')) {
     $source = Join-Path $FfmpegRoot "bin\$dll"
     if (Test-Path $source) { Copy-Item $source (Join-Path $out $dll) -Force }

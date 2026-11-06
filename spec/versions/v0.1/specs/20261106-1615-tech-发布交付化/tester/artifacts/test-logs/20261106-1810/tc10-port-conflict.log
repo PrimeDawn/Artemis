@@ -1,0 +1,17 @@
+Command: TcpListener 占用 127.0.0.1:3000 ; Artemis.exe --console ; 读 tray.log（修复前）
+Exit code: 1
+=== TC-10 端口占用失败路径 ===
+Timestamp: 2026-11-06T18:20:01+08:00
+port 3000 occupied by test listener: True
+process exited: 
+--- stdout ---
+artemis: services started (decode pid 10432, node pid 20396)
+artemis: control page http://127.0.0.1:3000/control
+--- stderr ---
+--- tray.log tail ---
+2026-11-06T17:14:02 services started: decode pid=10048, node pid=16296, lan=192.168.1.5, control=3000
+2026-11-06T18:16:48 layout error: receiver entry not found: C:\Users\35692\AppData\Local\Temp\..\..\receiver\dist\src\pairing-cli.js
+2026-11-06T18:16:59 services started: decode pid=9364, node pid=9736, lan=192.168.1.5, control=3000
+2026-11-06T18:17:01 console mode: a service exited unexpectedly
+2026-11-06T18:20:06 services started: decode pid=10432, node pid=20396, lan=192.168.1.5, control=3000
+2026-11-06T18:20:08 console mode: a service exited unexpectedly

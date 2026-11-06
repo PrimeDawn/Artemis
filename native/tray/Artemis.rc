@@ -1,0 +1,7 @@
+// Artemis.exe 的资源：应用图标（资源管理器/开始菜单/安装器）与托盘图标。
+// 由 native/build.ps1 用 rc.exe 编译后链接进 Artemis.exe。
+#define IDI_APPICON 101
+#define IDI_TRAYICON 102
+
+IDI_APPICON ICON "Artemis.ico"
+IDI_TRAYICON ICON "Artemis-tray.ico"

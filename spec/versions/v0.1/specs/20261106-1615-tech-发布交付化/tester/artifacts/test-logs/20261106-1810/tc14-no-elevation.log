@@ -1,0 +1,11 @@
+﻿=== TC-14 免提权安装的静态确认 ===
+Timestamp: 2026-11-06T18:24:22+08:00
+Command: Select-String installer\artemis.iss -Pattern 'PrivilegesRequired|Architectures'; reg query HKLM CLSID
+22: DefaultDirName={localappdata}\Programs\{#MyAppName}
+26: PrivilegesRequired=lowest
+HKLM CLSID present: True
+HKCU CLSID present: True
+install under LOCALAPPDATA: True
+Exit code: 0
+HKLM CLSID present: False
+HKCU CLSID present: True

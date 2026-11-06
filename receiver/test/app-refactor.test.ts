@@ -17,10 +17,9 @@ async function withServer(run: (context: ServerContext) => Promise<void>) {
   const dir = await mkdtemp(resolve('../.cache/refactor-unit-'));
   let running: Awaited<ReturnType<typeof startPairingServer>> | undefined;
   try {
-    assert.ok(process.env.ARTEMIS_OPENSSL_PATH, 'test requires the existing vendor OpenSSL');
     running = await startPairingServer({
       controlHost: '127.0.0.1', controlPort: 0, lanHost: '127.0.0.1', tlsPort: 0,
-      dataDir: dir, opensslPath: process.env.ARTEMIS_OPENSSL_PATH, testOnly: true,
+      dataDir: dir, testOnly: true,
     });
     const cert = await readFile(join(dir, 'certificate.pem'));
     await run({ base: running.controlAddress, lan: running.lanAddress, cert });

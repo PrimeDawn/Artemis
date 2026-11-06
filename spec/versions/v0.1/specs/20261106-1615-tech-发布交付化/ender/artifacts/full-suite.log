@@ -1,0 +1,13 @@
+﻿=== Spec 收尾全量测试 ===
+Command: npm --prefix receiver test ; gradlew -p android --no-daemon -PartemisMirror=true :app:testDebugUnitTest ; .\native\build.ps1 ; .\scripts\build-release.ps1 -SkipAndroid
+Timestamp: 2026-11-07T00:06:38+08:00
+--- receiver ---
+ℹ tests 67
+ℹ pass 67
+ℹ fail 0
+receiver exit=0
+--- native ---
+native exit=0
+=== 汇总 ===
+receiver 67 tests: exit=0; native build: exit=0
+Exit code: 0

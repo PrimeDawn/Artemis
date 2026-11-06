@@ -1,0 +1,54 @@
+﻿=== TDD RED Run ===
+Command: node --test dist/test/cert.test.js (cwd=receiver)
+Timestamp: 2026-11-06T16:47:55+08:00
+✖ issues a self-signed certificate that verifies against its own key and carries the IP SAN (2.0131ms)
+✖ re-issuing with the same private key keeps the pinned public key while changing the serial number (0.2555ms)
+✔ rejects an address that is not an IPv4 literal instead of silently emitting a broken SAN (0.3559ms)
+✔ rejects a private key that is not a P-256 PKCS#8 PEM (19.9194ms)
+✖ exposes the parsed identity through node:crypto without an external openssl process (1.7402ms)
+ℹ tests 5
+ℹ suites 0
+ℹ pass 2
+ℹ fail 3
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 114.7527
+
+✖ failing tests:
+
+test at dist\test\cert.test.js:13:1
+✖ issues a self-signed certificate that verifies against its own key and carries the IP SAN (2.0131ms)
+  Error: cert: not implemented
+      at issueSelfSignedCertificate (file:///C:/workspace/Artemis/receiver/dist/src/cert.js:2:11)
+      at TestContext.<anonymous> (file:///C:/workspace/Artemis/receiver/dist/test/cert.test.js:16:26)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1325:25)
+      at Test.start (node:internal/test_runner/test:1191:17)
+      at startSubtestAfterBootstrap (node:internal/test_runner/harness:385:17)
+
+test at dist\test\cert.test.js:29:1
+✖ re-issuing with the same private key keeps the pinned public key while changing the serial number (0.2555ms)
+  Error: cert: not implemented
+      at issueSelfSignedCertificate (file:///C:/workspace/Artemis/receiver/dist/src/cert.js:2:11)
+      at TestContext.<anonymous> (file:///C:/workspace/Artemis/receiver/dist/test/cert.test.js:31:25)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1325:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:911:18)
+      at Test.postRun (node:internal/test_runner/test:1465:19)
+      at Test.run (node:internal/test_runner/test:1390:12)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:385:3)
+
+test at dist\test\cert.test.js:68:1
+✖ exposes the parsed identity through node:crypto without an external openssl process (1.7402ms)
+  Error: cert: not implemented
+      at issueSelfSignedCertificate (file:///C:/workspace/Artemis/receiver/dist/src/cert.js:2:11)
+      at TestContext.<anonymous> (file:///C:/workspace/Artemis/receiver/dist/test/cert.test.js:70:26)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1325:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:911:18)
+      at Test.postRun (node:internal/test_runner/test:1465:19)
+      at Test.run (node:internal/test_runner/test:1390:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:911:7)
+
+Exit code: 1

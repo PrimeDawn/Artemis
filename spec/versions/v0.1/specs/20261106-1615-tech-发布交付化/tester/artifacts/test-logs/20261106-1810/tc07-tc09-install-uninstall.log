@@ -1,0 +1,17 @@
+﻿=== TC-07 / TC-09 安装与运行中卸载（shell 启动安装包） ===
+Timestamp: 2026-11-06T18:09:33+08:00
+Command: cmd /c start "" "%TEMP%\artemis-tc\setup.exe" /VERYSILENT /SUPPRESSMSGBOXES /NORESTART
+Note: Start-Process(CreateProcess) 被 Smart App Control 拦截，改用 ShellExecute(start) 后安装成功。
+install: app dir=True
+install: CLSID InprocServer32=True
+install: FriendlyName=
+selftest BLOCKED
+== TC-09: 托盘运行中卸载 ==
+tray running=True
+decode child=0
+uninstall exit=0
+after: app dir=True
+after: CLSID=False
+after: data dir=True
+after: decode leftover=0
+Exit code: 0

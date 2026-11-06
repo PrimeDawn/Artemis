@@ -1,64 +1,72 @@
 # Artemis
 
-把手机变成电脑的摄像头和麦克风。
+把安卓手机变成 Windows 电脑上的摄像头：手机画面以 **720p / 30fps** 通过局域网送进电脑，在 OBS 等程序里显示为 `Artemis Camera`。麦克风声音可同时送到你自备的虚拟声卡（见[音频说明](docs/user/audio-vbcable.md)）。
 
-Artemis 计划通过原生安卓 App 采集视频与麦克风音频，在局域网内把画面与声音送到 Windows，并呈现为系统摄像头 `Artemis Camera` 与系统麦克风 `Artemis Microphone`。电脑侧提供本地配对与控制页面；OBS 只作为验收代表，不再是媒体接收端，音视频不由 Node.js 服务转码。
+- 手机端：`Artemis-android.apk`（Android 10 及以上）
+- 电脑端：`Artemis-Setup-<版本>.exe`（Windows 10 1809 及以上，64 位）
 
-当前按 [v0.1 技术预研规划](spec/versions/v0.1/plan.html)推进。工具链、配对/信令、应用层改造、系统摄像头设备层、手机画面链路已交付并合入 dev；真机 S24 的相机画面已能以 720p30 出现在 OBS 的 `Artemis Camera`。音频采集、`Artemis Microphone` 与真机验证基线尚未完成，端到端延迟未实测。手机真实换 IP 未测，实际断公网按用户要求不测。使用方式见[运行说明](docs/pairing-local-run.md)，验证范围以各 Spec 测试报告为准。
+两台设备需要在同一个可互访的局域网里，不经过任何服务器或云端。
 
-## 计划技术与目录
+## 安装
 
-| 目录 | 职责 | 计划技术 |
-| --- | --- | --- |
-| `android/` | 安卓采集 App | Kotlin、Jetpack Compose、Camera2、MediaCodec（H.264） |
-| `receiver/` | 电脑本地服务与控制页（配对、信任、连接状态） | Node.js、TypeScript、WebSocket；媒体只转发不转码 |
-| `native/` | Windows 系统摄像头过滤器与 FFmpeg 解码进程 | C++、DirectShow、FFmpeg |
-| `protocol/` | 配对、状态、错误码与媒体帧头约定 | 见 `pairing-v2.md` |
-| `docs/` | 使用指南与维护文档 | Markdown |
-| `spec/` | 版本计划、Spec、测试证据与项目记忆 | R&K Flow |
+1. 运行 `Artemis-Setup-<版本>.exe`，按提示安装。安装到当前用户目录，**不需要管理员权限**，也不会弹出 UAC。
+2. 把 `Artemis-android.apk` 传到手机上安装。首次安装需要在系统设置里允许「安装未知来源应用」。
+3. 安装完成后，开始菜单里会出现 **Artemis**。
 
-`android/` 与 `receiver/` 已有可构建工程；协议见 [pairing-v2.md](protocol/pairing-v2.md)（含媒体通道）。固定工具链见 [toolchain-lock.json](docs/toolchain-lock.json)，来源与许可证见 [依赖来源](docs/dependency-provenance.md)。
+## 第一次连接
 
-## 构建与运行
+1. 双击开始菜单里的 **Artemis**。托盘会出现 Artemis 图标，控制页会在浏览器里打开（`http://127.0.0.1:3000/control`）。
+2. 手机打开 Artemis，保持在前台、不要锁屏。
+3. 电脑的控制页里会自动列出这台手机，点一下选择它。
+4. 手机上会弹出确认，选择「允许并记住」。这一步每台手机只需做一次，以后重连不用再确认。
+5. 连接成功后，控制页会显示连接状态。
 
-Windows 准备 JDK 17、Node 24、Android API 36 和 Build Tools 36.0.0；原生端另需 VS Build Tools（MSVC）与 FFmpeg 开发库。具体安装、许可和镜像切换见 [工具链复现指南](docs/toolchain.md)。
+手机 App 只在前台且未锁屏时工作；切到别的应用或锁屏会暂停推流，回到 Artemis 后自动恢复。
 
-```powershell
-# JAVA_HOME / ANDROID_HOME 按本机实际路径设置（构建工具链不随仓库携带）。
-.\android\gradlew.bat -p android --no-daemon clean :app:assembleDebug
-npm --prefix receiver ci --ignore-scripts
-npm --prefix receiver test
-.\native\build.ps1                 # 需 VS Build Tools 与 FFmpeg 开发库
-.\native\register.ps1 register     # 逐用户注册 Artemis Camera，无需管理员
-Start-Artemis.cmd                  # 拉起解码进程 + 接收服务 + 打开控制页
+## 在 OBS 里使用
+
+1. 在来源里添加「**视频采集设备**」。
+2. 设备选择 `Artemis Camera`。
+3. 分辨率与帧率按 720p / 30fps 使用。
+
+其他支持 DirectShow 摄像头的程序同理，`Artemis Camera` 会出现在系统摄像头列表里。
+
+## 音频
+
+Artemis 不自带虚拟麦克风驱动。要听到手机麦克风，需要先安装免费的 [VB-CABLE](https://vb-audio.com/Cable/)：
+
+- 安装后 Artemis 会把声音写入 `CABLE Input`；
+- 在 OBS 里添加「音频输入采集」，设备选 `CABLE Output`。
+
+没装虚拟声卡时，Artemis 会提示「未检测到虚拟声卡」，画面不受影响。详细步骤见[音频说明](docs/user/audio-vbcable.md)。
+
+## 出问题了
+
+先看[常见问题](docs/user/troubleshooting.md)。日志在：
+
+```
+%LOCALAPPDATA%\Artemis\logs\
+    tray.log         启动、停止与错误
+    receiver.log     连接与配对
+    decode-host.log  画面解码
 ```
 
-`Start-Artemis.cmd` 是当前唯一同时启动解码进程与接收服务的入口；单独执行 `npm --prefix receiver run pairing` 只提供配对与控制，`/media` 没有本机解码进程可转发，OBS 不会出现手机画面。手工启动接收服务时，按 [本地连接说明](docs/pairing-local-run.md)配置实际 LAN 地址、私有数据目录与 OpenSSL。APK 为 `android/app/build/outputs/apk/debug/app-debug.apk`；真机与集成结果以 Spec 测试报告为准。
+## 停止与卸载
 
-## 研发工作流
+- 托盘图标右键 →「退出」即可停止全部服务；关闭浏览器标签页不会停止服务。
+- 卸载：设置 →「应用」→「已安装的应用」→ Artemis → 卸载。程序文件会被删除，`%LOCALAPPDATA%\Artemis\data` 里的配对记录会保留；需要彻底清空时手动删掉该目录。
 
-项目采用 R&K Flow，主干为 `main`，日常集成为 `dev`，版本提测使用 `release/<version>`。
+## 已知限制
 
-1. 用 `version-start` 规划版本，再用 `spec-start` 为具体需求创建设计、实现与验证闭环。
-2. 长期规则保存在 `.agents/rules/`，中立角色定义保存在 `.agents/roles/`。
-3. 项目目标和当前状态见 `GOALS.md`、`work-ledger.yaml`；业务进度不能从目录或初始化提交推断。
+- 只支持 Windows 的 x64 版本；不支持 macOS / Linux。
+- 只验证过 720p / 30fps 单一档位。
+- 端到端延迟尚未测量。
+- 虚拟声卡目前只支持 VB-CABLE。
+- 安装包尚未做代码签名，Windows 可能显示「未知发布者」；如果系统启用了「智能应用控制（Smart App Control）」，未签名程序可能被直接拦截，需要在系统设置里关闭该功能后才能运行。
+- 换用新签名的版本时，手机上需要先卸载旧版再装（会丢失已保存的配对，需要重新允许一次）。
 
-## 恢复本地工作流环境
+## 源码与许可证
 
-规范库与运行时数据库不提交到项目仓库。首次克隆项目后，在 PowerShell 中执行：
+源码仓库：<https://github.com/PrimeDawn/Artemis>
 
-```powershell
-git clone --depth=1 https://github.com/HHU3637kr/skills.git .agents/skills
-npm install --global @originoneai/agent-work-runtime@0.6.0 --ignore-scripts
-New-Item -ItemType Junction -Path html-report -Target (Resolve-Path .agents/skills/html-report).Path
-New-Item -ItemType Junction -Path .codex/skills -Target (Resolve-Path .agents/skills).Path
-awr --project . init --manifest .awr/project.toml
-# 核对来源映射后接受并重建本地索引：
-awr --project . init --manifest .awr/project.toml --accept
-awr --project . source reindex
-awr --project . intake inspect --json
-```
-
-项目规则、中立角色与 Codex 适配已随项目版本化，无需重新生成。目录联接已存在时跳过对应命令；AWR 状态为本地数据，不等同于产品验收。
-
-技能更新使用 `git -C .agents/skills pull --ff-only`，单一报告资产通过根目录 `html-report` 目录联接提供。
+Artemis 以 [MIT 许可证](LICENSE) 发布。安装包内含的第三方组件及其许可证见 `licenses\THIRD-PARTY.md`（其中 FFmpeg 为 GPL v3 构建，许可证原文见 `licenses\FFmpeg-GPL.txt`）。
